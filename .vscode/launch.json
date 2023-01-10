@@ -1,0 +1,21 @@
+{
+    "version": "0.2.0",
+    "configurations": 
+    [
+        {
+            "name": "Cortex Debug",
+            "cwd": "${workspaceRoot}",
+            "executable": "./build/F746G_DISCO_Player.elf",
+            "request": "launch",
+            "type": "cortex-debug",
+            "servertype": "openocd",
+            "device": "STM32F746xx",
+            "configFiles": 
+            [
+                "interface/stlink.cfg",
+                "target/stm32f7x.cfg"
+            ],
+            "svdFile": "./STM32H743.svd"
+        }
+    ]
+}

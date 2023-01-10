@@ -1,0 +1,130 @@
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cckzegya.s 			page 1
+
+
+   1              		.cpu cortex-m7
+   2              		.arch armv7e-m
+   3              		.fpu fpv5-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 6
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"fatfs_platform.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.BSP_PlatformIsDetected,"ax",%progbits
+  20              		.align	1
+  21              		.global	BSP_PlatformIsDetected
+  22              		.syntax unified
+  23              		.thumb
+  24              		.thumb_func
+  26              	BSP_PlatformIsDetected:
+  27              	.LFB141:
+  28              		.file 1 "FATFS/Target/fatfs_platform.c"
+   1:FATFS/Target/fatfs_platform.c **** /* USER CODE BEGIN Header */
+   2:FATFS/Target/fatfs_platform.c **** /**
+   3:FATFS/Target/fatfs_platform.c ****   ******************************************************************************
+   4:FATFS/Target/fatfs_platform.c ****   * @file           : fatfs_platform.c
+   5:FATFS/Target/fatfs_platform.c ****   * @brief          : fatfs_platform source file
+   6:FATFS/Target/fatfs_platform.c ****   ******************************************************************************
+   7:FATFS/Target/fatfs_platform.c ****   * @attention
+   8:FATFS/Target/fatfs_platform.c ****   *
+   9:FATFS/Target/fatfs_platform.c ****   * Copyright (c) 2023 STMicroelectronics.
+  10:FATFS/Target/fatfs_platform.c ****   * All rights reserved.
+  11:FATFS/Target/fatfs_platform.c ****   *
+  12:FATFS/Target/fatfs_platform.c ****   * This software is licensed under terms that can be found in the LICENSE file
+  13:FATFS/Target/fatfs_platform.c ****   * in the root directory of this software component.
+  14:FATFS/Target/fatfs_platform.c ****   * If no LICENSE file comes with this software, it is provided AS-IS.
+  15:FATFS/Target/fatfs_platform.c ****   *
+  16:FATFS/Target/fatfs_platform.c ****   ******************************************************************************
+  17:FATFS/Target/fatfs_platform.c **** */
+  18:FATFS/Target/fatfs_platform.c **** /* USER CODE END Header */
+  19:FATFS/Target/fatfs_platform.c **** #include "fatfs_platform.h"
+  20:FATFS/Target/fatfs_platform.c **** 
+  21:FATFS/Target/fatfs_platform.c **** uint8_t	BSP_PlatformIsDetected(void) {
+  29              		.loc 1 21 38
+  30              		.cfi_startproc
+  31              		@ args = 0, pretend = 0, frame = 8
+  32              		@ frame_needed = 1, uses_anonymous_args = 0
+  33 0000 80B5     		push	{r7, lr}
+  34              	.LCFI0:
+  35              		.cfi_def_cfa_offset 8
+  36              		.cfi_offset 7, -8
+  37              		.cfi_offset 14, -4
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cckzegya.s 			page 2
+
+
+  38 0002 82B0     		sub	sp, sp, #8
+  39              	.LCFI1:
+  40              		.cfi_def_cfa_offset 16
+  41 0004 00AF     		add	r7, sp, #0
+  42              	.LCFI2:
+  43              		.cfi_def_cfa_register 7
+  22:FATFS/Target/fatfs_platform.c ****     uint8_t status = SD_PRESENT;
+  44              		.loc 1 22 13
+  45 0006 0123     		movs	r3, #1
+  46 0008 FB71     		strb	r3, [r7, #7]
+  23:FATFS/Target/fatfs_platform.c ****     /* Check SD card detect pin */
+  24:FATFS/Target/fatfs_platform.c ****     if(HAL_GPIO_ReadPin(SD_DETECT_GPIO_PORT, SD_DETECT_PIN) != GPIO_PIN_RESET)
+  47              		.loc 1 24 8
+  48 000a 4FF40051 		mov	r1, #8192
+  49 000e 0648     		ldr	r0, .L4
+  50 0010 FFF7FEFF 		bl	HAL_GPIO_ReadPin
+  51 0014 0346     		mov	r3, r0
+  52              		.loc 1 24 7
+  53 0016 002B     		cmp	r3, #0
+  54 0018 01D0     		beq	.L2
+  25:FATFS/Target/fatfs_platform.c ****     {
+  26:FATFS/Target/fatfs_platform.c ****         status = SD_NOT_PRESENT;
+  55              		.loc 1 26 16
+  56 001a 0023     		movs	r3, #0
+  57 001c FB71     		strb	r3, [r7, #7]
+  58              	.L2:
+  27:FATFS/Target/fatfs_platform.c ****     }
+  28:FATFS/Target/fatfs_platform.c ****     /* USER CODE BEGIN 1 */
+  29:FATFS/Target/fatfs_platform.c ****     /* user code can be inserted here */
+  30:FATFS/Target/fatfs_platform.c ****     /* USER CODE END 1 */
+  31:FATFS/Target/fatfs_platform.c ****     return status;
+  59              		.loc 1 31 12
+  60 001e FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+  32:FATFS/Target/fatfs_platform.c **** }
+  61              		.loc 1 32 1
+  62 0020 1846     		mov	r0, r3
+  63 0022 0837     		adds	r7, r7, #8
+  64              	.LCFI3:
+  65              		.cfi_def_cfa_offset 8
+  66 0024 BD46     		mov	sp, r7
+  67              	.LCFI4:
+  68              		.cfi_def_cfa_register 13
+  69              		@ sp needed
+  70 0026 80BD     		pop	{r7, pc}
+  71              	.L5:
+  72              		.align	2
+  73              	.L4:
+  74 0028 00080240 		.word	1073874944
+  75              		.cfi_endproc
+  76              	.LFE141:
+  78              		.text
+  79              	.Letext0:
+  80              		.file 2 "d:\\3.tools\\arm_gcc_toolchain\\arm-none-eabi\\include\\machine\\_default_types.h"
+  81              		.file 3 "d:\\3.tools\\arm_gcc_toolchain\\arm-none-eabi\\include\\sys\\_stdint.h"
+  82              		.file 4 "Drivers/CMSIS/Device/ST/STM32F7xx/Include/stm32f746xx.h"
+  83              		.file 5 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_gpio.h"
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cckzegya.s 			page 3
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 fatfs_platform.c
+C:\Users\jisu8\AppData\Local\Temp\cckzegya.s:20     .text.BSP_PlatformIsDetected:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\cckzegya.s:26     .text.BSP_PlatformIsDetected:00000000 BSP_PlatformIsDetected
+C:\Users\jisu8\AppData\Local\Temp\cckzegya.s:74     .text.BSP_PlatformIsDetected:00000028 $d
+
+UNDEFINED SYMBOLS
+HAL_GPIO_ReadPin

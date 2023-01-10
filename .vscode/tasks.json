@@ -1,0 +1,29 @@
+{
+    "tasks": [
+        {
+            "type": "cppbuild",
+            "label": "C/C++: arm-none-eabi-gcc.exe 활성 파일 빌드",
+            "command": "/Users/seojisu/Library/Arm-GCC-xPack/bin/arm-none-eabi-gcc",
+            "args": [
+                "-g",
+                "${file}",
+                "-o",
+                "${fileDirname}\\${fileBasenameNoExtension}.exe",
+                "-mcpu=cortex-m7",
+                "-mthumb"
+            ],
+            "options": {
+                "cwd": "${fileDirname}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "detail": "디버거에서 생성된 작업입니다."
+        }
+    ],
+    "version": "2.0.0"
+}

@@ -1,0 +1,363 @@
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccgIFwXq.s 			page 1
+
+
+   1              		.cpu cortex-m7
+   2              		.arch armv7e-m
+   3              		.fpu fpv5-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 6
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"freertos.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.vApplicationIdleHook,"ax",%progbits
+  20              		.align	1
+  21              		.weak	vApplicationIdleHook
+  22              		.syntax unified
+  23              		.thumb
+  24              		.thumb_func
+  26              	vApplicationIdleHook:
+  27              	.LFB146:
+  28              		.file 1 "Core/Src/freertos.c"
+   1:Core/Src/freertos.c **** /* USER CODE BEGIN Header */
+   2:Core/Src/freertos.c **** /**
+   3:Core/Src/freertos.c ****   ******************************************************************************
+   4:Core/Src/freertos.c ****   * File Name          : freertos.c
+   5:Core/Src/freertos.c ****   * Description        : Code for freertos applications
+   6:Core/Src/freertos.c ****   ******************************************************************************
+   7:Core/Src/freertos.c ****   * @attention
+   8:Core/Src/freertos.c ****   *
+   9:Core/Src/freertos.c ****   * Copyright (c) 2023 STMicroelectronics.
+  10:Core/Src/freertos.c ****   * All rights reserved.
+  11:Core/Src/freertos.c ****   *
+  12:Core/Src/freertos.c ****   * This software is licensed under terms that can be found in the LICENSE file
+  13:Core/Src/freertos.c ****   * in the root directory of this software component.
+  14:Core/Src/freertos.c ****   * If no LICENSE file comes with this software, it is provided AS-IS.
+  15:Core/Src/freertos.c ****   *
+  16:Core/Src/freertos.c ****   ******************************************************************************
+  17:Core/Src/freertos.c ****   */
+  18:Core/Src/freertos.c **** /* USER CODE END Header */
+  19:Core/Src/freertos.c **** 
+  20:Core/Src/freertos.c **** /* Includes ------------------------------------------------------------------*/
+  21:Core/Src/freertos.c **** #include "FreeRTOS.h"
+  22:Core/Src/freertos.c **** #include "task.h"
+  23:Core/Src/freertos.c **** #include "main.h"
+  24:Core/Src/freertos.c **** 
+  25:Core/Src/freertos.c **** /* Private includes ----------------------------------------------------------*/
+  26:Core/Src/freertos.c **** /* USER CODE BEGIN Includes */
+  27:Core/Src/freertos.c **** 
+  28:Core/Src/freertos.c **** /* USER CODE END Includes */
+  29:Core/Src/freertos.c **** 
+  30:Core/Src/freertos.c **** /* Private typedef -----------------------------------------------------------*/
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccgIFwXq.s 			page 2
+
+
+  31:Core/Src/freertos.c **** /* USER CODE BEGIN PTD */
+  32:Core/Src/freertos.c **** 
+  33:Core/Src/freertos.c **** /* USER CODE END PTD */
+  34:Core/Src/freertos.c **** 
+  35:Core/Src/freertos.c **** /* Private define ------------------------------------------------------------*/
+  36:Core/Src/freertos.c **** /* USER CODE BEGIN PD */
+  37:Core/Src/freertos.c **** 
+  38:Core/Src/freertos.c **** /* USER CODE END PD */
+  39:Core/Src/freertos.c **** 
+  40:Core/Src/freertos.c **** /* Private macro -------------------------------------------------------------*/
+  41:Core/Src/freertos.c **** /* USER CODE BEGIN PM */
+  42:Core/Src/freertos.c **** 
+  43:Core/Src/freertos.c **** /* USER CODE END PM */
+  44:Core/Src/freertos.c **** 
+  45:Core/Src/freertos.c **** /* Private variables ---------------------------------------------------------*/
+  46:Core/Src/freertos.c **** /* USER CODE BEGIN Variables */
+  47:Core/Src/freertos.c **** 
+  48:Core/Src/freertos.c **** /* USER CODE END Variables */
+  49:Core/Src/freertos.c **** 
+  50:Core/Src/freertos.c **** /* Private function prototypes -----------------------------------------------*/
+  51:Core/Src/freertos.c **** /* USER CODE BEGIN FunctionPrototypes */
+  52:Core/Src/freertos.c **** 
+  53:Core/Src/freertos.c **** /* USER CODE END FunctionPrototypes */
+  54:Core/Src/freertos.c **** 
+  55:Core/Src/freertos.c **** /* GetIdleTaskMemory prototype (linked to static allocation support) */
+  56:Core/Src/freertos.c **** void vApplicationGetIdleTaskMemory( StaticTask_t **ppxIdleTaskTCBBuffer, StackType_t **ppxIdleTaskS
+  57:Core/Src/freertos.c **** 
+  58:Core/Src/freertos.c **** /* Hook prototypes */
+  59:Core/Src/freertos.c **** void vApplicationIdleHook(void);
+  60:Core/Src/freertos.c **** void vApplicationStackOverflowHook(xTaskHandle xTask, signed char *pcTaskName);
+  61:Core/Src/freertos.c **** void vApplicationMallocFailedHook(void);
+  62:Core/Src/freertos.c **** 
+  63:Core/Src/freertos.c **** /* USER CODE BEGIN 2 */
+  64:Core/Src/freertos.c **** __weak void vApplicationIdleHook( void )
+  65:Core/Src/freertos.c **** {
+  29              		.loc 1 65 1
+  30              		.cfi_startproc
+  31              		@ args = 0, pretend = 0, frame = 0
+  32              		@ frame_needed = 1, uses_anonymous_args = 0
+  33              		@ link register save eliminated.
+  34 0000 80B4     		push	{r7}
+  35              	.LCFI0:
+  36              		.cfi_def_cfa_offset 4
+  37              		.cfi_offset 7, -4
+  38 0002 00AF     		add	r7, sp, #0
+  39              	.LCFI1:
+  40              		.cfi_def_cfa_register 7
+  66:Core/Src/freertos.c ****    /* vApplicationIdleHook() will only be called if configUSE_IDLE_HOOK is set
+  67:Core/Src/freertos.c ****    to 1 in FreeRTOSConfig.h. It will be called on each iteration of the idle
+  68:Core/Src/freertos.c ****    task. It is essential that code added to this hook function never attempts
+  69:Core/Src/freertos.c ****    to block in any way (for example, call xQueueReceive() with a block time
+  70:Core/Src/freertos.c ****    specified, or call vTaskDelay()). If the application makes use of the
+  71:Core/Src/freertos.c ****    vTaskDelete() API function (as this demo application does) then it is also
+  72:Core/Src/freertos.c ****    important that vApplicationIdleHook() is permitted to return to its calling
+  73:Core/Src/freertos.c ****    function, because it is the responsibility of the idle task to clean up
+  74:Core/Src/freertos.c ****    memory allocated by the kernel to any task that has since been deleted. */
+  75:Core/Src/freertos.c **** }
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccgIFwXq.s 			page 3
+
+
+  41              		.loc 1 75 1
+  42 0004 00BF     		nop
+  43 0006 BD46     		mov	sp, r7
+  44              	.LCFI2:
+  45              		.cfi_def_cfa_register 13
+  46              		@ sp needed
+  47 0008 5DF8047B 		ldr	r7, [sp], #4
+  48              	.LCFI3:
+  49              		.cfi_restore 7
+  50              		.cfi_def_cfa_offset 0
+  51 000c 7047     		bx	lr
+  52              		.cfi_endproc
+  53              	.LFE146:
+  55              		.section	.text.vApplicationStackOverflowHook,"ax",%progbits
+  56              		.align	1
+  57              		.weak	vApplicationStackOverflowHook
+  58              		.syntax unified
+  59              		.thumb
+  60              		.thumb_func
+  62              	vApplicationStackOverflowHook:
+  63              	.LFB147:
+  76:Core/Src/freertos.c **** /* USER CODE END 2 */
+  77:Core/Src/freertos.c **** 
+  78:Core/Src/freertos.c **** /* USER CODE BEGIN 4 */
+  79:Core/Src/freertos.c **** __weak void vApplicationStackOverflowHook(xTaskHandle xTask, signed char *pcTaskName)
+  80:Core/Src/freertos.c **** {
+  64              		.loc 1 80 1
+  65              		.cfi_startproc
+  66              		@ args = 0, pretend = 0, frame = 8
+  67              		@ frame_needed = 1, uses_anonymous_args = 0
+  68              		@ link register save eliminated.
+  69 0000 80B4     		push	{r7}
+  70              	.LCFI4:
+  71              		.cfi_def_cfa_offset 4
+  72              		.cfi_offset 7, -4
+  73 0002 83B0     		sub	sp, sp, #12
+  74              	.LCFI5:
+  75              		.cfi_def_cfa_offset 16
+  76 0004 00AF     		add	r7, sp, #0
+  77              	.LCFI6:
+  78              		.cfi_def_cfa_register 7
+  79 0006 7860     		str	r0, [r7, #4]
+  80 0008 3960     		str	r1, [r7]
+  81:Core/Src/freertos.c ****    /* Run time stack overflow checking is performed if
+  82:Core/Src/freertos.c ****    configCHECK_FOR_STACK_OVERFLOW is defined to 1 or 2. This hook function is
+  83:Core/Src/freertos.c ****    called if a stack overflow is detected. */
+  84:Core/Src/freertos.c **** }
+  81              		.loc 1 84 1
+  82 000a 00BF     		nop
+  83 000c 0C37     		adds	r7, r7, #12
+  84              	.LCFI7:
+  85              		.cfi_def_cfa_offset 4
+  86 000e BD46     		mov	sp, r7
+  87              	.LCFI8:
+  88              		.cfi_def_cfa_register 13
+  89              		@ sp needed
+  90 0010 5DF8047B 		ldr	r7, [sp], #4
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccgIFwXq.s 			page 4
+
+
+  91              	.LCFI9:
+  92              		.cfi_restore 7
+  93              		.cfi_def_cfa_offset 0
+  94 0014 7047     		bx	lr
+  95              		.cfi_endproc
+  96              	.LFE147:
+  98              		.section	.text.vApplicationMallocFailedHook,"ax",%progbits
+  99              		.align	1
+ 100              		.weak	vApplicationMallocFailedHook
+ 101              		.syntax unified
+ 102              		.thumb
+ 103              		.thumb_func
+ 105              	vApplicationMallocFailedHook:
+ 106              	.LFB148:
+  85:Core/Src/freertos.c **** /* USER CODE END 4 */
+  86:Core/Src/freertos.c **** 
+  87:Core/Src/freertos.c **** /* USER CODE BEGIN 5 */
+  88:Core/Src/freertos.c **** __weak void vApplicationMallocFailedHook(void)
+  89:Core/Src/freertos.c **** {
+ 107              		.loc 1 89 1
+ 108              		.cfi_startproc
+ 109              		@ args = 0, pretend = 0, frame = 0
+ 110              		@ frame_needed = 1, uses_anonymous_args = 0
+ 111              		@ link register save eliminated.
+ 112 0000 80B4     		push	{r7}
+ 113              	.LCFI10:
+ 114              		.cfi_def_cfa_offset 4
+ 115              		.cfi_offset 7, -4
+ 116 0002 00AF     		add	r7, sp, #0
+ 117              	.LCFI11:
+ 118              		.cfi_def_cfa_register 7
+  90:Core/Src/freertos.c ****    /* vApplicationMallocFailedHook() will only be called if
+  91:Core/Src/freertos.c ****    configUSE_MALLOC_FAILED_HOOK is set to 1 in FreeRTOSConfig.h. It is a hook
+  92:Core/Src/freertos.c ****    function that will get called if a call to pvPortMalloc() fails.
+  93:Core/Src/freertos.c ****    pvPortMalloc() is called internally by the kernel whenever a task, queue,
+  94:Core/Src/freertos.c ****    timer or semaphore is created. It is also called by various parts of the
+  95:Core/Src/freertos.c ****    demo application. If heap_1.c or heap_2.c are used, then the size of the
+  96:Core/Src/freertos.c ****    heap available to pvPortMalloc() is defined by configTOTAL_HEAP_SIZE in
+  97:Core/Src/freertos.c ****    FreeRTOSConfig.h, and the xPortGetFreeHeapSize() API function can be used
+  98:Core/Src/freertos.c ****    to query the size of free heap space that remains (although it does not
+  99:Core/Src/freertos.c ****    provide information on how the remaining heap might be fragmented). */
+ 100:Core/Src/freertos.c **** }
+ 119              		.loc 1 100 1
+ 120 0004 00BF     		nop
+ 121 0006 BD46     		mov	sp, r7
+ 122              	.LCFI12:
+ 123              		.cfi_def_cfa_register 13
+ 124              		@ sp needed
+ 125 0008 5DF8047B 		ldr	r7, [sp], #4
+ 126              	.LCFI13:
+ 127              		.cfi_restore 7
+ 128              		.cfi_def_cfa_offset 0
+ 129 000c 7047     		bx	lr
+ 130              		.cfi_endproc
+ 131              	.LFE148:
+ 133              		.section	.bss.xIdleTaskTCBBuffer,"aw",%nobits
+ 134              		.align	3
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccgIFwXq.s 			page 5
+
+
+ 137              	xIdleTaskTCBBuffer:
+ 138 0000 00000000 		.space	1152
+ 138      00000000 
+ 138      00000000 
+ 138      00000000 
+ 138      00000000 
+ 139              		.section	.bss.xIdleStack,"aw",%nobits
+ 140              		.align	2
+ 143              	xIdleStack:
+ 144 0000 00000000 		.space	512
+ 144      00000000 
+ 144      00000000 
+ 144      00000000 
+ 144      00000000 
+ 145              		.section	.text.vApplicationGetIdleTaskMemory,"ax",%progbits
+ 146              		.align	1
+ 147              		.global	vApplicationGetIdleTaskMemory
+ 148              		.syntax unified
+ 149              		.thumb
+ 150              		.thumb_func
+ 152              	vApplicationGetIdleTaskMemory:
+ 153              	.LFB149:
+ 101:Core/Src/freertos.c **** /* USER CODE END 5 */
+ 102:Core/Src/freertos.c **** 
+ 103:Core/Src/freertos.c **** /* USER CODE BEGIN GET_IDLE_TASK_MEMORY */
+ 104:Core/Src/freertos.c **** static StaticTask_t xIdleTaskTCBBuffer;
+ 105:Core/Src/freertos.c **** static StackType_t xIdleStack[configMINIMAL_STACK_SIZE];
+ 106:Core/Src/freertos.c **** 
+ 107:Core/Src/freertos.c **** void vApplicationGetIdleTaskMemory( StaticTask_t **ppxIdleTaskTCBBuffer, StackType_t **ppxIdleTaskS
+ 108:Core/Src/freertos.c **** {
+ 154              		.loc 1 108 1
+ 155              		.cfi_startproc
+ 156              		@ args = 0, pretend = 0, frame = 16
+ 157              		@ frame_needed = 1, uses_anonymous_args = 0
+ 158              		@ link register save eliminated.
+ 159 0000 80B4     		push	{r7}
+ 160              	.LCFI14:
+ 161              		.cfi_def_cfa_offset 4
+ 162              		.cfi_offset 7, -4
+ 163 0002 85B0     		sub	sp, sp, #20
+ 164              	.LCFI15:
+ 165              		.cfi_def_cfa_offset 24
+ 166 0004 00AF     		add	r7, sp, #0
+ 167              	.LCFI16:
+ 168              		.cfi_def_cfa_register 7
+ 169 0006 F860     		str	r0, [r7, #12]
+ 170 0008 B960     		str	r1, [r7, #8]
+ 171 000a 7A60     		str	r2, [r7, #4]
+ 109:Core/Src/freertos.c ****   *ppxIdleTaskTCBBuffer = &xIdleTaskTCBBuffer;
+ 172              		.loc 1 109 25
+ 173 000c FB68     		ldr	r3, [r7, #12]
+ 174 000e 074A     		ldr	r2, .L5
+ 175 0010 1A60     		str	r2, [r3]
+ 110:Core/Src/freertos.c ****   *ppxIdleTaskStackBuffer = &xIdleStack[0];
+ 176              		.loc 1 110 27
+ 177 0012 BB68     		ldr	r3, [r7, #8]
+ 178 0014 064A     		ldr	r2, .L5+4
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccgIFwXq.s 			page 6
+
+
+ 179 0016 1A60     		str	r2, [r3]
+ 111:Core/Src/freertos.c ****   *pulIdleTaskStackSize = configMINIMAL_STACK_SIZE;
+ 180              		.loc 1 111 25
+ 181 0018 7B68     		ldr	r3, [r7, #4]
+ 182 001a 8022     		movs	r2, #128
+ 183 001c 1A60     		str	r2, [r3]
+ 112:Core/Src/freertos.c ****   /* place for user code */
+ 113:Core/Src/freertos.c **** }
+ 184              		.loc 1 113 1
+ 185 001e 00BF     		nop
+ 186 0020 1437     		adds	r7, r7, #20
+ 187              	.LCFI17:
+ 188              		.cfi_def_cfa_offset 4
+ 189 0022 BD46     		mov	sp, r7
+ 190              	.LCFI18:
+ 191              		.cfi_def_cfa_register 13
+ 192              		@ sp needed
+ 193 0024 5DF8047B 		ldr	r7, [sp], #4
+ 194              	.LCFI19:
+ 195              		.cfi_restore 7
+ 196              		.cfi_def_cfa_offset 0
+ 197 0028 7047     		bx	lr
+ 198              	.L6:
+ 199 002a 00BF     		.align	2
+ 200              	.L5:
+ 201 002c 00000000 		.word	xIdleTaskTCBBuffer
+ 202 0030 00000000 		.word	xIdleStack
+ 203              		.cfi_endproc
+ 204              	.LFE149:
+ 206              		.text
+ 207              	.Letext0:
+ 208              		.file 2 "d:\\3.tools\\arm_gcc_toolchain\\arm-none-eabi\\include\\machine\\_default_types.h"
+ 209              		.file 3 "d:\\3.tools\\arm_gcc_toolchain\\arm-none-eabi\\include\\sys\\_stdint.h"
+ 210              		.file 4 "Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1/portmacro.h"
+ 211              		.file 5 "d:\\3.tools\\arm_gcc_toolchain\\lib\\gcc\\arm-none-eabi\\10.3.1\\include\\stddef.h"
+ 212              		.file 6 "d:\\3.tools\\arm_gcc_toolchain\\arm-none-eabi\\include\\sys\\_types.h"
+ 213              		.file 7 "d:\\3.tools\\arm_gcc_toolchain\\arm-none-eabi\\include\\sys\\reent.h"
+ 214              		.file 8 "d:\\3.tools\\arm_gcc_toolchain\\arm-none-eabi\\include\\sys\\lock.h"
+ 215              		.file 9 "Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h"
+ 216              		.file 10 "Middlewares/Third_Party/FreeRTOS/Source/include/task.h"
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccgIFwXq.s 			page 7
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 freertos.c
+C:\Users\jisu8\AppData\Local\Temp\ccgIFwXq.s:20     .text.vApplicationIdleHook:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\ccgIFwXq.s:26     .text.vApplicationIdleHook:00000000 vApplicationIdleHook
+C:\Users\jisu8\AppData\Local\Temp\ccgIFwXq.s:56     .text.vApplicationStackOverflowHook:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\ccgIFwXq.s:62     .text.vApplicationStackOverflowHook:00000000 vApplicationStackOverflowHook
+C:\Users\jisu8\AppData\Local\Temp\ccgIFwXq.s:99     .text.vApplicationMallocFailedHook:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\ccgIFwXq.s:105    .text.vApplicationMallocFailedHook:00000000 vApplicationMallocFailedHook
+C:\Users\jisu8\AppData\Local\Temp\ccgIFwXq.s:134    .bss.xIdleTaskTCBBuffer:00000000 $d
+C:\Users\jisu8\AppData\Local\Temp\ccgIFwXq.s:137    .bss.xIdleTaskTCBBuffer:00000000 xIdleTaskTCBBuffer
+C:\Users\jisu8\AppData\Local\Temp\ccgIFwXq.s:140    .bss.xIdleStack:00000000 $d
+C:\Users\jisu8\AppData\Local\Temp\ccgIFwXq.s:143    .bss.xIdleStack:00000000 xIdleStack
+C:\Users\jisu8\AppData\Local\Temp\ccgIFwXq.s:146    .text.vApplicationGetIdleTaskMemory:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\ccgIFwXq.s:152    .text.vApplicationGetIdleTaskMemory:00000000 vApplicationGetIdleTaskMemory
+C:\Users\jisu8\AppData\Local\Temp\ccgIFwXq.s:201    .text.vApplicationGetIdleTaskMemory:0000002c $d
+
+NO UNDEFINED SYMBOLS
