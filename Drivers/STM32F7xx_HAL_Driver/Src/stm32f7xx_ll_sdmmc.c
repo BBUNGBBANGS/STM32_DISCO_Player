@@ -1059,7 +1059,7 @@ uint32_t SDMMC_CmdSendStatus(SDMMC_TypeDef *SDMMCx, uint32_t Argument)
   sdmmc_cmdinit.WaitForInterrupt = SDMMC_WAIT_NO;
   sdmmc_cmdinit.CPSM             = SDMMC_CPSM_ENABLE;
   (void)SDMMC_SendCommand(SDMMCx, &sdmmc_cmdinit);
-  
+  HAL_Delay(1);
   /* Check for error conditions */
   errorstate = SDMMC_GetCmdResp1(SDMMCx, SDMMC_CMD_SEND_STATUS, SDMMC_CMDTIMEOUT);
 

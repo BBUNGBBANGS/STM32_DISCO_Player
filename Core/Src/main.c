@@ -149,7 +149,6 @@ int main(void)
   /* USER CODE BEGIN RTOS_MUTEX */
   /* add mutexes, ... */
   /* USER CODE END RTOS_MUTEX */
-  BSP_SD_Init();
 
   /* USER CODE BEGIN RTOS_SEMAPHORES */
   /* add semaphores, ... */
@@ -987,23 +986,24 @@ static void MX_GPIO_Init(void)
 /* USER CODE END Header_StartDefaultTask */
 void StartDefaultTask(void const * argument)
 {
-  uint32_t byteswritten; /* File write count */
-  uint8_t wtext[] = "SD card test in STM32F746G-DISCO board"; 
-  f_mount(&SDFatFs, (TCHAR const*) SDPath, 0);
-  f_open(&MyFile, "Example.txt", FA_CREATE_ALWAYS | FA_WRITE);
-  f_write(&MyFile, wtext, sizeof(wtext), (void *) &byteswritten);
-  f_close(&MyFile);
-  /* init code for USB_HOST */
-  //MX_USB_HOST_Init();
-  /* init code for USB_DEVICE */
-  MX_USB_DEVICE_Init();  
-  /* USER CODE BEGIN 5 */
-  /* Infinite loop */
-  for(;;)
-  {
-    osDelay(1);
-  }
-  /* USER CODE END 5 */
+    uint8_t tx_buf[100] = {0,};
+    uint32_t byteswritten; /* File write count */
+    uint8_t wtext[] = "SD card test in STM32F746G-DISCO board"; 
+    f_mount(&SDFatFs, (TCHAR const*) SDPath, 0);
+    f_open(&MyFile, "Example.txt", FA_CREATE_ALWAYS | FA_WRITE);
+    f_write(&MyFile, wtext, sizeof(wtext), (void *) &byteswritten);
+    f_close(&MyFile);
+    /* init code for USB_HOST */
+    //MX_USB_HOST_Init();
+    /* init code for USB_DEVICE */
+    MX_USB_DEVICE_Init();  
+    /* Infinite loop */
+    for(;;)
+    {
+        sprintf(tx_buf,"freeos test \r\n");
+        HAL_UART_Transmit(&huart1,tx_buf,strlen(tx_buf),100);
+        osDelay(100);
+    }
 }
 
 /**

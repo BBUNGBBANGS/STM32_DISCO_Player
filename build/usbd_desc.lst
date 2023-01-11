@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccfffXqo.s 			page 1
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSa4GOE.s 			page 1
 
 
    1              		.cpu cortex-m7
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccfffXqo.s 			page 1
   27:USB_DEVICE/App/usbd_desc.c **** 
   28:USB_DEVICE/App/usbd_desc.c **** /* USER CODE END INCLUDE */
   29:USB_DEVICE/App/usbd_desc.c **** 
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccfffXqo.s 			page 2
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSa4GOE.s 			page 2
 
 
   30:USB_DEVICE/App/usbd_desc.c **** /* Private typedef -----------------------------------------------------------*/
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccfffXqo.s 			page 1
   84:USB_DEVICE/App/usbd_desc.c **** 
   85:USB_DEVICE/App/usbd_desc.c **** /* USER CODE END 0 */
   86:USB_DEVICE/App/usbd_desc.c **** 
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccfffXqo.s 			page 3
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSa4GOE.s 			page 3
 
 
   87:USB_DEVICE/App/usbd_desc.c **** /** @defgroup USBD_DESC_Private_Macros USBD_DESC_Private_Macros
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccfffXqo.s 			page 1
  141:USB_DEVICE/App/usbd_desc.c **** , USBD_HS_LangIDStrDescriptor
  142:USB_DEVICE/App/usbd_desc.c **** , USBD_HS_ManufacturerStrDescriptor
  143:USB_DEVICE/App/usbd_desc.c **** , USBD_HS_ProductStrDescriptor
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccfffXqo.s 			page 4
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSa4GOE.s 			page 4
 
 
  144:USB_DEVICE/App/usbd_desc.c **** , USBD_HS_SerialStrDescriptor
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccfffXqo.s 			page 1
  198:USB_DEVICE/App/usbd_desc.c ****   0x7,
  199:USB_DEVICE/App/usbd_desc.c ****   USB_DEVICE_CAPABITY_TYPE,
  200:USB_DEVICE/App/usbd_desc.c ****   0x2,
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccfffXqo.s 			page 5
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSa4GOE.s 			page 5
 
 
  201:USB_DEVICE/App/usbd_desc.c ****   0x2,  /*LPM capability bit set */
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccfffXqo.s 			page 1
  255:USB_DEVICE/App/usbd_desc.c ****   * @param  speed : Current device speed
  256:USB_DEVICE/App/usbd_desc.c ****   * @param  length : Pointer to data length variable
  257:USB_DEVICE/App/usbd_desc.c ****   * @retval Pointer to descriptor buffer
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccfffXqo.s 			page 6
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSa4GOE.s 			page 6
 
 
  258:USB_DEVICE/App/usbd_desc.c ****   */
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccfffXqo.s 			page 1
  275:USB_DEVICE/App/usbd_desc.c ****   *length = sizeof(USBD_LangIDDesc);
   69              		.loc 1 275 3 view .LVU9
   70              		.loc 1 275 11 is_stmt 0 view .LVU10
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccfffXqo.s 			page 7
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSa4GOE.s 			page 7
 
 
   71 0000 0423     		movs	r3, #4
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccfffXqo.s 			page 1
  307:USB_DEVICE/App/usbd_desc.c ****   USBD_GetString((uint8_t *)USBD_MANUFACTURER_STRING, USBD_StrDesc, length);
  308:USB_DEVICE/App/usbd_desc.c ****   return USBD_StrDesc;
  309:USB_DEVICE/App/usbd_desc.c **** }
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccfffXqo.s 			page 8
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSa4GOE.s 			page 8
 
 
  310:USB_DEVICE/App/usbd_desc.c **** 
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccfffXqo.s 			page 1
  364:USB_DEVICE/App/usbd_desc.c ****   {
  365:USB_DEVICE/App/usbd_desc.c ****     USBD_GetString((uint8_t *)USBD_INTERFACE_STRING_HS, USBD_StrDesc, length);
  366:USB_DEVICE/App/usbd_desc.c ****   }
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccfffXqo.s 			page 9
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSa4GOE.s 			page 9
 
 
  367:USB_DEVICE/App/usbd_desc.c ****   return USBD_StrDesc;
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccfffXqo.s 			page 1
  391:USB_DEVICE/App/usbd_desc.c **** {
  392:USB_DEVICE/App/usbd_desc.c ****   uint32_t deviceserial0, deviceserial1, deviceserial2;
  393:USB_DEVICE/App/usbd_desc.c **** 
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccfffXqo.s 			page 10
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSa4GOE.s 			page 10
 
 
  394:USB_DEVICE/App/usbd_desc.c ****   deviceserial0 = *(uint32_t *) DEVICE_ID1;
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccfffXqo.s 			page 1
  148              		.loc 1 426 7 is_stmt 1 view .LVU28
  149              		.loc 1 426 43 is_stmt 0 view .LVU29
  150 000a 0CF1370C 		add	ip, ip, #55
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccfffXqo.s 			page 11
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSa4GOE.s 			page 11
 
 
  151              		.loc 1 426 21 view .LVU30
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccfffXqo.s 			page 1
  189 003e E8E7     		b	.L13
  190              	.L19:
  432:USB_DEVICE/App/usbd_desc.c ****   }
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccfffXqo.s 			page 12
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSa4GOE.s 			page 12
 
 
  433:USB_DEVICE/App/usbd_desc.c **** }
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccfffXqo.s 			page 1
  236              		.loc 1 400 3 view .LVU59
  400:USB_DEVICE/App/usbd_desc.c ****   {
  237              		.loc 1 400 6 is_stmt 0 view .LVU60
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccfffXqo.s 			page 13
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSa4GOE.s 			page 13
 
 
  238 0010 C018     		adds	r0, r0, r3
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccfffXqo.s 			page 1
  287              		.cfi_def_cfa_offset 8
  288              		.cfi_offset 3, -8
  289              		.cfi_offset 14, -4
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccfffXqo.s 			page 14
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSa4GOE.s 			page 14
 
 
  319:USB_DEVICE/App/usbd_desc.c ****   *length = USB_SIZ_STRING_SERIAL;
@@ -838,7 +838,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccfffXqo.s 			page 1
  287:USB_DEVICE/App/usbd_desc.c ****   {
  334              		.loc 1 287 3 is_stmt 1 view .LVU76
  287:USB_DEVICE/App/usbd_desc.c ****   {
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccfffXqo.s 			page 15
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSa4GOE.s 			page 15
 
 
  335              		.loc 1 287 5 is_stmt 0 view .LVU77
@@ -898,7 +898,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccfffXqo.s 			page 1
  377              		.align	1
  378              		.global	USBD_HS_ManufacturerStrDescriptor
  379              		.syntax unified
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccfffXqo.s 			page 16
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSa4GOE.s 			page 16
 
 
  380              		.thumb
@@ -958,7 +958,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccfffXqo.s 			page 1
  426              		.global	USBD_HS_ConfigStrDescriptor
  427              		.syntax unified
  428              		.thumb
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccfffXqo.s 			page 17
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSa4GOE.s 			page 17
 
 
  429              		.thumb_func
@@ -1018,7 +1018,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccfffXqo.s 			page 1
  472              	.LVL40:
  346:USB_DEVICE/App/usbd_desc.c ****   }
  473              		.loc 1 346 5 view .LVU107
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccfffXqo.s 			page 18
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSa4GOE.s 			page 18
 
 
  474 001a F8E7     		b	.L42
@@ -1078,7 +1078,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccfffXqo.s 			page 1
  520              	.L48:
  367:USB_DEVICE/App/usbd_desc.c **** }
  521              		.loc 1 367 3 is_stmt 1 view .LVU115
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccfffXqo.s 			page 19
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSa4GOE.s 			page 19
 
 
  368:USB_DEVICE/App/usbd_desc.c **** 
@@ -1138,7 +1138,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccfffXqo.s 			page 1
  572              		.section	.data.USBD_HS_BOSDesc,"aw"
  573              		.align	2
  574              		.set	.LANCHOR2,. + 0
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccfffXqo.s 			page 20
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSa4GOE.s 			page 20
 
 
  577              	USBD_HS_BOSDesc:
@@ -1176,56 +1176,56 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccfffXqo.s 			page 1
  606              		.file 4 "Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_def.h"
  607              		.file 5 "USB_DEVICE/App/usbd_desc.h"
  608              		.file 6 "Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ctlreq.h"
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccfffXqo.s 			page 21
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSa4GOE.s 			page 21
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 usbd_desc.c
-C:\Users\jisu8\AppData\Local\Temp\ccfffXqo.s:20     .text.USBD_HS_DeviceDescriptor:00000000 $t
-C:\Users\jisu8\AppData\Local\Temp\ccfffXqo.s:26     .text.USBD_HS_DeviceDescriptor:00000000 USBD_HS_DeviceDescriptor
-C:\Users\jisu8\AppData\Local\Temp\ccfffXqo.s:49     .text.USBD_HS_DeviceDescriptor:00000008 $d
-C:\Users\jisu8\AppData\Local\Temp\ccfffXqo.s:54     .text.USBD_HS_LangIDStrDescriptor:00000000 $t
-C:\Users\jisu8\AppData\Local\Temp\ccfffXqo.s:60     .text.USBD_HS_LangIDStrDescriptor:00000000 USBD_HS_LangIDStrDescriptor
-C:\Users\jisu8\AppData\Local\Temp\ccfffXqo.s:82     .text.USBD_HS_LangIDStrDescriptor:00000008 $d
-C:\Users\jisu8\AppData\Local\Temp\ccfffXqo.s:87     .text.USBD_HS_USR_BOSDescriptor:00000000 $t
-C:\Users\jisu8\AppData\Local\Temp\ccfffXqo.s:93     .text.USBD_HS_USR_BOSDescriptor:00000000 USBD_HS_USR_BOSDescriptor
-C:\Users\jisu8\AppData\Local\Temp\ccfffXqo.s:115    .text.USBD_HS_USR_BOSDescriptor:00000008 $d
-C:\Users\jisu8\AppData\Local\Temp\ccfffXqo.s:120    .text.IntToUnicode:00000000 $t
-C:\Users\jisu8\AppData\Local\Temp\ccfffXqo.s:125    .text.IntToUnicode:00000000 IntToUnicode
-C:\Users\jisu8\AppData\Local\Temp\ccfffXqo.s:203    .text.Get_SerialNum:00000000 $t
-C:\Users\jisu8\AppData\Local\Temp\ccfffXqo.s:208    .text.Get_SerialNum:00000000 Get_SerialNum
-C:\Users\jisu8\AppData\Local\Temp\ccfffXqo.s:265    .text.Get_SerialNum:00000030 $d
-C:\Users\jisu8\AppData\Local\Temp\ccfffXqo.s:271    .text.USBD_HS_SerialStrDescriptor:00000000 $t
-C:\Users\jisu8\AppData\Local\Temp\ccfffXqo.s:277    .text.USBD_HS_SerialStrDescriptor:00000000 USBD_HS_SerialStrDescriptor
-C:\Users\jisu8\AppData\Local\Temp\ccfffXqo.s:305    .text.USBD_HS_SerialStrDescriptor:00000010 $d
-C:\Users\jisu8\AppData\Local\Temp\ccfffXqo.s:310    .rodata.USBD_HS_ProductStrDescriptor.str1.4:00000000 $d
-C:\Users\jisu8\AppData\Local\Temp\ccfffXqo.s:314    .text.USBD_HS_ProductStrDescriptor:00000000 $t
-C:\Users\jisu8\AppData\Local\Temp\ccfffXqo.s:320    .text.USBD_HS_ProductStrDescriptor:00000000 USBD_HS_ProductStrDescriptor
-C:\Users\jisu8\AppData\Local\Temp\ccfffXqo.s:367    .text.USBD_HS_ProductStrDescriptor:0000001c $d
-C:\Users\jisu8\AppData\Local\Temp\ccfffXqo.s:373    .rodata.USBD_HS_ManufacturerStrDescriptor.str1.4:00000000 $d
-C:\Users\jisu8\AppData\Local\Temp\ccfffXqo.s:377    .text.USBD_HS_ManufacturerStrDescriptor:00000000 $t
-C:\Users\jisu8\AppData\Local\Temp\ccfffXqo.s:383    .text.USBD_HS_ManufacturerStrDescriptor:00000000 USBD_HS_ManufacturerStrDescriptor
-C:\Users\jisu8\AppData\Local\Temp\ccfffXqo.s:415    .text.USBD_HS_ManufacturerStrDescriptor:00000014 $d
-C:\Users\jisu8\AppData\Local\Temp\ccfffXqo.s:421    .rodata.USBD_HS_ConfigStrDescriptor.str1.4:00000000 $d
-C:\Users\jisu8\AppData\Local\Temp\ccfffXqo.s:425    .text.USBD_HS_ConfigStrDescriptor:00000000 $t
-C:\Users\jisu8\AppData\Local\Temp\ccfffXqo.s:431    .text.USBD_HS_ConfigStrDescriptor:00000000 USBD_HS_ConfigStrDescriptor
-C:\Users\jisu8\AppData\Local\Temp\ccfffXqo.s:478    .text.USBD_HS_ConfigStrDescriptor:0000001c $d
-C:\Users\jisu8\AppData\Local\Temp\ccfffXqo.s:484    .rodata.USBD_HS_InterfaceStrDescriptor.str1.4:00000000 $d
-C:\Users\jisu8\AppData\Local\Temp\ccfffXqo.s:488    .text.USBD_HS_InterfaceStrDescriptor:00000000 $t
-C:\Users\jisu8\AppData\Local\Temp\ccfffXqo.s:494    .text.USBD_HS_InterfaceStrDescriptor:00000000 USBD_HS_InterfaceStrDescriptor
-C:\Users\jisu8\AppData\Local\Temp\ccfffXqo.s:541    .text.USBD_HS_InterfaceStrDescriptor:0000001c $d
-C:\Users\jisu8\AppData\Local\Temp\ccfffXqo.s:599    .data.USBD_StringSerial:00000000 USBD_StringSerial
-C:\Users\jisu8\AppData\Local\Temp\ccfffXqo.s:557    .bss.USBD_StrDesc:00000000 USBD_StrDesc
-C:\Users\jisu8\AppData\Local\Temp\ccfffXqo.s:592    .data.USBD_LangIDDesc:00000000 USBD_LangIDDesc
-C:\Users\jisu8\AppData\Local\Temp\ccfffXqo.s:577    .data.USBD_HS_BOSDesc:00000000 USBD_HS_BOSDesc
-C:\Users\jisu8\AppData\Local\Temp\ccfffXqo.s:584    .data.USBD_HS_DeviceDesc:00000000 USBD_HS_DeviceDesc
-C:\Users\jisu8\AppData\Local\Temp\ccfffXqo.s:563    .data.HS_Desc:00000000 HS_Desc
-C:\Users\jisu8\AppData\Local\Temp\ccfffXqo.s:553    .bss.USBD_StrDesc:00000000 $d
-C:\Users\jisu8\AppData\Local\Temp\ccfffXqo.s:560    .data.HS_Desc:00000000 $d
-C:\Users\jisu8\AppData\Local\Temp\ccfffXqo.s:573    .data.USBD_HS_BOSDesc:00000000 $d
-C:\Users\jisu8\AppData\Local\Temp\ccfffXqo.s:580    .data.USBD_HS_DeviceDesc:00000000 $d
-C:\Users\jisu8\AppData\Local\Temp\ccfffXqo.s:588    .data.USBD_LangIDDesc:00000000 $d
-C:\Users\jisu8\AppData\Local\Temp\ccfffXqo.s:595    .data.USBD_StringSerial:00000000 $d
+C:\Users\jisu8\AppData\Local\Temp\ccSa4GOE.s:20     .text.USBD_HS_DeviceDescriptor:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\ccSa4GOE.s:26     .text.USBD_HS_DeviceDescriptor:00000000 USBD_HS_DeviceDescriptor
+C:\Users\jisu8\AppData\Local\Temp\ccSa4GOE.s:49     .text.USBD_HS_DeviceDescriptor:00000008 $d
+C:\Users\jisu8\AppData\Local\Temp\ccSa4GOE.s:54     .text.USBD_HS_LangIDStrDescriptor:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\ccSa4GOE.s:60     .text.USBD_HS_LangIDStrDescriptor:00000000 USBD_HS_LangIDStrDescriptor
+C:\Users\jisu8\AppData\Local\Temp\ccSa4GOE.s:82     .text.USBD_HS_LangIDStrDescriptor:00000008 $d
+C:\Users\jisu8\AppData\Local\Temp\ccSa4GOE.s:87     .text.USBD_HS_USR_BOSDescriptor:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\ccSa4GOE.s:93     .text.USBD_HS_USR_BOSDescriptor:00000000 USBD_HS_USR_BOSDescriptor
+C:\Users\jisu8\AppData\Local\Temp\ccSa4GOE.s:115    .text.USBD_HS_USR_BOSDescriptor:00000008 $d
+C:\Users\jisu8\AppData\Local\Temp\ccSa4GOE.s:120    .text.IntToUnicode:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\ccSa4GOE.s:125    .text.IntToUnicode:00000000 IntToUnicode
+C:\Users\jisu8\AppData\Local\Temp\ccSa4GOE.s:203    .text.Get_SerialNum:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\ccSa4GOE.s:208    .text.Get_SerialNum:00000000 Get_SerialNum
+C:\Users\jisu8\AppData\Local\Temp\ccSa4GOE.s:265    .text.Get_SerialNum:00000030 $d
+C:\Users\jisu8\AppData\Local\Temp\ccSa4GOE.s:271    .text.USBD_HS_SerialStrDescriptor:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\ccSa4GOE.s:277    .text.USBD_HS_SerialStrDescriptor:00000000 USBD_HS_SerialStrDescriptor
+C:\Users\jisu8\AppData\Local\Temp\ccSa4GOE.s:305    .text.USBD_HS_SerialStrDescriptor:00000010 $d
+C:\Users\jisu8\AppData\Local\Temp\ccSa4GOE.s:310    .rodata.USBD_HS_ProductStrDescriptor.str1.4:00000000 $d
+C:\Users\jisu8\AppData\Local\Temp\ccSa4GOE.s:314    .text.USBD_HS_ProductStrDescriptor:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\ccSa4GOE.s:320    .text.USBD_HS_ProductStrDescriptor:00000000 USBD_HS_ProductStrDescriptor
+C:\Users\jisu8\AppData\Local\Temp\ccSa4GOE.s:367    .text.USBD_HS_ProductStrDescriptor:0000001c $d
+C:\Users\jisu8\AppData\Local\Temp\ccSa4GOE.s:373    .rodata.USBD_HS_ManufacturerStrDescriptor.str1.4:00000000 $d
+C:\Users\jisu8\AppData\Local\Temp\ccSa4GOE.s:377    .text.USBD_HS_ManufacturerStrDescriptor:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\ccSa4GOE.s:383    .text.USBD_HS_ManufacturerStrDescriptor:00000000 USBD_HS_ManufacturerStrDescriptor
+C:\Users\jisu8\AppData\Local\Temp\ccSa4GOE.s:415    .text.USBD_HS_ManufacturerStrDescriptor:00000014 $d
+C:\Users\jisu8\AppData\Local\Temp\ccSa4GOE.s:421    .rodata.USBD_HS_ConfigStrDescriptor.str1.4:00000000 $d
+C:\Users\jisu8\AppData\Local\Temp\ccSa4GOE.s:425    .text.USBD_HS_ConfigStrDescriptor:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\ccSa4GOE.s:431    .text.USBD_HS_ConfigStrDescriptor:00000000 USBD_HS_ConfigStrDescriptor
+C:\Users\jisu8\AppData\Local\Temp\ccSa4GOE.s:478    .text.USBD_HS_ConfigStrDescriptor:0000001c $d
+C:\Users\jisu8\AppData\Local\Temp\ccSa4GOE.s:484    .rodata.USBD_HS_InterfaceStrDescriptor.str1.4:00000000 $d
+C:\Users\jisu8\AppData\Local\Temp\ccSa4GOE.s:488    .text.USBD_HS_InterfaceStrDescriptor:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\ccSa4GOE.s:494    .text.USBD_HS_InterfaceStrDescriptor:00000000 USBD_HS_InterfaceStrDescriptor
+C:\Users\jisu8\AppData\Local\Temp\ccSa4GOE.s:541    .text.USBD_HS_InterfaceStrDescriptor:0000001c $d
+C:\Users\jisu8\AppData\Local\Temp\ccSa4GOE.s:599    .data.USBD_StringSerial:00000000 USBD_StringSerial
+C:\Users\jisu8\AppData\Local\Temp\ccSa4GOE.s:557    .bss.USBD_StrDesc:00000000 USBD_StrDesc
+C:\Users\jisu8\AppData\Local\Temp\ccSa4GOE.s:592    .data.USBD_LangIDDesc:00000000 USBD_LangIDDesc
+C:\Users\jisu8\AppData\Local\Temp\ccSa4GOE.s:577    .data.USBD_HS_BOSDesc:00000000 USBD_HS_BOSDesc
+C:\Users\jisu8\AppData\Local\Temp\ccSa4GOE.s:584    .data.USBD_HS_DeviceDesc:00000000 USBD_HS_DeviceDesc
+C:\Users\jisu8\AppData\Local\Temp\ccSa4GOE.s:563    .data.HS_Desc:00000000 HS_Desc
+C:\Users\jisu8\AppData\Local\Temp\ccSa4GOE.s:553    .bss.USBD_StrDesc:00000000 $d
+C:\Users\jisu8\AppData\Local\Temp\ccSa4GOE.s:560    .data.HS_Desc:00000000 $d
+C:\Users\jisu8\AppData\Local\Temp\ccSa4GOE.s:573    .data.USBD_HS_BOSDesc:00000000 $d
+C:\Users\jisu8\AppData\Local\Temp\ccSa4GOE.s:580    .data.USBD_HS_DeviceDesc:00000000 $d
+C:\Users\jisu8\AppData\Local\Temp\ccSa4GOE.s:588    .data.USBD_LangIDDesc:00000000 $d
+C:\Users\jisu8\AppData\Local\Temp\ccSa4GOE.s:595    .data.USBD_StringSerial:00000000 $d
 
 UNDEFINED SYMBOLS
 USBD_GetString
