@@ -257,7 +257,7 @@ int8_t STORAGE_Read_HS(uint8_t lun, uint8_t *buf, uint32_t blk_addr, uint16_t bl
 
 	if (BSP_SD_IsDetected() != SD_NOT_PRESENT)
 	{
-	    BSP_SD_ReadBlocks((uint32_t *) buf, blk_addr, blk_len,10000);
+	    BSP_SD_ReadBlocks_DMA((uint32_t *) buf, blk_addr, blk_len);
 
 	    /* Wait until SD card is ready to use for  new operation */
 	    while (BSP_SD_GetCardState() != SD_TRANSFER_OK)
@@ -281,7 +281,7 @@ int8_t STORAGE_Write_HS(uint8_t lun, uint8_t *buf, uint32_t blk_addr, uint16_t b
 
 	if (BSP_SD_IsDetected() != SD_NOT_PRESENT)
 	{
-	    BSP_SD_WriteBlocks((uint32_t *) buf, blk_addr, blk_len,10000);
+	    BSP_SD_WriteBlocks_DMA((uint32_t *) buf, blk_addr, blk_len);
 
 	    /* Wait until SD card is ready to use for new operation */
 	    while (BSP_SD_GetCardState() != SD_TRANSFER_OK)

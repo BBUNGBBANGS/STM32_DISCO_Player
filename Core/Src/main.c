@@ -107,10 +107,6 @@ void StartDefaultTask(void const * argument);
 int main(void)
 {
   /* USER CODE BEGIN 1 */
-
-       uint32_t byteswritten; /* File write count */
-
-       uint8_t wtext[] = "SD card test in STM32F746G-DISCO board"; /* File write buffer
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
@@ -154,6 +150,7 @@ int main(void)
   /* add mutexes, ... */
   /* USER CODE END RTOS_MUTEX */
   BSP_SD_Init();
+
   /* USER CODE BEGIN RTOS_SEMAPHORES */
   /* add semaphores, ... */
   /* USER CODE END RTOS_SEMAPHORES */
@@ -990,6 +987,12 @@ static void MX_GPIO_Init(void)
 /* USER CODE END Header_StartDefaultTask */
 void StartDefaultTask(void const * argument)
 {
+  uint32_t byteswritten; /* File write count */
+  uint8_t wtext[] = "SD card test in STM32F746G-DISCO board"; 
+  f_mount(&SDFatFs, (TCHAR const*) SDPath, 0);
+  f_open(&MyFile, "Example.txt", FA_CREATE_ALWAYS | FA_WRITE);
+  f_write(&MyFile, wtext, sizeof(wtext), (void *) &byteswritten);
+  f_close(&MyFile);
   /* init code for USB_HOST */
   //MX_USB_HOST_Init();
   /* init code for USB_DEVICE */

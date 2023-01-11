@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccutw7ob.s 			page 1
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccEsNiEp.s 			page 1
 
 
    1              		.cpu cortex-m7
@@ -12,69 +12,69 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccutw7ob.s 			page 1
    9              		.eabi_attribute 24, 1
   10              		.eabi_attribute 25, 1
   11              		.eabi_attribute 26, 1
-  12              		.eabi_attribute 30, 6
+  12              		.eabi_attribute 30, 1
   13              		.eabi_attribute 34, 1
   14              		.eabi_attribute 18, 4
   15              		.file	"usbd_msc_data.c"
   16              		.text
   17              	.Ltext0:
   18              		.cfi_sections	.debug_frame
-  19              		.global	MSC_Page00_Inquiry_Data
-  20              		.section	.data.MSC_Page00_Inquiry_Data,"aw"
-  21              		.align	2
-  24              	MSC_Page00_Inquiry_Data:
-  25 0000 00000002 		.ascii	"\000\000\000\002\000\200"
-  25      0080
-  26              		.global	MSC_Page80_Inquiry_Data
-  27              		.section	.data.MSC_Page80_Inquiry_Data,"aw"
-  28              		.align	2
-  31              	MSC_Page80_Inquiry_Data:
-  32 0000 00800008 		.ascii	"\000\200\000\010    "
-  32      20202020 
-  33              		.global	MSC_Mode_Sense6_data
-  34              		.section	.data.MSC_Mode_Sense6_data,"aw"
-  35              		.align	2
-  38              	MSC_Mode_Sense6_data:
-  39 0000 22000000 		.ascii	"\"\000\000\000\010\022\000\000\000\000\000\000\000\000"
-  39      08120000 
-  39      00000000 
-  39      0000
-  40 000e 00000000 		.ascii	"\000\000\000\000\000\000\000\000\000"
-  40      00000000 
-  40      00
-  41              		.global	MSC_Mode_Sense10_data
-  42              		.section	.data.MSC_Mode_Sense10_data,"aw"
-  43              		.align	2
-  46              	MSC_Mode_Sense10_data:
-  47 0000 00260000 		.ascii	"\000&\000\000\000\000\000\000\010\022\000\000\000\000"
-  47      00000000 
-  47      08120000 
-  47      0000
-  48 000e 00000000 		.ascii	"\000\000\000\000\000\000\000\000\000\000\000\000\000"
-  48      00000000 
-  48      00000000 
-  48      00
+  19              		.global	MSC_Mode_Sense10_data
+  20              		.global	MSC_Mode_Sense6_data
+  21              		.global	MSC_Page80_Inquiry_Data
+  22              		.global	MSC_Page00_Inquiry_Data
+  23              		.section	.data.MSC_Mode_Sense10_data,"aw"
+  24              		.align	2
+  27              	MSC_Mode_Sense10_data:
+  28 0000 00260000 		.ascii	"\000&\000\000\000\000\000\000\010\022\000\000\000\000"
+  28      00000000 
+  28      08120000 
+  28      0000
+  29 000e 00000000 		.ascii	"\000\000\000\000\000\000\000\000\000\000\000\000\000"
+  29      00000000 
+  29      00000000 
+  29      00
+  30              		.section	.data.MSC_Mode_Sense6_data,"aw"
+  31              		.align	2
+  34              	MSC_Mode_Sense6_data:
+  35 0000 22000000 		.ascii	"\"\000\000\000\010\022\000\000\000\000\000\000\000\000"
+  35      08120000 
+  35      00000000 
+  35      0000
+  36 000e 00000000 		.ascii	"\000\000\000\000\000\000\000\000\000"
+  36      00000000 
+  36      00
+  37              		.section	.data.MSC_Page00_Inquiry_Data,"aw"
+  38              		.align	2
+  41              	MSC_Page00_Inquiry_Data:
+  42 0000 00000002 		.ascii	"\000\000\000\002\000\200"
+  42      0080
+  43              		.section	.data.MSC_Page80_Inquiry_Data,"aw"
+  44              		.align	2
+  47              	MSC_Page80_Inquiry_Data:
+  48 0000 00800008 		.ascii	"\000\200\000\010    "
+  48      20202020 
   49              		.text
   50              	.Letext0:
   51              		.file 1 "d:\\3.tools\\arm_gcc_toolchain\\arm-none-eabi\\include\\machine\\_default_types.h"
   52              		.file 2 "d:\\3.tools\\arm_gcc_toolchain\\arm-none-eabi\\include\\sys\\_stdint.h"
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccutw7ob.s 			page 2
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccEsNiEp.s 			page 2
 
 
   53              		.file 3 "Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Inc/usbd_msc_data.h"
   54              		.file 4 "Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Src/usbd_msc_data.c"
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccutw7ob.s 			page 3
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccEsNiEp.s 			page 3
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 usbd_msc_data.c
-C:\Users\jisu8\AppData\Local\Temp\ccutw7ob.s:24     .data.MSC_Page00_Inquiry_Data:00000000 MSC_Page00_Inquiry_Data
-C:\Users\jisu8\AppData\Local\Temp\ccutw7ob.s:21     .data.MSC_Page00_Inquiry_Data:00000000 $d
-C:\Users\jisu8\AppData\Local\Temp\ccutw7ob.s:31     .data.MSC_Page80_Inquiry_Data:00000000 MSC_Page80_Inquiry_Data
-C:\Users\jisu8\AppData\Local\Temp\ccutw7ob.s:28     .data.MSC_Page80_Inquiry_Data:00000000 $d
-C:\Users\jisu8\AppData\Local\Temp\ccutw7ob.s:38     .data.MSC_Mode_Sense6_data:00000000 MSC_Mode_Sense6_data
-C:\Users\jisu8\AppData\Local\Temp\ccutw7ob.s:35     .data.MSC_Mode_Sense6_data:00000000 $d
-C:\Users\jisu8\AppData\Local\Temp\ccutw7ob.s:46     .data.MSC_Mode_Sense10_data:00000000 MSC_Mode_Sense10_data
-C:\Users\jisu8\AppData\Local\Temp\ccutw7ob.s:43     .data.MSC_Mode_Sense10_data:00000000 $d
+C:\Users\jisu8\AppData\Local\Temp\ccEsNiEp.s:27     .data.MSC_Mode_Sense10_data:00000000 MSC_Mode_Sense10_data
+C:\Users\jisu8\AppData\Local\Temp\ccEsNiEp.s:34     .data.MSC_Mode_Sense6_data:00000000 MSC_Mode_Sense6_data
+C:\Users\jisu8\AppData\Local\Temp\ccEsNiEp.s:47     .data.MSC_Page80_Inquiry_Data:00000000 MSC_Page80_Inquiry_Data
+C:\Users\jisu8\AppData\Local\Temp\ccEsNiEp.s:41     .data.MSC_Page00_Inquiry_Data:00000000 MSC_Page00_Inquiry_Data
+C:\Users\jisu8\AppData\Local\Temp\ccEsNiEp.s:24     .data.MSC_Mode_Sense10_data:00000000 $d
+C:\Users\jisu8\AppData\Local\Temp\ccEsNiEp.s:31     .data.MSC_Mode_Sense6_data:00000000 $d
+C:\Users\jisu8\AppData\Local\Temp\ccEsNiEp.s:38     .data.MSC_Page00_Inquiry_Data:00000000 $d
+C:\Users\jisu8\AppData\Local\Temp\ccEsNiEp.s:44     .data.MSC_Page80_Inquiry_Data:00000000 $d
 
 NO UNDEFINED SYMBOLS
