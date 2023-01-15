@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccFpR0z7.s 			page 1
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccHwRrjg.s 			page 1
 
 
    1              		.cpu cortex-m7
@@ -12,22 +12,44 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccFpR0z7.s 			page 1
    9              		.eabi_attribute 24, 1
   10              		.eabi_attribute 25, 1
   11              		.eabi_attribute 26, 1
-  12              		.eabi_attribute 30, 1
+  12              		.eabi_attribute 30, 6
   13              		.eabi_attribute 34, 1
   14              		.eabi_attribute 18, 4
   15              		.file	"fatfs.c"
   16              		.text
   17              	.Ltext0:
   18              		.cfi_sections	.debug_frame
-  19              		.section	.text.MX_FATFS_Init,"ax",%progbits
-  20              		.align	1
-  21              		.global	MX_FATFS_Init
-  22              		.syntax unified
-  23              		.thumb
-  24              		.thumb_func
-  26              	MX_FATFS_Init:
-  27              	.LFB146:
-  28              		.file 1 "FATFS/App/fatfs.c"
+  19              		.global	retSD
+  20              		.section	.bss.retSD,"aw",%nobits
+  23              	retSD:
+  24 0000 00       		.space	1
+  25              		.global	SDFatFS
+  26              		.section	.bss.SDFatFS,"aw",%nobits
+  27              		.align	2
+  30              	SDFatFS:
+  31 0000 00000000 		.space	572
+  31      00000000 
+  31      00000000 
+  31      00000000 
+  31      00000000 
+  32              		.global	SDFile
+  33              		.section	.bss.SDFile,"aw",%nobits
+  34              		.align	3
+  37              	SDFile:
+  38 0000 00000000 		.space	600
+  38      00000000 
+  38      00000000 
+  38      00000000 
+  38      00000000 
+  39              		.section	.text.MX_FATFS_Init,"ax",%progbits
+  40              		.align	1
+  41              		.global	MX_FATFS_Init
+  42              		.syntax unified
+  43              		.thumb
+  44              		.thumb_func
+  46              	MX_FATFS_Init:
+  47              	.LFB149:
+  48              		.file 1 "FATFS/App/fatfs.c"
    1:FATFS/App/fatfs.c **** /* USER CODE BEGIN Header */
    2:FATFS/App/fatfs.c **** /**
    3:FATFS/App/fatfs.c ****   ******************************************************************************
@@ -36,6 +58,9 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccFpR0z7.s 			page 1
    6:FATFS/App/fatfs.c ****   ******************************************************************************
    7:FATFS/App/fatfs.c ****   * @attention
    8:FATFS/App/fatfs.c ****   *
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccHwRrjg.s 			page 2
+
+
    9:FATFS/App/fatfs.c ****   * Copyright (c) 2023 STMicroelectronics.
   10:FATFS/App/fatfs.c ****   * All rights reserved.
   11:FATFS/App/fatfs.c ****   *
@@ -58,53 +83,57 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccFpR0z7.s 			page 1
   28:FATFS/App/fatfs.c **** /* USER CODE END Variables */
   29:FATFS/App/fatfs.c **** 
   30:FATFS/App/fatfs.c **** void MX_FATFS_Init(void)
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccFpR0z7.s 			page 2
-
-
   31:FATFS/App/fatfs.c **** {
-  29              		.loc 1 31 1 view -0
-  30              		.cfi_startproc
-  31              		@ args = 0, pretend = 0, frame = 0
-  32              		@ frame_needed = 0, uses_anonymous_args = 0
-  33 0000 08B5     		push	{r3, lr}
-  34              	.LCFI0:
-  35              		.cfi_def_cfa_offset 8
-  36              		.cfi_offset 3, -8
-  37              		.cfi_offset 14, -4
+  49              		.loc 1 31 1
+  50              		.cfi_startproc
+  51              		@ args = 0, pretend = 0, frame = 0
+  52              		@ frame_needed = 1, uses_anonymous_args = 0
+  53 0000 80B5     		push	{r7, lr}
+  54              	.LCFI0:
+  55              		.cfi_def_cfa_offset 8
+  56              		.cfi_offset 7, -8
+  57              		.cfi_offset 14, -4
+  58 0002 00AF     		add	r7, sp, #0
+  59              	.LCFI1:
+  60              		.cfi_def_cfa_register 7
   32:FATFS/App/fatfs.c ****   /*## FatFS: Link the SD driver ###########################*/
   33:FATFS/App/fatfs.c ****   retSD = FATFS_LinkDriver(&SD_Driver, SDPath);
-  38              		.loc 1 33 3 view .LVU1
-  39              		.loc 1 33 11 is_stmt 0 view .LVU2
-  40 0002 0349     		ldr	r1, .L3
-  41 0004 0348     		ldr	r0, .L3+4
-  42 0006 FFF7FEFF 		bl	FATFS_LinkDriver
-  43              	.LVL0:
-  44              		.loc 1 33 9 view .LVU3
-  45 000a 034B     		ldr	r3, .L3+8
-  46 000c 1870     		strb	r0, [r3]
+  61              		.loc 1 33 11
+  62 0004 0449     		ldr	r1, .L2
+  63 0006 0548     		ldr	r0, .L2+4
+  64 0008 FFF7FEFF 		bl	FATFS_LinkDriver
+  65 000c 0346     		mov	r3, r0
+  66 000e 1A46     		mov	r2, r3
+  67              		.loc 1 33 9
+  68 0010 034B     		ldr	r3, .L2+8
+  69 0012 1A70     		strb	r2, [r3]
   34:FATFS/App/fatfs.c **** 
   35:FATFS/App/fatfs.c ****   /* USER CODE BEGIN Init */
   36:FATFS/App/fatfs.c ****   /* additional user code for init */
   37:FATFS/App/fatfs.c ****   /* USER CODE END Init */
   38:FATFS/App/fatfs.c **** }
-  47              		.loc 1 38 1 view .LVU4
-  48 000e 08BD     		pop	{r3, pc}
-  49              	.L4:
-  50              		.align	2
-  51              	.L3:
-  52 0010 00000000 		.word	SDPath
-  53 0014 00000000 		.word	SD_Driver
-  54 0018 00000000 		.word	.LANCHOR0
-  55              		.cfi_endproc
-  56              	.LFE146:
-  58              		.section	.text.get_fattime,"ax",%progbits
-  59              		.align	1
-  60              		.global	get_fattime
-  61              		.syntax unified
-  62              		.thumb
-  63              		.thumb_func
-  65              	get_fattime:
-  66              	.LFB147:
+  70              		.loc 1 38 1
+  71 0014 00BF     		nop
+  72 0016 80BD     		pop	{r7, pc}
+  73              	.L3:
+  74              		.align	2
+  75              	.L2:
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccHwRrjg.s 			page 3
+
+
+  76 0018 00000000 		.word	SDPath
+  77 001c 00000000 		.word	SD_Driver
+  78 0020 00000000 		.word	retSD
+  79              		.cfi_endproc
+  80              	.LFE149:
+  82              		.section	.text.get_fattime,"ax",%progbits
+  83              		.align	1
+  84              		.global	get_fattime
+  85              		.syntax unified
+  86              		.thumb
+  87              		.thumb_func
+  89              	get_fattime:
+  90              	.LFB150:
   39:FATFS/App/fatfs.c **** 
   40:FATFS/App/fatfs.c **** /**
   41:FATFS/App/fatfs.c ****   * @brief  Gets Time from RTC
@@ -113,76 +142,69 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccFpR0z7.s 			page 1
   44:FATFS/App/fatfs.c ****   */
   45:FATFS/App/fatfs.c **** DWORD get_fattime(void)
   46:FATFS/App/fatfs.c **** {
-  67              		.loc 1 46 1 is_stmt 1 view -0
-  68              		.cfi_startproc
-  69              		@ args = 0, pretend = 0, frame = 0
-  70              		@ frame_needed = 0, uses_anonymous_args = 0
-  71              		@ link register save eliminated.
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccFpR0z7.s 			page 3
-
-
+  91              		.loc 1 46 1
+  92              		.cfi_startproc
+  93              		@ args = 0, pretend = 0, frame = 0
+  94              		@ frame_needed = 1, uses_anonymous_args = 0
+  95              		@ link register save eliminated.
+  96 0000 80B4     		push	{r7}
+  97              	.LCFI2:
+  98              		.cfi_def_cfa_offset 4
+  99              		.cfi_offset 7, -4
+ 100 0002 00AF     		add	r7, sp, #0
+ 101              	.LCFI3:
+ 102              		.cfi_def_cfa_register 7
   47:FATFS/App/fatfs.c ****   /* USER CODE BEGIN get_fattime */
   48:FATFS/App/fatfs.c ****   return 0;
-  72              		.loc 1 48 3 view .LVU6
+ 103              		.loc 1 48 10
+ 104 0004 0023     		movs	r3, #0
   49:FATFS/App/fatfs.c ****   /* USER CODE END get_fattime */
   50:FATFS/App/fatfs.c **** }
-  73              		.loc 1 50 1 is_stmt 0 view .LVU7
-  74 0000 0020     		movs	r0, #0
-  75 0002 7047     		bx	lr
-  76              		.cfi_endproc
-  77              	.LFE147:
-  79              		.global	SDFile
-  80              		.global	SDFatFS
-  81              		.global	retSD
-  82              		.section	.bss.SDFatFS,"aw",%nobits
-  83              		.align	2
-  86              	SDFatFS:
-  87 0000 00000000 		.space	572
-  87      00000000 
-  87      00000000 
-  87      00000000 
-  87      00000000 
-  88              		.section	.bss.SDFile,"aw",%nobits
-  89              		.align	3
-  92              	SDFile:
-  93 0000 00000000 		.space	600
-  93      00000000 
-  93      00000000 
-  93      00000000 
-  93      00000000 
-  94              		.section	.bss.retSD,"aw",%nobits
-  95              		.set	.LANCHOR0,. + 0
-  98              	retSD:
-  99 0000 00       		.space	1
- 100              		.text
- 101              	.Letext0:
- 102              		.file 2 "Middlewares/Third_Party/FatFs/src/integer.h"
- 103              		.file 3 "d:\\3.tools\\arm_gcc_toolchain\\arm-none-eabi\\include\\machine\\_default_types.h"
- 104              		.file 4 "d:\\3.tools\\arm_gcc_toolchain\\arm-none-eabi\\include\\sys\\_stdint.h"
- 105              		.file 5 "Middlewares/Third_Party/FreeRTOS/Source/include/queue.h"
- 106              		.file 6 "Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h"
- 107              		.file 7 "Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h"
- 108              		.file 8 "Middlewares/Third_Party/FatFs/src/ff.h"
- 109              		.file 9 "Middlewares/Third_Party/FatFs/src/diskio.h"
- 110              		.file 10 "Middlewares/Third_Party/FatFs/src/ff_gen_drv.h"
- 111              		.file 11 "FATFS/Target/sd_diskio.h"
- 112              		.file 12 "FATFS/App/fatfs.h"
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccFpR0z7.s 			page 4
+ 105              		.loc 1 50 1
+ 106 0006 1846     		mov	r0, r3
+ 107 0008 BD46     		mov	sp, r7
+ 108              	.LCFI4:
+ 109              		.cfi_def_cfa_register 13
+ 110              		@ sp needed
+ 111 000a 5DF8047B 		ldr	r7, [sp], #4
+ 112              	.LCFI5:
+ 113              		.cfi_restore 7
+ 114              		.cfi_def_cfa_offset 0
+ 115 000e 7047     		bx	lr
+ 116              		.cfi_endproc
+ 117              	.LFE150:
+ 119              		.text
+ 120              	.Letext0:
+ 121              		.file 2 "Middlewares/Third_Party/FatFs/src/integer.h"
+ 122              		.file 3 "d:\\3.tools\\arm_gcc_toolchain\\arm-none-eabi\\include\\machine\\_default_types.h"
+ 123              		.file 4 "d:\\3.tools\\arm_gcc_toolchain\\arm-none-eabi\\include\\sys\\_stdint.h"
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccHwRrjg.s 			page 4
+
+
+ 124              		.file 5 "Middlewares/Third_Party/FreeRTOS/Source/include/queue.h"
+ 125              		.file 6 "Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h"
+ 126              		.file 7 "Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h"
+ 127              		.file 8 "Middlewares/Third_Party/FatFs/src/ff.h"
+ 128              		.file 9 "Middlewares/Third_Party/FatFs/src/diskio.h"
+ 129              		.file 10 "Middlewares/Third_Party/FatFs/src/ff_gen_drv.h"
+ 130              		.file 11 "FATFS/Target/sd_diskio.h"
+ 131              		.file 12 "FATFS/App/fatfs.h"
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccHwRrjg.s 			page 5
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 fatfs.c
-C:\Users\jisu8\AppData\Local\Temp\ccFpR0z7.s:20     .text.MX_FATFS_Init:00000000 $t
-C:\Users\jisu8\AppData\Local\Temp\ccFpR0z7.s:26     .text.MX_FATFS_Init:00000000 MX_FATFS_Init
-C:\Users\jisu8\AppData\Local\Temp\ccFpR0z7.s:52     .text.MX_FATFS_Init:00000010 $d
-C:\Users\jisu8\AppData\Local\Temp\ccFpR0z7.s:59     .text.get_fattime:00000000 $t
-C:\Users\jisu8\AppData\Local\Temp\ccFpR0z7.s:65     .text.get_fattime:00000000 get_fattime
-C:\Users\jisu8\AppData\Local\Temp\ccFpR0z7.s:92     .bss.SDFile:00000000 SDFile
-C:\Users\jisu8\AppData\Local\Temp\ccFpR0z7.s:86     .bss.SDFatFS:00000000 SDFatFS
-C:\Users\jisu8\AppData\Local\Temp\ccFpR0z7.s:98     .bss.retSD:00000000 retSD
-C:\Users\jisu8\AppData\Local\Temp\ccFpR0z7.s:83     .bss.SDFatFS:00000000 $d
-C:\Users\jisu8\AppData\Local\Temp\ccFpR0z7.s:89     .bss.SDFile:00000000 $d
-C:\Users\jisu8\AppData\Local\Temp\ccFpR0z7.s:99     .bss.retSD:00000000 $d
+C:\Users\jisu8\AppData\Local\Temp\ccHwRrjg.s:23     .bss.retSD:00000000 retSD
+C:\Users\jisu8\AppData\Local\Temp\ccHwRrjg.s:24     .bss.retSD:00000000 $d
+C:\Users\jisu8\AppData\Local\Temp\ccHwRrjg.s:30     .bss.SDFatFS:00000000 SDFatFS
+C:\Users\jisu8\AppData\Local\Temp\ccHwRrjg.s:27     .bss.SDFatFS:00000000 $d
+C:\Users\jisu8\AppData\Local\Temp\ccHwRrjg.s:37     .bss.SDFile:00000000 SDFile
+C:\Users\jisu8\AppData\Local\Temp\ccHwRrjg.s:34     .bss.SDFile:00000000 $d
+C:\Users\jisu8\AppData\Local\Temp\ccHwRrjg.s:40     .text.MX_FATFS_Init:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\ccHwRrjg.s:46     .text.MX_FATFS_Init:00000000 MX_FATFS_Init
+C:\Users\jisu8\AppData\Local\Temp\ccHwRrjg.s:76     .text.MX_FATFS_Init:00000018 $d
+C:\Users\jisu8\AppData\Local\Temp\ccHwRrjg.s:83     .text.get_fattime:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\ccHwRrjg.s:89     .text.get_fattime:00000000 get_fattime
 
 UNDEFINED SYMBOLS
 FATFS_LinkDriver

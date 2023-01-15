@@ -1,0 +1,1484 @@
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cc8yvQ9b.s 			page 1
+
+
+   1              		.cpu cortex-m7
+   2              		.arch armv7e-m
+   3              		.fpu fpv5-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 6
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"sdram.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.bss.Timing,"aw",%nobits
+  20              		.align	2
+  23              	Timing:
+  24 0000 00000000 		.space	28
+  24      00000000 
+  24      00000000 
+  24      00000000 
+  24      00000000 
+  25              		.section	.bss.Command,"aw",%nobits
+  26              		.align	2
+  29              	Command:
+  30 0000 00000000 		.space	16
+  30      00000000 
+  30      00000000 
+  30      00000000 
+  31              		.section	.text.BSP_SDRAM_Init,"ax",%progbits
+  32              		.align	1
+  33              		.global	BSP_SDRAM_Init
+  34              		.syntax unified
+  35              		.thumb
+  36              		.thumb_func
+  38              	BSP_SDRAM_Init:
+  39              	.LFB144:
+  40              		.file 1 "Core/Src/sdram.c"
+   1:Core/Src/sdram.c **** /**
+   2:Core/Src/sdram.c ****   ******************************************************************************
+   3:Core/Src/sdram.c ****   * @file    stm32746g_discovery_sdram.c
+   4:Core/Src/sdram.c ****   * @author  MCD Application Team
+   5:Core/Src/sdram.c ****   * @brief   This file includes the SDRAM driver for the MT48LC4M32B2B5-7 memory 
+   6:Core/Src/sdram.c ****   *          device mounted on STM32746G-Discovery board.
+   7:Core/Src/sdram.c ****   *
+   8:Core/Src/sdram.c ****   ******************************************************************************
+   9:Core/Src/sdram.c ****   * @attention
+  10:Core/Src/sdram.c ****   *
+  11:Core/Src/sdram.c ****   * Copyright (c) 2016 STMicroelectronics.
+  12:Core/Src/sdram.c ****   * All rights reserved.
+  13:Core/Src/sdram.c ****   *
+  14:Core/Src/sdram.c ****   * This software is licensed under terms that can be found in the LICENSE file
+  15:Core/Src/sdram.c ****   * in the root directory of this software component.
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cc8yvQ9b.s 			page 2
+
+
+  16:Core/Src/sdram.c ****   * If no LICENSE file comes with this software, it is provided AS-IS.
+  17:Core/Src/sdram.c ****   *
+  18:Core/Src/sdram.c ****   ******************************************************************************
+  19:Core/Src/sdram.c ****   @verbatim
+  20:Core/Src/sdram.c ****    1. How To use this driver:
+  21:Core/Src/sdram.c ****    --------------------------
+  22:Core/Src/sdram.c ****       - This driver is used to drive the MT48LC4M32B2B5-7 SDRAM external memory mounted
+  23:Core/Src/sdram.c ****         on STM32746G-Discovery board.
+  24:Core/Src/sdram.c ****       - This driver does not need a specific component driver for the SDRAM device
+  25:Core/Src/sdram.c ****         to be included with.
+  26:Core/Src/sdram.c ****    
+  27:Core/Src/sdram.c ****    2. Driver description:
+  28:Core/Src/sdram.c ****    ---------------------
+  29:Core/Src/sdram.c ****      + Initialization steps:
+  30:Core/Src/sdram.c ****         o Initialize the SDRAM external memory using the BSP_SDRAM_Init() function. This 
+  31:Core/Src/sdram.c ****           function includes the MSP layer hardware resources initialization and the
+  32:Core/Src/sdram.c ****           FMC controller configuration to interface with the external SDRAM memory.
+  33:Core/Src/sdram.c ****         o It contains the SDRAM initialization sequence to program the SDRAM external 
+  34:Core/Src/sdram.c ****           device using the function BSP_SDRAM_Initialization_sequence(). Note that this 
+  35:Core/Src/sdram.c ****           sequence is standard for all SDRAM devices, but can include some differences
+  36:Core/Src/sdram.c ****           from a device to another. If it is the case, the right sequence should be 
+  37:Core/Src/sdram.c ****           implemented separately.
+  38:Core/Src/sdram.c ****      
+  39:Core/Src/sdram.c ****      + SDRAM read/write operations
+  40:Core/Src/sdram.c ****         o SDRAM external memory can be accessed with read/write operations once it is
+  41:Core/Src/sdram.c ****           initialized.
+  42:Core/Src/sdram.c ****           Read/write operation can be performed with AHB access using the functions
+  43:Core/Src/sdram.c ****           BSP_SDRAM_ReadData()/BSP_SDRAM_WriteData(), or by DMA transfer using the functions
+  44:Core/Src/sdram.c ****           BSP_SDRAM_ReadData_DMA()/BSP_SDRAM_WriteData_DMA().
+  45:Core/Src/sdram.c ****         o The AHB access is performed with 32-bit width transaction, the DMA transfer
+  46:Core/Src/sdram.c ****           configuration is fixed at single (no burst) word transfer (see the 
+  47:Core/Src/sdram.c ****           SDRAM_MspInit() static function).
+  48:Core/Src/sdram.c ****         o User can implement his own functions for read/write access with his desired 
+  49:Core/Src/sdram.c ****           configurations.
+  50:Core/Src/sdram.c ****         o If interrupt mode is used for DMA transfer, the function BSP_SDRAM_DMA_IRQHandler()
+  51:Core/Src/sdram.c ****           is called in IRQ handler file, to serve the generated interrupt once the DMA 
+  52:Core/Src/sdram.c ****           transfer is complete.
+  53:Core/Src/sdram.c ****         o You can send a command to the SDRAM device in runtime using the function 
+  54:Core/Src/sdram.c ****           BSP_SDRAM_Sendcmd(), and giving the desired command as parameter chosen between 
+  55:Core/Src/sdram.c ****           the predefined commands of the "FMC_SDRAM_CommandTypeDef" structure. 
+  56:Core/Src/sdram.c ****  
+  57:Core/Src/sdram.c ****   @endverbatim
+  58:Core/Src/sdram.c ****   ******************************************************************************
+  59:Core/Src/sdram.c ****   */
+  60:Core/Src/sdram.c **** 
+  61:Core/Src/sdram.c **** /* Dependencies
+  62:Core/Src/sdram.c **** - stm32f7xx_hal_sdram.c
+  63:Core/Src/sdram.c **** - stm32f7xx_ll_fmc.c
+  64:Core/Src/sdram.c **** - stm32f7xx_hal_dma.c  
+  65:Core/Src/sdram.c **** - stm32f7xx_hal_gpio.c
+  66:Core/Src/sdram.c **** - stm32f7xx_hal_cortex.c
+  67:Core/Src/sdram.c **** - stm32f7xx_hal_rcc_ex.h
+  68:Core/Src/sdram.c **** EndDependencies */
+  69:Core/Src/sdram.c **** 
+  70:Core/Src/sdram.c **** /* Includes ------------------------------------------------------------------*/
+  71:Core/Src/sdram.c **** #include "sdram.h"
+  72:Core/Src/sdram.c **** 
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cc8yvQ9b.s 			page 3
+
+
+  73:Core/Src/sdram.c **** /** @addtogroup BSP
+  74:Core/Src/sdram.c ****   * @{
+  75:Core/Src/sdram.c ****   */
+  76:Core/Src/sdram.c **** 
+  77:Core/Src/sdram.c **** /** @addtogroup STM32746G_DISCOVERY
+  78:Core/Src/sdram.c ****   * @{
+  79:Core/Src/sdram.c ****   */ 
+  80:Core/Src/sdram.c ****   
+  81:Core/Src/sdram.c **** /** @defgroup STM32746G_DISCOVERY_SDRAM STM32746G_DISCOVERY_SDRAM
+  82:Core/Src/sdram.c ****   * @{
+  83:Core/Src/sdram.c ****   */ 
+  84:Core/Src/sdram.c **** 
+  85:Core/Src/sdram.c **** /** @defgroup STM32746G_DISCOVERY_SDRAM_Private_Types_Definitions STM32746G_DISCOVERY_SDRAM Private
+  86:Core/Src/sdram.c ****   * @{
+  87:Core/Src/sdram.c ****   */ 
+  88:Core/Src/sdram.c **** /**
+  89:Core/Src/sdram.c ****   * @}
+  90:Core/Src/sdram.c ****   */
+  91:Core/Src/sdram.c **** 
+  92:Core/Src/sdram.c **** /** @defgroup STM32746G_DISCOVERY_SDRAM_Private_Defines STM32746G_DISCOVERY_SDRAM Private Defines
+  93:Core/Src/sdram.c ****   * @{
+  94:Core/Src/sdram.c ****   */
+  95:Core/Src/sdram.c **** /**
+  96:Core/Src/sdram.c ****   * @}
+  97:Core/Src/sdram.c ****   */
+  98:Core/Src/sdram.c **** 
+  99:Core/Src/sdram.c **** /** @defgroup STM32746G_DISCOVERY_SDRAM_Private_Macros STM32746G_DISCOVERY_SDRAM Private Macros
+ 100:Core/Src/sdram.c ****   * @{
+ 101:Core/Src/sdram.c ****   */  
+ 102:Core/Src/sdram.c **** /**
+ 103:Core/Src/sdram.c ****   * @}
+ 104:Core/Src/sdram.c ****   */
+ 105:Core/Src/sdram.c **** 
+ 106:Core/Src/sdram.c **** /** @defgroup STM32746G_DISCOVERY_SDRAM_Private_Variables STM32746G_DISCOVERY_SDRAM Private Variabl
+ 107:Core/Src/sdram.c ****   * @{
+ 108:Core/Src/sdram.c ****   */      
+ 109:Core/Src/sdram.c ****  
+ 110:Core/Src/sdram.c **** extern SDRAM_HandleTypeDef hsdram1; 
+ 111:Core/Src/sdram.c **** static FMC_SDRAM_TimingTypeDef Timing;
+ 112:Core/Src/sdram.c **** static FMC_SDRAM_CommandTypeDef Command;
+ 113:Core/Src/sdram.c **** /**
+ 114:Core/Src/sdram.c ****   * @}
+ 115:Core/Src/sdram.c ****   */ 
+ 116:Core/Src/sdram.c **** 
+ 117:Core/Src/sdram.c **** /** @defgroup STM32746G_DISCOVERY_SDRAM_Private_Function_Prototypes STM32746G_DISCOVERY_SDRAM Priva
+ 118:Core/Src/sdram.c ****   * @{
+ 119:Core/Src/sdram.c ****   */ 
+ 120:Core/Src/sdram.c **** /**
+ 121:Core/Src/sdram.c ****   * @}
+ 122:Core/Src/sdram.c ****   */
+ 123:Core/Src/sdram.c ****     
+ 124:Core/Src/sdram.c **** /** @defgroup STM32746G_DISCOVERY_SDRAM_Exported_Functions STM32746G_DISCOVERY_SDRAM Exported Funct
+ 125:Core/Src/sdram.c ****   * @{
+ 126:Core/Src/sdram.c ****   */ 
+ 127:Core/Src/sdram.c **** 
+ 128:Core/Src/sdram.c **** /**
+ 129:Core/Src/sdram.c ****   * @brief  Initializes the SDRAM device.
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cc8yvQ9b.s 			page 4
+
+
+ 130:Core/Src/sdram.c ****   * @retval SDRAM status
+ 131:Core/Src/sdram.c ****   */
+ 132:Core/Src/sdram.c **** uint8_t BSP_SDRAM_Init(void)
+ 133:Core/Src/sdram.c **** { 
+  41              		.loc 1 133 1
+  42              		.cfi_startproc
+  43              		@ args = 0, pretend = 0, frame = 0
+  44              		@ frame_needed = 1, uses_anonymous_args = 0
+  45 0000 80B5     		push	{r7, lr}
+  46              	.LCFI0:
+  47              		.cfi_def_cfa_offset 8
+  48              		.cfi_offset 7, -8
+  49              		.cfi_offset 14, -4
+  50 0002 00AF     		add	r7, sp, #0
+  51              	.LCFI1:
+  52              		.cfi_def_cfa_register 7
+ 134:Core/Src/sdram.c ****     /* SDRAM initialization sequence */
+ 135:Core/Src/sdram.c ****     BSP_SDRAM_Initialization_sequence(REFRESH_COUNT);
+  53              		.loc 1 135 5
+  54 0004 40F20360 		movw	r0, #1539
+  55 0008 FFF7FEFF 		bl	BSP_SDRAM_Initialization_sequence
+ 136:Core/Src/sdram.c ****     
+ 137:Core/Src/sdram.c ****     return SDRAM_OK;
+  56              		.loc 1 137 12
+  57 000c 0023     		movs	r3, #0
+ 138:Core/Src/sdram.c **** }
+  58              		.loc 1 138 1
+  59 000e 1846     		mov	r0, r3
+  60 0010 80BD     		pop	{r7, pc}
+  61              		.cfi_endproc
+  62              	.LFE144:
+  64              		.section	.text.BSP_SDRAM_DeInit,"ax",%progbits
+  65              		.align	1
+  66              		.global	BSP_SDRAM_DeInit
+  67              		.syntax unified
+  68              		.thumb
+  69              		.thumb_func
+  71              	BSP_SDRAM_DeInit:
+  72              	.LFB145:
+ 139:Core/Src/sdram.c **** 
+ 140:Core/Src/sdram.c **** /**
+ 141:Core/Src/sdram.c ****   * @brief  DeInitializes the SDRAM device.
+ 142:Core/Src/sdram.c ****   * @retval SDRAM status
+ 143:Core/Src/sdram.c ****   */
+ 144:Core/Src/sdram.c **** uint8_t BSP_SDRAM_DeInit(void)
+ 145:Core/Src/sdram.c **** { 
+  73              		.loc 1 145 1
+  74              		.cfi_startproc
+  75              		@ args = 0, pretend = 0, frame = 0
+  76              		@ frame_needed = 1, uses_anonymous_args = 0
+  77 0000 80B5     		push	{r7, lr}
+  78              	.LCFI2:
+  79              		.cfi_def_cfa_offset 8
+  80              		.cfi_offset 7, -8
+  81              		.cfi_offset 14, -4
+  82 0002 00AF     		add	r7, sp, #0
+  83              	.LCFI3:
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cc8yvQ9b.s 			page 5
+
+
+  84              		.cfi_def_cfa_register 7
+ 146:Core/Src/sdram.c ****   static uint8_t sdramstatus = SDRAM_ERROR;
+ 147:Core/Src/sdram.c ****   /* SDRAM device de-initialization */
+ 148:Core/Src/sdram.c ****   hsdram1.Instance = FMC_SDRAM_DEVICE;
+  85              		.loc 1 148 20
+  86 0004 0B4B     		ldr	r3, .L7
+  87 0006 0C4A     		ldr	r2, .L7+4
+  88 0008 1A60     		str	r2, [r3]
+ 149:Core/Src/sdram.c **** 
+ 150:Core/Src/sdram.c ****   if(HAL_SDRAM_DeInit(&hsdram1) != HAL_OK)
+  89              		.loc 1 150 6
+  90 000a 0A48     		ldr	r0, .L7
+  91 000c FFF7FEFF 		bl	HAL_SDRAM_DeInit
+  92 0010 0346     		mov	r3, r0
+  93              		.loc 1 150 5
+  94 0012 002B     		cmp	r3, #0
+  95 0014 03D0     		beq	.L4
+ 151:Core/Src/sdram.c ****   {
+ 152:Core/Src/sdram.c ****     sdramstatus = SDRAM_ERROR;
+  96              		.loc 1 152 17
+  97 0016 094B     		ldr	r3, .L7+8
+  98 0018 0122     		movs	r2, #1
+  99 001a 1A70     		strb	r2, [r3]
+ 100 001c 02E0     		b	.L5
+ 101              	.L4:
+ 153:Core/Src/sdram.c ****   }
+ 154:Core/Src/sdram.c ****   else
+ 155:Core/Src/sdram.c ****   {
+ 156:Core/Src/sdram.c ****     sdramstatus = SDRAM_OK;
+ 102              		.loc 1 156 17
+ 103 001e 074B     		ldr	r3, .L7+8
+ 104 0020 0022     		movs	r2, #0
+ 105 0022 1A70     		strb	r2, [r3]
+ 106              	.L5:
+ 157:Core/Src/sdram.c ****   }
+ 158:Core/Src/sdram.c ****   
+ 159:Core/Src/sdram.c ****   /* SDRAM controller de-initialization */
+ 160:Core/Src/sdram.c ****   BSP_SDRAM_MspDeInit(&hsdram1, NULL);
+ 107              		.loc 1 160 3
+ 108 0024 0021     		movs	r1, #0
+ 109 0026 0348     		ldr	r0, .L7
+ 110 0028 FFF7FEFF 		bl	BSP_SDRAM_MspDeInit
+ 161:Core/Src/sdram.c ****   
+ 162:Core/Src/sdram.c ****   return sdramstatus;
+ 111              		.loc 1 162 10
+ 112 002c 034B     		ldr	r3, .L7+8
+ 113 002e 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 163:Core/Src/sdram.c **** }
+ 114              		.loc 1 163 1
+ 115 0030 1846     		mov	r0, r3
+ 116 0032 80BD     		pop	{r7, pc}
+ 117              	.L8:
+ 118              		.align	2
+ 119              	.L7:
+ 120 0034 00000000 		.word	hsdram1
+ 121 0038 400100A0 		.word	-1610612416
+ 122 003c 00000000 		.word	sdramstatus.2
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cc8yvQ9b.s 			page 6
+
+
+ 123              		.cfi_endproc
+ 124              	.LFE145:
+ 126              		.section	.text.BSP_SDRAM_Initialization_sequence,"ax",%progbits
+ 127              		.align	1
+ 128              		.global	BSP_SDRAM_Initialization_sequence
+ 129              		.syntax unified
+ 130              		.thumb
+ 131              		.thumb_func
+ 133              	BSP_SDRAM_Initialization_sequence:
+ 134              	.LFB146:
+ 164:Core/Src/sdram.c **** 
+ 165:Core/Src/sdram.c **** /**
+ 166:Core/Src/sdram.c ****   * @brief  Programs the SDRAM device.
+ 167:Core/Src/sdram.c ****   * @param  RefreshCount: SDRAM refresh counter value 
+ 168:Core/Src/sdram.c ****   * @retval None
+ 169:Core/Src/sdram.c ****   */
+ 170:Core/Src/sdram.c **** void BSP_SDRAM_Initialization_sequence(uint32_t RefreshCount)
+ 171:Core/Src/sdram.c **** {
+ 135              		.loc 1 171 1
+ 136              		.cfi_startproc
+ 137              		@ args = 0, pretend = 0, frame = 16
+ 138              		@ frame_needed = 1, uses_anonymous_args = 0
+ 139 0000 80B5     		push	{r7, lr}
+ 140              	.LCFI4:
+ 141              		.cfi_def_cfa_offset 8
+ 142              		.cfi_offset 7, -8
+ 143              		.cfi_offset 14, -4
+ 144 0002 84B0     		sub	sp, sp, #16
+ 145              	.LCFI5:
+ 146              		.cfi_def_cfa_offset 24
+ 147 0004 00AF     		add	r7, sp, #0
+ 148              	.LCFI6:
+ 149              		.cfi_def_cfa_register 7
+ 150 0006 7860     		str	r0, [r7, #4]
+ 172:Core/Src/sdram.c ****   __IO uint32_t tmpmrd = 0;
+ 151              		.loc 1 172 17
+ 152 0008 0023     		movs	r3, #0
+ 153 000a FB60     		str	r3, [r7, #12]
+ 173:Core/Src/sdram.c ****   
+ 174:Core/Src/sdram.c ****   /* Step 1: Configure a clock configuration enable command */
+ 175:Core/Src/sdram.c ****   Command.CommandMode            = FMC_SDRAM_CMD_CLK_ENABLE;
+ 154              		.loc 1 175 34
+ 155 000c 2A4B     		ldr	r3, .L10
+ 156 000e 0122     		movs	r2, #1
+ 157 0010 1A60     		str	r2, [r3]
+ 176:Core/Src/sdram.c ****   Command.CommandTarget          = FMC_SDRAM_CMD_TARGET_BANK1;
+ 158              		.loc 1 176 34
+ 159 0012 294B     		ldr	r3, .L10
+ 160 0014 1022     		movs	r2, #16
+ 161 0016 5A60     		str	r2, [r3, #4]
+ 177:Core/Src/sdram.c ****   Command.AutoRefreshNumber      = 1;
+ 162              		.loc 1 177 34
+ 163 0018 274B     		ldr	r3, .L10
+ 164 001a 0122     		movs	r2, #1
+ 165 001c 9A60     		str	r2, [r3, #8]
+ 178:Core/Src/sdram.c ****   Command.ModeRegisterDefinition = 0;
+ 166              		.loc 1 178 34
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cc8yvQ9b.s 			page 7
+
+
+ 167 001e 264B     		ldr	r3, .L10
+ 168 0020 0022     		movs	r2, #0
+ 169 0022 DA60     		str	r2, [r3, #12]
+ 179:Core/Src/sdram.c **** 
+ 180:Core/Src/sdram.c ****   /* Send the command */
+ 181:Core/Src/sdram.c ****   HAL_SDRAM_SendCommand(&hsdram1, &Command, SDRAM_TIMEOUT);
+ 170              		.loc 1 181 3
+ 171 0024 4FF6FF72 		movw	r2, #65535
+ 172 0028 2349     		ldr	r1, .L10
+ 173 002a 2448     		ldr	r0, .L10+4
+ 174 002c FFF7FEFF 		bl	HAL_SDRAM_SendCommand
+ 182:Core/Src/sdram.c **** 
+ 183:Core/Src/sdram.c ****   /* Step 2: Insert 100 us minimum delay */ 
+ 184:Core/Src/sdram.c ****   /* Inserted delay is equal to 1 ms due to systick time base unit (ms) */
+ 185:Core/Src/sdram.c ****   HAL_Delay(1);
+ 175              		.loc 1 185 3
+ 176 0030 0120     		movs	r0, #1
+ 177 0032 FFF7FEFF 		bl	HAL_Delay
+ 186:Core/Src/sdram.c ****     
+ 187:Core/Src/sdram.c ****   /* Step 3: Configure a PALL (precharge all) command */ 
+ 188:Core/Src/sdram.c ****   Command.CommandMode            = FMC_SDRAM_CMD_PALL;
+ 178              		.loc 1 188 34
+ 179 0036 204B     		ldr	r3, .L10
+ 180 0038 0222     		movs	r2, #2
+ 181 003a 1A60     		str	r2, [r3]
+ 189:Core/Src/sdram.c ****   Command.CommandTarget          = FMC_SDRAM_CMD_TARGET_BANK1;
+ 182              		.loc 1 189 34
+ 183 003c 1E4B     		ldr	r3, .L10
+ 184 003e 1022     		movs	r2, #16
+ 185 0040 5A60     		str	r2, [r3, #4]
+ 190:Core/Src/sdram.c ****   Command.AutoRefreshNumber      = 1;
+ 186              		.loc 1 190 34
+ 187 0042 1D4B     		ldr	r3, .L10
+ 188 0044 0122     		movs	r2, #1
+ 189 0046 9A60     		str	r2, [r3, #8]
+ 191:Core/Src/sdram.c ****   Command.ModeRegisterDefinition = 0;
+ 190              		.loc 1 191 34
+ 191 0048 1B4B     		ldr	r3, .L10
+ 192 004a 0022     		movs	r2, #0
+ 193 004c DA60     		str	r2, [r3, #12]
+ 192:Core/Src/sdram.c **** 
+ 193:Core/Src/sdram.c ****   /* Send the command */
+ 194:Core/Src/sdram.c ****   HAL_SDRAM_SendCommand(&hsdram1, &Command, SDRAM_TIMEOUT);  
+ 194              		.loc 1 194 3
+ 195 004e 4FF6FF72 		movw	r2, #65535
+ 196 0052 1949     		ldr	r1, .L10
+ 197 0054 1948     		ldr	r0, .L10+4
+ 198 0056 FFF7FEFF 		bl	HAL_SDRAM_SendCommand
+ 195:Core/Src/sdram.c ****   
+ 196:Core/Src/sdram.c ****   /* Step 4: Configure an Auto Refresh command */ 
+ 197:Core/Src/sdram.c ****   Command.CommandMode            = FMC_SDRAM_CMD_AUTOREFRESH_MODE;
+ 199              		.loc 1 197 34
+ 200 005a 174B     		ldr	r3, .L10
+ 201 005c 0322     		movs	r2, #3
+ 202 005e 1A60     		str	r2, [r3]
+ 198:Core/Src/sdram.c ****   Command.CommandTarget          = FMC_SDRAM_CMD_TARGET_BANK1;
+ 203              		.loc 1 198 34
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cc8yvQ9b.s 			page 8
+
+
+ 204 0060 154B     		ldr	r3, .L10
+ 205 0062 1022     		movs	r2, #16
+ 206 0064 5A60     		str	r2, [r3, #4]
+ 199:Core/Src/sdram.c ****   Command.AutoRefreshNumber      = 8;
+ 207              		.loc 1 199 34
+ 208 0066 144B     		ldr	r3, .L10
+ 209 0068 0822     		movs	r2, #8
+ 210 006a 9A60     		str	r2, [r3, #8]
+ 200:Core/Src/sdram.c ****   Command.ModeRegisterDefinition = 0;
+ 211              		.loc 1 200 34
+ 212 006c 124B     		ldr	r3, .L10
+ 213 006e 0022     		movs	r2, #0
+ 214 0070 DA60     		str	r2, [r3, #12]
+ 201:Core/Src/sdram.c **** 
+ 202:Core/Src/sdram.c ****   /* Send the command */
+ 203:Core/Src/sdram.c ****   HAL_SDRAM_SendCommand(&hsdram1, &Command, SDRAM_TIMEOUT);
+ 215              		.loc 1 203 3
+ 216 0072 4FF6FF72 		movw	r2, #65535
+ 217 0076 1049     		ldr	r1, .L10
+ 218 0078 1048     		ldr	r0, .L10+4
+ 219 007a FFF7FEFF 		bl	HAL_SDRAM_SendCommand
+ 204:Core/Src/sdram.c ****   
+ 205:Core/Src/sdram.c ****   /* Step 5: Program the external memory mode register */
+ 206:Core/Src/sdram.c ****   tmpmrd = (uint32_t)SDRAM_MODEREG_BURST_LENGTH_1          |\
+ 220              		.loc 1 206 10
+ 221 007e 4FF40873 		mov	r3, #544
+ 222 0082 FB60     		str	r3, [r7, #12]
+ 207:Core/Src/sdram.c ****                      SDRAM_MODEREG_BURST_TYPE_SEQUENTIAL   |\
+ 208:Core/Src/sdram.c ****                      SDRAM_MODEREG_CAS_LATENCY_2           |\
+ 209:Core/Src/sdram.c ****                      SDRAM_MODEREG_OPERATING_MODE_STANDARD |\
+ 210:Core/Src/sdram.c ****                      SDRAM_MODEREG_WRITEBURST_MODE_SINGLE;
+ 211:Core/Src/sdram.c ****   
+ 212:Core/Src/sdram.c ****   Command.CommandMode            = FMC_SDRAM_CMD_LOAD_MODE;
+ 223              		.loc 1 212 34
+ 224 0084 0C4B     		ldr	r3, .L10
+ 225 0086 0422     		movs	r2, #4
+ 226 0088 1A60     		str	r2, [r3]
+ 213:Core/Src/sdram.c ****   Command.CommandTarget          = FMC_SDRAM_CMD_TARGET_BANK1;
+ 227              		.loc 1 213 34
+ 228 008a 0B4B     		ldr	r3, .L10
+ 229 008c 1022     		movs	r2, #16
+ 230 008e 5A60     		str	r2, [r3, #4]
+ 214:Core/Src/sdram.c ****   Command.AutoRefreshNumber      = 1;
+ 231              		.loc 1 214 34
+ 232 0090 094B     		ldr	r3, .L10
+ 233 0092 0122     		movs	r2, #1
+ 234 0094 9A60     		str	r2, [r3, #8]
+ 215:Core/Src/sdram.c ****   Command.ModeRegisterDefinition = tmpmrd;
+ 235              		.loc 1 215 34
+ 236 0096 FB68     		ldr	r3, [r7, #12]
+ 237 0098 074A     		ldr	r2, .L10
+ 238 009a D360     		str	r3, [r2, #12]
+ 216:Core/Src/sdram.c **** 
+ 217:Core/Src/sdram.c ****   /* Send the command */
+ 218:Core/Src/sdram.c ****   HAL_SDRAM_SendCommand(&hsdram1, &Command, SDRAM_TIMEOUT);
+ 239              		.loc 1 218 3
+ 240 009c 4FF6FF72 		movw	r2, #65535
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cc8yvQ9b.s 			page 9
+
+
+ 241 00a0 0549     		ldr	r1, .L10
+ 242 00a2 0648     		ldr	r0, .L10+4
+ 243 00a4 FFF7FEFF 		bl	HAL_SDRAM_SendCommand
+ 219:Core/Src/sdram.c ****   
+ 220:Core/Src/sdram.c ****   /* Step 6: Set the refresh rate counter */
+ 221:Core/Src/sdram.c ****   /* Set the device refresh rate */
+ 222:Core/Src/sdram.c ****   HAL_SDRAM_ProgramRefreshRate(&hsdram1, RefreshCount); 
+ 244              		.loc 1 222 3
+ 245 00a8 7968     		ldr	r1, [r7, #4]
+ 246 00aa 0448     		ldr	r0, .L10+4
+ 247 00ac FFF7FEFF 		bl	HAL_SDRAM_ProgramRefreshRate
+ 223:Core/Src/sdram.c **** }
+ 248              		.loc 1 223 1
+ 249 00b0 00BF     		nop
+ 250 00b2 1037     		adds	r7, r7, #16
+ 251              	.LCFI7:
+ 252              		.cfi_def_cfa_offset 8
+ 253 00b4 BD46     		mov	sp, r7
+ 254              	.LCFI8:
+ 255              		.cfi_def_cfa_register 13
+ 256              		@ sp needed
+ 257 00b6 80BD     		pop	{r7, pc}
+ 258              	.L11:
+ 259              		.align	2
+ 260              	.L10:
+ 261 00b8 00000000 		.word	Command
+ 262 00bc 00000000 		.word	hsdram1
+ 263              		.cfi_endproc
+ 264              	.LFE146:
+ 266              		.section	.text.BSP_SDRAM_ReadData,"ax",%progbits
+ 267              		.align	1
+ 268              		.global	BSP_SDRAM_ReadData
+ 269              		.syntax unified
+ 270              		.thumb
+ 271              		.thumb_func
+ 273              	BSP_SDRAM_ReadData:
+ 274              	.LFB147:
+ 224:Core/Src/sdram.c **** 
+ 225:Core/Src/sdram.c **** /**
+ 226:Core/Src/sdram.c ****   * @brief  Reads an amount of data from the SDRAM memory in polling mode.
+ 227:Core/Src/sdram.c ****   * @param  uwStartAddress: Read start address
+ 228:Core/Src/sdram.c ****   * @param  pData: Pointer to data to be read  
+ 229:Core/Src/sdram.c ****   * @param  uwDataSize: Size of read data from the memory
+ 230:Core/Src/sdram.c ****   * @retval SDRAM status
+ 231:Core/Src/sdram.c ****   */
+ 232:Core/Src/sdram.c **** uint8_t BSP_SDRAM_ReadData(uint32_t uwStartAddress, uint32_t *pData, uint32_t uwDataSize)
+ 233:Core/Src/sdram.c **** {
+ 275              		.loc 1 233 1
+ 276              		.cfi_startproc
+ 277              		@ args = 0, pretend = 0, frame = 16
+ 278              		@ frame_needed = 1, uses_anonymous_args = 0
+ 279 0000 80B5     		push	{r7, lr}
+ 280              	.LCFI9:
+ 281              		.cfi_def_cfa_offset 8
+ 282              		.cfi_offset 7, -8
+ 283              		.cfi_offset 14, -4
+ 284 0002 84B0     		sub	sp, sp, #16
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cc8yvQ9b.s 			page 10
+
+
+ 285              	.LCFI10:
+ 286              		.cfi_def_cfa_offset 24
+ 287 0004 00AF     		add	r7, sp, #0
+ 288              	.LCFI11:
+ 289              		.cfi_def_cfa_register 7
+ 290 0006 F860     		str	r0, [r7, #12]
+ 291 0008 B960     		str	r1, [r7, #8]
+ 292 000a 7A60     		str	r2, [r7, #4]
+ 234:Core/Src/sdram.c ****   if(HAL_SDRAM_Read_32b(&hsdram1, (uint32_t *)uwStartAddress, pData, uwDataSize) != HAL_OK)
+ 293              		.loc 1 234 6
+ 294 000c F968     		ldr	r1, [r7, #12]
+ 295 000e 7B68     		ldr	r3, [r7, #4]
+ 296 0010 BA68     		ldr	r2, [r7, #8]
+ 297 0012 0648     		ldr	r0, .L15
+ 298 0014 FFF7FEFF 		bl	HAL_SDRAM_Read_32b
+ 299 0018 0346     		mov	r3, r0
+ 300              		.loc 1 234 5
+ 301 001a 002B     		cmp	r3, #0
+ 302 001c 01D0     		beq	.L13
+ 235:Core/Src/sdram.c ****   {
+ 236:Core/Src/sdram.c ****     return SDRAM_ERROR;
+ 303              		.loc 1 236 12
+ 304 001e 0123     		movs	r3, #1
+ 305 0020 00E0     		b	.L14
+ 306              	.L13:
+ 237:Core/Src/sdram.c ****   }
+ 238:Core/Src/sdram.c ****   else
+ 239:Core/Src/sdram.c ****   {
+ 240:Core/Src/sdram.c ****     return SDRAM_OK;
+ 307              		.loc 1 240 12
+ 308 0022 0023     		movs	r3, #0
+ 309              	.L14:
+ 241:Core/Src/sdram.c ****   } 
+ 242:Core/Src/sdram.c **** }
+ 310              		.loc 1 242 1
+ 311 0024 1846     		mov	r0, r3
+ 312 0026 1037     		adds	r7, r7, #16
+ 313              	.LCFI12:
+ 314              		.cfi_def_cfa_offset 8
+ 315 0028 BD46     		mov	sp, r7
+ 316              	.LCFI13:
+ 317              		.cfi_def_cfa_register 13
+ 318              		@ sp needed
+ 319 002a 80BD     		pop	{r7, pc}
+ 320              	.L16:
+ 321              		.align	2
+ 322              	.L15:
+ 323 002c 00000000 		.word	hsdram1
+ 324              		.cfi_endproc
+ 325              	.LFE147:
+ 327              		.section	.text.BSP_SDRAM_ReadData_DMA,"ax",%progbits
+ 328              		.align	1
+ 329              		.global	BSP_SDRAM_ReadData_DMA
+ 330              		.syntax unified
+ 331              		.thumb
+ 332              		.thumb_func
+ 334              	BSP_SDRAM_ReadData_DMA:
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cc8yvQ9b.s 			page 11
+
+
+ 335              	.LFB148:
+ 243:Core/Src/sdram.c **** 
+ 244:Core/Src/sdram.c **** /**
+ 245:Core/Src/sdram.c ****   * @brief  Reads an amount of data from the SDRAM memory in DMA mode.
+ 246:Core/Src/sdram.c ****   * @param  uwStartAddress: Read start address
+ 247:Core/Src/sdram.c ****   * @param  pData: Pointer to data to be read  
+ 248:Core/Src/sdram.c ****   * @param  uwDataSize: Size of read data from the memory
+ 249:Core/Src/sdram.c ****   * @retval SDRAM status
+ 250:Core/Src/sdram.c ****   */
+ 251:Core/Src/sdram.c **** uint8_t BSP_SDRAM_ReadData_DMA(uint32_t uwStartAddress, uint32_t *pData, uint32_t uwDataSize)
+ 252:Core/Src/sdram.c **** {
+ 336              		.loc 1 252 1
+ 337              		.cfi_startproc
+ 338              		@ args = 0, pretend = 0, frame = 16
+ 339              		@ frame_needed = 1, uses_anonymous_args = 0
+ 340 0000 80B5     		push	{r7, lr}
+ 341              	.LCFI14:
+ 342              		.cfi_def_cfa_offset 8
+ 343              		.cfi_offset 7, -8
+ 344              		.cfi_offset 14, -4
+ 345 0002 84B0     		sub	sp, sp, #16
+ 346              	.LCFI15:
+ 347              		.cfi_def_cfa_offset 24
+ 348 0004 00AF     		add	r7, sp, #0
+ 349              	.LCFI16:
+ 350              		.cfi_def_cfa_register 7
+ 351 0006 F860     		str	r0, [r7, #12]
+ 352 0008 B960     		str	r1, [r7, #8]
+ 353 000a 7A60     		str	r2, [r7, #4]
+ 253:Core/Src/sdram.c ****   if(HAL_SDRAM_Read_DMA(&hsdram1, (uint32_t *)uwStartAddress, pData, uwDataSize) != HAL_OK)
+ 354              		.loc 1 253 6
+ 355 000c F968     		ldr	r1, [r7, #12]
+ 356 000e 7B68     		ldr	r3, [r7, #4]
+ 357 0010 BA68     		ldr	r2, [r7, #8]
+ 358 0012 0648     		ldr	r0, .L20
+ 359 0014 FFF7FEFF 		bl	HAL_SDRAM_Read_DMA
+ 360 0018 0346     		mov	r3, r0
+ 361              		.loc 1 253 5
+ 362 001a 002B     		cmp	r3, #0
+ 363 001c 01D0     		beq	.L18
+ 254:Core/Src/sdram.c ****   {
+ 255:Core/Src/sdram.c ****     return SDRAM_ERROR;
+ 364              		.loc 1 255 12
+ 365 001e 0123     		movs	r3, #1
+ 366 0020 00E0     		b	.L19
+ 367              	.L18:
+ 256:Core/Src/sdram.c ****   }
+ 257:Core/Src/sdram.c ****   else
+ 258:Core/Src/sdram.c ****   {
+ 259:Core/Src/sdram.c ****     return SDRAM_OK;
+ 368              		.loc 1 259 12
+ 369 0022 0023     		movs	r3, #0
+ 370              	.L19:
+ 260:Core/Src/sdram.c ****   }     
+ 261:Core/Src/sdram.c **** }
+ 371              		.loc 1 261 1
+ 372 0024 1846     		mov	r0, r3
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cc8yvQ9b.s 			page 12
+
+
+ 373 0026 1037     		adds	r7, r7, #16
+ 374              	.LCFI17:
+ 375              		.cfi_def_cfa_offset 8
+ 376 0028 BD46     		mov	sp, r7
+ 377              	.LCFI18:
+ 378              		.cfi_def_cfa_register 13
+ 379              		@ sp needed
+ 380 002a 80BD     		pop	{r7, pc}
+ 381              	.L21:
+ 382              		.align	2
+ 383              	.L20:
+ 384 002c 00000000 		.word	hsdram1
+ 385              		.cfi_endproc
+ 386              	.LFE148:
+ 388              		.section	.text.BSP_SDRAM_WriteData,"ax",%progbits
+ 389              		.align	1
+ 390              		.global	BSP_SDRAM_WriteData
+ 391              		.syntax unified
+ 392              		.thumb
+ 393              		.thumb_func
+ 395              	BSP_SDRAM_WriteData:
+ 396              	.LFB149:
+ 262:Core/Src/sdram.c **** 
+ 263:Core/Src/sdram.c **** /**
+ 264:Core/Src/sdram.c ****   * @brief  Writes an amount of data to the SDRAM memory in polling mode.
+ 265:Core/Src/sdram.c ****   * @param  uwStartAddress: Write start address
+ 266:Core/Src/sdram.c ****   * @param  pData: Pointer to data to be written  
+ 267:Core/Src/sdram.c ****   * @param  uwDataSize: Size of written data from the memory
+ 268:Core/Src/sdram.c ****   * @retval SDRAM status
+ 269:Core/Src/sdram.c ****   */
+ 270:Core/Src/sdram.c **** uint8_t BSP_SDRAM_WriteData(uint32_t uwStartAddress, uint32_t *pData, uint32_t uwDataSize) 
+ 271:Core/Src/sdram.c **** {
+ 397              		.loc 1 271 1
+ 398              		.cfi_startproc
+ 399              		@ args = 0, pretend = 0, frame = 16
+ 400              		@ frame_needed = 1, uses_anonymous_args = 0
+ 401 0000 80B5     		push	{r7, lr}
+ 402              	.LCFI19:
+ 403              		.cfi_def_cfa_offset 8
+ 404              		.cfi_offset 7, -8
+ 405              		.cfi_offset 14, -4
+ 406 0002 84B0     		sub	sp, sp, #16
+ 407              	.LCFI20:
+ 408              		.cfi_def_cfa_offset 24
+ 409 0004 00AF     		add	r7, sp, #0
+ 410              	.LCFI21:
+ 411              		.cfi_def_cfa_register 7
+ 412 0006 F860     		str	r0, [r7, #12]
+ 413 0008 B960     		str	r1, [r7, #8]
+ 414 000a 7A60     		str	r2, [r7, #4]
+ 272:Core/Src/sdram.c ****   if(HAL_SDRAM_Write_32b(&hsdram1, (uint32_t *)uwStartAddress, pData, uwDataSize) != HAL_OK)
+ 415              		.loc 1 272 6
+ 416 000c F968     		ldr	r1, [r7, #12]
+ 417 000e 7B68     		ldr	r3, [r7, #4]
+ 418 0010 BA68     		ldr	r2, [r7, #8]
+ 419 0012 0648     		ldr	r0, .L25
+ 420 0014 FFF7FEFF 		bl	HAL_SDRAM_Write_32b
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cc8yvQ9b.s 			page 13
+
+
+ 421 0018 0346     		mov	r3, r0
+ 422              		.loc 1 272 5
+ 423 001a 002B     		cmp	r3, #0
+ 424 001c 01D0     		beq	.L23
+ 273:Core/Src/sdram.c ****   {
+ 274:Core/Src/sdram.c ****     return SDRAM_ERROR;
+ 425              		.loc 1 274 12
+ 426 001e 0123     		movs	r3, #1
+ 427 0020 00E0     		b	.L24
+ 428              	.L23:
+ 275:Core/Src/sdram.c ****   }
+ 276:Core/Src/sdram.c ****   else
+ 277:Core/Src/sdram.c ****   {
+ 278:Core/Src/sdram.c ****     return SDRAM_OK;
+ 429              		.loc 1 278 12
+ 430 0022 0023     		movs	r3, #0
+ 431              	.L24:
+ 279:Core/Src/sdram.c ****   }
+ 280:Core/Src/sdram.c **** }
+ 432              		.loc 1 280 1
+ 433 0024 1846     		mov	r0, r3
+ 434 0026 1037     		adds	r7, r7, #16
+ 435              	.LCFI22:
+ 436              		.cfi_def_cfa_offset 8
+ 437 0028 BD46     		mov	sp, r7
+ 438              	.LCFI23:
+ 439              		.cfi_def_cfa_register 13
+ 440              		@ sp needed
+ 441 002a 80BD     		pop	{r7, pc}
+ 442              	.L26:
+ 443              		.align	2
+ 444              	.L25:
+ 445 002c 00000000 		.word	hsdram1
+ 446              		.cfi_endproc
+ 447              	.LFE149:
+ 449              		.section	.text.BSP_SDRAM_WriteData_DMA,"ax",%progbits
+ 450              		.align	1
+ 451              		.global	BSP_SDRAM_WriteData_DMA
+ 452              		.syntax unified
+ 453              		.thumb
+ 454              		.thumb_func
+ 456              	BSP_SDRAM_WriteData_DMA:
+ 457              	.LFB150:
+ 281:Core/Src/sdram.c **** 
+ 282:Core/Src/sdram.c **** /**
+ 283:Core/Src/sdram.c ****   * @brief  Writes an amount of data to the SDRAM memory in DMA mode.
+ 284:Core/Src/sdram.c ****   * @param  uwStartAddress: Write start address
+ 285:Core/Src/sdram.c ****   * @param  pData: Pointer to data to be written  
+ 286:Core/Src/sdram.c ****   * @param  uwDataSize: Size of written data from the memory
+ 287:Core/Src/sdram.c ****   * @retval SDRAM status
+ 288:Core/Src/sdram.c ****   */
+ 289:Core/Src/sdram.c **** uint8_t BSP_SDRAM_WriteData_DMA(uint32_t uwStartAddress, uint32_t *pData, uint32_t uwDataSize) 
+ 290:Core/Src/sdram.c **** {
+ 458              		.loc 1 290 1
+ 459              		.cfi_startproc
+ 460              		@ args = 0, pretend = 0, frame = 16
+ 461              		@ frame_needed = 1, uses_anonymous_args = 0
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cc8yvQ9b.s 			page 14
+
+
+ 462 0000 80B5     		push	{r7, lr}
+ 463              	.LCFI24:
+ 464              		.cfi_def_cfa_offset 8
+ 465              		.cfi_offset 7, -8
+ 466              		.cfi_offset 14, -4
+ 467 0002 84B0     		sub	sp, sp, #16
+ 468              	.LCFI25:
+ 469              		.cfi_def_cfa_offset 24
+ 470 0004 00AF     		add	r7, sp, #0
+ 471              	.LCFI26:
+ 472              		.cfi_def_cfa_register 7
+ 473 0006 F860     		str	r0, [r7, #12]
+ 474 0008 B960     		str	r1, [r7, #8]
+ 475 000a 7A60     		str	r2, [r7, #4]
+ 291:Core/Src/sdram.c ****   if(HAL_SDRAM_Write_DMA(&hsdram1, (uint32_t *)uwStartAddress, pData, uwDataSize) != HAL_OK)
+ 476              		.loc 1 291 6
+ 477 000c F968     		ldr	r1, [r7, #12]
+ 478 000e 7B68     		ldr	r3, [r7, #4]
+ 479 0010 BA68     		ldr	r2, [r7, #8]
+ 480 0012 0648     		ldr	r0, .L30
+ 481 0014 FFF7FEFF 		bl	HAL_SDRAM_Write_DMA
+ 482 0018 0346     		mov	r3, r0
+ 483              		.loc 1 291 5
+ 484 001a 002B     		cmp	r3, #0
+ 485 001c 01D0     		beq	.L28
+ 292:Core/Src/sdram.c ****   {
+ 293:Core/Src/sdram.c ****     return SDRAM_ERROR;
+ 486              		.loc 1 293 12
+ 487 001e 0123     		movs	r3, #1
+ 488 0020 00E0     		b	.L29
+ 489              	.L28:
+ 294:Core/Src/sdram.c ****   }
+ 295:Core/Src/sdram.c ****   else
+ 296:Core/Src/sdram.c ****   {
+ 297:Core/Src/sdram.c ****     return SDRAM_OK;
+ 490              		.loc 1 297 12
+ 491 0022 0023     		movs	r3, #0
+ 492              	.L29:
+ 298:Core/Src/sdram.c ****   } 
+ 299:Core/Src/sdram.c **** }
+ 493              		.loc 1 299 1
+ 494 0024 1846     		mov	r0, r3
+ 495 0026 1037     		adds	r7, r7, #16
+ 496              	.LCFI27:
+ 497              		.cfi_def_cfa_offset 8
+ 498 0028 BD46     		mov	sp, r7
+ 499              	.LCFI28:
+ 500              		.cfi_def_cfa_register 13
+ 501              		@ sp needed
+ 502 002a 80BD     		pop	{r7, pc}
+ 503              	.L31:
+ 504              		.align	2
+ 505              	.L30:
+ 506 002c 00000000 		.word	hsdram1
+ 507              		.cfi_endproc
+ 508              	.LFE150:
+ 510              		.section	.text.BSP_SDRAM_Sendcmd,"ax",%progbits
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cc8yvQ9b.s 			page 15
+
+
+ 511              		.align	1
+ 512              		.global	BSP_SDRAM_Sendcmd
+ 513              		.syntax unified
+ 514              		.thumb
+ 515              		.thumb_func
+ 517              	BSP_SDRAM_Sendcmd:
+ 518              	.LFB151:
+ 300:Core/Src/sdram.c **** 
+ 301:Core/Src/sdram.c **** /**
+ 302:Core/Src/sdram.c ****   * @brief  Sends command to the SDRAM bank.
+ 303:Core/Src/sdram.c ****   * @param  SdramCmd: Pointer to SDRAM command structure 
+ 304:Core/Src/sdram.c ****   * @retval SDRAM status
+ 305:Core/Src/sdram.c ****   */  
+ 306:Core/Src/sdram.c **** uint8_t BSP_SDRAM_Sendcmd(FMC_SDRAM_CommandTypeDef *SdramCmd)
+ 307:Core/Src/sdram.c **** {
+ 519              		.loc 1 307 1
+ 520              		.cfi_startproc
+ 521              		@ args = 0, pretend = 0, frame = 8
+ 522              		@ frame_needed = 1, uses_anonymous_args = 0
+ 523 0000 80B5     		push	{r7, lr}
+ 524              	.LCFI29:
+ 525              		.cfi_def_cfa_offset 8
+ 526              		.cfi_offset 7, -8
+ 527              		.cfi_offset 14, -4
+ 528 0002 82B0     		sub	sp, sp, #8
+ 529              	.LCFI30:
+ 530              		.cfi_def_cfa_offset 16
+ 531 0004 00AF     		add	r7, sp, #0
+ 532              	.LCFI31:
+ 533              		.cfi_def_cfa_register 7
+ 534 0006 7860     		str	r0, [r7, #4]
+ 308:Core/Src/sdram.c ****   if(HAL_SDRAM_SendCommand(&hsdram1, SdramCmd, SDRAM_TIMEOUT) != HAL_OK)
+ 535              		.loc 1 308 6
+ 536 0008 4FF6FF72 		movw	r2, #65535
+ 537 000c 7968     		ldr	r1, [r7, #4]
+ 538 000e 0648     		ldr	r0, .L35
+ 539 0010 FFF7FEFF 		bl	HAL_SDRAM_SendCommand
+ 540 0014 0346     		mov	r3, r0
+ 541              		.loc 1 308 5
+ 542 0016 002B     		cmp	r3, #0
+ 543 0018 01D0     		beq	.L33
+ 309:Core/Src/sdram.c ****   {
+ 310:Core/Src/sdram.c ****     return SDRAM_ERROR;
+ 544              		.loc 1 310 12
+ 545 001a 0123     		movs	r3, #1
+ 546 001c 00E0     		b	.L34
+ 547              	.L33:
+ 311:Core/Src/sdram.c ****   }
+ 312:Core/Src/sdram.c ****   else
+ 313:Core/Src/sdram.c ****   {
+ 314:Core/Src/sdram.c ****     return SDRAM_OK;
+ 548              		.loc 1 314 12
+ 549 001e 0023     		movs	r3, #0
+ 550              	.L34:
+ 315:Core/Src/sdram.c ****   }
+ 316:Core/Src/sdram.c **** }
+ 551              		.loc 1 316 1
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cc8yvQ9b.s 			page 16
+
+
+ 552 0020 1846     		mov	r0, r3
+ 553 0022 0837     		adds	r7, r7, #8
+ 554              	.LCFI32:
+ 555              		.cfi_def_cfa_offset 8
+ 556 0024 BD46     		mov	sp, r7
+ 557              	.LCFI33:
+ 558              		.cfi_def_cfa_register 13
+ 559              		@ sp needed
+ 560 0026 80BD     		pop	{r7, pc}
+ 561              	.L36:
+ 562              		.align	2
+ 563              	.L35:
+ 564 0028 00000000 		.word	hsdram1
+ 565              		.cfi_endproc
+ 566              	.LFE151:
+ 568              		.section	.text.BSP_SDRAM_MspInit,"ax",%progbits
+ 569              		.align	1
+ 570              		.weak	BSP_SDRAM_MspInit
+ 571              		.syntax unified
+ 572              		.thumb
+ 573              		.thumb_func
+ 575              	BSP_SDRAM_MspInit:
+ 576              	.LFB152:
+ 317:Core/Src/sdram.c **** 
+ 318:Core/Src/sdram.c **** /**
+ 319:Core/Src/sdram.c ****   * @brief  Initializes SDRAM MSP.
+ 320:Core/Src/sdram.c ****   * @param  hsdram: SDRAM handle
+ 321:Core/Src/sdram.c ****   * @param  Params
+ 322:Core/Src/sdram.c ****   * @retval None
+ 323:Core/Src/sdram.c ****   */
+ 324:Core/Src/sdram.c **** __weak void BSP_SDRAM_MspInit(SDRAM_HandleTypeDef  *hsdram, void *Params)
+ 325:Core/Src/sdram.c **** {  
+ 577              		.loc 1 325 1
+ 578              		.cfi_startproc
+ 579              		@ args = 0, pretend = 0, frame = 64
+ 580              		@ frame_needed = 1, uses_anonymous_args = 0
+ 581 0000 80B5     		push	{r7, lr}
+ 582              	.LCFI34:
+ 583              		.cfi_def_cfa_offset 8
+ 584              		.cfi_offset 7, -8
+ 585              		.cfi_offset 14, -4
+ 586 0002 90B0     		sub	sp, sp, #64
+ 587              	.LCFI35:
+ 588              		.cfi_def_cfa_offset 72
+ 589 0004 00AF     		add	r7, sp, #0
+ 590              	.LCFI36:
+ 591              		.cfi_def_cfa_register 7
+ 592 0006 7860     		str	r0, [r7, #4]
+ 593 0008 3960     		str	r1, [r7]
+ 594              	.LBB2:
+ 326:Core/Src/sdram.c ****   static DMA_HandleTypeDef dma_handle;
+ 327:Core/Src/sdram.c ****   GPIO_InitTypeDef gpio_init_structure;
+ 328:Core/Src/sdram.c ****   
+ 329:Core/Src/sdram.c ****   /* Enable FMC clock */
+ 330:Core/Src/sdram.c ****   __HAL_RCC_FMC_CLK_ENABLE();
+ 595              		.loc 1 330 3
+ 596 000a 704B     		ldr	r3, .L38
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cc8yvQ9b.s 			page 17
+
+
+ 597 000c 9B6B     		ldr	r3, [r3, #56]
+ 598 000e 6F4A     		ldr	r2, .L38
+ 599 0010 43F00103 		orr	r3, r3, #1
+ 600 0014 9363     		str	r3, [r2, #56]
+ 601 0016 6D4B     		ldr	r3, .L38
+ 602 0018 9B6B     		ldr	r3, [r3, #56]
+ 603 001a 03F00103 		and	r3, r3, #1
+ 604 001e BB62     		str	r3, [r7, #40]
+ 605 0020 BB6A     		ldr	r3, [r7, #40]
+ 606              	.LBE2:
+ 607              	.LBB3:
+ 331:Core/Src/sdram.c ****   
+ 332:Core/Src/sdram.c ****   /* Enable chosen DMAx clock */
+ 333:Core/Src/sdram.c ****   __DMAx_CLK_ENABLE();
+ 608              		.loc 1 333 3
+ 609 0022 6A4B     		ldr	r3, .L38
+ 610 0024 1B6B     		ldr	r3, [r3, #48]
+ 611 0026 694A     		ldr	r2, .L38
+ 612 0028 43F48003 		orr	r3, r3, #4194304
+ 613 002c 1363     		str	r3, [r2, #48]
+ 614 002e 674B     		ldr	r3, .L38
+ 615 0030 1B6B     		ldr	r3, [r3, #48]
+ 616 0032 03F48003 		and	r3, r3, #4194304
+ 617 0036 7B62     		str	r3, [r7, #36]
+ 618 0038 7B6A     		ldr	r3, [r7, #36]
+ 619              	.LBE3:
+ 620              	.LBB4:
+ 334:Core/Src/sdram.c **** 
+ 335:Core/Src/sdram.c ****   /* Enable GPIOs clock */
+ 336:Core/Src/sdram.c ****   __HAL_RCC_GPIOC_CLK_ENABLE();
+ 621              		.loc 1 336 3
+ 622 003a 644B     		ldr	r3, .L38
+ 623 003c 1B6B     		ldr	r3, [r3, #48]
+ 624 003e 634A     		ldr	r2, .L38
+ 625 0040 43F00403 		orr	r3, r3, #4
+ 626 0044 1363     		str	r3, [r2, #48]
+ 627 0046 614B     		ldr	r3, .L38
+ 628 0048 1B6B     		ldr	r3, [r3, #48]
+ 629 004a 03F00403 		and	r3, r3, #4
+ 630 004e 3B62     		str	r3, [r7, #32]
+ 631 0050 3B6A     		ldr	r3, [r7, #32]
+ 632              	.LBE4:
+ 633              	.LBB5:
+ 337:Core/Src/sdram.c ****   __HAL_RCC_GPIOD_CLK_ENABLE();
+ 634              		.loc 1 337 3
+ 635 0052 5E4B     		ldr	r3, .L38
+ 636 0054 1B6B     		ldr	r3, [r3, #48]
+ 637 0056 5D4A     		ldr	r2, .L38
+ 638 0058 43F00803 		orr	r3, r3, #8
+ 639 005c 1363     		str	r3, [r2, #48]
+ 640 005e 5B4B     		ldr	r3, .L38
+ 641 0060 1B6B     		ldr	r3, [r3, #48]
+ 642 0062 03F00803 		and	r3, r3, #8
+ 643 0066 FB61     		str	r3, [r7, #28]
+ 644 0068 FB69     		ldr	r3, [r7, #28]
+ 645              	.LBE5:
+ 646              	.LBB6:
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cc8yvQ9b.s 			page 18
+
+
+ 338:Core/Src/sdram.c ****   __HAL_RCC_GPIOE_CLK_ENABLE();
+ 647              		.loc 1 338 3
+ 648 006a 584B     		ldr	r3, .L38
+ 649 006c 1B6B     		ldr	r3, [r3, #48]
+ 650 006e 574A     		ldr	r2, .L38
+ 651 0070 43F01003 		orr	r3, r3, #16
+ 652 0074 1363     		str	r3, [r2, #48]
+ 653 0076 554B     		ldr	r3, .L38
+ 654 0078 1B6B     		ldr	r3, [r3, #48]
+ 655 007a 03F01003 		and	r3, r3, #16
+ 656 007e BB61     		str	r3, [r7, #24]
+ 657 0080 BB69     		ldr	r3, [r7, #24]
+ 658              	.LBE6:
+ 659              	.LBB7:
+ 339:Core/Src/sdram.c ****   __HAL_RCC_GPIOF_CLK_ENABLE();
+ 660              		.loc 1 339 3
+ 661 0082 524B     		ldr	r3, .L38
+ 662 0084 1B6B     		ldr	r3, [r3, #48]
+ 663 0086 514A     		ldr	r2, .L38
+ 664 0088 43F02003 		orr	r3, r3, #32
+ 665 008c 1363     		str	r3, [r2, #48]
+ 666 008e 4F4B     		ldr	r3, .L38
+ 667 0090 1B6B     		ldr	r3, [r3, #48]
+ 668 0092 03F02003 		and	r3, r3, #32
+ 669 0096 7B61     		str	r3, [r7, #20]
+ 670 0098 7B69     		ldr	r3, [r7, #20]
+ 671              	.LBE7:
+ 672              	.LBB8:
+ 340:Core/Src/sdram.c ****   __HAL_RCC_GPIOG_CLK_ENABLE();
+ 673              		.loc 1 340 3
+ 674 009a 4C4B     		ldr	r3, .L38
+ 675 009c 1B6B     		ldr	r3, [r3, #48]
+ 676 009e 4B4A     		ldr	r2, .L38
+ 677 00a0 43F04003 		orr	r3, r3, #64
+ 678 00a4 1363     		str	r3, [r2, #48]
+ 679 00a6 494B     		ldr	r3, .L38
+ 680 00a8 1B6B     		ldr	r3, [r3, #48]
+ 681 00aa 03F04003 		and	r3, r3, #64
+ 682 00ae 3B61     		str	r3, [r7, #16]
+ 683 00b0 3B69     		ldr	r3, [r7, #16]
+ 684              	.LBE8:
+ 685              	.LBB9:
+ 341:Core/Src/sdram.c ****   __HAL_RCC_GPIOH_CLK_ENABLE();
+ 686              		.loc 1 341 3
+ 687 00b2 464B     		ldr	r3, .L38
+ 688 00b4 1B6B     		ldr	r3, [r3, #48]
+ 689 00b6 454A     		ldr	r2, .L38
+ 690 00b8 43F08003 		orr	r3, r3, #128
+ 691 00bc 1363     		str	r3, [r2, #48]
+ 692 00be 434B     		ldr	r3, .L38
+ 693 00c0 1B6B     		ldr	r3, [r3, #48]
+ 694 00c2 03F08003 		and	r3, r3, #128
+ 695 00c6 FB60     		str	r3, [r7, #12]
+ 696 00c8 FB68     		ldr	r3, [r7, #12]
+ 697              	.LBE9:
+ 342:Core/Src/sdram.c ****   
+ 343:Core/Src/sdram.c ****   /* Common GPIO configuration */
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cc8yvQ9b.s 			page 19
+
+
+ 344:Core/Src/sdram.c ****   gpio_init_structure.Mode      = GPIO_MODE_AF_PP;
+ 698              		.loc 1 344 33
+ 699 00ca 0223     		movs	r3, #2
+ 700 00cc 3B63     		str	r3, [r7, #48]
+ 345:Core/Src/sdram.c ****   gpio_init_structure.Pull      = GPIO_PULLUP;
+ 701              		.loc 1 345 33
+ 702 00ce 0123     		movs	r3, #1
+ 703 00d0 7B63     		str	r3, [r7, #52]
+ 346:Core/Src/sdram.c ****   gpio_init_structure.Speed     = GPIO_SPEED_FAST;
+ 704              		.loc 1 346 33
+ 705 00d2 0223     		movs	r3, #2
+ 706 00d4 BB63     		str	r3, [r7, #56]
+ 347:Core/Src/sdram.c ****   gpio_init_structure.Alternate = GPIO_AF12_FMC;
+ 707              		.loc 1 347 33
+ 708 00d6 0C23     		movs	r3, #12
+ 709 00d8 FB63     		str	r3, [r7, #60]
+ 348:Core/Src/sdram.c ****   
+ 349:Core/Src/sdram.c ****   /* GPIOC configuration */
+ 350:Core/Src/sdram.c ****   gpio_init_structure.Pin   = GPIO_PIN_3;
+ 710              		.loc 1 350 29
+ 711 00da 0823     		movs	r3, #8
+ 712 00dc FB62     		str	r3, [r7, #44]
+ 351:Core/Src/sdram.c ****   HAL_GPIO_Init(GPIOC, &gpio_init_structure);
+ 713              		.loc 1 351 3
+ 714 00de 07F12C03 		add	r3, r7, #44
+ 715 00e2 1946     		mov	r1, r3
+ 716 00e4 3A48     		ldr	r0, .L38+4
+ 717 00e6 FFF7FEFF 		bl	HAL_GPIO_Init
+ 352:Core/Src/sdram.c **** 
+ 353:Core/Src/sdram.c ****   /* GPIOD configuration */
+ 354:Core/Src/sdram.c ****   gpio_init_structure.Pin   = GPIO_PIN_0 | GPIO_PIN_1 | GPIO_PIN_8 | GPIO_PIN_9 |
+ 718              		.loc 1 354 29
+ 719 00ea 4CF20373 		movw	r3, #50947
+ 720 00ee FB62     		str	r3, [r7, #44]
+ 355:Core/Src/sdram.c ****                               GPIO_PIN_10 | GPIO_PIN_14 | GPIO_PIN_15;
+ 356:Core/Src/sdram.c ****   HAL_GPIO_Init(GPIOD, &gpio_init_structure);
+ 721              		.loc 1 356 3
+ 722 00f0 07F12C03 		add	r3, r7, #44
+ 723 00f4 1946     		mov	r1, r3
+ 724 00f6 3748     		ldr	r0, .L38+8
+ 725 00f8 FFF7FEFF 		bl	HAL_GPIO_Init
+ 357:Core/Src/sdram.c **** 
+ 358:Core/Src/sdram.c ****   /* GPIOE configuration */  
+ 359:Core/Src/sdram.c ****   gpio_init_structure.Pin   = GPIO_PIN_0 | GPIO_PIN_1 | GPIO_PIN_7| GPIO_PIN_8 | GPIO_PIN_9 |\
+ 726              		.loc 1 359 29
+ 727 00fc 4FF68373 		movw	r3, #65411
+ 728 0100 FB62     		str	r3, [r7, #44]
+ 360:Core/Src/sdram.c ****                               GPIO_PIN_10 | GPIO_PIN_11 | GPIO_PIN_12 | GPIO_PIN_13 | GPIO_PIN_14 |
+ 361:Core/Src/sdram.c ****                               GPIO_PIN_15;
+ 362:Core/Src/sdram.c ****   HAL_GPIO_Init(GPIOE, &gpio_init_structure);
+ 729              		.loc 1 362 3
+ 730 0102 07F12C03 		add	r3, r7, #44
+ 731 0106 1946     		mov	r1, r3
+ 732 0108 3348     		ldr	r0, .L38+12
+ 733 010a FFF7FEFF 		bl	HAL_GPIO_Init
+ 363:Core/Src/sdram.c ****   
+ 364:Core/Src/sdram.c ****   /* GPIOF configuration */  
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cc8yvQ9b.s 			page 20
+
+
+ 365:Core/Src/sdram.c ****   gpio_init_structure.Pin   = GPIO_PIN_0 | GPIO_PIN_1 | GPIO_PIN_2| GPIO_PIN_3 | GPIO_PIN_4 |\
+ 734              		.loc 1 365 29
+ 735 010e 4FF63F03 		movw	r3, #63551
+ 736 0112 FB62     		str	r3, [r7, #44]
+ 366:Core/Src/sdram.c ****                               GPIO_PIN_5 | GPIO_PIN_11 | GPIO_PIN_12 | GPIO_PIN_13 | GPIO_PIN_14 |\
+ 367:Core/Src/sdram.c ****                               GPIO_PIN_15;
+ 368:Core/Src/sdram.c ****   HAL_GPIO_Init(GPIOF, &gpio_init_structure);
+ 737              		.loc 1 368 3
+ 738 0114 07F12C03 		add	r3, r7, #44
+ 739 0118 1946     		mov	r1, r3
+ 740 011a 3048     		ldr	r0, .L38+16
+ 741 011c FFF7FEFF 		bl	HAL_GPIO_Init
+ 369:Core/Src/sdram.c ****   
+ 370:Core/Src/sdram.c ****   /* GPIOG configuration */  
+ 371:Core/Src/sdram.c ****   gpio_init_structure.Pin   = GPIO_PIN_0 | GPIO_PIN_1 | GPIO_PIN_4| GPIO_PIN_5 | GPIO_PIN_8 |\
+ 742              		.loc 1 371 29
+ 743 0120 48F23313 		movw	r3, #33075
+ 744 0124 FB62     		str	r3, [r7, #44]
+ 372:Core/Src/sdram.c ****                               GPIO_PIN_15;
+ 373:Core/Src/sdram.c ****   HAL_GPIO_Init(GPIOG, &gpio_init_structure);
+ 745              		.loc 1 373 3
+ 746 0126 07F12C03 		add	r3, r7, #44
+ 747 012a 1946     		mov	r1, r3
+ 748 012c 2C48     		ldr	r0, .L38+20
+ 749 012e FFF7FEFF 		bl	HAL_GPIO_Init
+ 374:Core/Src/sdram.c **** 
+ 375:Core/Src/sdram.c ****   /* GPIOH configuration */  
+ 376:Core/Src/sdram.c ****   gpio_init_structure.Pin   = GPIO_PIN_3 | GPIO_PIN_5;
+ 750              		.loc 1 376 29
+ 751 0132 2823     		movs	r3, #40
+ 752 0134 FB62     		str	r3, [r7, #44]
+ 377:Core/Src/sdram.c ****   HAL_GPIO_Init(GPIOH, &gpio_init_structure); 
+ 753              		.loc 1 377 3
+ 754 0136 07F12C03 		add	r3, r7, #44
+ 755 013a 1946     		mov	r1, r3
+ 756 013c 2948     		ldr	r0, .L38+24
+ 757 013e FFF7FEFF 		bl	HAL_GPIO_Init
+ 378:Core/Src/sdram.c ****   
+ 379:Core/Src/sdram.c ****   /* Configure common DMA parameters */
+ 380:Core/Src/sdram.c ****   dma_handle.Init.Channel             = SDRAM_DMAx_CHANNEL;
+ 758              		.loc 1 380 39
+ 759 0142 294B     		ldr	r3, .L38+28
+ 760 0144 0022     		movs	r2, #0
+ 761 0146 5A60     		str	r2, [r3, #4]
+ 381:Core/Src/sdram.c ****   dma_handle.Init.Direction           = DMA_MEMORY_TO_MEMORY;
+ 762              		.loc 1 381 39
+ 763 0148 274B     		ldr	r3, .L38+28
+ 764 014a 8022     		movs	r2, #128
+ 765 014c 9A60     		str	r2, [r3, #8]
+ 382:Core/Src/sdram.c ****   dma_handle.Init.PeriphInc           = DMA_PINC_ENABLE;
+ 766              		.loc 1 382 39
+ 767 014e 264B     		ldr	r3, .L38+28
+ 768 0150 4FF40072 		mov	r2, #512
+ 769 0154 DA60     		str	r2, [r3, #12]
+ 383:Core/Src/sdram.c ****   dma_handle.Init.MemInc              = DMA_MINC_ENABLE;
+ 770              		.loc 1 383 39
+ 771 0156 244B     		ldr	r3, .L38+28
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cc8yvQ9b.s 			page 21
+
+
+ 772 0158 4FF48062 		mov	r2, #1024
+ 773 015c 1A61     		str	r2, [r3, #16]
+ 384:Core/Src/sdram.c ****   dma_handle.Init.PeriphDataAlignment = DMA_PDATAALIGN_WORD;
+ 774              		.loc 1 384 39
+ 775 015e 224B     		ldr	r3, .L38+28
+ 776 0160 4FF48052 		mov	r2, #4096
+ 777 0164 5A61     		str	r2, [r3, #20]
+ 385:Core/Src/sdram.c ****   dma_handle.Init.MemDataAlignment    = DMA_MDATAALIGN_WORD;
+ 778              		.loc 1 385 39
+ 779 0166 204B     		ldr	r3, .L38+28
+ 780 0168 4FF48042 		mov	r2, #16384
+ 781 016c 9A61     		str	r2, [r3, #24]
+ 386:Core/Src/sdram.c ****   dma_handle.Init.Mode                = DMA_NORMAL;
+ 782              		.loc 1 386 39
+ 783 016e 1E4B     		ldr	r3, .L38+28
+ 784 0170 0022     		movs	r2, #0
+ 785 0172 DA61     		str	r2, [r3, #28]
+ 387:Core/Src/sdram.c ****   dma_handle.Init.Priority            = DMA_PRIORITY_HIGH;
+ 786              		.loc 1 387 39
+ 787 0174 1C4B     		ldr	r3, .L38+28
+ 788 0176 4FF40032 		mov	r2, #131072
+ 789 017a 1A62     		str	r2, [r3, #32]
+ 388:Core/Src/sdram.c ****   dma_handle.Init.FIFOMode            = DMA_FIFOMODE_DISABLE;         
+ 790              		.loc 1 388 39
+ 791 017c 1A4B     		ldr	r3, .L38+28
+ 792 017e 0022     		movs	r2, #0
+ 793 0180 5A62     		str	r2, [r3, #36]
+ 389:Core/Src/sdram.c ****   dma_handle.Init.FIFOThreshold       = DMA_FIFO_THRESHOLD_FULL;
+ 794              		.loc 1 389 39
+ 795 0182 194B     		ldr	r3, .L38+28
+ 796 0184 0322     		movs	r2, #3
+ 797 0186 9A62     		str	r2, [r3, #40]
+ 390:Core/Src/sdram.c ****   dma_handle.Init.MemBurst            = DMA_MBURST_SINGLE;
+ 798              		.loc 1 390 39
+ 799 0188 174B     		ldr	r3, .L38+28
+ 800 018a 0022     		movs	r2, #0
+ 801 018c DA62     		str	r2, [r3, #44]
+ 391:Core/Src/sdram.c ****   dma_handle.Init.PeriphBurst         = DMA_PBURST_SINGLE; 
+ 802              		.loc 1 391 39
+ 803 018e 164B     		ldr	r3, .L38+28
+ 804 0190 0022     		movs	r2, #0
+ 805 0192 1A63     		str	r2, [r3, #48]
+ 392:Core/Src/sdram.c ****   
+ 393:Core/Src/sdram.c ****   dma_handle.Instance = SDRAM_DMAx_STREAM;
+ 806              		.loc 1 393 23
+ 807 0194 144B     		ldr	r3, .L38+28
+ 808 0196 154A     		ldr	r2, .L38+32
+ 809 0198 1A60     		str	r2, [r3]
+ 394:Core/Src/sdram.c ****   
+ 395:Core/Src/sdram.c ****    /* Associate the DMA handle */
+ 396:Core/Src/sdram.c ****   __HAL_LINKDMA(hsdram, hdma, dma_handle);
+ 810              		.loc 1 396 3
+ 811 019a 7B68     		ldr	r3, [r7, #4]
+ 812 019c 124A     		ldr	r2, .L38+28
+ 813 019e 1A63     		str	r2, [r3, #48]
+ 814 01a0 114A     		ldr	r2, .L38+28
+ 815 01a2 7B68     		ldr	r3, [r7, #4]
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cc8yvQ9b.s 			page 22
+
+
+ 816 01a4 9363     		str	r3, [r2, #56]
+ 397:Core/Src/sdram.c ****   
+ 398:Core/Src/sdram.c ****   /* Deinitialize the stream for new transfer */
+ 399:Core/Src/sdram.c ****   HAL_DMA_DeInit(&dma_handle);
+ 817              		.loc 1 399 3
+ 818 01a6 1048     		ldr	r0, .L38+28
+ 819 01a8 FFF7FEFF 		bl	HAL_DMA_DeInit
+ 400:Core/Src/sdram.c ****   
+ 401:Core/Src/sdram.c ****   /* Configure the DMA stream */
+ 402:Core/Src/sdram.c ****   HAL_DMA_Init(&dma_handle); 
+ 820              		.loc 1 402 3
+ 821 01ac 0E48     		ldr	r0, .L38+28
+ 822 01ae FFF7FEFF 		bl	HAL_DMA_Init
+ 403:Core/Src/sdram.c ****   
+ 404:Core/Src/sdram.c ****   /* NVIC configuration for DMA transfer complete interrupt */
+ 405:Core/Src/sdram.c ****   HAL_NVIC_SetPriority(SDRAM_DMAx_IRQn, 0x05, 0);
+ 823              		.loc 1 405 3
+ 824 01b2 0022     		movs	r2, #0
+ 825 01b4 0521     		movs	r1, #5
+ 826 01b6 3820     		movs	r0, #56
+ 827 01b8 FFF7FEFF 		bl	HAL_NVIC_SetPriority
+ 406:Core/Src/sdram.c ****   HAL_NVIC_EnableIRQ(SDRAM_DMAx_IRQn);
+ 828              		.loc 1 406 3
+ 829 01bc 3820     		movs	r0, #56
+ 830 01be FFF7FEFF 		bl	HAL_NVIC_EnableIRQ
+ 407:Core/Src/sdram.c **** }
+ 831              		.loc 1 407 1
+ 832 01c2 00BF     		nop
+ 833 01c4 4037     		adds	r7, r7, #64
+ 834              	.LCFI37:
+ 835              		.cfi_def_cfa_offset 8
+ 836 01c6 BD46     		mov	sp, r7
+ 837              	.LCFI38:
+ 838              		.cfi_def_cfa_register 13
+ 839              		@ sp needed
+ 840 01c8 80BD     		pop	{r7, pc}
+ 841              	.L39:
+ 842 01ca 00BF     		.align	2
+ 843              	.L38:
+ 844 01cc 00380240 		.word	1073887232
+ 845 01d0 00080240 		.word	1073874944
+ 846 01d4 000C0240 		.word	1073875968
+ 847 01d8 00100240 		.word	1073876992
+ 848 01dc 00140240 		.word	1073878016
+ 849 01e0 00180240 		.word	1073879040
+ 850 01e4 001C0240 		.word	1073880064
+ 851 01e8 00000000 		.word	dma_handle.1
+ 852 01ec 10640240 		.word	1073898512
+ 853              		.cfi_endproc
+ 854              	.LFE152:
+ 856              		.section	.text.BSP_SDRAM_MspDeInit,"ax",%progbits
+ 857              		.align	1
+ 858              		.weak	BSP_SDRAM_MspDeInit
+ 859              		.syntax unified
+ 860              		.thumb
+ 861              		.thumb_func
+ 863              	BSP_SDRAM_MspDeInit:
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cc8yvQ9b.s 			page 23
+
+
+ 864              	.LFB153:
+ 408:Core/Src/sdram.c **** 
+ 409:Core/Src/sdram.c **** /**
+ 410:Core/Src/sdram.c ****   * @brief  DeInitializes SDRAM MSP.
+ 411:Core/Src/sdram.c ****   * @param  hsdram: SDRAM handle
+ 412:Core/Src/sdram.c ****   * @param  Params
+ 413:Core/Src/sdram.c ****   * @retval None
+ 414:Core/Src/sdram.c ****   */
+ 415:Core/Src/sdram.c **** __weak void BSP_SDRAM_MspDeInit(SDRAM_HandleTypeDef  *hsdram, void *Params)
+ 416:Core/Src/sdram.c **** {  
+ 865              		.loc 1 416 1
+ 866              		.cfi_startproc
+ 867              		@ args = 0, pretend = 0, frame = 8
+ 868              		@ frame_needed = 1, uses_anonymous_args = 0
+ 869 0000 80B5     		push	{r7, lr}
+ 870              	.LCFI39:
+ 871              		.cfi_def_cfa_offset 8
+ 872              		.cfi_offset 7, -8
+ 873              		.cfi_offset 14, -4
+ 874 0002 82B0     		sub	sp, sp, #8
+ 875              	.LCFI40:
+ 876              		.cfi_def_cfa_offset 16
+ 877 0004 00AF     		add	r7, sp, #0
+ 878              	.LCFI41:
+ 879              		.cfi_def_cfa_register 7
+ 880 0006 7860     		str	r0, [r7, #4]
+ 881 0008 3960     		str	r1, [r7]
+ 417:Core/Src/sdram.c ****     static DMA_HandleTypeDef dma_handle;
+ 418:Core/Src/sdram.c ****   
+ 419:Core/Src/sdram.c ****     /* Disable NVIC configuration for DMA interrupt */
+ 420:Core/Src/sdram.c ****     HAL_NVIC_DisableIRQ(SDRAM_DMAx_IRQn);
+ 882              		.loc 1 420 5
+ 883 000a 3820     		movs	r0, #56
+ 884 000c FFF7FEFF 		bl	HAL_NVIC_DisableIRQ
+ 421:Core/Src/sdram.c **** 
+ 422:Core/Src/sdram.c ****     /* Deinitialize the stream for new transfer */
+ 423:Core/Src/sdram.c ****     dma_handle.Instance = SDRAM_DMAx_STREAM;
+ 885              		.loc 1 423 25
+ 886 0010 044B     		ldr	r3, .L41
+ 887 0012 054A     		ldr	r2, .L41+4
+ 888 0014 1A60     		str	r2, [r3]
+ 424:Core/Src/sdram.c ****     HAL_DMA_DeInit(&dma_handle);
+ 889              		.loc 1 424 5
+ 890 0016 0348     		ldr	r0, .L41
+ 891 0018 FFF7FEFF 		bl	HAL_DMA_DeInit
+ 425:Core/Src/sdram.c **** 
+ 426:Core/Src/sdram.c ****     /* GPIO pins clock, FMC clock and DMA clock can be shut down in the applications
+ 427:Core/Src/sdram.c ****        by surcharging this __weak function */ 
+ 428:Core/Src/sdram.c **** }
+ 892              		.loc 1 428 1
+ 893 001c 00BF     		nop
+ 894 001e 0837     		adds	r7, r7, #8
+ 895              	.LCFI42:
+ 896              		.cfi_def_cfa_offset 8
+ 897 0020 BD46     		mov	sp, r7
+ 898              	.LCFI43:
+ 899              		.cfi_def_cfa_register 13
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cc8yvQ9b.s 			page 24
+
+
+ 900              		@ sp needed
+ 901 0022 80BD     		pop	{r7, pc}
+ 902              	.L42:
+ 903              		.align	2
+ 904              	.L41:
+ 905 0024 00000000 		.word	dma_handle.0
+ 906 0028 10640240 		.word	1073898512
+ 907              		.cfi_endproc
+ 908              	.LFE153:
+ 910              		.section	.data.sdramstatus.2,"aw"
+ 913              	sdramstatus.2:
+ 914 0000 01       		.byte	1
+ 915              		.section	.bss.dma_handle.1,"aw",%nobits
+ 916              		.align	2
+ 919              	dma_handle.1:
+ 920 0000 00000000 		.space	96
+ 920      00000000 
+ 920      00000000 
+ 920      00000000 
+ 920      00000000 
+ 921              		.section	.bss.dma_handle.0,"aw",%nobits
+ 922              		.align	2
+ 925              	dma_handle.0:
+ 926 0000 00000000 		.space	96
+ 926      00000000 
+ 926      00000000 
+ 926      00000000 
+ 926      00000000 
+ 927              		.text
+ 928              	.Letext0:
+ 929              		.file 2 "d:\\3.tools\\arm_gcc_toolchain\\arm-none-eabi\\include\\machine\\_default_types.h"
+ 930              		.file 3 "d:\\3.tools\\arm_gcc_toolchain\\arm-none-eabi\\include\\sys\\_stdint.h"
+ 931              		.file 4 "Drivers/CMSIS/Device/ST/STM32F7xx/Include/stm32f746xx.h"
+ 932              		.file 5 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_def.h"
+ 933              		.file 6 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_gpio.h"
+ 934              		.file 7 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_dma.h"
+ 935              		.file 8 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_ll_fmc.h"
+ 936              		.file 9 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_sdram.h"
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cc8yvQ9b.s 			page 25
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 sdram.c
+C:\Users\jisu8\AppData\Local\Temp\cc8yvQ9b.s:20     .bss.Timing:00000000 $d
+C:\Users\jisu8\AppData\Local\Temp\cc8yvQ9b.s:23     .bss.Timing:00000000 Timing
+C:\Users\jisu8\AppData\Local\Temp\cc8yvQ9b.s:26     .bss.Command:00000000 $d
+C:\Users\jisu8\AppData\Local\Temp\cc8yvQ9b.s:29     .bss.Command:00000000 Command
+C:\Users\jisu8\AppData\Local\Temp\cc8yvQ9b.s:32     .text.BSP_SDRAM_Init:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\cc8yvQ9b.s:38     .text.BSP_SDRAM_Init:00000000 BSP_SDRAM_Init
+C:\Users\jisu8\AppData\Local\Temp\cc8yvQ9b.s:133    .text.BSP_SDRAM_Initialization_sequence:00000000 BSP_SDRAM_Initialization_sequence
+C:\Users\jisu8\AppData\Local\Temp\cc8yvQ9b.s:65     .text.BSP_SDRAM_DeInit:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\cc8yvQ9b.s:71     .text.BSP_SDRAM_DeInit:00000000 BSP_SDRAM_DeInit
+C:\Users\jisu8\AppData\Local\Temp\cc8yvQ9b.s:863    .text.BSP_SDRAM_MspDeInit:00000000 BSP_SDRAM_MspDeInit
+C:\Users\jisu8\AppData\Local\Temp\cc8yvQ9b.s:120    .text.BSP_SDRAM_DeInit:00000034 $d
+C:\Users\jisu8\AppData\Local\Temp\cc8yvQ9b.s:913    .data.sdramstatus.2:00000000 sdramstatus.2
+C:\Users\jisu8\AppData\Local\Temp\cc8yvQ9b.s:127    .text.BSP_SDRAM_Initialization_sequence:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\cc8yvQ9b.s:261    .text.BSP_SDRAM_Initialization_sequence:000000b8 $d
+C:\Users\jisu8\AppData\Local\Temp\cc8yvQ9b.s:267    .text.BSP_SDRAM_ReadData:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\cc8yvQ9b.s:273    .text.BSP_SDRAM_ReadData:00000000 BSP_SDRAM_ReadData
+C:\Users\jisu8\AppData\Local\Temp\cc8yvQ9b.s:323    .text.BSP_SDRAM_ReadData:0000002c $d
+C:\Users\jisu8\AppData\Local\Temp\cc8yvQ9b.s:328    .text.BSP_SDRAM_ReadData_DMA:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\cc8yvQ9b.s:334    .text.BSP_SDRAM_ReadData_DMA:00000000 BSP_SDRAM_ReadData_DMA
+C:\Users\jisu8\AppData\Local\Temp\cc8yvQ9b.s:384    .text.BSP_SDRAM_ReadData_DMA:0000002c $d
+C:\Users\jisu8\AppData\Local\Temp\cc8yvQ9b.s:389    .text.BSP_SDRAM_WriteData:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\cc8yvQ9b.s:395    .text.BSP_SDRAM_WriteData:00000000 BSP_SDRAM_WriteData
+C:\Users\jisu8\AppData\Local\Temp\cc8yvQ9b.s:445    .text.BSP_SDRAM_WriteData:0000002c $d
+C:\Users\jisu8\AppData\Local\Temp\cc8yvQ9b.s:450    .text.BSP_SDRAM_WriteData_DMA:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\cc8yvQ9b.s:456    .text.BSP_SDRAM_WriteData_DMA:00000000 BSP_SDRAM_WriteData_DMA
+C:\Users\jisu8\AppData\Local\Temp\cc8yvQ9b.s:506    .text.BSP_SDRAM_WriteData_DMA:0000002c $d
+C:\Users\jisu8\AppData\Local\Temp\cc8yvQ9b.s:511    .text.BSP_SDRAM_Sendcmd:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\cc8yvQ9b.s:517    .text.BSP_SDRAM_Sendcmd:00000000 BSP_SDRAM_Sendcmd
+C:\Users\jisu8\AppData\Local\Temp\cc8yvQ9b.s:564    .text.BSP_SDRAM_Sendcmd:00000028 $d
+C:\Users\jisu8\AppData\Local\Temp\cc8yvQ9b.s:569    .text.BSP_SDRAM_MspInit:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\cc8yvQ9b.s:575    .text.BSP_SDRAM_MspInit:00000000 BSP_SDRAM_MspInit
+C:\Users\jisu8\AppData\Local\Temp\cc8yvQ9b.s:844    .text.BSP_SDRAM_MspInit:000001cc $d
+C:\Users\jisu8\AppData\Local\Temp\cc8yvQ9b.s:919    .bss.dma_handle.1:00000000 dma_handle.1
+C:\Users\jisu8\AppData\Local\Temp\cc8yvQ9b.s:857    .text.BSP_SDRAM_MspDeInit:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\cc8yvQ9b.s:905    .text.BSP_SDRAM_MspDeInit:00000024 $d
+C:\Users\jisu8\AppData\Local\Temp\cc8yvQ9b.s:925    .bss.dma_handle.0:00000000 dma_handle.0
+C:\Users\jisu8\AppData\Local\Temp\cc8yvQ9b.s:916    .bss.dma_handle.1:00000000 $d
+C:\Users\jisu8\AppData\Local\Temp\cc8yvQ9b.s:922    .bss.dma_handle.0:00000000 $d
+
+UNDEFINED SYMBOLS
+HAL_SDRAM_DeInit
+hsdram1
+HAL_SDRAM_SendCommand
+HAL_Delay
+HAL_SDRAM_ProgramRefreshRate
+HAL_SDRAM_Read_32b
+HAL_SDRAM_Read_DMA
+HAL_SDRAM_Write_32b
+HAL_SDRAM_Write_DMA
+HAL_GPIO_Init
+HAL_DMA_DeInit
+HAL_DMA_Init
+HAL_NVIC_SetPriority
+HAL_NVIC_EnableIRQ
+HAL_NVIC_DisableIRQ
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cc8yvQ9b.s 			page 26
+
+

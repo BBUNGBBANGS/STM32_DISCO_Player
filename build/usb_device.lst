@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccWB9WGl.s 			page 1
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccehVaxv.s 			page 1
 
 
    1              		.cpu cortex-m7
@@ -12,22 +12,31 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccWB9WGl.s 			page 1
    9              		.eabi_attribute 24, 1
   10              		.eabi_attribute 25, 1
   11              		.eabi_attribute 26, 1
-  12              		.eabi_attribute 30, 1
+  12              		.eabi_attribute 30, 6
   13              		.eabi_attribute 34, 1
   14              		.eabi_attribute 18, 4
   15              		.file	"usb_device.c"
   16              		.text
   17              	.Ltext0:
   18              		.cfi_sections	.debug_frame
-  19              		.section	.text.MX_USB_DEVICE_Init,"ax",%progbits
-  20              		.align	1
-  21              		.global	MX_USB_DEVICE_Init
-  22              		.syntax unified
-  23              		.thumb
-  24              		.thumb_func
-  26              	MX_USB_DEVICE_Init:
-  27              	.LFB145:
-  28              		.file 1 "USB_DEVICE/App/usb_device.c"
+  19              		.global	hUsbDeviceHS
+  20              		.section	.bss.hUsbDeviceHS,"aw",%nobits
+  21              		.align	2
+  24              	hUsbDeviceHS:
+  25 0000 00000000 		.space	732
+  25      00000000 
+  25      00000000 
+  25      00000000 
+  25      00000000 
+  26              		.section	.text.MX_USB_DEVICE_Init,"ax",%progbits
+  27              		.align	1
+  28              		.global	MX_USB_DEVICE_Init
+  29              		.syntax unified
+  30              		.thumb
+  31              		.thumb_func
+  33              	MX_USB_DEVICE_Init:
+  34              	.LFB145:
+  35              		.file 1 "USB_DEVICE/App/usb_device.c"
    1:USB_DEVICE/App/usb_device.c **** /* USER CODE BEGIN Header */
    2:USB_DEVICE/App/usb_device.c **** /**
    3:USB_DEVICE/App/usb_device.c ****   ******************************************************************************
@@ -49,6 +58,9 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccWB9WGl.s 			page 1
   19:USB_DEVICE/App/usb_device.c **** /* USER CODE END Header */
   20:USB_DEVICE/App/usb_device.c **** 
   21:USB_DEVICE/App/usb_device.c **** /* Includes ------------------------------------------------------------------*/
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccehVaxv.s 			page 2
+
+
   22:USB_DEVICE/App/usb_device.c **** 
   23:USB_DEVICE/App/usb_device.c **** #include "usb_device.h"
   24:USB_DEVICE/App/usb_device.c **** #include "usbd_core.h"
@@ -58,9 +70,6 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccWB9WGl.s 			page 1
   28:USB_DEVICE/App/usb_device.c **** 
   29:USB_DEVICE/App/usb_device.c **** /* USER CODE BEGIN Includes */
   30:USB_DEVICE/App/usb_device.c **** 
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccWB9WGl.s 			page 2
-
-
   31:USB_DEVICE/App/usb_device.c **** /* USER CODE END Includes */
   32:USB_DEVICE/App/usb_device.c **** 
   33:USB_DEVICE/App/usb_device.c **** /* USER CODE BEGIN PV */
@@ -96,156 +105,131 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccWB9WGl.s 			page 1
   63:USB_DEVICE/App/usb_device.c ****   */
   64:USB_DEVICE/App/usb_device.c **** void MX_USB_DEVICE_Init(void)
   65:USB_DEVICE/App/usb_device.c **** {
-  29              		.loc 1 65 1 view -0
-  30              		.cfi_startproc
-  31              		@ args = 0, pretend = 0, frame = 0
-  32              		@ frame_needed = 0, uses_anonymous_args = 0
-  33 0000 08B5     		push	{r3, lr}
-  34              	.LCFI0:
-  35              		.cfi_def_cfa_offset 8
-  36              		.cfi_offset 3, -8
-  37              		.cfi_offset 14, -4
+  36              		.loc 1 65 1
+  37              		.cfi_startproc
+  38              		@ args = 0, pretend = 0, frame = 0
+  39              		@ frame_needed = 1, uses_anonymous_args = 0
+  40 0000 80B5     		push	{r7, lr}
+  41              	.LCFI0:
+  42              		.cfi_def_cfa_offset 8
+  43              		.cfi_offset 7, -8
+  44              		.cfi_offset 14, -4
+  45 0002 00AF     		add	r7, sp, #0
+  46              	.LCFI1:
+  47              		.cfi_def_cfa_register 7
   66:USB_DEVICE/App/usb_device.c ****   /* USER CODE BEGIN USB_DEVICE_Init_PreTreatment */
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccehVaxv.s 			page 3
+
+
   67:USB_DEVICE/App/usb_device.c **** 
   68:USB_DEVICE/App/usb_device.c ****   /* USER CODE END USB_DEVICE_Init_PreTreatment */
   69:USB_DEVICE/App/usb_device.c **** 
   70:USB_DEVICE/App/usb_device.c ****   /* Init Device Library, add supported class and start the library. */
   71:USB_DEVICE/App/usb_device.c ****   if (USBD_Init(&hUsbDeviceHS, &HS_Desc, DEVICE_HS) != USBD_OK)
-  38              		.loc 1 71 3 view .LVU1
-  39              		.loc 1 71 7 is_stmt 0 view .LVU2
-  40 0002 0122     		movs	r2, #1
-  41 0004 0F49     		ldr	r1, .L11
-  42 0006 1048     		ldr	r0, .L11+4
-  43 0008 FFF7FEFF 		bl	USBD_Init
-  44              	.LVL0:
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccWB9WGl.s 			page 3
-
-
-  45              		.loc 1 71 6 view .LVU3
-  46 000c 70B9     		cbnz	r0, .L7
-  47              	.L2:
+  48              		.loc 1 71 7
+  49 0004 0122     		movs	r2, #1
+  50 0006 1249     		ldr	r1, .L7
+  51 0008 1248     		ldr	r0, .L7+4
+  52 000a FFF7FEFF 		bl	USBD_Init
+  53 000e 0346     		mov	r3, r0
+  54              		.loc 1 71 6
+  55 0010 002B     		cmp	r3, #0
+  56 0012 01D0     		beq	.L2
   72:USB_DEVICE/App/usb_device.c ****   {
   73:USB_DEVICE/App/usb_device.c ****     Error_Handler();
+  57              		.loc 1 73 5
+  58 0014 FFF7FEFF 		bl	Error_Handler
+  59              	.L2:
   74:USB_DEVICE/App/usb_device.c ****   }
   75:USB_DEVICE/App/usb_device.c ****   if (USBD_RegisterClass(&hUsbDeviceHS, &USBD_MSC) != USBD_OK)
-  48              		.loc 1 75 3 is_stmt 1 view .LVU4
-  49              		.loc 1 75 7 is_stmt 0 view .LVU5
-  50 000e 0F49     		ldr	r1, .L11+8
-  51 0010 0D48     		ldr	r0, .L11+4
-  52 0012 FFF7FEFF 		bl	USBD_RegisterClass
-  53              	.LVL1:
-  54              		.loc 1 75 6 view .LVU6
-  55 0016 60B9     		cbnz	r0, .L8
-  56              	.L3:
+  60              		.loc 1 75 7
+  61 0018 0F49     		ldr	r1, .L7+8
+  62 001a 0E48     		ldr	r0, .L7+4
+  63 001c FFF7FEFF 		bl	USBD_RegisterClass
+  64 0020 0346     		mov	r3, r0
+  65              		.loc 1 75 6
+  66 0022 002B     		cmp	r3, #0
+  67 0024 01D0     		beq	.L3
   76:USB_DEVICE/App/usb_device.c ****   {
   77:USB_DEVICE/App/usb_device.c ****     Error_Handler();
+  68              		.loc 1 77 5
+  69 0026 FFF7FEFF 		bl	Error_Handler
+  70              	.L3:
   78:USB_DEVICE/App/usb_device.c ****   }
   79:USB_DEVICE/App/usb_device.c ****   if (USBD_MSC_RegisterStorage(&hUsbDeviceHS, &USBD_Storage_Interface_fops_HS) != USBD_OK)
-  57              		.loc 1 79 3 is_stmt 1 view .LVU7
-  58              		.loc 1 79 7 is_stmt 0 view .LVU8
-  59 0018 0D49     		ldr	r1, .L11+12
-  60 001a 0B48     		ldr	r0, .L11+4
-  61 001c FFF7FEFF 		bl	USBD_MSC_RegisterStorage
-  62              	.LVL2:
-  63              		.loc 1 79 6 view .LVU9
-  64 0020 50B9     		cbnz	r0, .L9
-  65              	.L4:
+  71              		.loc 1 79 7
+  72 002a 0C49     		ldr	r1, .L7+12
+  73 002c 0948     		ldr	r0, .L7+4
+  74 002e FFF7FEFF 		bl	USBD_MSC_RegisterStorage
+  75 0032 0346     		mov	r3, r0
+  76              		.loc 1 79 6
+  77 0034 002B     		cmp	r3, #0
+  78 0036 01D0     		beq	.L4
   80:USB_DEVICE/App/usb_device.c ****   {
   81:USB_DEVICE/App/usb_device.c ****     Error_Handler();
+  79              		.loc 1 81 5
+  80 0038 FFF7FEFF 		bl	Error_Handler
+  81              	.L4:
   82:USB_DEVICE/App/usb_device.c ****   }
   83:USB_DEVICE/App/usb_device.c ****   if (USBD_Start(&hUsbDeviceHS) != USBD_OK)
-  66              		.loc 1 83 3 is_stmt 1 view .LVU10
-  67              		.loc 1 83 7 is_stmt 0 view .LVU11
-  68 0022 0948     		ldr	r0, .L11+4
-  69 0024 FFF7FEFF 		bl	USBD_Start
-  70              	.LVL3:
-  71              		.loc 1 83 6 view .LVU12
-  72 0028 48B9     		cbnz	r0, .L10
-  73              	.L1:
+  82              		.loc 1 83 7
+  83 003c 0548     		ldr	r0, .L7+4
+  84 003e FFF7FEFF 		bl	USBD_Start
+  85 0042 0346     		mov	r3, r0
+  86              		.loc 1 83 6
+  87 0044 002B     		cmp	r3, #0
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccehVaxv.s 			page 4
+
+
+  88 0046 01D0     		beq	.L6
   84:USB_DEVICE/App/usb_device.c ****   {
   85:USB_DEVICE/App/usb_device.c ****     Error_Handler();
+  89              		.loc 1 85 5
+  90 0048 FFF7FEFF 		bl	Error_Handler
+  91              	.L6:
   86:USB_DEVICE/App/usb_device.c ****   }
   87:USB_DEVICE/App/usb_device.c **** 
   88:USB_DEVICE/App/usb_device.c ****   /* USER CODE BEGIN USB_DEVICE_Init_PostTreatment */
   89:USB_DEVICE/App/usb_device.c **** 
   90:USB_DEVICE/App/usb_device.c ****   /* USER CODE END USB_DEVICE_Init_PostTreatment */
   91:USB_DEVICE/App/usb_device.c **** }
-  74              		.loc 1 91 1 view .LVU13
-  75 002a 08BD     		pop	{r3, pc}
-  76              	.L7:
-  73:USB_DEVICE/App/usb_device.c ****   }
-  77              		.loc 1 73 5 is_stmt 1 view .LVU14
-  78 002c FFF7FEFF 		bl	Error_Handler
-  79              	.LVL4:
-  80 0030 EDE7     		b	.L2
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccWB9WGl.s 			page 4
-
-
-  81              	.L8:
-  77:USB_DEVICE/App/usb_device.c ****   }
-  82              		.loc 1 77 5 view .LVU15
-  83 0032 FFF7FEFF 		bl	Error_Handler
-  84              	.LVL5:
-  85 0036 EFE7     		b	.L3
-  86              	.L9:
-  81:USB_DEVICE/App/usb_device.c ****   }
-  87              		.loc 1 81 5 view .LVU16
-  88 0038 FFF7FEFF 		bl	Error_Handler
-  89              	.LVL6:
-  90 003c F1E7     		b	.L4
-  91              	.L10:
-  85:USB_DEVICE/App/usb_device.c ****   }
-  92              		.loc 1 85 5 view .LVU17
-  93 003e FFF7FEFF 		bl	Error_Handler
-  94              	.LVL7:
-  95              		.loc 1 91 1 is_stmt 0 view .LVU18
-  96 0042 F2E7     		b	.L1
-  97              	.L12:
-  98              		.align	2
-  99              	.L11:
- 100 0044 00000000 		.word	HS_Desc
- 101 0048 00000000 		.word	.LANCHOR0
- 102 004c 00000000 		.word	USBD_MSC
- 103 0050 00000000 		.word	USBD_Storage_Interface_fops_HS
- 104              		.cfi_endproc
- 105              	.LFE145:
- 107              		.global	hUsbDeviceHS
- 108              		.section	.bss.hUsbDeviceHS,"aw",%nobits
- 109              		.align	2
- 110              		.set	.LANCHOR0,. + 0
- 113              	hUsbDeviceHS:
- 114 0000 00000000 		.space	732
- 114      00000000 
- 114      00000000 
- 114      00000000 
- 114      00000000 
- 115              		.text
- 116              	.Letext0:
- 117              		.file 2 "d:\\3.tools\\arm_gcc_toolchain\\arm-none-eabi\\include\\machine\\_default_types.h"
- 118              		.file 3 "d:\\3.tools\\arm_gcc_toolchain\\arm-none-eabi\\include\\sys\\_stdint.h"
- 119              		.file 4 "Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_def.h"
- 120              		.file 5 "Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Inc/usbd_msc.h"
- 121              		.file 6 "USB_DEVICE/App/usbd_desc.h"
- 122              		.file 7 "USB_DEVICE/App/usbd_storage_if.h"
- 123              		.file 8 "Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_core.h"
- 124              		.file 9 "Core/Inc/main.h"
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccWB9WGl.s 			page 5
+  92              		.loc 1 91 1
+  93 004c 00BF     		nop
+  94 004e 80BD     		pop	{r7, pc}
+  95              	.L8:
+  96              		.align	2
+  97              	.L7:
+  98 0050 00000000 		.word	HS_Desc
+  99 0054 00000000 		.word	hUsbDeviceHS
+ 100 0058 00000000 		.word	USBD_MSC
+ 101 005c 00000000 		.word	USBD_Storage_Interface_fops_HS
+ 102              		.cfi_endproc
+ 103              	.LFE145:
+ 105              		.text
+ 106              	.Letext0:
+ 107              		.file 2 "d:\\3.tools\\arm_gcc_toolchain\\arm-none-eabi\\include\\machine\\_default_types.h"
+ 108              		.file 3 "d:\\3.tools\\arm_gcc_toolchain\\arm-none-eabi\\include\\sys\\_stdint.h"
+ 109              		.file 4 "Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_def.h"
+ 110              		.file 5 "Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Inc/usbd_msc.h"
+ 111              		.file 6 "USB_DEVICE/App/usbd_desc.h"
+ 112              		.file 7 "USB_DEVICE/App/usbd_storage_if.h"
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccehVaxv.s 			page 5
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 usb_device.c
-C:\Users\jisu8\AppData\Local\Temp\ccWB9WGl.s:20     .text.MX_USB_DEVICE_Init:00000000 $t
-C:\Users\jisu8\AppData\Local\Temp\ccWB9WGl.s:26     .text.MX_USB_DEVICE_Init:00000000 MX_USB_DEVICE_Init
-C:\Users\jisu8\AppData\Local\Temp\ccWB9WGl.s:100    .text.MX_USB_DEVICE_Init:00000044 $d
-C:\Users\jisu8\AppData\Local\Temp\ccWB9WGl.s:113    .bss.hUsbDeviceHS:00000000 hUsbDeviceHS
-C:\Users\jisu8\AppData\Local\Temp\ccWB9WGl.s:109    .bss.hUsbDeviceHS:00000000 $d
+C:\Users\jisu8\AppData\Local\Temp\ccehVaxv.s:24     .bss.hUsbDeviceHS:00000000 hUsbDeviceHS
+C:\Users\jisu8\AppData\Local\Temp\ccehVaxv.s:21     .bss.hUsbDeviceHS:00000000 $d
+C:\Users\jisu8\AppData\Local\Temp\ccehVaxv.s:27     .text.MX_USB_DEVICE_Init:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\ccehVaxv.s:33     .text.MX_USB_DEVICE_Init:00000000 MX_USB_DEVICE_Init
+C:\Users\jisu8\AppData\Local\Temp\ccehVaxv.s:98     .text.MX_USB_DEVICE_Init:00000050 $d
 
 UNDEFINED SYMBOLS
 USBD_Init
+Error_Handler
 USBD_RegisterClass
 USBD_MSC_RegisterStorage
 USBD_Start
-Error_Handler
 HS_Desc
 USBD_MSC
 USBD_Storage_Interface_fops_HS

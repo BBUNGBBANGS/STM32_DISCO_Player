@@ -22,6 +22,7 @@
 #include "fatfs.h"
 #include "usb_host.h"
 #include "usb_device.h"
+#include "lcd.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -29,7 +30,6 @@
 FATFS SDFatFs; /* File system object for SD card logical drive */
 
 FIL MyFile; /* File object */
-
 char SDPath[4]; /* SD card logical drive path */
 /* USER CODE END Includes */
 
@@ -478,7 +478,7 @@ static void MX_LTDC_Init(void)
   pLayerCfg.WindowX1 = 480;
   pLayerCfg.WindowY0 = 0;
   pLayerCfg.WindowY1 = 272;
-  pLayerCfg.PixelFormat = LTDC_PIXEL_FORMAT_RGB565;
+  pLayerCfg.PixelFormat = LTDC_PIXEL_FORMAT_ARGB8888;
   pLayerCfg.Alpha = 255;
   pLayerCfg.Alpha0 = 0;
   pLayerCfg.BlendingFactor1 = LTDC_BLENDING_FACTOR1_PAxCA;
@@ -714,7 +714,7 @@ static void MX_FMC_Init(void)
   hsdram1.Init.RowBitsNumber = FMC_SDRAM_ROW_BITS_NUM_12;
   hsdram1.Init.MemoryDataWidth = FMC_SDRAM_MEM_BUS_WIDTH_16;
   hsdram1.Init.InternalBankNumber = FMC_SDRAM_INTERN_BANKS_NUM_4;
-  hsdram1.Init.CASLatency = FMC_SDRAM_CAS_LATENCY_3;
+  hsdram1.Init.CASLatency = FMC_SDRAM_CAS_LATENCY_2;
   hsdram1.Init.WriteProtection = FMC_SDRAM_WRITE_PROTECTION_DISABLE;
   hsdram1.Init.SDClockPeriod = FMC_SDRAM_CLOCK_PERIOD_2;
   hsdram1.Init.ReadBurst = FMC_SDRAM_RBURST_ENABLE;
@@ -1015,8 +1015,6 @@ static void MX_GPIO_Init(void)
 
 }
 
-/* USER CODE BEGIN 4 */
-
 /* USER CODE END 4 */
 
 /* USER CODE BEGIN Header_StartDefaultTask */
@@ -1028,6 +1026,7 @@ static void MX_GPIO_Init(void)
 /* USER CODE END Header_StartDefaultTask */
 void StartDefaultTask(void const * argument)
 {
+    uint8_t desc[50];
     uint8_t tx_buf[100] = {0,};
     uint32_t byteswritten; /* File write count */
     uint8_t wtext[] = "SD card test in STM32F746G-DISCO board"; 
@@ -1039,12 +1038,15 @@ void StartDefaultTask(void const * argument)
     //MX_USB_HOST_Init();
     /* init code for USB_DEVICE */
     MX_USB_DEVICE_Init();  
+
+    BSP_SDRAM_Init();
+    BSP_LCD_Init();
+    LCD_Test();
     /* Infinite loop */
     for(;;)
     {
-        sprintf(tx_buf,"freeos test \r\n");
-        HAL_UART_Transmit(&huart1,tx_buf,strlen(tx_buf),100);
-        osDelay(100);
+        //LCD_Test();
+        osDelay(1000);
     }
 }
 

@@ -26,7 +26,7 @@
 extern DMA_HandleTypeDef hdma_sdmmc1_rx;
 
 extern DMA_HandleTypeDef hdma_sdmmc1_tx;
-
+extern SDRAM_HandleTypeDef hsdram1;
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN TD */
 
@@ -360,7 +360,7 @@ void HAL_LTDC_MspInit(LTDC_HandleTypeDef* hltdc)
     GPIO_InitStruct.Pin = LCD_B0_Pin;
     GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
     GPIO_InitStruct.Pull = GPIO_NOPULL;
-    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
     GPIO_InitStruct.Alternate = GPIO_AF14_LTDC;
     HAL_GPIO_Init(LCD_B0_GPIO_Port, &GPIO_InitStruct);
 
@@ -370,7 +370,7 @@ void HAL_LTDC_MspInit(LTDC_HandleTypeDef* hltdc)
                           |LCD_R3_Pin|LCD_R1_Pin|LCD_R2_Pin;
     GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
     GPIO_InitStruct.Pull = GPIO_NOPULL;
-    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
     GPIO_InitStruct.Alternate = GPIO_AF14_LTDC;
     HAL_GPIO_Init(GPIOJ, &GPIO_InitStruct);
 
@@ -378,21 +378,21 @@ void HAL_LTDC_MspInit(LTDC_HandleTypeDef* hltdc)
                           |LCD_G6_Pin|LCD_G7_Pin|LCD_G5_Pin;
     GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
     GPIO_InitStruct.Pull = GPIO_NOPULL;
-    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
     GPIO_InitStruct.Alternate = GPIO_AF14_LTDC;
     HAL_GPIO_Init(GPIOK, &GPIO_InitStruct);
 
     GPIO_InitStruct.Pin = LCD_B4_Pin;
     GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
     GPIO_InitStruct.Pull = GPIO_NOPULL;
-    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
     GPIO_InitStruct.Alternate = GPIO_AF9_LTDC;
     HAL_GPIO_Init(LCD_B4_GPIO_Port, &GPIO_InitStruct);
 
     GPIO_InitStruct.Pin = LCD_HSYNC_Pin|LCD_VSYNC_Pin|LCD_R0_Pin|LCD_CLK_Pin;
     GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
     GPIO_InitStruct.Pull = GPIO_NOPULL;
-    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
     GPIO_InitStruct.Alternate = GPIO_AF14_LTDC;
     HAL_GPIO_Init(GPIOI, &GPIO_InitStruct);
 
@@ -931,7 +931,7 @@ static uint32_t FMC_Initialized = 0;
 
 static void HAL_FMC_MspInit(void){
   /* USER CODE BEGIN FMC_MspInit 0 */
-
+  static DMA_HandleTypeDef dma_handle;
   /* USER CODE END FMC_MspInit 0 */
   GPIO_InitTypeDef GPIO_InitStruct ={0};
   if (FMC_Initialized) {
@@ -1031,7 +1031,26 @@ static void HAL_FMC_MspInit(void){
   HAL_GPIO_Init(FMC_SDCKE0_GPIO_Port, &GPIO_InitStruct);
 
   /* USER CODE BEGIN FMC_MspInit 1 */
-
+  /* Configure common DMA parameters */
+  dma_handle.Instance = DMA2_Stream0;
+  dma_handle.Init.Channel = DMA_CHANNEL_0;
+  dma_handle.Init.Direction = DMA_MEMORY_TO_MEMORY;
+  dma_handle.Init.PeriphInc = DMA_PINC_ENABLE;
+  dma_handle.Init.MemInc = DMA_MINC_ENABLE;
+  dma_handle.Init.PeriphDataAlignment = DMA_PDATAALIGN_WORD;
+  dma_handle.Init.MemDataAlignment = DMA_MDATAALIGN_WORD;
+  dma_handle.Init.Mode = DMA_NORMAL;
+  dma_handle.Init.Priority = DMA_PRIORITY_HIGH;
+  dma_handle.Init.FIFOMode = DMA_FIFOMODE_DISABLE;         
+  dma_handle.Init.FIFOThreshold = DMA_FIFO_THRESHOLD_FULL;
+  dma_handle.Init.MemBurst = DMA_MBURST_SINGLE;
+  dma_handle.Init.PeriphBurst = DMA_PBURST_SINGLE; 
+  if (HAL_DMA_Init(&dma_handle) != HAL_OK)
+  {
+    Error_Handler();
+  }
+   /* Associate the DMA handle */
+  __HAL_LINKDMA(&hsdram1,hdma,dma_handle);
   /* USER CODE END FMC_MspInit 1 */
 }
 

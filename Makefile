@@ -22,7 +22,7 @@ TARGET = F746G_DISCO_Player
 # debug build?
 DEBUG = 1
 # optimization
-OPT = -Og
+OPT = -O0
 
 
 #######################################
@@ -41,6 +41,12 @@ Core/Src/freertos.c \
 Core/Src/stm32f7xx_it.c \
 Core/Src/stm32f7xx_hal_msp.c \
 Core/Src/stm32f7xx_hal_timebase_tim.c \
+Core/Src/lcd.c \
+Core/Src/lcd2.c \
+Core/Src/sdram.c \
+Core/Src/touch.c \
+Core/Src/stm32746g_discovery.c \
+Core/Src/logo.c \
 FATFS/Target/bsp_driver_sd.c \
 FATFS/Target/sd_diskio.c \
 FATFS/Target/fatfs_platform.c \
@@ -181,7 +187,8 @@ C_INCLUDES =  \
 -IMiddlewares/ST/STM32_USB_Host_Library/Core/Inc \
 -IMiddlewares/ST/STM32_USB_Host_Library/Class/MSC/Inc \
 -IDrivers/CMSIS/Device/ST/STM32F7xx/Include \
--IDrivers/CMSIS/Include
+-IDrivers/CMSIS/Include \
+-IComponents
 
 
 # compile gcc flags

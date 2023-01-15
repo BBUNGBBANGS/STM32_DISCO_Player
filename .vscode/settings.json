@@ -4,6 +4,7 @@
         "usbd_def.h": "c",
         "stm32f7xx_hal.h": "c",
         "usb_host.h": "c",
-        "stm32f7xx_hal_pcd.h": "c"
+        "stm32f7xx_hal_pcd.h": "c",
+        "stm32746g_discovery_lcd.h": "c"
     }
 }

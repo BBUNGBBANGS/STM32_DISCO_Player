@@ -1,0 +1,714 @@
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccKsRCGI.s 			page 1
+
+
+   1              		.cpu cortex-m7
+   2              		.arch armv7e-m
+   3              		.fpu fpv5-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 6
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"lcd2.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.global	LCD_Feature
+  20              		.section	.bss.LCD_Feature,"aw",%nobits
+  23              	LCD_Feature:
+  24 0000 00       		.space	1
+  25              		.section	.text.LCD_demo,"ax",%progbits
+  26              		.align	1
+  27              		.global	LCD_demo
+  28              		.syntax unified
+  29              		.thumb
+  30              		.thumb_func
+  32              	LCD_demo:
+  33              	.LFB144:
+  34              		.file 1 "Core/Src/lcd2.c"
+   1:Core/Src/lcd2.c **** /**
+   2:Core/Src/lcd2.c ****   ******************************************************************************
+   3:Core/Src/lcd2.c ****   * @file    BSP/Src/lcd.c 
+   4:Core/Src/lcd2.c ****   * @author  MCD Application Team
+   5:Core/Src/lcd2.c ****   * @brief   This example code shows how to use LCD drawing features.
+   6:Core/Src/lcd2.c ****   ******************************************************************************
+   7:Core/Src/lcd2.c ****   * @attention
+   8:Core/Src/lcd2.c ****   *
+   9:Core/Src/lcd2.c ****   * Copyright (c) 2016 STMicroelectronics.
+  10:Core/Src/lcd2.c ****   * All rights reserved.
+  11:Core/Src/lcd2.c ****   *
+  12:Core/Src/lcd2.c ****   * This software is licensed under terms that can be found in the LICENSE file
+  13:Core/Src/lcd2.c ****   * in the root directory of this software component.
+  14:Core/Src/lcd2.c ****   * If no LICENSE file comes with this software, it is provided AS-IS.
+  15:Core/Src/lcd2.c ****   *
+  16:Core/Src/lcd2.c ****   ******************************************************************************
+  17:Core/Src/lcd2.c ****   */
+  18:Core/Src/lcd2.c **** 
+  19:Core/Src/lcd2.c **** /* Includes ------------------------------------------------------------------*/
+  20:Core/Src/lcd2.c **** #include "main.h"
+  21:Core/Src/lcd2.c **** #include "lcd.h"
+  22:Core/Src/lcd2.c **** /** @addtogroup STM32F7xx_HAL_Examples
+  23:Core/Src/lcd2.c ****   * @{
+  24:Core/Src/lcd2.c ****   */
+  25:Core/Src/lcd2.c **** 
+  26:Core/Src/lcd2.c **** /** @addtogroup BSP
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccKsRCGI.s 			page 2
+
+
+  27:Core/Src/lcd2.c ****   * @{
+  28:Core/Src/lcd2.c ****   */ 
+  29:Core/Src/lcd2.c **** 
+  30:Core/Src/lcd2.c **** /* Private typedef -----------------------------------------------------------*/
+  31:Core/Src/lcd2.c **** /* Private define ------------------------------------------------------------*/
+  32:Core/Src/lcd2.c **** #define LCD_FEATURES_NUM                4
+  33:Core/Src/lcd2.c **** /* Private macro -------------------------------------------------------------*/
+  34:Core/Src/lcd2.c **** /* Private variables ---------------------------------------------------------*/
+  35:Core/Src/lcd2.c **** uint8_t LCD_Feature = 0;
+  36:Core/Src/lcd2.c **** /* Private functions ---------------------------------------------------------*/
+  37:Core/Src/lcd2.c **** 
+  38:Core/Src/lcd2.c **** /**
+  39:Core/Src/lcd2.c ****   * @brief  LCD demo
+  40:Core/Src/lcd2.c ****   * @param  None
+  41:Core/Src/lcd2.c ****   * @retval None
+  42:Core/Src/lcd2.c ****   */
+  43:Core/Src/lcd2.c **** void LCD_demo (void)
+  44:Core/Src/lcd2.c **** { 
+  35              		.loc 1 44 1
+  36              		.cfi_startproc
+  37              		@ args = 0, pretend = 0, frame = 0
+  38              		@ frame_needed = 1, uses_anonymous_args = 0
+  39 0000 80B5     		push	{r7, lr}
+  40              	.LCFI0:
+  41              		.cfi_def_cfa_offset 8
+  42              		.cfi_offset 7, -8
+  43              		.cfi_offset 14, -4
+  44 0002 00AF     		add	r7, sp, #0
+  45              	.LCFI1:
+  46              		.cfi_def_cfa_register 7
+  45:Core/Src/lcd2.c ****   LCD_SetHint();
+  47              		.loc 1 45 3
+  48 0004 FFF7FEFF 		bl	LCD_SetHint
+  46:Core/Src/lcd2.c ****   LCD_Feature = 0;
+  49              		.loc 1 46 15
+  50 0008 104B     		ldr	r3, .L7
+  51 000a 0022     		movs	r2, #0
+  52 000c 1A70     		strb	r2, [r3]
+  47:Core/Src/lcd2.c ****   LCD_Show_Feature (LCD_Feature); 
+  53              		.loc 1 47 3
+  54 000e 0F4B     		ldr	r3, .L7
+  55 0010 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+  56 0012 1846     		mov	r0, r3
+  57 0014 FFF7FEFF 		bl	LCD_Show_Feature
+  58              	.L5:
+  59              	.LBB2:
+  48:Core/Src/lcd2.c ****   
+  49:Core/Src/lcd2.c ****   while (1)
+  50:Core/Src/lcd2.c ****   {
+  51:Core/Src/lcd2.c ****     
+  52:Core/Src/lcd2.c ****     if(CheckForUserInput() > 0)
+  60              		.loc 1 52 8
+  61 0018 FFF7FEFF 		bl	CheckForUserInput
+  62 001c 0346     		mov	r3, r0
+  63              		.loc 1 52 7
+  64 001e 002B     		cmp	r3, #0
+  65 0020 0EDD     		ble	.L2
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccKsRCGI.s 			page 3
+
+
+  53:Core/Src/lcd2.c ****     {
+  54:Core/Src/lcd2.c ****       if(++LCD_Feature < LCD_FEATURES_NUM)
+  66              		.loc 1 54 10
+  67 0022 0A4B     		ldr	r3, .L7
+  68 0024 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+  69 0026 0133     		adds	r3, r3, #1
+  70 0028 DAB2     		uxtb	r2, r3
+  71              		.loc 1 54 9
+  72 002a 084B     		ldr	r3, .L7
+  73 002c 1A70     		strb	r2, [r3]
+  74              		.loc 1 54 10
+  75 002e 074B     		ldr	r3, .L7
+  76 0030 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+  77              		.loc 1 54 9
+  78 0032 032B     		cmp	r3, #3
+  79 0034 08D8     		bhi	.L6
+  55:Core/Src/lcd2.c ****       {
+  56:Core/Src/lcd2.c ****        LCD_Show_Feature (LCD_Feature); 
+  80              		.loc 1 56 8
+  81 0036 054B     		ldr	r3, .L7
+  82 0038 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+  83 003a 1846     		mov	r0, r3
+  84 003c FFF7FEFF 		bl	LCD_Show_Feature
+  85              	.L2:
+  86              	.LBE2:
+  57:Core/Src/lcd2.c ****       }
+  58:Core/Src/lcd2.c ****       else
+  59:Core/Src/lcd2.c ****       {
+  60:Core/Src/lcd2.c ****         return;
+  61:Core/Src/lcd2.c ****       }
+  62:Core/Src/lcd2.c ****     }
+  63:Core/Src/lcd2.c ****     HAL_Delay(100);
+  87              		.loc 1 63 5
+  88 0040 6420     		movs	r0, #100
+  89 0042 FFF7FEFF 		bl	HAL_Delay
+  52:Core/Src/lcd2.c ****     {
+  90              		.loc 1 52 7
+  91 0046 E7E7     		b	.L5
+  92              	.L6:
+  93              	.LBB3:
+  60:Core/Src/lcd2.c ****       }
+  94              		.loc 1 60 9
+  95 0048 00BF     		nop
+  96              	.LBE3:
+  64:Core/Src/lcd2.c ****   }
+  65:Core/Src/lcd2.c **** }
+  97              		.loc 1 65 1
+  98 004a 80BD     		pop	{r7, pc}
+  99              	.L8:
+ 100              		.align	2
+ 101              	.L7:
+ 102 004c 00000000 		.word	LCD_Feature
+ 103              		.cfi_endproc
+ 104              	.LFE144:
+ 106              		.section	.rodata
+ 107              		.align	2
+ 108              	.LC2:
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccKsRCGI.s 			page 4
+
+
+ 109 0000 4C434420 		.ascii	"LCD Demo\000"
+ 109      44656D6F 
+ 109      00
+ 110 0009 000000   		.align	2
+ 111              	.LC3:
+ 112 000c 55736520 		.ascii	"Use User BUTTON to\000"
+ 112      55736572 
+ 112      20425554 
+ 112      544F4E20 
+ 112      746F00
+ 113 001f 00       		.align	2
+ 114              	.LC4:
+ 115 0020 64697370 		.ascii	"display next page\000"
+ 115      6C617920 
+ 115      6E657874 
+ 115      20706167 
+ 115      6500
+ 116              		.section	.text.LCD_SetHint,"ax",%progbits
+ 117              		.align	1
+ 118              		.global	LCD_SetHint
+ 119              		.syntax unified
+ 120              		.thumb
+ 121              		.thumb_func
+ 123              	LCD_SetHint:
+ 124              	.LFB145:
+  66:Core/Src/lcd2.c **** 
+  67:Core/Src/lcd2.c **** /**
+  68:Core/Src/lcd2.c ****   * @brief  Display LCD demo hint
+  69:Core/Src/lcd2.c ****   * @param  None
+  70:Core/Src/lcd2.c ****   * @retval None
+  71:Core/Src/lcd2.c ****   */
+  72:Core/Src/lcd2.c **** void LCD_SetHint(void)
+  73:Core/Src/lcd2.c **** {
+ 125              		.loc 1 73 1
+ 126              		.cfi_startproc
+ 127              		@ args = 0, pretend = 0, frame = 0
+ 128              		@ frame_needed = 1, uses_anonymous_args = 0
+ 129 0000 80B5     		push	{r7, lr}
+ 130              	.LCFI2:
+ 131              		.cfi_def_cfa_offset 8
+ 132              		.cfi_offset 7, -8
+ 133              		.cfi_offset 14, -4
+ 134 0002 00AF     		add	r7, sp, #0
+ 135              	.LCFI3:
+ 136              		.cfi_def_cfa_register 7
+  74:Core/Src/lcd2.c ****   /* Clear the LCD */ 
+  75:Core/Src/lcd2.c ****   BSP_LCD_Clear(LCD_COLOR_WHITE);
+ 137              		.loc 1 75 3
+ 138 0004 4FF0FF30 		mov	r0, #-1
+ 139 0008 FFF7FEFF 		bl	BSP_LCD_Clear
+  76:Core/Src/lcd2.c **** 
+  77:Core/Src/lcd2.c ****   /* Clear the LCD */ 
+  78:Core/Src/lcd2.c ****   BSP_LCD_Clear(LCD_COLOR_WHITE);
+ 140              		.loc 1 78 3
+ 141 000c 4FF0FF30 		mov	r0, #-1
+ 142 0010 FFF7FEFF 		bl	BSP_LCD_Clear
+  79:Core/Src/lcd2.c ****   
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccKsRCGI.s 			page 5
+
+
+  80:Core/Src/lcd2.c ****   /* Set Joystick Demo description */
+  81:Core/Src/lcd2.c ****   BSP_LCD_SetTextColor(LCD_COLOR_BLUE);
+ 143              		.loc 1 81 3
+ 144 0014 1948     		ldr	r0, .L10
+ 145 0016 FFF7FEFF 		bl	BSP_LCD_SetTextColor
+  82:Core/Src/lcd2.c ****   BSP_LCD_FillRect(0, 0, BSP_LCD_GetXSize(), 55);
+ 146              		.loc 1 82 26
+ 147 001a FFF7FEFF 		bl	BSP_LCD_GetXSize
+ 148 001e 0346     		mov	r3, r0
+ 149              		.loc 1 82 3
+ 150 0020 9AB2     		uxth	r2, r3
+ 151 0022 3723     		movs	r3, #55
+ 152 0024 0021     		movs	r1, #0
+ 153 0026 0020     		movs	r0, #0
+ 154 0028 FFF7FEFF 		bl	BSP_LCD_FillRect
+  83:Core/Src/lcd2.c ****   BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
+ 155              		.loc 1 83 3
+ 156 002c 4FF0FF30 		mov	r0, #-1
+ 157 0030 FFF7FEFF 		bl	BSP_LCD_SetTextColor
+  84:Core/Src/lcd2.c ****   BSP_LCD_SetBackColor(LCD_COLOR_BLUE); 
+ 158              		.loc 1 84 3
+ 159 0034 1148     		ldr	r0, .L10
+ 160 0036 FFF7FEFF 		bl	BSP_LCD_SetBackColor
+  85:Core/Src/lcd2.c ****   BSP_LCD_SetFont(&Font24);
+ 161              		.loc 1 85 3
+ 162 003a 1148     		ldr	r0, .L10+4
+ 163 003c FFF7FEFF 		bl	BSP_LCD_SetFont
+  86:Core/Src/lcd2.c **** 
+  87:Core/Src/lcd2.c ****   BSP_LCD_SetFont(&Font12);
+ 164              		.loc 1 87 3
+ 165 0040 1048     		ldr	r0, .L10+8
+ 166 0042 FFF7FEFF 		bl	BSP_LCD_SetFont
+  88:Core/Src/lcd2.c ****   BSP_LCD_DisplayStringAt(0, 10, (uint8_t *)"LCD Demo", CENTER_MODE);
+ 167              		.loc 1 88 3
+ 168 0046 0123     		movs	r3, #1
+ 169 0048 0F4A     		ldr	r2, .L10+12
+ 170 004a 0A21     		movs	r1, #10
+ 171 004c 0020     		movs	r0, #0
+ 172 004e FFF7FEFF 		bl	BSP_LCD_DisplayStringAt
+  89:Core/Src/lcd2.c ****   BSP_LCD_DisplayStringAt(0, 25, (uint8_t *)"Use User BUTTON to", CENTER_MODE);
+ 173              		.loc 1 89 3
+ 174 0052 0123     		movs	r3, #1
+ 175 0054 0D4A     		ldr	r2, .L10+16
+ 176 0056 1921     		movs	r1, #25
+ 177 0058 0020     		movs	r0, #0
+ 178 005a FFF7FEFF 		bl	BSP_LCD_DisplayStringAt
+  90:Core/Src/lcd2.c ****   BSP_LCD_DisplayStringAt(0, 40, (uint8_t *)"display next page", CENTER_MODE);
+ 179              		.loc 1 90 3
+ 180 005e 0123     		movs	r3, #1
+ 181 0060 0B4A     		ldr	r2, .L10+20
+ 182 0062 2821     		movs	r1, #40
+ 183 0064 0020     		movs	r0, #0
+ 184 0066 FFF7FEFF 		bl	BSP_LCD_DisplayStringAt
+  91:Core/Src/lcd2.c **** 
+  92:Core/Src/lcd2.c ****   BSP_LCD_SetTextColor(LCD_COLOR_BLUE);
+ 185              		.loc 1 92 3
+ 186 006a 0448     		ldr	r0, .L10
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccKsRCGI.s 			page 6
+
+
+ 187 006c FFF7FEFF 		bl	BSP_LCD_SetTextColor
+  93:Core/Src/lcd2.c ****   BSP_LCD_SetBackColor(LCD_COLOR_WHITE); 
+ 188              		.loc 1 93 3
+ 189 0070 4FF0FF30 		mov	r0, #-1
+ 190 0074 FFF7FEFF 		bl	BSP_LCD_SetBackColor
+  94:Core/Src/lcd2.c **** }
+ 191              		.loc 1 94 1
+ 192 0078 00BF     		nop
+ 193 007a 80BD     		pop	{r7, pc}
+ 194              	.L11:
+ 195              		.align	2
+ 196              	.L10:
+ 197 007c FF0000FF 		.word	-16776961
+ 198 0080 00000000 		.word	Font24
+ 199 0084 00000000 		.word	Font12
+ 200 0088 00000000 		.word	.LC2
+ 201 008c 0C000000 		.word	.LC3
+ 202 0090 20000000 		.word	.LC4
+ 203              		.cfi_endproc
+ 204              	.LFE145:
+ 206              		.section	.rodata
+ 207 0032 0000     		.align	2
+ 208              	.LC5:
+ 209 0034 466F6E74 		.ascii	"Font24\000"
+ 209      323400
+ 210 003b 00       		.align	2
+ 211              	.LC6:
+ 212 003c 466F6E74 		.ascii	"Font20\000"
+ 212      323000
+ 213 0043 00       		.align	2
+ 214              	.LC7:
+ 215 0044 466F6E74 		.ascii	"Font16\000"
+ 215      313600
+ 216 004b 00       		.align	2
+ 217              	.LC0:
+ 218 004c 1400     		.short	20
+ 219 004e 4600     		.short	70
+ 220 0050 3C00     		.short	60
+ 221 0052 4600     		.short	70
+ 222 0054 3C00     		.short	60
+ 223 0056 6400     		.short	100
+ 224              		.align	2
+ 225              	.LC1:
+ 226 0058 5000     		.short	80
+ 227 005a 4600     		.short	70
+ 228 005c 7800     		.short	120
+ 229 005e 4600     		.short	70
+ 230 0060 7800     		.short	120
+ 231 0062 6400     		.short	100
+ 232              		.section	.text.LCD_Show_Feature,"ax",%progbits
+ 233              		.align	1
+ 234              		.global	LCD_Show_Feature
+ 235              		.syntax unified
+ 236              		.thumb
+ 237              		.thumb_func
+ 239              	LCD_Show_Feature:
+ 240              	.LFB146:
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccKsRCGI.s 			page 7
+
+
+  95:Core/Src/lcd2.c **** 
+  96:Core/Src/lcd2.c **** /**
+  97:Core/Src/lcd2.c ****   * @brief  Show LCD Features
+  98:Core/Src/lcd2.c ****   * @param  feature : feature index
+  99:Core/Src/lcd2.c ****   * @retval None
+ 100:Core/Src/lcd2.c ****   */
+ 101:Core/Src/lcd2.c **** void LCD_Show_Feature(uint8_t feature)
+ 102:Core/Src/lcd2.c **** {
+ 241              		.loc 1 102 1
+ 242              		.cfi_startproc
+ 243              		@ args = 0, pretend = 0, frame = 32
+ 244              		@ frame_needed = 1, uses_anonymous_args = 0
+ 245 0000 90B5     		push	{r4, r7, lr}
+ 246              	.LCFI4:
+ 247              		.cfi_def_cfa_offset 12
+ 248              		.cfi_offset 4, -12
+ 249              		.cfi_offset 7, -8
+ 250              		.cfi_offset 14, -4
+ 251 0002 89B0     		sub	sp, sp, #36
+ 252              	.LCFI5:
+ 253              		.cfi_def_cfa_offset 48
+ 254 0004 00AF     		add	r7, sp, #0
+ 255              	.LCFI6:
+ 256              		.cfi_def_cfa_register 7
+ 257 0006 0346     		mov	r3, r0
+ 258 0008 FB71     		strb	r3, [r7, #7]
+ 103:Core/Src/lcd2.c ****   Point Points[]= {{20, 70}, {60, 70}, {60, 100}};
+ 259              		.loc 1 103 9
+ 260 000a 5B4A     		ldr	r2, .L21
+ 261 000c 07F11403 		add	r3, r7, #20
+ 262 0010 07CA     		ldm	r2, {r0, r1, r2}
+ 263 0012 83E80700 		stm	r3, {r0, r1, r2}
+ 104:Core/Src/lcd2.c ****   Point Points2[]= {{80, 70}, {120, 70}, {120, 100}};
+ 264              		.loc 1 104 9
+ 265 0016 594A     		ldr	r2, .L21+4
+ 266 0018 07F10803 		add	r3, r7, #8
+ 267 001c 07CA     		ldm	r2, {r0, r1, r2}
+ 268 001e 83E80700 		stm	r3, {r0, r1, r2}
+ 105:Core/Src/lcd2.c ****   
+ 106:Core/Src/lcd2.c ****   BSP_LCD_SetBackColor(LCD_COLOR_WHITE);  
+ 269              		.loc 1 106 3
+ 270 0022 4FF0FF30 		mov	r0, #-1
+ 271 0026 FFF7FEFF 		bl	BSP_LCD_SetBackColor
+ 107:Core/Src/lcd2.c ****   BSP_LCD_SetTextColor(LCD_COLOR_WHITE);    
+ 272              		.loc 1 107 3
+ 273 002a 4FF0FF30 		mov	r0, #-1
+ 274 002e FFF7FEFF 		bl	BSP_LCD_SetTextColor
+ 108:Core/Src/lcd2.c ****   BSP_LCD_FillRect(0, 60, BSP_LCD_GetXSize(), BSP_LCD_GetYSize()- 40);
+ 275              		.loc 1 108 27
+ 276 0032 FFF7FEFF 		bl	BSP_LCD_GetXSize
+ 277 0036 0346     		mov	r3, r0
+ 278              		.loc 1 108 3
+ 279 0038 9CB2     		uxth	r4, r3
+ 280              		.loc 1 108 47
+ 281 003a FFF7FEFF 		bl	BSP_LCD_GetYSize
+ 282 003e 0346     		mov	r3, r0
+ 283              		.loc 1 108 3
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccKsRCGI.s 			page 8
+
+
+ 284 0040 9BB2     		uxth	r3, r3
+ 285 0042 283B     		subs	r3, r3, #40
+ 286 0044 9BB2     		uxth	r3, r3
+ 287 0046 2246     		mov	r2, r4
+ 288 0048 3C21     		movs	r1, #60
+ 289 004a 0020     		movs	r0, #0
+ 290 004c FFF7FEFF 		bl	BSP_LCD_FillRect
+ 109:Core/Src/lcd2.c ****   BSP_LCD_SetTextColor(LCD_COLOR_BLACK);
+ 291              		.loc 1 109 3
+ 292 0050 4FF07F40 		mov	r0, #-16777216
+ 293 0054 FFF7FEFF 		bl	BSP_LCD_SetTextColor
+ 110:Core/Src/lcd2.c **** 
+ 111:Core/Src/lcd2.c ****   switch (feature)
+ 294              		.loc 1 111 3
+ 295 0058 FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 296 005a 032B     		cmp	r3, #3
+ 297 005c 00F28880 		bhi	.L19
+ 298 0060 01A2     		adr	r2, .L15
+ 299 0062 52F823F0 		ldr	pc, [r2, r3, lsl #2]
+ 300 0066 00BF     		.p2align 2
+ 301              	.L15:
+ 302 0068 79000000 		.word	.L18+1
+ 303 006c B1000000 		.word	.L17+1
+ 304 0070 1F010000 		.word	.L16+1
+ 305 0074 6F010000 		.word	.L20+1
+ 306              		.p2align 1
+ 307              	.L18:
+ 112:Core/Src/lcd2.c ****   {
+ 113:Core/Src/lcd2.c ****   case 0:
+ 114:Core/Src/lcd2.c ****     /* Text Feature */
+ 115:Core/Src/lcd2.c ****     BSP_LCD_SetFont(&Font24);
+ 308              		.loc 1 115 5
+ 309 0078 4148     		ldr	r0, .L21+8
+ 310 007a FFF7FEFF 		bl	BSP_LCD_SetFont
+ 116:Core/Src/lcd2.c ****     BSP_LCD_DisplayStringAt(14, 80, (uint8_t *)"Font24", LEFT_MODE); 
+ 311              		.loc 1 116 5
+ 312 007e 0323     		movs	r3, #3
+ 313 0080 404A     		ldr	r2, .L21+12
+ 314 0082 5021     		movs	r1, #80
+ 315 0084 0E20     		movs	r0, #14
+ 316 0086 FFF7FEFF 		bl	BSP_LCD_DisplayStringAt
+ 117:Core/Src/lcd2.c ****     BSP_LCD_SetFont(&Font20);
+ 317              		.loc 1 117 5
+ 318 008a 3F48     		ldr	r0, .L21+16
+ 319 008c FFF7FEFF 		bl	BSP_LCD_SetFont
+ 118:Core/Src/lcd2.c ****     BSP_LCD_DisplayStringAt(0, 105, (uint8_t *)"Font20", CENTER_MODE); 
+ 320              		.loc 1 118 5
+ 321 0090 0123     		movs	r3, #1
+ 322 0092 3E4A     		ldr	r2, .L21+20
+ 323 0094 6921     		movs	r1, #105
+ 324 0096 0020     		movs	r0, #0
+ 325 0098 FFF7FEFF 		bl	BSP_LCD_DisplayStringAt
+ 119:Core/Src/lcd2.c ****     BSP_LCD_SetFont(&Font16);
+ 326              		.loc 1 119 5
+ 327 009c 3C48     		ldr	r0, .L21+24
+ 328 009e FFF7FEFF 		bl	BSP_LCD_SetFont
+ 120:Core/Src/lcd2.c ****     BSP_LCD_DisplayStringAt(14, 130, (uint8_t *)"Font16", RIGHT_MODE); 
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccKsRCGI.s 			page 9
+
+
+ 329              		.loc 1 120 5
+ 330 00a2 0223     		movs	r3, #2
+ 331 00a4 3B4A     		ldr	r2, .L21+28
+ 332 00a6 8221     		movs	r1, #130
+ 333 00a8 0E20     		movs	r0, #14
+ 334 00aa FFF7FEFF 		bl	BSP_LCD_DisplayStringAt
+ 121:Core/Src/lcd2.c ****     break;
+ 335              		.loc 1 121 5
+ 336 00ae 5FE0     		b	.L13
+ 337              	.L17:
+ 122:Core/Src/lcd2.c ****     
+ 123:Core/Src/lcd2.c ****   case 1:
+ 124:Core/Src/lcd2.c ****     /* Draw misc. Shapes part 1*/
+ 125:Core/Src/lcd2.c ****     BSP_LCD_SetTextColor(LCD_COLOR_BLACK); 
+ 338              		.loc 1 125 5
+ 339 00b0 4FF07F40 		mov	r0, #-16777216
+ 340 00b4 FFF7FEFF 		bl	BSP_LCD_SetTextColor
+ 126:Core/Src/lcd2.c ****     BSP_LCD_DrawRect(20, 70, 40 , 20);
+ 341              		.loc 1 126 5
+ 342 00b8 1423     		movs	r3, #20
+ 343 00ba 2822     		movs	r2, #40
+ 344 00bc 4621     		movs	r1, #70
+ 345 00be 1420     		movs	r0, #20
+ 346 00c0 FFF7FEFF 		bl	BSP_LCD_DrawRect
+ 127:Core/Src/lcd2.c ****     BSP_LCD_FillRect(70, 70, 40 , 20); 
+ 347              		.loc 1 127 5
+ 348 00c4 1423     		movs	r3, #20
+ 349 00c6 2822     		movs	r2, #40
+ 350 00c8 4621     		movs	r1, #70
+ 351 00ca 4620     		movs	r0, #70
+ 352 00cc FFF7FEFF 		bl	BSP_LCD_FillRect
+ 128:Core/Src/lcd2.c ****     
+ 129:Core/Src/lcd2.c ****     BSP_LCD_SetTextColor(LCD_COLOR_BLUE); 
+ 353              		.loc 1 129 5
+ 354 00d0 3148     		ldr	r0, .L21+32
+ 355 00d2 FFF7FEFF 		bl	BSP_LCD_SetTextColor
+ 130:Core/Src/lcd2.c ****     BSP_LCD_DrawCircle(40, 120, 20);
+ 356              		.loc 1 130 5
+ 357 00d6 1422     		movs	r2, #20
+ 358 00d8 7821     		movs	r1, #120
+ 359 00da 2820     		movs	r0, #40
+ 360 00dc FFF7FEFF 		bl	BSP_LCD_DrawCircle
+ 131:Core/Src/lcd2.c ****     BSP_LCD_FillCircle(90, 120, 20);
+ 361              		.loc 1 131 5
+ 362 00e0 1422     		movs	r2, #20
+ 363 00e2 7821     		movs	r1, #120
+ 364 00e4 5A20     		movs	r0, #90
+ 365 00e6 FFF7FEFF 		bl	BSP_LCD_FillCircle
+ 132:Core/Src/lcd2.c ****      
+ 133:Core/Src/lcd2.c ****     BSP_LCD_SetTextColor(LCD_COLOR_RED); 
+ 366              		.loc 1 133 5
+ 367 00ea 2C48     		ldr	r0, .L21+36
+ 368 00ec FFF7FEFF 		bl	BSP_LCD_SetTextColor
+ 134:Core/Src/lcd2.c ****     BSP_LCD_DrawLine (20, 70, 20+40 , 70+20);
+ 369              		.loc 1 134 5
+ 370 00f0 5A23     		movs	r3, #90
+ 371 00f2 3C22     		movs	r2, #60
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccKsRCGI.s 			page 10
+
+
+ 372 00f4 4621     		movs	r1, #70
+ 373 00f6 1420     		movs	r0, #20
+ 374 00f8 FFF7FEFF 		bl	BSP_LCD_DrawLine
+ 135:Core/Src/lcd2.c ****     BSP_LCD_DrawLine (20, 70+20, 20+40 , 70);
+ 375              		.loc 1 135 5
+ 376 00fc 4623     		movs	r3, #70
+ 377 00fe 3C22     		movs	r2, #60
+ 378 0100 5A21     		movs	r1, #90
+ 379 0102 1420     		movs	r0, #20
+ 380 0104 FFF7FEFF 		bl	BSP_LCD_DrawLine
+ 136:Core/Src/lcd2.c ****     BSP_LCD_DrawHLine(20, 120, 40);
+ 381              		.loc 1 136 5
+ 382 0108 2822     		movs	r2, #40
+ 383 010a 7821     		movs	r1, #120
+ 384 010c 1420     		movs	r0, #20
+ 385 010e FFF7FEFF 		bl	BSP_LCD_DrawHLine
+ 137:Core/Src/lcd2.c ****     BSP_LCD_DrawVLine(40, 100, 40);
+ 386              		.loc 1 137 5
+ 387 0112 2822     		movs	r2, #40
+ 388 0114 6421     		movs	r1, #100
+ 389 0116 2820     		movs	r0, #40
+ 390 0118 FFF7FEFF 		bl	BSP_LCD_DrawVLine
+ 138:Core/Src/lcd2.c ****     break;
+ 391              		.loc 1 138 5
+ 392 011c 28E0     		b	.L13
+ 393              	.L16:
+ 139:Core/Src/lcd2.c ****  
+ 140:Core/Src/lcd2.c ****   case 2:
+ 141:Core/Src/lcd2.c ****     /* Draw misc. Shapes part 2*/
+ 142:Core/Src/lcd2.c ****     BSP_LCD_SetTextColor(LCD_COLOR_GREEN); 
+ 394              		.loc 1 142 5
+ 395 011e 4FF0FF20 		mov	r0, #-16711936
+ 396 0122 FFF7FEFF 		bl	BSP_LCD_SetTextColor
+ 143:Core/Src/lcd2.c ****     BSP_LCD_DrawPolygon(Points, 3);
+ 397              		.loc 1 143 5
+ 398 0126 07F11403 		add	r3, r7, #20
+ 399 012a 0321     		movs	r1, #3
+ 400 012c 1846     		mov	r0, r3
+ 401 012e FFF7FEFF 		bl	BSP_LCD_DrawPolygon
+ 144:Core/Src/lcd2.c ****     BSP_LCD_FillPolygon(Points2, 3);
+ 402              		.loc 1 144 5
+ 403 0132 07F10803 		add	r3, r7, #8
+ 404 0136 0321     		movs	r1, #3
+ 405 0138 1846     		mov	r0, r3
+ 406 013a FFF7FEFF 		bl	BSP_LCD_FillPolygon
+ 145:Core/Src/lcd2.c ****     
+ 146:Core/Src/lcd2.c ****     BSP_LCD_SetTextColor(LCD_COLOR_RED); 
+ 407              		.loc 1 146 5
+ 408 013e 1748     		ldr	r0, .L21+36
+ 409 0140 FFF7FEFF 		bl	BSP_LCD_SetTextColor
+ 147:Core/Src/lcd2.c ****     BSP_LCD_DrawEllipse(BSP_LCD_GetXSize() - 100, 110, 20, 30);
+ 410              		.loc 1 147 25
+ 411 0144 FFF7FEFF 		bl	BSP_LCD_GetXSize
+ 412 0148 0346     		mov	r3, r0
+ 413              		.loc 1 147 44
+ 414 014a 643B     		subs	r3, r3, #100
+ 415              		.loc 1 147 5
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccKsRCGI.s 			page 11
+
+
+ 416 014c 1846     		mov	r0, r3
+ 417 014e 1E23     		movs	r3, #30
+ 418 0150 1422     		movs	r2, #20
+ 419 0152 6E21     		movs	r1, #110
+ 420 0154 FFF7FEFF 		bl	BSP_LCD_DrawEllipse
+ 148:Core/Src/lcd2.c ****     BSP_LCD_FillEllipse(BSP_LCD_GetXSize() - 40, 110, 20, 30);
+ 421              		.loc 1 148 25
+ 422 0158 FFF7FEFF 		bl	BSP_LCD_GetXSize
+ 423 015c 0346     		mov	r3, r0
+ 424              		.loc 1 148 44
+ 425 015e 283B     		subs	r3, r3, #40
+ 426              		.loc 1 148 5
+ 427 0160 1846     		mov	r0, r3
+ 428 0162 1E23     		movs	r3, #30
+ 429 0164 1422     		movs	r2, #20
+ 430 0166 6E21     		movs	r1, #110
+ 431 0168 FFF7FEFF 		bl	BSP_LCD_FillEllipse
+ 149:Core/Src/lcd2.c ****     break;
+ 432              		.loc 1 149 5
+ 433 016c 00E0     		b	.L13
+ 434              	.L20:
+ 150:Core/Src/lcd2.c ****   
+ 151:Core/Src/lcd2.c ****   case 3:
+ 152:Core/Src/lcd2.c ****     /* Draw Bitmap */
+ 153:Core/Src/lcd2.c ****     //BSP_LCD_DrawBitmap(20, 70, (uint8_t *)stlogo);
+ 154:Core/Src/lcd2.c ****     break;
+ 435              		.loc 1 154 5
+ 436 016e 00BF     		nop
+ 437              	.L13:
+ 438              	.L19:
+ 155:Core/Src/lcd2.c ****   }
+ 156:Core/Src/lcd2.c **** }
+ 439              		.loc 1 156 1
+ 440 0170 00BF     		nop
+ 441 0172 2437     		adds	r7, r7, #36
+ 442              	.LCFI7:
+ 443              		.cfi_def_cfa_offset 12
+ 444 0174 BD46     		mov	sp, r7
+ 445              	.LCFI8:
+ 446              		.cfi_def_cfa_register 13
+ 447              		@ sp needed
+ 448 0176 90BD     		pop	{r4, r7, pc}
+ 449              	.L22:
+ 450              		.align	2
+ 451              	.L21:
+ 452 0178 4C000000 		.word	.LC0
+ 453 017c 58000000 		.word	.LC1
+ 454 0180 00000000 		.word	Font24
+ 455 0184 34000000 		.word	.LC5
+ 456 0188 00000000 		.word	Font20
+ 457 018c 3C000000 		.word	.LC6
+ 458 0190 00000000 		.word	Font16
+ 459 0194 44000000 		.word	.LC7
+ 460 0198 FF0000FF 		.word	-16776961
+ 461 019c 0000FFFF 		.word	-65536
+ 462              		.cfi_endproc
+ 463              	.LFE146:
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccKsRCGI.s 			page 12
+
+
+ 465              		.text
+ 466              	.Letext0:
+ 467              		.file 2 "d:\\3.tools\\arm_gcc_toolchain\\arm-none-eabi\\include\\machine\\_default_types.h"
+ 468              		.file 3 "d:\\3.tools\\arm_gcc_toolchain\\arm-none-eabi\\include\\sys\\_stdint.h"
+ 469              		.file 4 "Drivers/STM32F7xx_HAL_Driver/Inc/../../../Utilities/Fonts/fonts.h"
+ 470              		.file 5 "Core/Inc/lcd.h"
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccKsRCGI.s 			page 13
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 lcd2.c
+C:\Users\jisu8\AppData\Local\Temp\ccKsRCGI.s:23     .bss.LCD_Feature:00000000 LCD_Feature
+C:\Users\jisu8\AppData\Local\Temp\ccKsRCGI.s:24     .bss.LCD_Feature:00000000 $d
+C:\Users\jisu8\AppData\Local\Temp\ccKsRCGI.s:26     .text.LCD_demo:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\ccKsRCGI.s:32     .text.LCD_demo:00000000 LCD_demo
+C:\Users\jisu8\AppData\Local\Temp\ccKsRCGI.s:123    .text.LCD_SetHint:00000000 LCD_SetHint
+C:\Users\jisu8\AppData\Local\Temp\ccKsRCGI.s:239    .text.LCD_Show_Feature:00000000 LCD_Show_Feature
+C:\Users\jisu8\AppData\Local\Temp\ccKsRCGI.s:102    .text.LCD_demo:0000004c $d
+C:\Users\jisu8\AppData\Local\Temp\ccKsRCGI.s:107    .rodata:00000000 $d
+C:\Users\jisu8\AppData\Local\Temp\ccKsRCGI.s:117    .text.LCD_SetHint:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\ccKsRCGI.s:197    .text.LCD_SetHint:0000007c $d
+C:\Users\jisu8\AppData\Local\Temp\ccKsRCGI.s:233    .text.LCD_Show_Feature:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\ccKsRCGI.s:302    .text.LCD_Show_Feature:00000068 $d
+C:\Users\jisu8\AppData\Local\Temp\ccKsRCGI.s:306    .text.LCD_Show_Feature:00000078 $t
+C:\Users\jisu8\AppData\Local\Temp\ccKsRCGI.s:452    .text.LCD_Show_Feature:00000178 $d
+
+UNDEFINED SYMBOLS
+CheckForUserInput
+HAL_Delay
+BSP_LCD_Clear
+BSP_LCD_SetTextColor
+BSP_LCD_GetXSize
+BSP_LCD_FillRect
+BSP_LCD_SetBackColor
+BSP_LCD_SetFont
+BSP_LCD_DisplayStringAt
+Font24
+Font12
+BSP_LCD_GetYSize
+BSP_LCD_DrawRect
+BSP_LCD_DrawCircle
+BSP_LCD_FillCircle
+BSP_LCD_DrawLine
+BSP_LCD_DrawHLine
+BSP_LCD_DrawVLine
+BSP_LCD_DrawPolygon
+BSP_LCD_FillPolygon
+BSP_LCD_DrawEllipse
+BSP_LCD_FillEllipse
+Font20
+Font16

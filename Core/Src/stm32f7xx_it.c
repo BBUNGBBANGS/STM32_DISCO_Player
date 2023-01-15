@@ -65,7 +65,7 @@ extern DMA_HandleTypeDef hdma_sdmmc1_rx;
 extern DMA_HandleTypeDef hdma_sdmmc1_tx;
 extern SD_HandleTypeDef hsd1;
 extern TIM_HandleTypeDef htim6;
-
+extern SDRAM_HandleTypeDef hsdram1;
 /* USER CODE BEGIN EV */
 
 /* USER CODE END EV */
@@ -268,5 +268,8 @@ void DMA2D_IRQHandler(void)
 }
 
 /* USER CODE BEGIN 1 */
-
+void DMA2_Stream0_IRQHandler(void)
+{
+  HAL_DMA_IRQHandler(hsdram1.hdma); 
+}
 /* USER CODE END 1 */

@@ -1,0 +1,3580 @@
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s 			page 1
+
+
+   1              		.cpu cortex-m7
+   2              		.arch armv7e-m
+   3              		.fpu fpv5-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 6
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"stm32746g_discovery.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.global	GPIO_PIN
+  20              		.section	.rodata.GPIO_PIN,"a"
+  21              		.align	2
+  24              	GPIO_PIN:
+  25 0000 02000000 		.word	2
+  26              		.global	BUTTON_PORT
+  27              		.section	.data.BUTTON_PORT,"aw"
+  28              		.align	2
+  31              	BUTTON_PORT:
+  32 0000 00200240 		.word	1073881088
+  33 0004 00200240 		.word	1073881088
+  34 0008 00200240 		.word	1073881088
+  35              		.global	BUTTON_PIN
+  36              		.section	.rodata.BUTTON_PIN,"a"
+  37              		.align	2
+  40              	BUTTON_PIN:
+  41 0000 0008     		.short	2048
+  42 0002 0008     		.short	2048
+  43 0004 0008     		.short	2048
+  44              		.global	BUTTON_IRQn
+  45              		.section	.rodata.BUTTON_IRQn,"a"
+  46              		.align	2
+  49              	BUTTON_IRQn:
+  50 0000 2800     		.short	40
+  51 0002 2800     		.short	40
+  52 0004 2800     		.short	40
+  53              		.global	COM_USART
+  54              		.section	.data.COM_USART,"aw"
+  55              		.align	2
+  58              	COM_USART:
+  59 0000 00100140 		.word	1073811456
+  60              		.global	COM_TX_PORT
+  61              		.section	.data.COM_TX_PORT,"aw"
+  62              		.align	2
+  65              	COM_TX_PORT:
+  66 0000 00000240 		.word	1073872896
+  67              		.global	COM_RX_PORT
+  68              		.section	.data.COM_RX_PORT,"aw"
+  69              		.align	2
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s 			page 2
+
+
+  72              	COM_RX_PORT:
+  73 0000 00040240 		.word	1073873920
+  74              		.global	COM_TX_PIN
+  75              		.section	.rodata.COM_TX_PIN,"a"
+  76              		.align	2
+  79              	COM_TX_PIN:
+  80 0000 0002     		.short	512
+  81              		.global	COM_RX_PIN
+  82              		.section	.rodata.COM_RX_PIN,"a"
+  83              		.align	2
+  86              	COM_RX_PIN:
+  87 0000 8000     		.short	128
+  88              		.global	COM_TX_AF
+  89              		.section	.rodata.COM_TX_AF,"a"
+  90              		.align	2
+  93              	COM_TX_AF:
+  94 0000 0700     		.short	7
+  95              		.global	COM_RX_AF
+  96              		.section	.rodata.COM_RX_AF,"a"
+  97              		.align	2
+ 100              	COM_RX_AF:
+ 101 0000 0700     		.short	7
+ 102              		.section	.bss.hI2cAudioHandler,"aw",%nobits
+ 103              		.align	2
+ 106              	hI2cAudioHandler:
+ 107 0000 00000000 		.space	84
+ 107      00000000 
+ 107      00000000 
+ 107      00000000 
+ 107      00000000 
+ 108              		.section	.bss.hI2cExtHandler,"aw",%nobits
+ 109              		.align	2
+ 112              	hI2cExtHandler:
+ 113 0000 00000000 		.space	84
+ 113      00000000 
+ 113      00000000 
+ 113      00000000 
+ 113      00000000 
+ 114              		.section	.text.BSP_GetVersion,"ax",%progbits
+ 115              		.align	1
+ 116              		.global	BSP_GetVersion
+ 117              		.syntax unified
+ 118              		.thumb
+ 119              		.thumb_func
+ 121              	BSP_GetVersion:
+ 122              	.LFB141:
+ 123              		.file 1 "Core/Src/stm32746g_discovery.c"
+   1:Core/Src/stm32746g_discovery.c **** /**
+   2:Core/Src/stm32746g_discovery.c ****   ******************************************************************************
+   3:Core/Src/stm32746g_discovery.c ****   * @file    stm32746g_discovery.c
+   4:Core/Src/stm32746g_discovery.c ****   * @author  MCD Application Team
+   5:Core/Src/stm32746g_discovery.c ****   * @brief   This file provides a set of firmware functions to manage LEDs, 
+   6:Core/Src/stm32746g_discovery.c ****   *          push-buttons and COM ports available on STM32746G-Discovery
+   7:Core/Src/stm32746g_discovery.c ****   *          board(MB1191) from STMicroelectronics.
+   8:Core/Src/stm32746g_discovery.c ****   ******************************************************************************
+   9:Core/Src/stm32746g_discovery.c ****   * @attention
+  10:Core/Src/stm32746g_discovery.c ****   *
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s 			page 3
+
+
+  11:Core/Src/stm32746g_discovery.c ****   * Copyright (c) 2016 STMicroelectronics.
+  12:Core/Src/stm32746g_discovery.c ****   * All rights reserved.
+  13:Core/Src/stm32746g_discovery.c ****   *
+  14:Core/Src/stm32746g_discovery.c ****   * This software is licensed under terms that can be found in the LICENSE file
+  15:Core/Src/stm32746g_discovery.c ****   * in the root directory of this software component.
+  16:Core/Src/stm32746g_discovery.c ****   * If no LICENSE file comes with this software, it is provided AS-IS.
+  17:Core/Src/stm32746g_discovery.c ****   *
+  18:Core/Src/stm32746g_discovery.c ****   ******************************************************************************
+  19:Core/Src/stm32746g_discovery.c ****   */
+  20:Core/Src/stm32746g_discovery.c **** 
+  21:Core/Src/stm32746g_discovery.c **** /* Dependencies
+  22:Core/Src/stm32746g_discovery.c **** - stm32f7xx_hal_cortex.c
+  23:Core/Src/stm32746g_discovery.c **** - stm32f7xx_hal_gpio.c
+  24:Core/Src/stm32746g_discovery.c **** - stm32f7xx_hal_uart.c
+  25:Core/Src/stm32746g_discovery.c **** - stm32f7xx_hal_i2c.c
+  26:Core/Src/stm32746g_discovery.c **** EndDependencies */
+  27:Core/Src/stm32746g_discovery.c **** 
+  28:Core/Src/stm32746g_discovery.c **** /* Includes ------------------------------------------------------------------*/
+  29:Core/Src/stm32746g_discovery.c **** #include "stm32746g_discovery.h"
+  30:Core/Src/stm32746g_discovery.c **** 
+  31:Core/Src/stm32746g_discovery.c **** /** @addtogroup BSP
+  32:Core/Src/stm32746g_discovery.c ****   * @{
+  33:Core/Src/stm32746g_discovery.c ****   */ 
+  34:Core/Src/stm32746g_discovery.c **** 
+  35:Core/Src/stm32746g_discovery.c **** /** @addtogroup STM32746G_DISCOVERY
+  36:Core/Src/stm32746g_discovery.c ****   * @{
+  37:Core/Src/stm32746g_discovery.c ****   */
+  38:Core/Src/stm32746g_discovery.c **** 
+  39:Core/Src/stm32746g_discovery.c **** /** @defgroup STM32746G_DISCOVERY_LOW_LEVEL STM32746G_DISCOVERY_LOW_LEVEL
+  40:Core/Src/stm32746g_discovery.c ****   * @{
+  41:Core/Src/stm32746g_discovery.c ****   */
+  42:Core/Src/stm32746g_discovery.c **** 
+  43:Core/Src/stm32746g_discovery.c **** /** @defgroup STM32746G_DISCOVERY_LOW_LEVEL_Private_TypesDefinitions STM32746G_DISCOVERY_LOW_LEVEL 
+  44:Core/Src/stm32746g_discovery.c ****   * @{
+  45:Core/Src/stm32746g_discovery.c ****   */
+  46:Core/Src/stm32746g_discovery.c **** /**
+  47:Core/Src/stm32746g_discovery.c ****   * @}
+  48:Core/Src/stm32746g_discovery.c ****   */
+  49:Core/Src/stm32746g_discovery.c **** 
+  50:Core/Src/stm32746g_discovery.c **** /** @defgroup STM32746G_DISCOVERY_LOW_LEVEL_Private_Defines STM32746G_DISCOVERY_LOW_LEVEL Private D
+  51:Core/Src/stm32746g_discovery.c ****   * @{
+  52:Core/Src/stm32746g_discovery.c ****   */
+  53:Core/Src/stm32746g_discovery.c **** /**
+  54:Core/Src/stm32746g_discovery.c ****  * @brief STM32746G DISCOVERY BSP Driver version number V2.0.4
+  55:Core/Src/stm32746g_discovery.c ****    */
+  56:Core/Src/stm32746g_discovery.c **** #define __STM32746G_DISCO_BSP_VERSION_MAIN   (0x02) /*!< [31:24] main version */
+  57:Core/Src/stm32746g_discovery.c **** #define __STM32746G_DISCO_BSP_VERSION_SUB1   (0x00) /*!< [23:16] sub1 version */
+  58:Core/Src/stm32746g_discovery.c **** #define __STM32746G_DISCO_BSP_VERSION_SUB2   (0x04) /*!< [15:8]  sub2 version */
+  59:Core/Src/stm32746g_discovery.c **** #define __STM32746G_DISCO_BSP_VERSION_RC     (0x00) /*!< [7:0]  release candidate */
+  60:Core/Src/stm32746g_discovery.c **** #define __STM32746G_DISCO_BSP_VERSION         ((__STM32746G_DISCO_BSP_VERSION_MAIN << 24)\
+  61:Core/Src/stm32746g_discovery.c ****                                              |(__STM32746G_DISCO_BSP_VERSION_SUB1 << 16)\
+  62:Core/Src/stm32746g_discovery.c ****                                              |(__STM32746G_DISCO_BSP_VERSION_SUB2 << 8 )\
+  63:Core/Src/stm32746g_discovery.c ****                                              |(__STM32746G_DISCO_BSP_VERSION_RC))
+  64:Core/Src/stm32746g_discovery.c **** /**
+  65:Core/Src/stm32746g_discovery.c ****   * @}
+  66:Core/Src/stm32746g_discovery.c ****   */
+  67:Core/Src/stm32746g_discovery.c **** 
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s 			page 4
+
+
+  68:Core/Src/stm32746g_discovery.c **** /** @defgroup STM32746G_DISCOVERY_LOW_LEVEL_Private_Macros STM32746G_DISCOVERY_LOW_LEVEL Private Ma
+  69:Core/Src/stm32746g_discovery.c ****   * @{
+  70:Core/Src/stm32746g_discovery.c ****   */
+  71:Core/Src/stm32746g_discovery.c **** /**
+  72:Core/Src/stm32746g_discovery.c ****   * @}
+  73:Core/Src/stm32746g_discovery.c ****   */
+  74:Core/Src/stm32746g_discovery.c **** 
+  75:Core/Src/stm32746g_discovery.c **** /** @defgroup STM32746G_DISCOVERY_LOW_LEVEL_Private_Variables STM32746G_DISCOVERY_LOW_LEVEL Private
+  76:Core/Src/stm32746g_discovery.c ****   * @{
+  77:Core/Src/stm32746g_discovery.c ****   */
+  78:Core/Src/stm32746g_discovery.c **** 
+  79:Core/Src/stm32746g_discovery.c **** const uint32_t GPIO_PIN[LEDn] = {LED1_PIN};
+  80:Core/Src/stm32746g_discovery.c **** 
+  81:Core/Src/stm32746g_discovery.c **** GPIO_TypeDef* BUTTON_PORT[BUTTONn] = {WAKEUP_BUTTON_GPIO_PORT,
+  82:Core/Src/stm32746g_discovery.c ****                                       TAMPER_BUTTON_GPIO_PORT,
+  83:Core/Src/stm32746g_discovery.c ****                                       KEY_BUTTON_GPIO_PORT};
+  84:Core/Src/stm32746g_discovery.c **** 
+  85:Core/Src/stm32746g_discovery.c **** const uint16_t BUTTON_PIN[BUTTONn] = {WAKEUP_BUTTON_PIN,
+  86:Core/Src/stm32746g_discovery.c ****                                       TAMPER_BUTTON_PIN,
+  87:Core/Src/stm32746g_discovery.c ****                                       KEY_BUTTON_PIN};
+  88:Core/Src/stm32746g_discovery.c **** 
+  89:Core/Src/stm32746g_discovery.c **** const uint16_t BUTTON_IRQn[BUTTONn] = {WAKEUP_BUTTON_EXTI_IRQn,
+  90:Core/Src/stm32746g_discovery.c ****                                        TAMPER_BUTTON_EXTI_IRQn,
+  91:Core/Src/stm32746g_discovery.c ****                                        KEY_BUTTON_EXTI_IRQn};
+  92:Core/Src/stm32746g_discovery.c **** 
+  93:Core/Src/stm32746g_discovery.c **** USART_TypeDef* COM_USART[COMn] = {DISCOVERY_COM1};
+  94:Core/Src/stm32746g_discovery.c **** 
+  95:Core/Src/stm32746g_discovery.c **** GPIO_TypeDef* COM_TX_PORT[COMn] = {DISCOVERY_COM1_TX_GPIO_PORT};
+  96:Core/Src/stm32746g_discovery.c **** 
+  97:Core/Src/stm32746g_discovery.c **** GPIO_TypeDef* COM_RX_PORT[COMn] = {DISCOVERY_COM1_RX_GPIO_PORT};
+  98:Core/Src/stm32746g_discovery.c **** 
+  99:Core/Src/stm32746g_discovery.c **** const uint16_t COM_TX_PIN[COMn] = {DISCOVERY_COM1_TX_PIN};
+ 100:Core/Src/stm32746g_discovery.c **** 
+ 101:Core/Src/stm32746g_discovery.c **** const uint16_t COM_RX_PIN[COMn] = {DISCOVERY_COM1_RX_PIN};
+ 102:Core/Src/stm32746g_discovery.c **** 
+ 103:Core/Src/stm32746g_discovery.c **** const uint16_t COM_TX_AF[COMn] = {DISCOVERY_COM1_TX_AF};
+ 104:Core/Src/stm32746g_discovery.c **** 
+ 105:Core/Src/stm32746g_discovery.c **** const uint16_t COM_RX_AF[COMn] = {DISCOVERY_COM1_RX_AF};
+ 106:Core/Src/stm32746g_discovery.c **** 
+ 107:Core/Src/stm32746g_discovery.c **** static I2C_HandleTypeDef hI2cAudioHandler = {0};
+ 108:Core/Src/stm32746g_discovery.c **** static I2C_HandleTypeDef hI2cExtHandler = {0};
+ 109:Core/Src/stm32746g_discovery.c **** 
+ 110:Core/Src/stm32746g_discovery.c **** /**
+ 111:Core/Src/stm32746g_discovery.c ****   * @}
+ 112:Core/Src/stm32746g_discovery.c ****   */
+ 113:Core/Src/stm32746g_discovery.c **** 
+ 114:Core/Src/stm32746g_discovery.c **** /** @defgroup STM32746G_DISCOVERY_LOW_LEVEL_Private_FunctionPrototypes STM32746G_DISCOVERY_LOW_LEVE
+ 115:Core/Src/stm32746g_discovery.c ****   * @{
+ 116:Core/Src/stm32746g_discovery.c ****   */
+ 117:Core/Src/stm32746g_discovery.c **** static void     I2Cx_MspInit(I2C_HandleTypeDef *i2c_handler);
+ 118:Core/Src/stm32746g_discovery.c **** static void     I2Cx_Init(I2C_HandleTypeDef *i2c_handler);
+ 119:Core/Src/stm32746g_discovery.c **** 
+ 120:Core/Src/stm32746g_discovery.c **** static HAL_StatusTypeDef I2Cx_ReadMultiple(I2C_HandleTypeDef *i2c_handler, uint8_t Addr, uint16_t R
+ 121:Core/Src/stm32746g_discovery.c **** static HAL_StatusTypeDef I2Cx_WriteMultiple(I2C_HandleTypeDef *i2c_handler, uint8_t Addr, uint16_t 
+ 122:Core/Src/stm32746g_discovery.c **** static HAL_StatusTypeDef I2Cx_IsDeviceReady(I2C_HandleTypeDef *i2c_handler, uint16_t DevAddress, ui
+ 123:Core/Src/stm32746g_discovery.c **** static void              I2Cx_Error(I2C_HandleTypeDef *i2c_handler, uint8_t Addr);
+ 124:Core/Src/stm32746g_discovery.c **** 
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s 			page 5
+
+
+ 125:Core/Src/stm32746g_discovery.c **** /* AUDIO IO functions */
+ 126:Core/Src/stm32746g_discovery.c **** void            AUDIO_IO_Init(void);
+ 127:Core/Src/stm32746g_discovery.c **** void            AUDIO_IO_DeInit(void);
+ 128:Core/Src/stm32746g_discovery.c **** void            AUDIO_IO_Write(uint8_t Addr, uint16_t Reg, uint16_t Value);
+ 129:Core/Src/stm32746g_discovery.c **** uint16_t        AUDIO_IO_Read(uint8_t Addr, uint16_t Reg);
+ 130:Core/Src/stm32746g_discovery.c **** void            AUDIO_IO_Delay(uint32_t Delay);
+ 131:Core/Src/stm32746g_discovery.c **** 
+ 132:Core/Src/stm32746g_discovery.c **** /* TOUCHSCREEN IO functions */
+ 133:Core/Src/stm32746g_discovery.c **** void            TS_IO_Init(void);
+ 134:Core/Src/stm32746g_discovery.c **** void            TS_IO_Write(uint8_t Addr, uint8_t Reg, uint8_t Value);
+ 135:Core/Src/stm32746g_discovery.c **** uint8_t         TS_IO_Read(uint8_t Addr, uint8_t Reg);
+ 136:Core/Src/stm32746g_discovery.c **** void            TS_IO_Delay(uint32_t Delay);
+ 137:Core/Src/stm32746g_discovery.c **** 
+ 138:Core/Src/stm32746g_discovery.c **** /* CAMERA IO functions */
+ 139:Core/Src/stm32746g_discovery.c **** void            CAMERA_IO_Init(void);
+ 140:Core/Src/stm32746g_discovery.c **** void            CAMERA_Delay(uint32_t Delay);
+ 141:Core/Src/stm32746g_discovery.c **** void            CAMERA_IO_Write(uint8_t Addr, uint8_t Reg, uint8_t Value);
+ 142:Core/Src/stm32746g_discovery.c **** uint8_t         CAMERA_IO_Read(uint8_t Addr, uint8_t Reg);
+ 143:Core/Src/stm32746g_discovery.c **** 
+ 144:Core/Src/stm32746g_discovery.c **** /* I2C EEPROM IO function */
+ 145:Core/Src/stm32746g_discovery.c **** void                EEPROM_IO_Init(void);
+ 146:Core/Src/stm32746g_discovery.c **** HAL_StatusTypeDef   EEPROM_IO_WriteData(uint16_t DevAddress, uint16_t MemAddress, uint8_t* pBuffer,
+ 147:Core/Src/stm32746g_discovery.c **** HAL_StatusTypeDef   EEPROM_IO_ReadData(uint16_t DevAddress, uint16_t MemAddress, uint8_t* pBuffer, 
+ 148:Core/Src/stm32746g_discovery.c **** HAL_StatusTypeDef   EEPROM_IO_IsDeviceReady(uint16_t DevAddress, uint32_t Trials);
+ 149:Core/Src/stm32746g_discovery.c **** /**
+ 150:Core/Src/stm32746g_discovery.c ****   * @}
+ 151:Core/Src/stm32746g_discovery.c ****   */
+ 152:Core/Src/stm32746g_discovery.c **** 
+ 153:Core/Src/stm32746g_discovery.c **** /** @defgroup STM32746G_DISCOVERY_LOW_LEVEL_Exported_Functions STM32746G_DISCOVERY_LOW_LEVELSTM3274
+ 154:Core/Src/stm32746g_discovery.c ****   * @{
+ 155:Core/Src/stm32746g_discovery.c ****   */ 
+ 156:Core/Src/stm32746g_discovery.c **** 
+ 157:Core/Src/stm32746g_discovery.c ****   /**
+ 158:Core/Src/stm32746g_discovery.c ****   * @brief  This method returns the STM32746G DISCOVERY BSP Driver revision
+ 159:Core/Src/stm32746g_discovery.c ****   * @retval version: 0xXYZR (8bits for each decimal, R for RC)
+ 160:Core/Src/stm32746g_discovery.c ****   */
+ 161:Core/Src/stm32746g_discovery.c **** uint32_t BSP_GetVersion(void)
+ 162:Core/Src/stm32746g_discovery.c **** {
+ 124              		.loc 1 162 1
+ 125              		.cfi_startproc
+ 126              		@ args = 0, pretend = 0, frame = 0
+ 127              		@ frame_needed = 1, uses_anonymous_args = 0
+ 128              		@ link register save eliminated.
+ 129 0000 80B4     		push	{r7}
+ 130              	.LCFI0:
+ 131              		.cfi_def_cfa_offset 4
+ 132              		.cfi_offset 7, -4
+ 133 0002 00AF     		add	r7, sp, #0
+ 134              	.LCFI1:
+ 135              		.cfi_def_cfa_register 7
+ 163:Core/Src/stm32746g_discovery.c ****   return __STM32746G_DISCO_BSP_VERSION;
+ 136              		.loc 1 163 10
+ 137 0004 024B     		ldr	r3, .L3
+ 164:Core/Src/stm32746g_discovery.c **** }
+ 138              		.loc 1 164 1
+ 139 0006 1846     		mov	r0, r3
+ 140 0008 BD46     		mov	sp, r7
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s 			page 6
+
+
+ 141              	.LCFI2:
+ 142              		.cfi_def_cfa_register 13
+ 143              		@ sp needed
+ 144 000a 5DF8047B 		ldr	r7, [sp], #4
+ 145              	.LCFI3:
+ 146              		.cfi_restore 7
+ 147              		.cfi_def_cfa_offset 0
+ 148 000e 7047     		bx	lr
+ 149              	.L4:
+ 150              		.align	2
+ 151              	.L3:
+ 152 0010 00040002 		.word	33555456
+ 153              		.cfi_endproc
+ 154              	.LFE141:
+ 156              		.section	.text.BSP_LED_Init,"ax",%progbits
+ 157              		.align	1
+ 158              		.global	BSP_LED_Init
+ 159              		.syntax unified
+ 160              		.thumb
+ 161              		.thumb_func
+ 163              	BSP_LED_Init:
+ 164              	.LFB142:
+ 165:Core/Src/stm32746g_discovery.c **** 
+ 166:Core/Src/stm32746g_discovery.c **** /**
+ 167:Core/Src/stm32746g_discovery.c ****   * @brief  Configures LED on GPIO.
+ 168:Core/Src/stm32746g_discovery.c ****   * @param  Led: LED to be configured. 
+ 169:Core/Src/stm32746g_discovery.c ****   *          This parameter can be one of the following values:
+ 170:Core/Src/stm32746g_discovery.c ****   *            @arg  LED1
+ 171:Core/Src/stm32746g_discovery.c ****   * @retval None
+ 172:Core/Src/stm32746g_discovery.c ****   */
+ 173:Core/Src/stm32746g_discovery.c **** void BSP_LED_Init(Led_TypeDef Led)
+ 174:Core/Src/stm32746g_discovery.c **** {
+ 165              		.loc 1 174 1
+ 166              		.cfi_startproc
+ 167              		@ args = 0, pretend = 0, frame = 40
+ 168              		@ frame_needed = 1, uses_anonymous_args = 0
+ 169 0000 80B5     		push	{r7, lr}
+ 170              	.LCFI4:
+ 171              		.cfi_def_cfa_offset 8
+ 172              		.cfi_offset 7, -8
+ 173              		.cfi_offset 14, -4
+ 174 0002 8AB0     		sub	sp, sp, #40
+ 175              	.LCFI5:
+ 176              		.cfi_def_cfa_offset 48
+ 177 0004 00AF     		add	r7, sp, #0
+ 178              	.LCFI6:
+ 179              		.cfi_def_cfa_register 7
+ 180 0006 0346     		mov	r3, r0
+ 181 0008 FB71     		strb	r3, [r7, #7]
+ 175:Core/Src/stm32746g_discovery.c ****   GPIO_InitTypeDef  gpio_init_structure;
+ 176:Core/Src/stm32746g_discovery.c ****   GPIO_TypeDef*     gpio_led;
+ 177:Core/Src/stm32746g_discovery.c **** 
+ 178:Core/Src/stm32746g_discovery.c ****   if (Led == LED1)
+ 182              		.loc 1 178 6
+ 183 000a FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 184 000c 002B     		cmp	r3, #0
+ 185 000e 22D1     		bne	.L7
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s 			page 7
+
+
+ 179:Core/Src/stm32746g_discovery.c ****   {
+ 180:Core/Src/stm32746g_discovery.c ****     gpio_led = LED1_GPIO_PORT;
+ 186              		.loc 1 180 14
+ 187 0010 134B     		ldr	r3, .L8
+ 188 0012 7B62     		str	r3, [r7, #36]
+ 189              	.LBB2:
+ 181:Core/Src/stm32746g_discovery.c ****     /* Enable the GPIO_LED clock */
+ 182:Core/Src/stm32746g_discovery.c ****     LED1_GPIO_CLK_ENABLE();
+ 190              		.loc 1 182 5
+ 191 0014 134B     		ldr	r3, .L8+4
+ 192 0016 1B6B     		ldr	r3, [r3, #48]
+ 193 0018 124A     		ldr	r2, .L8+4
+ 194 001a 43F48073 		orr	r3, r3, #256
+ 195 001e 1363     		str	r3, [r2, #48]
+ 196 0020 104B     		ldr	r3, .L8+4
+ 197 0022 1B6B     		ldr	r3, [r3, #48]
+ 198 0024 03F48073 		and	r3, r3, #256
+ 199 0028 FB60     		str	r3, [r7, #12]
+ 200 002a FB68     		ldr	r3, [r7, #12]
+ 201              	.LBE2:
+ 183:Core/Src/stm32746g_discovery.c **** 
+ 184:Core/Src/stm32746g_discovery.c ****     /* Configure the GPIO_LED pin */
+ 185:Core/Src/stm32746g_discovery.c ****     gpio_init_structure.Pin = GPIO_PIN[Led];
+ 202              		.loc 1 185 39
+ 203 002c 0223     		movs	r3, #2
+ 204              		.loc 1 185 29
+ 205 002e 3B61     		str	r3, [r7, #16]
+ 186:Core/Src/stm32746g_discovery.c ****     gpio_init_structure.Mode = GPIO_MODE_OUTPUT_PP;
+ 206              		.loc 1 186 30
+ 207 0030 0123     		movs	r3, #1
+ 208 0032 7B61     		str	r3, [r7, #20]
+ 187:Core/Src/stm32746g_discovery.c ****     gpio_init_structure.Pull = GPIO_PULLUP;
+ 209              		.loc 1 187 30
+ 210 0034 0123     		movs	r3, #1
+ 211 0036 BB61     		str	r3, [r7, #24]
+ 188:Core/Src/stm32746g_discovery.c ****     gpio_init_structure.Speed = GPIO_SPEED_HIGH;
+ 212              		.loc 1 188 31
+ 213 0038 0323     		movs	r3, #3
+ 214 003a FB61     		str	r3, [r7, #28]
+ 189:Core/Src/stm32746g_discovery.c ****   
+ 190:Core/Src/stm32746g_discovery.c ****     HAL_GPIO_Init(gpio_led, &gpio_init_structure);
+ 215              		.loc 1 190 5
+ 216 003c 07F11003 		add	r3, r7, #16
+ 217 0040 1946     		mov	r1, r3
+ 218 0042 786A     		ldr	r0, [r7, #36]
+ 219 0044 FFF7FEFF 		bl	HAL_GPIO_Init
+ 191:Core/Src/stm32746g_discovery.c ****     
+ 192:Core/Src/stm32746g_discovery.c ****     /* By default, turn off LED */
+ 193:Core/Src/stm32746g_discovery.c ****     HAL_GPIO_WritePin(gpio_led, GPIO_PIN[Led], GPIO_PIN_RESET);
+ 220              		.loc 1 193 41
+ 221 0048 0223     		movs	r3, #2
+ 222              		.loc 1 193 5
+ 223 004a 9BB2     		uxth	r3, r3
+ 224 004c 0022     		movs	r2, #0
+ 225 004e 1946     		mov	r1, r3
+ 226 0050 786A     		ldr	r0, [r7, #36]
+ 227 0052 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s 			page 8
+
+
+ 228              	.L7:
+ 194:Core/Src/stm32746g_discovery.c ****   }
+ 195:Core/Src/stm32746g_discovery.c **** }
+ 229              		.loc 1 195 1
+ 230 0056 00BF     		nop
+ 231 0058 2837     		adds	r7, r7, #40
+ 232              	.LCFI7:
+ 233              		.cfi_def_cfa_offset 8
+ 234 005a BD46     		mov	sp, r7
+ 235              	.LCFI8:
+ 236              		.cfi_def_cfa_register 13
+ 237              		@ sp needed
+ 238 005c 80BD     		pop	{r7, pc}
+ 239              	.L9:
+ 240 005e 00BF     		.align	2
+ 241              	.L8:
+ 242 0060 00200240 		.word	1073881088
+ 243 0064 00380240 		.word	1073887232
+ 244              		.cfi_endproc
+ 245              	.LFE142:
+ 247              		.section	.text.BSP_LED_DeInit,"ax",%progbits
+ 248              		.align	1
+ 249              		.global	BSP_LED_DeInit
+ 250              		.syntax unified
+ 251              		.thumb
+ 252              		.thumb_func
+ 254              	BSP_LED_DeInit:
+ 255              	.LFB143:
+ 196:Core/Src/stm32746g_discovery.c **** 
+ 197:Core/Src/stm32746g_discovery.c **** /**
+ 198:Core/Src/stm32746g_discovery.c ****   * @brief  DeInit LEDs.
+ 199:Core/Src/stm32746g_discovery.c ****   * @param  Led: LED to be configured. 
+ 200:Core/Src/stm32746g_discovery.c ****   *          This parameter can be one of the following values:
+ 201:Core/Src/stm32746g_discovery.c ****   *            @arg  LED1
+ 202:Core/Src/stm32746g_discovery.c ****   * @note Led DeInit does not disable the GPIO clock
+ 203:Core/Src/stm32746g_discovery.c ****   * @retval None
+ 204:Core/Src/stm32746g_discovery.c ****   */
+ 205:Core/Src/stm32746g_discovery.c **** void BSP_LED_DeInit(Led_TypeDef Led)
+ 206:Core/Src/stm32746g_discovery.c **** {
+ 256              		.loc 1 206 1
+ 257              		.cfi_startproc
+ 258              		@ args = 0, pretend = 0, frame = 32
+ 259              		@ frame_needed = 1, uses_anonymous_args = 0
+ 260 0000 80B5     		push	{r7, lr}
+ 261              	.LCFI9:
+ 262              		.cfi_def_cfa_offset 8
+ 263              		.cfi_offset 7, -8
+ 264              		.cfi_offset 14, -4
+ 265 0002 88B0     		sub	sp, sp, #32
+ 266              	.LCFI10:
+ 267              		.cfi_def_cfa_offset 40
+ 268 0004 00AF     		add	r7, sp, #0
+ 269              	.LCFI11:
+ 270              		.cfi_def_cfa_register 7
+ 271 0006 0346     		mov	r3, r0
+ 272 0008 FB71     		strb	r3, [r7, #7]
+ 207:Core/Src/stm32746g_discovery.c ****   GPIO_InitTypeDef  gpio_init_structure;
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s 			page 9
+
+
+ 208:Core/Src/stm32746g_discovery.c ****   GPIO_TypeDef*     gpio_led;
+ 209:Core/Src/stm32746g_discovery.c **** 
+ 210:Core/Src/stm32746g_discovery.c ****   if (Led == LED1)
+ 273              		.loc 1 210 6
+ 274 000a FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 275 000c 002B     		cmp	r3, #0
+ 276 000e 0FD1     		bne	.L12
+ 211:Core/Src/stm32746g_discovery.c ****   {
+ 212:Core/Src/stm32746g_discovery.c ****     gpio_led = LED1_GPIO_PORT;
+ 277              		.loc 1 212 14
+ 278 0010 094B     		ldr	r3, .L13
+ 279 0012 FB61     		str	r3, [r7, #28]
+ 213:Core/Src/stm32746g_discovery.c ****     /* Turn off LED */
+ 214:Core/Src/stm32746g_discovery.c ****     HAL_GPIO_WritePin(gpio_led, GPIO_PIN[Led], GPIO_PIN_RESET);
+ 280              		.loc 1 214 41
+ 281 0014 0223     		movs	r3, #2
+ 282              		.loc 1 214 5
+ 283 0016 9BB2     		uxth	r3, r3
+ 284 0018 0022     		movs	r2, #0
+ 285 001a 1946     		mov	r1, r3
+ 286 001c F869     		ldr	r0, [r7, #28]
+ 287 001e FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 215:Core/Src/stm32746g_discovery.c ****     /* Configure the GPIO_LED pin */
+ 216:Core/Src/stm32746g_discovery.c ****     gpio_init_structure.Pin = GPIO_PIN[Led];
+ 288              		.loc 1 216 39
+ 289 0022 0223     		movs	r3, #2
+ 290              		.loc 1 216 29
+ 291 0024 BB60     		str	r3, [r7, #8]
+ 217:Core/Src/stm32746g_discovery.c ****     HAL_GPIO_DeInit(gpio_led, gpio_init_structure.Pin);
+ 292              		.loc 1 217 5
+ 293 0026 BB68     		ldr	r3, [r7, #8]
+ 294 0028 1946     		mov	r1, r3
+ 295 002a F869     		ldr	r0, [r7, #28]
+ 296 002c FFF7FEFF 		bl	HAL_GPIO_DeInit
+ 297              	.L12:
+ 218:Core/Src/stm32746g_discovery.c ****   }
+ 219:Core/Src/stm32746g_discovery.c **** }
+ 298              		.loc 1 219 1
+ 299 0030 00BF     		nop
+ 300 0032 2037     		adds	r7, r7, #32
+ 301              	.LCFI12:
+ 302              		.cfi_def_cfa_offset 8
+ 303 0034 BD46     		mov	sp, r7
+ 304              	.LCFI13:
+ 305              		.cfi_def_cfa_register 13
+ 306              		@ sp needed
+ 307 0036 80BD     		pop	{r7, pc}
+ 308              	.L14:
+ 309              		.align	2
+ 310              	.L13:
+ 311 0038 00200240 		.word	1073881088
+ 312              		.cfi_endproc
+ 313              	.LFE143:
+ 315              		.section	.text.BSP_LED_On,"ax",%progbits
+ 316              		.align	1
+ 317              		.global	BSP_LED_On
+ 318              		.syntax unified
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s 			page 10
+
+
+ 319              		.thumb
+ 320              		.thumb_func
+ 322              	BSP_LED_On:
+ 323              	.LFB144:
+ 220:Core/Src/stm32746g_discovery.c **** 
+ 221:Core/Src/stm32746g_discovery.c **** /**
+ 222:Core/Src/stm32746g_discovery.c ****   * @brief  Turns selected LED On.
+ 223:Core/Src/stm32746g_discovery.c ****   * @param  Led: LED to be set on 
+ 224:Core/Src/stm32746g_discovery.c ****   *          This parameter can be one of the following values:
+ 225:Core/Src/stm32746g_discovery.c ****   *            @arg  LED1
+ 226:Core/Src/stm32746g_discovery.c ****   * @retval None
+ 227:Core/Src/stm32746g_discovery.c ****   */
+ 228:Core/Src/stm32746g_discovery.c **** void BSP_LED_On(Led_TypeDef Led)
+ 229:Core/Src/stm32746g_discovery.c **** {
+ 324              		.loc 1 229 1
+ 325              		.cfi_startproc
+ 326              		@ args = 0, pretend = 0, frame = 16
+ 327              		@ frame_needed = 1, uses_anonymous_args = 0
+ 328 0000 80B5     		push	{r7, lr}
+ 329              	.LCFI14:
+ 330              		.cfi_def_cfa_offset 8
+ 331              		.cfi_offset 7, -8
+ 332              		.cfi_offset 14, -4
+ 333 0002 84B0     		sub	sp, sp, #16
+ 334              	.LCFI15:
+ 335              		.cfi_def_cfa_offset 24
+ 336 0004 00AF     		add	r7, sp, #0
+ 337              	.LCFI16:
+ 338              		.cfi_def_cfa_register 7
+ 339 0006 0346     		mov	r3, r0
+ 340 0008 FB71     		strb	r3, [r7, #7]
+ 230:Core/Src/stm32746g_discovery.c ****   GPIO_TypeDef*     gpio_led;
+ 231:Core/Src/stm32746g_discovery.c **** 
+ 232:Core/Src/stm32746g_discovery.c ****   if (Led == LED1)	/* Switch On LED connected to GPIO */
+ 341              		.loc 1 232 6
+ 342 000a FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 343 000c 002B     		cmp	r3, #0
+ 344 000e 08D1     		bne	.L17
+ 233:Core/Src/stm32746g_discovery.c ****   {
+ 234:Core/Src/stm32746g_discovery.c ****     gpio_led = LED1_GPIO_PORT;
+ 345              		.loc 1 234 14
+ 346 0010 064B     		ldr	r3, .L18
+ 347 0012 FB60     		str	r3, [r7, #12]
+ 235:Core/Src/stm32746g_discovery.c ****     HAL_GPIO_WritePin(gpio_led, GPIO_PIN[Led], GPIO_PIN_SET);
+ 348              		.loc 1 235 41
+ 349 0014 0223     		movs	r3, #2
+ 350              		.loc 1 235 5
+ 351 0016 9BB2     		uxth	r3, r3
+ 352 0018 0122     		movs	r2, #1
+ 353 001a 1946     		mov	r1, r3
+ 354 001c F868     		ldr	r0, [r7, #12]
+ 355 001e FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 356              	.L17:
+ 236:Core/Src/stm32746g_discovery.c ****   }
+ 237:Core/Src/stm32746g_discovery.c **** }
+ 357              		.loc 1 237 1
+ 358 0022 00BF     		nop
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s 			page 11
+
+
+ 359 0024 1037     		adds	r7, r7, #16
+ 360              	.LCFI17:
+ 361              		.cfi_def_cfa_offset 8
+ 362 0026 BD46     		mov	sp, r7
+ 363              	.LCFI18:
+ 364              		.cfi_def_cfa_register 13
+ 365              		@ sp needed
+ 366 0028 80BD     		pop	{r7, pc}
+ 367              	.L19:
+ 368 002a 00BF     		.align	2
+ 369              	.L18:
+ 370 002c 00200240 		.word	1073881088
+ 371              		.cfi_endproc
+ 372              	.LFE144:
+ 374              		.section	.text.BSP_LED_Off,"ax",%progbits
+ 375              		.align	1
+ 376              		.global	BSP_LED_Off
+ 377              		.syntax unified
+ 378              		.thumb
+ 379              		.thumb_func
+ 381              	BSP_LED_Off:
+ 382              	.LFB145:
+ 238:Core/Src/stm32746g_discovery.c **** 
+ 239:Core/Src/stm32746g_discovery.c **** /**
+ 240:Core/Src/stm32746g_discovery.c ****   * @brief  Turns selected LED Off. 
+ 241:Core/Src/stm32746g_discovery.c ****   * @param  Led: LED to be set off
+ 242:Core/Src/stm32746g_discovery.c ****   *          This parameter can be one of the following values:
+ 243:Core/Src/stm32746g_discovery.c ****   *            @arg  LED1
+ 244:Core/Src/stm32746g_discovery.c ****   * @retval None
+ 245:Core/Src/stm32746g_discovery.c ****   */
+ 246:Core/Src/stm32746g_discovery.c **** void BSP_LED_Off(Led_TypeDef Led)
+ 247:Core/Src/stm32746g_discovery.c **** {
+ 383              		.loc 1 247 1
+ 384              		.cfi_startproc
+ 385              		@ args = 0, pretend = 0, frame = 16
+ 386              		@ frame_needed = 1, uses_anonymous_args = 0
+ 387 0000 80B5     		push	{r7, lr}
+ 388              	.LCFI19:
+ 389              		.cfi_def_cfa_offset 8
+ 390              		.cfi_offset 7, -8
+ 391              		.cfi_offset 14, -4
+ 392 0002 84B0     		sub	sp, sp, #16
+ 393              	.LCFI20:
+ 394              		.cfi_def_cfa_offset 24
+ 395 0004 00AF     		add	r7, sp, #0
+ 396              	.LCFI21:
+ 397              		.cfi_def_cfa_register 7
+ 398 0006 0346     		mov	r3, r0
+ 399 0008 FB71     		strb	r3, [r7, #7]
+ 248:Core/Src/stm32746g_discovery.c ****   GPIO_TypeDef*     gpio_led;
+ 249:Core/Src/stm32746g_discovery.c **** 
+ 250:Core/Src/stm32746g_discovery.c ****   if (Led == LED1) /* Switch Off LED connected to GPIO */
+ 400              		.loc 1 250 6
+ 401 000a FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 402 000c 002B     		cmp	r3, #0
+ 403 000e 08D1     		bne	.L22
+ 251:Core/Src/stm32746g_discovery.c ****   {
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s 			page 12
+
+
+ 252:Core/Src/stm32746g_discovery.c ****     gpio_led = LED1_GPIO_PORT;
+ 404              		.loc 1 252 14
+ 405 0010 064B     		ldr	r3, .L23
+ 406 0012 FB60     		str	r3, [r7, #12]
+ 253:Core/Src/stm32746g_discovery.c ****     HAL_GPIO_WritePin(gpio_led, GPIO_PIN[Led], GPIO_PIN_RESET);
+ 407              		.loc 1 253 41
+ 408 0014 0223     		movs	r3, #2
+ 409              		.loc 1 253 5
+ 410 0016 9BB2     		uxth	r3, r3
+ 411 0018 0022     		movs	r2, #0
+ 412 001a 1946     		mov	r1, r3
+ 413 001c F868     		ldr	r0, [r7, #12]
+ 414 001e FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 415              	.L22:
+ 254:Core/Src/stm32746g_discovery.c ****   }
+ 255:Core/Src/stm32746g_discovery.c **** }
+ 416              		.loc 1 255 1
+ 417 0022 00BF     		nop
+ 418 0024 1037     		adds	r7, r7, #16
+ 419              	.LCFI22:
+ 420              		.cfi_def_cfa_offset 8
+ 421 0026 BD46     		mov	sp, r7
+ 422              	.LCFI23:
+ 423              		.cfi_def_cfa_register 13
+ 424              		@ sp needed
+ 425 0028 80BD     		pop	{r7, pc}
+ 426              	.L24:
+ 427 002a 00BF     		.align	2
+ 428              	.L23:
+ 429 002c 00200240 		.word	1073881088
+ 430              		.cfi_endproc
+ 431              	.LFE145:
+ 433              		.section	.text.BSP_LED_Toggle,"ax",%progbits
+ 434              		.align	1
+ 435              		.global	BSP_LED_Toggle
+ 436              		.syntax unified
+ 437              		.thumb
+ 438              		.thumb_func
+ 440              	BSP_LED_Toggle:
+ 441              	.LFB146:
+ 256:Core/Src/stm32746g_discovery.c **** 
+ 257:Core/Src/stm32746g_discovery.c **** /**
+ 258:Core/Src/stm32746g_discovery.c ****   * @brief  Toggles the selected LED.
+ 259:Core/Src/stm32746g_discovery.c ****   * @param  Led: LED to be toggled
+ 260:Core/Src/stm32746g_discovery.c ****   *          This parameter can be one of the following values:
+ 261:Core/Src/stm32746g_discovery.c ****   *            @arg  LED1
+ 262:Core/Src/stm32746g_discovery.c ****   * @retval None
+ 263:Core/Src/stm32746g_discovery.c ****   */
+ 264:Core/Src/stm32746g_discovery.c **** void BSP_LED_Toggle(Led_TypeDef Led)
+ 265:Core/Src/stm32746g_discovery.c **** {
+ 442              		.loc 1 265 1
+ 443              		.cfi_startproc
+ 444              		@ args = 0, pretend = 0, frame = 16
+ 445              		@ frame_needed = 1, uses_anonymous_args = 0
+ 446 0000 80B5     		push	{r7, lr}
+ 447              	.LCFI24:
+ 448              		.cfi_def_cfa_offset 8
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s 			page 13
+
+
+ 449              		.cfi_offset 7, -8
+ 450              		.cfi_offset 14, -4
+ 451 0002 84B0     		sub	sp, sp, #16
+ 452              	.LCFI25:
+ 453              		.cfi_def_cfa_offset 24
+ 454 0004 00AF     		add	r7, sp, #0
+ 455              	.LCFI26:
+ 456              		.cfi_def_cfa_register 7
+ 457 0006 0346     		mov	r3, r0
+ 458 0008 FB71     		strb	r3, [r7, #7]
+ 266:Core/Src/stm32746g_discovery.c ****   GPIO_TypeDef*     gpio_led;
+ 267:Core/Src/stm32746g_discovery.c **** 
+ 268:Core/Src/stm32746g_discovery.c ****   if (Led == LED1)	/* Toggle LED connected to GPIO */
+ 459              		.loc 1 268 6
+ 460 000a FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 461 000c 002B     		cmp	r3, #0
+ 462 000e 07D1     		bne	.L27
+ 269:Core/Src/stm32746g_discovery.c ****   {
+ 270:Core/Src/stm32746g_discovery.c ****     gpio_led = LED1_GPIO_PORT;
+ 463              		.loc 1 270 14
+ 464 0010 054B     		ldr	r3, .L28
+ 465 0012 FB60     		str	r3, [r7, #12]
+ 271:Core/Src/stm32746g_discovery.c ****     HAL_GPIO_TogglePin(gpio_led, GPIO_PIN[Led]);
+ 466              		.loc 1 271 42
+ 467 0014 0223     		movs	r3, #2
+ 468              		.loc 1 271 5
+ 469 0016 9BB2     		uxth	r3, r3
+ 470 0018 1946     		mov	r1, r3
+ 471 001a F868     		ldr	r0, [r7, #12]
+ 472 001c FFF7FEFF 		bl	HAL_GPIO_TogglePin
+ 473              	.L27:
+ 272:Core/Src/stm32746g_discovery.c ****   }
+ 273:Core/Src/stm32746g_discovery.c **** }
+ 474              		.loc 1 273 1
+ 475 0020 00BF     		nop
+ 476 0022 1037     		adds	r7, r7, #16
+ 477              	.LCFI27:
+ 478              		.cfi_def_cfa_offset 8
+ 479 0024 BD46     		mov	sp, r7
+ 480              	.LCFI28:
+ 481              		.cfi_def_cfa_register 13
+ 482              		@ sp needed
+ 483 0026 80BD     		pop	{r7, pc}
+ 484              	.L29:
+ 485              		.align	2
+ 486              	.L28:
+ 487 0028 00200240 		.word	1073881088
+ 488              		.cfi_endproc
+ 489              	.LFE146:
+ 491              		.section	.text.BSP_PB_Init,"ax",%progbits
+ 492              		.align	1
+ 493              		.global	BSP_PB_Init
+ 494              		.syntax unified
+ 495              		.thumb
+ 496              		.thumb_func
+ 498              	BSP_PB_Init:
+ 499              	.LFB147:
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s 			page 14
+
+
+ 274:Core/Src/stm32746g_discovery.c **** 
+ 275:Core/Src/stm32746g_discovery.c **** /**
+ 276:Core/Src/stm32746g_discovery.c ****   * @brief  Configures button GPIO and EXTI Line.
+ 277:Core/Src/stm32746g_discovery.c ****   * @param  Button: Button to be configured
+ 278:Core/Src/stm32746g_discovery.c ****   *          This parameter can be one of the following values:
+ 279:Core/Src/stm32746g_discovery.c ****   *            @arg  BUTTON_WAKEUP: Wakeup Push Button 
+ 280:Core/Src/stm32746g_discovery.c ****   *            @arg  BUTTON_TAMPER: Tamper Push Button  
+ 281:Core/Src/stm32746g_discovery.c ****   *            @arg  BUTTON_KEY: Key Push Button
+ 282:Core/Src/stm32746g_discovery.c ****   * @param  ButtonMode: Button mode
+ 283:Core/Src/stm32746g_discovery.c ****   *          This parameter can be one of the following values:
+ 284:Core/Src/stm32746g_discovery.c ****   *            @arg  BUTTON_MODE_GPIO: Button will be used as simple IO
+ 285:Core/Src/stm32746g_discovery.c ****   *            @arg  BUTTON_MODE_EXTI: Button will be connected to EXTI line 
+ 286:Core/Src/stm32746g_discovery.c ****   *                                    with interrupt generation capability
+ 287:Core/Src/stm32746g_discovery.c ****   * @note On STM32746G-Discovery board, the three buttons (Wakeup, Tamper and key buttons)
+ 288:Core/Src/stm32746g_discovery.c ****   *       are mapped on the same push button named "User"
+ 289:Core/Src/stm32746g_discovery.c ****   *       on the board serigraphy.
+ 290:Core/Src/stm32746g_discovery.c ****   * @retval None
+ 291:Core/Src/stm32746g_discovery.c ****   */
+ 292:Core/Src/stm32746g_discovery.c **** void BSP_PB_Init(Button_TypeDef Button, ButtonMode_TypeDef ButtonMode)
+ 293:Core/Src/stm32746g_discovery.c **** {
+ 500              		.loc 1 293 1
+ 501              		.cfi_startproc
+ 502              		@ args = 0, pretend = 0, frame = 40
+ 503              		@ frame_needed = 1, uses_anonymous_args = 0
+ 504 0000 80B5     		push	{r7, lr}
+ 505              	.LCFI29:
+ 506              		.cfi_def_cfa_offset 8
+ 507              		.cfi_offset 7, -8
+ 508              		.cfi_offset 14, -4
+ 509 0002 8AB0     		sub	sp, sp, #40
+ 510              	.LCFI30:
+ 511              		.cfi_def_cfa_offset 48
+ 512 0004 00AF     		add	r7, sp, #0
+ 513              	.LCFI31:
+ 514              		.cfi_def_cfa_register 7
+ 515 0006 0346     		mov	r3, r0
+ 516 0008 0A46     		mov	r2, r1
+ 517 000a FB71     		strb	r3, [r7, #7]
+ 518 000c 1346     		mov	r3, r2
+ 519 000e BB71     		strb	r3, [r7, #6]
+ 294:Core/Src/stm32746g_discovery.c ****   GPIO_InitTypeDef gpio_init_structure;
+ 295:Core/Src/stm32746g_discovery.c ****   
+ 296:Core/Src/stm32746g_discovery.c ****   /* Enable the BUTTON clock */
+ 297:Core/Src/stm32746g_discovery.c ****   BUTTONx_GPIO_CLK_ENABLE(Button);
+ 520              		.loc 1 297 3
+ 521 0010 FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 522 0012 002B     		cmp	r3, #0
+ 523 0014 0CD1     		bne	.L31
+ 524              	.LBB3:
+ 525              		.loc 1 297 3 is_stmt 0 discriminator 1
+ 526 0016 3B4B     		ldr	r3, .L39
+ 527 0018 1B6B     		ldr	r3, [r3, #48]
+ 528 001a 3A4A     		ldr	r2, .L39
+ 529 001c 43F48073 		orr	r3, r3, #256
+ 530 0020 1363     		str	r3, [r2, #48]
+ 531 0022 384B     		ldr	r3, .L39
+ 532 0024 1B6B     		ldr	r3, [r3, #48]
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s 			page 15
+
+
+ 533 0026 03F48073 		and	r3, r3, #256
+ 534 002a 3B61     		str	r3, [r7, #16]
+ 535 002c 3B69     		ldr	r3, [r7, #16]
+ 536              	.LBE3:
+ 537 002e 1BE0     		b	.L32
+ 538              	.L31:
+ 539              		.loc 1 297 3 discriminator 2
+ 540 0030 FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 541 0032 012B     		cmp	r3, #1
+ 542 0034 0CD1     		bne	.L33
+ 543              	.LBB4:
+ 544              		.loc 1 297 3 discriminator 3
+ 545 0036 334B     		ldr	r3, .L39
+ 546 0038 1B6B     		ldr	r3, [r3, #48]
+ 547 003a 324A     		ldr	r2, .L39
+ 548 003c 43F48073 		orr	r3, r3, #256
+ 549 0040 1363     		str	r3, [r2, #48]
+ 550 0042 304B     		ldr	r3, .L39
+ 551 0044 1B6B     		ldr	r3, [r3, #48]
+ 552 0046 03F48073 		and	r3, r3, #256
+ 553 004a FB60     		str	r3, [r7, #12]
+ 554 004c FB68     		ldr	r3, [r7, #12]
+ 555              	.LBE4:
+ 556 004e 0BE0     		b	.L32
+ 557              	.L33:
+ 558              	.LBB5:
+ 559              		.loc 1 297 3 discriminator 4
+ 560 0050 2C4B     		ldr	r3, .L39
+ 561 0052 1B6B     		ldr	r3, [r3, #48]
+ 562 0054 2B4A     		ldr	r2, .L39
+ 563 0056 43F48073 		orr	r3, r3, #256
+ 564 005a 1363     		str	r3, [r2, #48]
+ 565 005c 294B     		ldr	r3, .L39
+ 566 005e 1B6B     		ldr	r3, [r3, #48]
+ 567 0060 03F48073 		and	r3, r3, #256
+ 568 0064 BB60     		str	r3, [r7, #8]
+ 569 0066 BB68     		ldr	r3, [r7, #8]
+ 570              	.L32:
+ 571              	.LBE5:
+ 298:Core/Src/stm32746g_discovery.c ****   
+ 299:Core/Src/stm32746g_discovery.c ****   if(ButtonMode == BUTTON_MODE_GPIO)
+ 572              		.loc 1 299 5 is_stmt 1
+ 573 0068 BB79     		ldrb	r3, [r7, #6]	@ zero_extendqisi2
+ 574 006a 002B     		cmp	r3, #0
+ 575 006c 14D1     		bne	.L34
+ 300:Core/Src/stm32746g_discovery.c ****   {
+ 301:Core/Src/stm32746g_discovery.c ****     /* Configure Button pin as input */
+ 302:Core/Src/stm32746g_discovery.c ****     gpio_init_structure.Pin = BUTTON_PIN[Button];
+ 576              		.loc 1 302 41
+ 577 006e FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 578 0070 254A     		ldr	r2, .L39+4
+ 579 0072 32F81330 		ldrh	r3, [r2, r3, lsl #1]
+ 580              		.loc 1 302 29
+ 581 0076 7B61     		str	r3, [r7, #20]
+ 303:Core/Src/stm32746g_discovery.c ****     gpio_init_structure.Mode = GPIO_MODE_INPUT;
+ 582              		.loc 1 303 30
+ 583 0078 0023     		movs	r3, #0
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s 			page 16
+
+
+ 584 007a BB61     		str	r3, [r7, #24]
+ 304:Core/Src/stm32746g_discovery.c ****     gpio_init_structure.Pull = GPIO_NOPULL;
+ 585              		.loc 1 304 30
+ 586 007c 0023     		movs	r3, #0
+ 587 007e FB61     		str	r3, [r7, #28]
+ 305:Core/Src/stm32746g_discovery.c ****     gpio_init_structure.Speed = GPIO_SPEED_FAST;
+ 588              		.loc 1 305 31
+ 589 0080 0223     		movs	r3, #2
+ 590 0082 3B62     		str	r3, [r7, #32]
+ 306:Core/Src/stm32746g_discovery.c ****     HAL_GPIO_Init(BUTTON_PORT[Button], &gpio_init_structure);
+ 591              		.loc 1 306 5
+ 592 0084 FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 593 0086 214A     		ldr	r2, .L39+8
+ 594 0088 52F82330 		ldr	r3, [r2, r3, lsl #2]
+ 595 008c 07F11402 		add	r2, r7, #20
+ 596 0090 1146     		mov	r1, r2
+ 597 0092 1846     		mov	r0, r3
+ 598 0094 FFF7FEFF 		bl	HAL_GPIO_Init
+ 599              	.L34:
+ 307:Core/Src/stm32746g_discovery.c ****   }
+ 308:Core/Src/stm32746g_discovery.c ****   
+ 309:Core/Src/stm32746g_discovery.c ****   if(ButtonMode == BUTTON_MODE_EXTI)
+ 600              		.loc 1 309 5
+ 601 0098 BB79     		ldrb	r3, [r7, #6]	@ zero_extendqisi2
+ 602 009a 012B     		cmp	r3, #1
+ 603 009c 2ED1     		bne	.L38
+ 310:Core/Src/stm32746g_discovery.c ****   {
+ 311:Core/Src/stm32746g_discovery.c ****     /* Configure Button pin as input with External interrupt */
+ 312:Core/Src/stm32746g_discovery.c ****     gpio_init_structure.Pin = BUTTON_PIN[Button];
+ 604              		.loc 1 312 41
+ 605 009e FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 606 00a0 194A     		ldr	r2, .L39+4
+ 607 00a2 32F81330 		ldrh	r3, [r2, r3, lsl #1]
+ 608              		.loc 1 312 29
+ 609 00a6 7B61     		str	r3, [r7, #20]
+ 313:Core/Src/stm32746g_discovery.c ****     gpio_init_structure.Pull = GPIO_NOPULL;
+ 610              		.loc 1 313 30
+ 611 00a8 0023     		movs	r3, #0
+ 612 00aa FB61     		str	r3, [r7, #28]
+ 314:Core/Src/stm32746g_discovery.c ****     gpio_init_structure.Speed = GPIO_SPEED_FAST;
+ 613              		.loc 1 314 31
+ 614 00ac 0223     		movs	r3, #2
+ 615 00ae 3B62     		str	r3, [r7, #32]
+ 315:Core/Src/stm32746g_discovery.c ****     
+ 316:Core/Src/stm32746g_discovery.c ****     if(Button != BUTTON_WAKEUP)
+ 616              		.loc 1 316 7
+ 617 00b0 FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 618 00b2 002B     		cmp	r3, #0
+ 619 00b4 03D0     		beq	.L36
+ 317:Core/Src/stm32746g_discovery.c ****     {
+ 318:Core/Src/stm32746g_discovery.c ****       gpio_init_structure.Mode = GPIO_MODE_IT_FALLING; 
+ 620              		.loc 1 318 32
+ 621 00b6 4FF40413 		mov	r3, #2162688
+ 622 00ba BB61     		str	r3, [r7, #24]
+ 623 00bc 02E0     		b	.L37
+ 624              	.L36:
+ 319:Core/Src/stm32746g_discovery.c ****     }
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s 			page 17
+
+
+ 320:Core/Src/stm32746g_discovery.c ****     else
+ 321:Core/Src/stm32746g_discovery.c ****     {
+ 322:Core/Src/stm32746g_discovery.c ****       gpio_init_structure.Mode = GPIO_MODE_IT_RISING;
+ 625              		.loc 1 322 32
+ 626 00be 4FF48813 		mov	r3, #1114112
+ 627 00c2 BB61     		str	r3, [r7, #24]
+ 628              	.L37:
+ 323:Core/Src/stm32746g_discovery.c ****     }
+ 324:Core/Src/stm32746g_discovery.c ****     
+ 325:Core/Src/stm32746g_discovery.c ****     HAL_GPIO_Init(BUTTON_PORT[Button], &gpio_init_structure);
+ 629              		.loc 1 325 5
+ 630 00c4 FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 631 00c6 114A     		ldr	r2, .L39+8
+ 632 00c8 52F82330 		ldr	r3, [r2, r3, lsl #2]
+ 633 00cc 07F11402 		add	r2, r7, #20
+ 634 00d0 1146     		mov	r1, r2
+ 635 00d2 1846     		mov	r0, r3
+ 636 00d4 FFF7FEFF 		bl	HAL_GPIO_Init
+ 326:Core/Src/stm32746g_discovery.c ****     
+ 327:Core/Src/stm32746g_discovery.c ****     /* Enable and set Button EXTI Interrupt to the lowest priority */
+ 328:Core/Src/stm32746g_discovery.c ****     HAL_NVIC_SetPriority((IRQn_Type)(BUTTON_IRQn[Button]), 0x0F, 0x00);
+ 637              		.loc 1 328 49
+ 638 00d8 FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 639 00da 0D4A     		ldr	r2, .L39+12
+ 640 00dc 32F81330 		ldrh	r3, [r2, r3, lsl #1]
+ 641              		.loc 1 328 5
+ 642 00e0 5BB2     		sxtb	r3, r3
+ 643 00e2 0022     		movs	r2, #0
+ 644 00e4 0F21     		movs	r1, #15
+ 645 00e6 1846     		mov	r0, r3
+ 646 00e8 FFF7FEFF 		bl	HAL_NVIC_SetPriority
+ 329:Core/Src/stm32746g_discovery.c ****     HAL_NVIC_EnableIRQ((IRQn_Type)(BUTTON_IRQn[Button]));
+ 647              		.loc 1 329 47
+ 648 00ec FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 649 00ee 084A     		ldr	r2, .L39+12
+ 650 00f0 32F81330 		ldrh	r3, [r2, r3, lsl #1]
+ 651              		.loc 1 329 5
+ 652 00f4 5BB2     		sxtb	r3, r3
+ 653 00f6 1846     		mov	r0, r3
+ 654 00f8 FFF7FEFF 		bl	HAL_NVIC_EnableIRQ
+ 655              	.L38:
+ 330:Core/Src/stm32746g_discovery.c ****   }
+ 331:Core/Src/stm32746g_discovery.c **** }
+ 656              		.loc 1 331 1
+ 657 00fc 00BF     		nop
+ 658 00fe 2837     		adds	r7, r7, #40
+ 659              	.LCFI32:
+ 660              		.cfi_def_cfa_offset 8
+ 661 0100 BD46     		mov	sp, r7
+ 662              	.LCFI33:
+ 663              		.cfi_def_cfa_register 13
+ 664              		@ sp needed
+ 665 0102 80BD     		pop	{r7, pc}
+ 666              	.L40:
+ 667              		.align	2
+ 668              	.L39:
+ 669 0104 00380240 		.word	1073887232
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s 			page 18
+
+
+ 670 0108 00000000 		.word	BUTTON_PIN
+ 671 010c 00000000 		.word	BUTTON_PORT
+ 672 0110 00000000 		.word	BUTTON_IRQn
+ 673              		.cfi_endproc
+ 674              	.LFE147:
+ 676              		.section	.text.BSP_PB_DeInit,"ax",%progbits
+ 677              		.align	1
+ 678              		.global	BSP_PB_DeInit
+ 679              		.syntax unified
+ 680              		.thumb
+ 681              		.thumb_func
+ 683              	BSP_PB_DeInit:
+ 684              	.LFB148:
+ 332:Core/Src/stm32746g_discovery.c **** 
+ 333:Core/Src/stm32746g_discovery.c **** /**
+ 334:Core/Src/stm32746g_discovery.c ****   * @brief  Push Button DeInit.
+ 335:Core/Src/stm32746g_discovery.c ****   * @param  Button: Button to be configured
+ 336:Core/Src/stm32746g_discovery.c ****   *          This parameter can be one of the following values:
+ 337:Core/Src/stm32746g_discovery.c ****   *            @arg  BUTTON_WAKEUP: Wakeup Push Button 
+ 338:Core/Src/stm32746g_discovery.c ****   *            @arg  BUTTON_TAMPER: Tamper Push Button  
+ 339:Core/Src/stm32746g_discovery.c ****   *            @arg  BUTTON_KEY: Key Push Button
+ 340:Core/Src/stm32746g_discovery.c ****   * @note On STM32746G-Discovery board, the three buttons (Wakeup, Tamper and key buttons) 
+ 341:Core/Src/stm32746g_discovery.c ****   *       are mapped on the same push button named "User"
+ 342:Core/Src/stm32746g_discovery.c ****   *       on the board serigraphy.
+ 343:Core/Src/stm32746g_discovery.c ****   * @note PB DeInit does not disable the GPIO clock
+ 344:Core/Src/stm32746g_discovery.c ****   * @retval None
+ 345:Core/Src/stm32746g_discovery.c ****   */
+ 346:Core/Src/stm32746g_discovery.c **** void BSP_PB_DeInit(Button_TypeDef Button)
+ 347:Core/Src/stm32746g_discovery.c **** {
+ 685              		.loc 1 347 1
+ 686              		.cfi_startproc
+ 687              		@ args = 0, pretend = 0, frame = 32
+ 688              		@ frame_needed = 1, uses_anonymous_args = 0
+ 689 0000 80B5     		push	{r7, lr}
+ 690              	.LCFI34:
+ 691              		.cfi_def_cfa_offset 8
+ 692              		.cfi_offset 7, -8
+ 693              		.cfi_offset 14, -4
+ 694 0002 88B0     		sub	sp, sp, #32
+ 695              	.LCFI35:
+ 696              		.cfi_def_cfa_offset 40
+ 697 0004 00AF     		add	r7, sp, #0
+ 698              	.LCFI36:
+ 699              		.cfi_def_cfa_register 7
+ 700 0006 0346     		mov	r3, r0
+ 701 0008 FB71     		strb	r3, [r7, #7]
+ 348:Core/Src/stm32746g_discovery.c ****     GPIO_InitTypeDef gpio_init_structure;
+ 349:Core/Src/stm32746g_discovery.c **** 
+ 350:Core/Src/stm32746g_discovery.c ****     gpio_init_structure.Pin = BUTTON_PIN[Button];
+ 702              		.loc 1 350 41
+ 703 000a FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 704 000c 0C4A     		ldr	r2, .L42
+ 705 000e 32F81330 		ldrh	r3, [r2, r3, lsl #1]
+ 706              		.loc 1 350 29
+ 707 0012 FB60     		str	r3, [r7, #12]
+ 351:Core/Src/stm32746g_discovery.c ****     HAL_NVIC_DisableIRQ((IRQn_Type)(BUTTON_IRQn[Button]));
+ 708              		.loc 1 351 48
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s 			page 19
+
+
+ 709 0014 FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 710 0016 0B4A     		ldr	r2, .L42+4
+ 711 0018 32F81330 		ldrh	r3, [r2, r3, lsl #1]
+ 712              		.loc 1 351 5
+ 713 001c 5BB2     		sxtb	r3, r3
+ 714 001e 1846     		mov	r0, r3
+ 715 0020 FFF7FEFF 		bl	HAL_NVIC_DisableIRQ
+ 352:Core/Src/stm32746g_discovery.c ****     HAL_GPIO_DeInit(BUTTON_PORT[Button], gpio_init_structure.Pin);
+ 716              		.loc 1 352 5
+ 717 0024 FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 718 0026 084A     		ldr	r2, .L42+8
+ 719 0028 52F82330 		ldr	r3, [r2, r3, lsl #2]
+ 720 002c FA68     		ldr	r2, [r7, #12]
+ 721 002e 1146     		mov	r1, r2
+ 722 0030 1846     		mov	r0, r3
+ 723 0032 FFF7FEFF 		bl	HAL_GPIO_DeInit
+ 353:Core/Src/stm32746g_discovery.c **** }
+ 724              		.loc 1 353 1
+ 725 0036 00BF     		nop
+ 726 0038 2037     		adds	r7, r7, #32
+ 727              	.LCFI37:
+ 728              		.cfi_def_cfa_offset 8
+ 729 003a BD46     		mov	sp, r7
+ 730              	.LCFI38:
+ 731              		.cfi_def_cfa_register 13
+ 732              		@ sp needed
+ 733 003c 80BD     		pop	{r7, pc}
+ 734              	.L43:
+ 735 003e 00BF     		.align	2
+ 736              	.L42:
+ 737 0040 00000000 		.word	BUTTON_PIN
+ 738 0044 00000000 		.word	BUTTON_IRQn
+ 739 0048 00000000 		.word	BUTTON_PORT
+ 740              		.cfi_endproc
+ 741              	.LFE148:
+ 743              		.section	.text.BSP_PB_GetState,"ax",%progbits
+ 744              		.align	1
+ 745              		.global	BSP_PB_GetState
+ 746              		.syntax unified
+ 747              		.thumb
+ 748              		.thumb_func
+ 750              	BSP_PB_GetState:
+ 751              	.LFB149:
+ 354:Core/Src/stm32746g_discovery.c **** 
+ 355:Core/Src/stm32746g_discovery.c **** 
+ 356:Core/Src/stm32746g_discovery.c **** /**
+ 357:Core/Src/stm32746g_discovery.c ****   * @brief  Returns the selected button state.
+ 358:Core/Src/stm32746g_discovery.c ****   * @param  Button: Button to be checked
+ 359:Core/Src/stm32746g_discovery.c ****   *          This parameter can be one of the following values:
+ 360:Core/Src/stm32746g_discovery.c ****   *            @arg  BUTTON_WAKEUP: Wakeup Push Button 
+ 361:Core/Src/stm32746g_discovery.c ****   *            @arg  BUTTON_TAMPER: Tamper Push Button 
+ 362:Core/Src/stm32746g_discovery.c ****   *            @arg  BUTTON_KEY: Key Push Button
+ 363:Core/Src/stm32746g_discovery.c ****   * @note On STM32746G-Discovery board, the three buttons (Wakeup, Tamper and key buttons) 
+ 364:Core/Src/stm32746g_discovery.c ****   *       are mapped on the same push button named "User"
+ 365:Core/Src/stm32746g_discovery.c ****   *       on the board serigraphy.
+ 366:Core/Src/stm32746g_discovery.c ****   * @retval The Button GPIO pin value
+ 367:Core/Src/stm32746g_discovery.c ****   */
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s 			page 20
+
+
+ 368:Core/Src/stm32746g_discovery.c **** uint32_t BSP_PB_GetState(Button_TypeDef Button)
+ 369:Core/Src/stm32746g_discovery.c **** {
+ 752              		.loc 1 369 1
+ 753              		.cfi_startproc
+ 754              		@ args = 0, pretend = 0, frame = 8
+ 755              		@ frame_needed = 1, uses_anonymous_args = 0
+ 756 0000 80B5     		push	{r7, lr}
+ 757              	.LCFI39:
+ 758              		.cfi_def_cfa_offset 8
+ 759              		.cfi_offset 7, -8
+ 760              		.cfi_offset 14, -4
+ 761 0002 82B0     		sub	sp, sp, #8
+ 762              	.LCFI40:
+ 763              		.cfi_def_cfa_offset 16
+ 764 0004 00AF     		add	r7, sp, #0
+ 765              	.LCFI41:
+ 766              		.cfi_def_cfa_register 7
+ 767 0006 0346     		mov	r3, r0
+ 768 0008 FB71     		strb	r3, [r7, #7]
+ 370:Core/Src/stm32746g_discovery.c ****   return HAL_GPIO_ReadPin(BUTTON_PORT[Button], BUTTON_PIN[Button]);
+ 769              		.loc 1 370 10
+ 770 000a FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 771 000c 074A     		ldr	r2, .L46
+ 772 000e 52F82320 		ldr	r2, [r2, r3, lsl #2]
+ 773 0012 FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 774 0014 0649     		ldr	r1, .L46+4
+ 775 0016 31F81330 		ldrh	r3, [r1, r3, lsl #1]
+ 776 001a 1946     		mov	r1, r3
+ 777 001c 1046     		mov	r0, r2
+ 778 001e FFF7FEFF 		bl	HAL_GPIO_ReadPin
+ 779 0022 0346     		mov	r3, r0
+ 371:Core/Src/stm32746g_discovery.c **** }
+ 780              		.loc 1 371 1
+ 781 0024 1846     		mov	r0, r3
+ 782 0026 0837     		adds	r7, r7, #8
+ 783              	.LCFI42:
+ 784              		.cfi_def_cfa_offset 8
+ 785 0028 BD46     		mov	sp, r7
+ 786              	.LCFI43:
+ 787              		.cfi_def_cfa_register 13
+ 788              		@ sp needed
+ 789 002a 80BD     		pop	{r7, pc}
+ 790              	.L47:
+ 791              		.align	2
+ 792              	.L46:
+ 793 002c 00000000 		.word	BUTTON_PORT
+ 794 0030 00000000 		.word	BUTTON_PIN
+ 795              		.cfi_endproc
+ 796              	.LFE149:
+ 798              		.section	.text.BSP_COM_Init,"ax",%progbits
+ 799              		.align	1
+ 800              		.global	BSP_COM_Init
+ 801              		.syntax unified
+ 802              		.thumb
+ 803              		.thumb_func
+ 805              	BSP_COM_Init:
+ 806              	.LFB150:
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s 			page 21
+
+
+ 372:Core/Src/stm32746g_discovery.c **** 
+ 373:Core/Src/stm32746g_discovery.c **** /**
+ 374:Core/Src/stm32746g_discovery.c ****   * @brief  Configures COM port.
+ 375:Core/Src/stm32746g_discovery.c ****   * @param  COM: COM port to be configured.
+ 376:Core/Src/stm32746g_discovery.c ****   *          This parameter can be one of the following values:
+ 377:Core/Src/stm32746g_discovery.c ****   *            @arg  COM1 
+ 378:Core/Src/stm32746g_discovery.c ****   *            @arg  COM2 
+ 379:Core/Src/stm32746g_discovery.c ****   * @param  huart: Pointer to a UART_HandleTypeDef structure that contains the
+ 380:Core/Src/stm32746g_discovery.c ****   *                configuration information for the specified USART peripheral.
+ 381:Core/Src/stm32746g_discovery.c ****   * @retval None
+ 382:Core/Src/stm32746g_discovery.c ****   */
+ 383:Core/Src/stm32746g_discovery.c **** void BSP_COM_Init(COM_TypeDef COM, UART_HandleTypeDef *huart)
+ 384:Core/Src/stm32746g_discovery.c **** {
+ 807              		.loc 1 384 1
+ 808              		.cfi_startproc
+ 809              		@ args = 0, pretend = 0, frame = 40
+ 810              		@ frame_needed = 1, uses_anonymous_args = 0
+ 811 0000 80B5     		push	{r7, lr}
+ 812              	.LCFI44:
+ 813              		.cfi_def_cfa_offset 8
+ 814              		.cfi_offset 7, -8
+ 815              		.cfi_offset 14, -4
+ 816 0002 8AB0     		sub	sp, sp, #40
+ 817              	.LCFI45:
+ 818              		.cfi_def_cfa_offset 48
+ 819 0004 00AF     		add	r7, sp, #0
+ 820              	.LCFI46:
+ 821              		.cfi_def_cfa_register 7
+ 822 0006 0346     		mov	r3, r0
+ 823 0008 3960     		str	r1, [r7]
+ 824 000a FB71     		strb	r3, [r7, #7]
+ 385:Core/Src/stm32746g_discovery.c ****   GPIO_InitTypeDef gpio_init_structure;
+ 386:Core/Src/stm32746g_discovery.c **** 
+ 387:Core/Src/stm32746g_discovery.c ****   /* Enable GPIO clock */
+ 388:Core/Src/stm32746g_discovery.c ****   DISCOVERY_COMx_TX_GPIO_CLK_ENABLE(COM);
+ 825              		.loc 1 388 3
+ 826 000c FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 827 000e 002B     		cmp	r3, #0
+ 828 0010 0BD1     		bne	.L49
+ 829              	.LBB6:
+ 830              		.loc 1 388 3 is_stmt 0 discriminator 1
+ 831 0012 2E4B     		ldr	r3, .L52
+ 832 0014 1B6B     		ldr	r3, [r3, #48]
+ 833 0016 2D4A     		ldr	r2, .L52
+ 834 0018 43F00103 		orr	r3, r3, #1
+ 835 001c 1363     		str	r3, [r2, #48]
+ 836 001e 2B4B     		ldr	r3, .L52
+ 837 0020 1B6B     		ldr	r3, [r3, #48]
+ 838 0022 03F00103 		and	r3, r3, #1
+ 839 0026 3B61     		str	r3, [r7, #16]
+ 840 0028 3B69     		ldr	r3, [r7, #16]
+ 841              	.L49:
+ 842              	.LBE6:
+ 389:Core/Src/stm32746g_discovery.c ****   DISCOVERY_COMx_RX_GPIO_CLK_ENABLE(COM);
+ 843              		.loc 1 389 3 is_stmt 1
+ 844 002a FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 845 002c 002B     		cmp	r3, #0
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s 			page 22
+
+
+ 846 002e 0BD1     		bne	.L50
+ 847              	.LBB7:
+ 848              		.loc 1 389 3 is_stmt 0 discriminator 1
+ 849 0030 264B     		ldr	r3, .L52
+ 850 0032 1B6B     		ldr	r3, [r3, #48]
+ 851 0034 254A     		ldr	r2, .L52
+ 852 0036 43F00203 		orr	r3, r3, #2
+ 853 003a 1363     		str	r3, [r2, #48]
+ 854 003c 234B     		ldr	r3, .L52
+ 855 003e 1B6B     		ldr	r3, [r3, #48]
+ 856 0040 03F00203 		and	r3, r3, #2
+ 857 0044 FB60     		str	r3, [r7, #12]
+ 858 0046 FB68     		ldr	r3, [r7, #12]
+ 859              	.L50:
+ 860              	.LBE7:
+ 390:Core/Src/stm32746g_discovery.c **** 
+ 391:Core/Src/stm32746g_discovery.c ****   /* Enable USART clock */
+ 392:Core/Src/stm32746g_discovery.c ****   DISCOVERY_COMx_CLK_ENABLE(COM);
+ 861              		.loc 1 392 3 is_stmt 1
+ 862 0048 FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 863 004a 002B     		cmp	r3, #0
+ 864 004c 0BD1     		bne	.L51
+ 865              	.LBB8:
+ 866              		.loc 1 392 3 is_stmt 0 discriminator 1
+ 867 004e 1F4B     		ldr	r3, .L52
+ 868 0050 5B6C     		ldr	r3, [r3, #68]
+ 869 0052 1E4A     		ldr	r2, .L52
+ 870 0054 43F01003 		orr	r3, r3, #16
+ 871 0058 5364     		str	r3, [r2, #68]
+ 872 005a 1C4B     		ldr	r3, .L52
+ 873 005c 5B6C     		ldr	r3, [r3, #68]
+ 874 005e 03F01003 		and	r3, r3, #16
+ 875 0062 BB60     		str	r3, [r7, #8]
+ 876 0064 BB68     		ldr	r3, [r7, #8]
+ 877              	.L51:
+ 878              	.LBE8:
+ 393:Core/Src/stm32746g_discovery.c **** 
+ 394:Core/Src/stm32746g_discovery.c ****   /* Configure USART Tx as alternate function */
+ 395:Core/Src/stm32746g_discovery.c ****   gpio_init_structure.Pin = COM_TX_PIN[COM];
+ 879              		.loc 1 395 39 is_stmt 1
+ 880 0066 4FF40073 		mov	r3, #512
+ 881              		.loc 1 395 27
+ 882 006a 7B61     		str	r3, [r7, #20]
+ 396:Core/Src/stm32746g_discovery.c ****   gpio_init_structure.Mode = GPIO_MODE_AF_PP;
+ 883              		.loc 1 396 28
+ 884 006c 0223     		movs	r3, #2
+ 885 006e BB61     		str	r3, [r7, #24]
+ 397:Core/Src/stm32746g_discovery.c ****   gpio_init_structure.Speed = GPIO_SPEED_FAST;
+ 886              		.loc 1 397 29
+ 887 0070 0223     		movs	r3, #2
+ 888 0072 3B62     		str	r3, [r7, #32]
+ 398:Core/Src/stm32746g_discovery.c ****   gpio_init_structure.Pull = GPIO_PULLUP;
+ 889              		.loc 1 398 28
+ 890 0074 0123     		movs	r3, #1
+ 891 0076 FB61     		str	r3, [r7, #28]
+ 399:Core/Src/stm32746g_discovery.c ****   gpio_init_structure.Alternate = COM_TX_AF[COM];
+ 892              		.loc 1 399 44
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s 			page 23
+
+
+ 893 0078 0723     		movs	r3, #7
+ 894              		.loc 1 399 33
+ 895 007a 7B62     		str	r3, [r7, #36]
+ 400:Core/Src/stm32746g_discovery.c ****   HAL_GPIO_Init(COM_TX_PORT[COM], &gpio_init_structure);
+ 896              		.loc 1 400 3
+ 897 007c FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 898 007e 144A     		ldr	r2, .L52+4
+ 899 0080 52F82330 		ldr	r3, [r2, r3, lsl #2]
+ 900 0084 07F11402 		add	r2, r7, #20
+ 901 0088 1146     		mov	r1, r2
+ 902 008a 1846     		mov	r0, r3
+ 903 008c FFF7FEFF 		bl	HAL_GPIO_Init
+ 401:Core/Src/stm32746g_discovery.c **** 
+ 402:Core/Src/stm32746g_discovery.c ****   /* Configure USART Rx as alternate function */
+ 403:Core/Src/stm32746g_discovery.c ****   gpio_init_structure.Pin = COM_RX_PIN[COM];
+ 904              		.loc 1 403 39
+ 905 0090 8023     		movs	r3, #128
+ 906              		.loc 1 403 27
+ 907 0092 7B61     		str	r3, [r7, #20]
+ 404:Core/Src/stm32746g_discovery.c ****   gpio_init_structure.Mode = GPIO_MODE_AF_PP;
+ 908              		.loc 1 404 28
+ 909 0094 0223     		movs	r3, #2
+ 910 0096 BB61     		str	r3, [r7, #24]
+ 405:Core/Src/stm32746g_discovery.c ****   gpio_init_structure.Alternate = COM_RX_AF[COM];
+ 911              		.loc 1 405 44
+ 912 0098 0723     		movs	r3, #7
+ 913              		.loc 1 405 33
+ 914 009a 7B62     		str	r3, [r7, #36]
+ 406:Core/Src/stm32746g_discovery.c ****   HAL_GPIO_Init(COM_RX_PORT[COM], &gpio_init_structure);
+ 915              		.loc 1 406 3
+ 916 009c FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 917 009e 0D4A     		ldr	r2, .L52+8
+ 918 00a0 52F82330 		ldr	r3, [r2, r3, lsl #2]
+ 919 00a4 07F11402 		add	r2, r7, #20
+ 920 00a8 1146     		mov	r1, r2
+ 921 00aa 1846     		mov	r0, r3
+ 922 00ac FFF7FEFF 		bl	HAL_GPIO_Init
+ 407:Core/Src/stm32746g_discovery.c **** 
+ 408:Core/Src/stm32746g_discovery.c ****   /* USART configuration */
+ 409:Core/Src/stm32746g_discovery.c ****   huart->Instance = COM_USART[COM];
+ 923              		.loc 1 409 30
+ 924 00b0 FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 925 00b2 094A     		ldr	r2, .L52+12
+ 926 00b4 52F82320 		ldr	r2, [r2, r3, lsl #2]
+ 927              		.loc 1 409 19
+ 928 00b8 3B68     		ldr	r3, [r7]
+ 929 00ba 1A60     		str	r2, [r3]
+ 410:Core/Src/stm32746g_discovery.c ****   HAL_UART_Init(huart);
+ 930              		.loc 1 410 3
+ 931 00bc 3868     		ldr	r0, [r7]
+ 932 00be FFF7FEFF 		bl	HAL_UART_Init
+ 411:Core/Src/stm32746g_discovery.c **** }
+ 933              		.loc 1 411 1
+ 934 00c2 00BF     		nop
+ 935 00c4 2837     		adds	r7, r7, #40
+ 936              	.LCFI47:
+ 937              		.cfi_def_cfa_offset 8
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s 			page 24
+
+
+ 938 00c6 BD46     		mov	sp, r7
+ 939              	.LCFI48:
+ 940              		.cfi_def_cfa_register 13
+ 941              		@ sp needed
+ 942 00c8 80BD     		pop	{r7, pc}
+ 943              	.L53:
+ 944 00ca 00BF     		.align	2
+ 945              	.L52:
+ 946 00cc 00380240 		.word	1073887232
+ 947 00d0 00000000 		.word	COM_TX_PORT
+ 948 00d4 00000000 		.word	COM_RX_PORT
+ 949 00d8 00000000 		.word	COM_USART
+ 950              		.cfi_endproc
+ 951              	.LFE150:
+ 953              		.section	.text.BSP_COM_DeInit,"ax",%progbits
+ 954              		.align	1
+ 955              		.global	BSP_COM_DeInit
+ 956              		.syntax unified
+ 957              		.thumb
+ 958              		.thumb_func
+ 960              	BSP_COM_DeInit:
+ 961              	.LFB151:
+ 412:Core/Src/stm32746g_discovery.c **** 
+ 413:Core/Src/stm32746g_discovery.c **** /**
+ 414:Core/Src/stm32746g_discovery.c ****   * @brief  DeInit COM port.
+ 415:Core/Src/stm32746g_discovery.c ****   * @param  COM: COM port to be configured.
+ 416:Core/Src/stm32746g_discovery.c ****   *          This parameter can be one of the following values:
+ 417:Core/Src/stm32746g_discovery.c ****   *            @arg  COM1 
+ 418:Core/Src/stm32746g_discovery.c ****   *            @arg  COM2 
+ 419:Core/Src/stm32746g_discovery.c ****   * @param  huart: Pointer to a UART_HandleTypeDef structure that contains the
+ 420:Core/Src/stm32746g_discovery.c ****   *                configuration information for the specified USART peripheral.
+ 421:Core/Src/stm32746g_discovery.c ****   * @retval None
+ 422:Core/Src/stm32746g_discovery.c ****   */
+ 423:Core/Src/stm32746g_discovery.c **** void BSP_COM_DeInit(COM_TypeDef COM, UART_HandleTypeDef *huart)
+ 424:Core/Src/stm32746g_discovery.c **** {
+ 962              		.loc 1 424 1
+ 963              		.cfi_startproc
+ 964              		@ args = 0, pretend = 0, frame = 8
+ 965              		@ frame_needed = 1, uses_anonymous_args = 0
+ 966 0000 80B5     		push	{r7, lr}
+ 967              	.LCFI49:
+ 968              		.cfi_def_cfa_offset 8
+ 969              		.cfi_offset 7, -8
+ 970              		.cfi_offset 14, -4
+ 971 0002 82B0     		sub	sp, sp, #8
+ 972              	.LCFI50:
+ 973              		.cfi_def_cfa_offset 16
+ 974 0004 00AF     		add	r7, sp, #0
+ 975              	.LCFI51:
+ 976              		.cfi_def_cfa_register 7
+ 977 0006 0346     		mov	r3, r0
+ 978 0008 3960     		str	r1, [r7]
+ 979 000a FB71     		strb	r3, [r7, #7]
+ 425:Core/Src/stm32746g_discovery.c ****   /* USART configuration */
+ 426:Core/Src/stm32746g_discovery.c ****   huart->Instance = COM_USART[COM];
+ 980              		.loc 1 426 30
+ 981 000c FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s 			page 25
+
+
+ 982 000e 0A4A     		ldr	r2, .L58
+ 983 0010 52F82320 		ldr	r2, [r2, r3, lsl #2]
+ 984              		.loc 1 426 19
+ 985 0014 3B68     		ldr	r3, [r7]
+ 986 0016 1A60     		str	r2, [r3]
+ 427:Core/Src/stm32746g_discovery.c ****   HAL_UART_DeInit(huart);
+ 987              		.loc 1 427 3
+ 988 0018 3868     		ldr	r0, [r7]
+ 989 001a FFF7FEFF 		bl	HAL_UART_DeInit
+ 428:Core/Src/stm32746g_discovery.c **** 
+ 429:Core/Src/stm32746g_discovery.c ****   /* Enable USART clock */
+ 430:Core/Src/stm32746g_discovery.c ****   DISCOVERY_COMx_CLK_DISABLE(COM);
+ 990              		.loc 1 430 3
+ 991 001e FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 992 0020 002B     		cmp	r3, #0
+ 993 0022 05D1     		bne	.L57
+ 994              		.loc 1 430 3 is_stmt 0 discriminator 1
+ 995 0024 054B     		ldr	r3, .L58+4
+ 996 0026 5B6C     		ldr	r3, [r3, #68]
+ 997 0028 044A     		ldr	r2, .L58+4
+ 998 002a 23F01003 		bic	r3, r3, #16
+ 999 002e 5364     		str	r3, [r2, #68]
+ 1000              	.L57:
+ 431:Core/Src/stm32746g_discovery.c **** 
+ 432:Core/Src/stm32746g_discovery.c ****   /* DeInit GPIO pins can be done in the application 
+ 433:Core/Src/stm32746g_discovery.c ****      (by surcharging this __weak function) */
+ 434:Core/Src/stm32746g_discovery.c **** 
+ 435:Core/Src/stm32746g_discovery.c ****   /* GPIO pins clock, DMA clock can be shut down in the application 
+ 436:Core/Src/stm32746g_discovery.c ****      by surcharging this __weak function */
+ 437:Core/Src/stm32746g_discovery.c **** }
+ 1001              		.loc 1 437 1 is_stmt 1
+ 1002 0030 00BF     		nop
+ 1003 0032 0837     		adds	r7, r7, #8
+ 1004              	.LCFI52:
+ 1005              		.cfi_def_cfa_offset 8
+ 1006 0034 BD46     		mov	sp, r7
+ 1007              	.LCFI53:
+ 1008              		.cfi_def_cfa_register 13
+ 1009              		@ sp needed
+ 1010 0036 80BD     		pop	{r7, pc}
+ 1011              	.L59:
+ 1012              		.align	2
+ 1013              	.L58:
+ 1014 0038 00000000 		.word	COM_USART
+ 1015 003c 00380240 		.word	1073887232
+ 1016              		.cfi_endproc
+ 1017              	.LFE151:
+ 1019              		.section	.text.I2Cx_MspInit,"ax",%progbits
+ 1020              		.align	1
+ 1021              		.syntax unified
+ 1022              		.thumb
+ 1023              		.thumb_func
+ 1025              	I2Cx_MspInit:
+ 1026              	.LFB152:
+ 438:Core/Src/stm32746g_discovery.c **** 
+ 439:Core/Src/stm32746g_discovery.c **** /*******************************************************************************
+ 440:Core/Src/stm32746g_discovery.c ****                             BUS OPERATIONS
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s 			page 26
+
+
+ 441:Core/Src/stm32746g_discovery.c **** *******************************************************************************/
+ 442:Core/Src/stm32746g_discovery.c **** 
+ 443:Core/Src/stm32746g_discovery.c **** /******************************* I2C Routines *********************************/
+ 444:Core/Src/stm32746g_discovery.c **** /**
+ 445:Core/Src/stm32746g_discovery.c ****   * @brief  Initializes I2C MSP.
+ 446:Core/Src/stm32746g_discovery.c ****   * @param  i2c_handler : I2C handler
+ 447:Core/Src/stm32746g_discovery.c ****   * @retval None
+ 448:Core/Src/stm32746g_discovery.c ****   */
+ 449:Core/Src/stm32746g_discovery.c **** static void I2Cx_MspInit(I2C_HandleTypeDef *i2c_handler)
+ 450:Core/Src/stm32746g_discovery.c **** {
+ 1027              		.loc 1 450 1
+ 1028              		.cfi_startproc
+ 1029              		@ args = 0, pretend = 0, frame = 48
+ 1030              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1031 0000 80B5     		push	{r7, lr}
+ 1032              	.LCFI54:
+ 1033              		.cfi_def_cfa_offset 8
+ 1034              		.cfi_offset 7, -8
+ 1035              		.cfi_offset 14, -4
+ 1036 0002 8CB0     		sub	sp, sp, #48
+ 1037              	.LCFI55:
+ 1038              		.cfi_def_cfa_offset 56
+ 1039 0004 00AF     		add	r7, sp, #0
+ 1040              	.LCFI56:
+ 1041              		.cfi_def_cfa_register 7
+ 1042 0006 7860     		str	r0, [r7, #4]
+ 451:Core/Src/stm32746g_discovery.c ****   GPIO_InitTypeDef  gpio_init_structure;
+ 452:Core/Src/stm32746g_discovery.c ****   
+ 453:Core/Src/stm32746g_discovery.c ****   if (i2c_handler == (I2C_HandleTypeDef*)(&hI2cAudioHandler))
+ 1043              		.loc 1 453 6
+ 1044 0008 7B68     		ldr	r3, [r7, #4]
+ 1045 000a 514A     		ldr	r2, .L64
+ 1046 000c 9342     		cmp	r3, r2
+ 1047 000e 4DD1     		bne	.L61
+ 1048              	.LBB9:
+ 454:Core/Src/stm32746g_discovery.c ****   {
+ 455:Core/Src/stm32746g_discovery.c ****     /* AUDIO and LCD I2C MSP init */
+ 456:Core/Src/stm32746g_discovery.c **** 
+ 457:Core/Src/stm32746g_discovery.c ****     /*** Configure the GPIOs ***/
+ 458:Core/Src/stm32746g_discovery.c ****     /* Enable GPIO clock */
+ 459:Core/Src/stm32746g_discovery.c ****     DISCOVERY_AUDIO_I2Cx_SCL_SDA_GPIO_CLK_ENABLE();
+ 1049              		.loc 1 459 5
+ 1050 0010 504B     		ldr	r3, .L64+4
+ 1051 0012 1B6B     		ldr	r3, [r3, #48]
+ 1052 0014 4F4A     		ldr	r2, .L64+4
+ 1053 0016 43F08003 		orr	r3, r3, #128
+ 1054 001a 1363     		str	r3, [r2, #48]
+ 1055 001c 4D4B     		ldr	r3, .L64+4
+ 1056 001e 1B6B     		ldr	r3, [r3, #48]
+ 1057 0020 03F08003 		and	r3, r3, #128
+ 1058 0024 BB61     		str	r3, [r7, #24]
+ 1059 0026 BB69     		ldr	r3, [r7, #24]
+ 1060              	.LBE9:
+ 460:Core/Src/stm32746g_discovery.c **** 
+ 461:Core/Src/stm32746g_discovery.c ****     /* Configure I2C Tx as alternate function */
+ 462:Core/Src/stm32746g_discovery.c ****     gpio_init_structure.Pin = DISCOVERY_AUDIO_I2Cx_SCL_PIN;
+ 1061              		.loc 1 462 29
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s 			page 27
+
+
+ 1062 0028 8023     		movs	r3, #128
+ 1063 002a FB61     		str	r3, [r7, #28]
+ 463:Core/Src/stm32746g_discovery.c ****     gpio_init_structure.Mode = GPIO_MODE_AF_OD;
+ 1064              		.loc 1 463 30
+ 1065 002c 1223     		movs	r3, #18
+ 1066 002e 3B62     		str	r3, [r7, #32]
+ 464:Core/Src/stm32746g_discovery.c ****     gpio_init_structure.Pull = GPIO_NOPULL;
+ 1067              		.loc 1 464 30
+ 1068 0030 0023     		movs	r3, #0
+ 1069 0032 7B62     		str	r3, [r7, #36]
+ 465:Core/Src/stm32746g_discovery.c ****     gpio_init_structure.Speed = GPIO_SPEED_FAST;
+ 1070              		.loc 1 465 31
+ 1071 0034 0223     		movs	r3, #2
+ 1072 0036 BB62     		str	r3, [r7, #40]
+ 466:Core/Src/stm32746g_discovery.c ****     gpio_init_structure.Alternate = DISCOVERY_AUDIO_I2Cx_SCL_SDA_AF;
+ 1073              		.loc 1 466 35
+ 1074 0038 0423     		movs	r3, #4
+ 1075 003a FB62     		str	r3, [r7, #44]
+ 467:Core/Src/stm32746g_discovery.c ****     HAL_GPIO_Init(DISCOVERY_AUDIO_I2Cx_SCL_SDA_GPIO_PORT, &gpio_init_structure);
+ 1076              		.loc 1 467 5
+ 1077 003c 07F11C03 		add	r3, r7, #28
+ 1078 0040 1946     		mov	r1, r3
+ 1079 0042 4548     		ldr	r0, .L64+8
+ 1080 0044 FFF7FEFF 		bl	HAL_GPIO_Init
+ 468:Core/Src/stm32746g_discovery.c **** 
+ 469:Core/Src/stm32746g_discovery.c ****     /* Configure I2C Rx as alternate function */
+ 470:Core/Src/stm32746g_discovery.c ****     gpio_init_structure.Pin = DISCOVERY_AUDIO_I2Cx_SDA_PIN;
+ 1081              		.loc 1 470 29
+ 1082 0048 4FF48073 		mov	r3, #256
+ 1083 004c FB61     		str	r3, [r7, #28]
+ 471:Core/Src/stm32746g_discovery.c ****     HAL_GPIO_Init(DISCOVERY_AUDIO_I2Cx_SCL_SDA_GPIO_PORT, &gpio_init_structure);
+ 1084              		.loc 1 471 5
+ 1085 004e 07F11C03 		add	r3, r7, #28
+ 1086 0052 1946     		mov	r1, r3
+ 1087 0054 4048     		ldr	r0, .L64+8
+ 1088 0056 FFF7FEFF 		bl	HAL_GPIO_Init
+ 1089              	.LBB10:
+ 472:Core/Src/stm32746g_discovery.c **** 
+ 473:Core/Src/stm32746g_discovery.c ****     /*** Configure the I2C peripheral ***/
+ 474:Core/Src/stm32746g_discovery.c ****     /* Enable I2C clock */
+ 475:Core/Src/stm32746g_discovery.c ****     DISCOVERY_AUDIO_I2Cx_CLK_ENABLE();
+ 1090              		.loc 1 475 5
+ 1091 005a 3E4B     		ldr	r3, .L64+4
+ 1092 005c 1B6C     		ldr	r3, [r3, #64]
+ 1093 005e 3D4A     		ldr	r2, .L64+4
+ 1094 0060 43F40003 		orr	r3, r3, #8388608
+ 1095 0064 1364     		str	r3, [r2, #64]
+ 1096 0066 3B4B     		ldr	r3, .L64+4
+ 1097 0068 1B6C     		ldr	r3, [r3, #64]
+ 1098 006a 03F40003 		and	r3, r3, #8388608
+ 1099 006e 7B61     		str	r3, [r7, #20]
+ 1100 0070 7B69     		ldr	r3, [r7, #20]
+ 1101              	.LBE10:
+ 476:Core/Src/stm32746g_discovery.c **** 
+ 477:Core/Src/stm32746g_discovery.c ****     /* Force the I2C peripheral clock reset */
+ 478:Core/Src/stm32746g_discovery.c ****     DISCOVERY_AUDIO_I2Cx_FORCE_RESET();
+ 1102              		.loc 1 478 5
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s 			page 28
+
+
+ 1103 0072 384B     		ldr	r3, .L64+4
+ 1104 0074 1B6A     		ldr	r3, [r3, #32]
+ 1105 0076 374A     		ldr	r2, .L64+4
+ 1106 0078 43F40003 		orr	r3, r3, #8388608
+ 1107 007c 1362     		str	r3, [r2, #32]
+ 479:Core/Src/stm32746g_discovery.c **** 
+ 480:Core/Src/stm32746g_discovery.c ****     /* Release the I2C peripheral clock reset */
+ 481:Core/Src/stm32746g_discovery.c ****     DISCOVERY_AUDIO_I2Cx_RELEASE_RESET();
+ 1108              		.loc 1 481 5
+ 1109 007e 354B     		ldr	r3, .L64+4
+ 1110 0080 1B6A     		ldr	r3, [r3, #32]
+ 1111 0082 344A     		ldr	r2, .L64+4
+ 1112 0084 23F40003 		bic	r3, r3, #8388608
+ 1113 0088 1362     		str	r3, [r2, #32]
+ 482:Core/Src/stm32746g_discovery.c **** 
+ 483:Core/Src/stm32746g_discovery.c ****     /* Enable and set I2Cx Interrupt to a lower priority */
+ 484:Core/Src/stm32746g_discovery.c ****     HAL_NVIC_SetPriority(DISCOVERY_AUDIO_I2Cx_EV_IRQn, 0x0F, 0);
+ 1114              		.loc 1 484 5
+ 1115 008a 0022     		movs	r2, #0
+ 1116 008c 0F21     		movs	r1, #15
+ 1117 008e 4820     		movs	r0, #72
+ 1118 0090 FFF7FEFF 		bl	HAL_NVIC_SetPriority
+ 485:Core/Src/stm32746g_discovery.c ****     HAL_NVIC_EnableIRQ(DISCOVERY_AUDIO_I2Cx_EV_IRQn);
+ 1119              		.loc 1 485 5
+ 1120 0094 4820     		movs	r0, #72
+ 1121 0096 FFF7FEFF 		bl	HAL_NVIC_EnableIRQ
+ 486:Core/Src/stm32746g_discovery.c **** 
+ 487:Core/Src/stm32746g_discovery.c ****     /* Enable and set I2Cx Interrupt to a lower priority */
+ 488:Core/Src/stm32746g_discovery.c ****     HAL_NVIC_SetPriority(DISCOVERY_AUDIO_I2Cx_ER_IRQn, 0x0F, 0);
+ 1122              		.loc 1 488 5
+ 1123 009a 0022     		movs	r2, #0
+ 1124 009c 0F21     		movs	r1, #15
+ 1125 009e 4920     		movs	r0, #73
+ 1126 00a0 FFF7FEFF 		bl	HAL_NVIC_SetPriority
+ 489:Core/Src/stm32746g_discovery.c ****     HAL_NVIC_EnableIRQ(DISCOVERY_AUDIO_I2Cx_ER_IRQn);
+ 1127              		.loc 1 489 5
+ 1128 00a4 4920     		movs	r0, #73
+ 1129 00a6 FFF7FEFF 		bl	HAL_NVIC_EnableIRQ
+ 490:Core/Src/stm32746g_discovery.c ****   }
+ 491:Core/Src/stm32746g_discovery.c ****   else
+ 492:Core/Src/stm32746g_discovery.c ****   {
+ 493:Core/Src/stm32746g_discovery.c ****     /* External, camera and Arduino connector I2C MSP init */
+ 494:Core/Src/stm32746g_discovery.c **** 
+ 495:Core/Src/stm32746g_discovery.c ****     /*** Configure the GPIOs ***/
+ 496:Core/Src/stm32746g_discovery.c ****     /* Enable GPIO clock */
+ 497:Core/Src/stm32746g_discovery.c ****     DISCOVERY_EXT_I2Cx_SCL_SDA_GPIO_CLK_ENABLE();
+ 498:Core/Src/stm32746g_discovery.c **** 
+ 499:Core/Src/stm32746g_discovery.c ****     /* Configure I2C Tx as alternate function */
+ 500:Core/Src/stm32746g_discovery.c ****     gpio_init_structure.Pin = DISCOVERY_EXT_I2Cx_SCL_PIN;
+ 501:Core/Src/stm32746g_discovery.c ****     gpio_init_structure.Mode = GPIO_MODE_AF_OD;
+ 502:Core/Src/stm32746g_discovery.c ****     gpio_init_structure.Pull = GPIO_NOPULL;
+ 503:Core/Src/stm32746g_discovery.c ****     gpio_init_structure.Speed = GPIO_SPEED_FAST;
+ 504:Core/Src/stm32746g_discovery.c ****     gpio_init_structure.Alternate = DISCOVERY_EXT_I2Cx_SCL_SDA_AF;
+ 505:Core/Src/stm32746g_discovery.c ****     HAL_GPIO_Init(DISCOVERY_EXT_I2Cx_SCL_SDA_GPIO_PORT, &gpio_init_structure);
+ 506:Core/Src/stm32746g_discovery.c **** 
+ 507:Core/Src/stm32746g_discovery.c ****     /* Configure I2C Rx as alternate function */
+ 508:Core/Src/stm32746g_discovery.c ****     gpio_init_structure.Pin = DISCOVERY_EXT_I2Cx_SDA_PIN;
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s 			page 29
+
+
+ 509:Core/Src/stm32746g_discovery.c ****     HAL_GPIO_Init(DISCOVERY_EXT_I2Cx_SCL_SDA_GPIO_PORT, &gpio_init_structure);
+ 510:Core/Src/stm32746g_discovery.c **** 
+ 511:Core/Src/stm32746g_discovery.c ****     /*** Configure the I2C peripheral ***/
+ 512:Core/Src/stm32746g_discovery.c ****     /* Enable I2C clock */
+ 513:Core/Src/stm32746g_discovery.c ****     DISCOVERY_EXT_I2Cx_CLK_ENABLE();
+ 514:Core/Src/stm32746g_discovery.c **** 
+ 515:Core/Src/stm32746g_discovery.c ****     /* Force the I2C peripheral clock reset */
+ 516:Core/Src/stm32746g_discovery.c ****     DISCOVERY_EXT_I2Cx_FORCE_RESET();
+ 517:Core/Src/stm32746g_discovery.c **** 
+ 518:Core/Src/stm32746g_discovery.c ****     /* Release the I2C peripheral clock reset */
+ 519:Core/Src/stm32746g_discovery.c ****     DISCOVERY_EXT_I2Cx_RELEASE_RESET();
+ 520:Core/Src/stm32746g_discovery.c **** 
+ 521:Core/Src/stm32746g_discovery.c ****     /* Enable and set I2Cx Interrupt to a lower priority */
+ 522:Core/Src/stm32746g_discovery.c ****     HAL_NVIC_SetPriority(DISCOVERY_EXT_I2Cx_EV_IRQn, 0x0F, 0);
+ 523:Core/Src/stm32746g_discovery.c ****     HAL_NVIC_EnableIRQ(DISCOVERY_EXT_I2Cx_EV_IRQn);
+ 524:Core/Src/stm32746g_discovery.c **** 
+ 525:Core/Src/stm32746g_discovery.c ****     /* Enable and set I2Cx Interrupt to a lower priority */
+ 526:Core/Src/stm32746g_discovery.c ****     HAL_NVIC_SetPriority(DISCOVERY_EXT_I2Cx_ER_IRQn, 0x0F, 0);
+ 527:Core/Src/stm32746g_discovery.c ****     HAL_NVIC_EnableIRQ(DISCOVERY_EXT_I2Cx_ER_IRQn);
+ 528:Core/Src/stm32746g_discovery.c ****   }
+ 529:Core/Src/stm32746g_discovery.c **** }
+ 1130              		.loc 1 529 1
+ 1131 00aa 4DE0     		b	.L63
+ 1132              	.L61:
+ 1133              	.LBB11:
+ 497:Core/Src/stm32746g_discovery.c **** 
+ 1134              		.loc 1 497 5
+ 1135 00ac 294B     		ldr	r3, .L64+4
+ 1136 00ae 1B6B     		ldr	r3, [r3, #48]
+ 1137 00b0 284A     		ldr	r2, .L64+4
+ 1138 00b2 43F00203 		orr	r3, r3, #2
+ 1139 00b6 1363     		str	r3, [r2, #48]
+ 1140 00b8 264B     		ldr	r3, .L64+4
+ 1141 00ba 1B6B     		ldr	r3, [r3, #48]
+ 1142 00bc 03F00203 		and	r3, r3, #2
+ 1143 00c0 3B61     		str	r3, [r7, #16]
+ 1144 00c2 3B69     		ldr	r3, [r7, #16]
+ 1145              	.LBE11:
+ 500:Core/Src/stm32746g_discovery.c ****     gpio_init_structure.Mode = GPIO_MODE_AF_OD;
+ 1146              		.loc 1 500 29
+ 1147 00c4 4FF48073 		mov	r3, #256
+ 1148 00c8 FB61     		str	r3, [r7, #28]
+ 501:Core/Src/stm32746g_discovery.c ****     gpio_init_structure.Pull = GPIO_NOPULL;
+ 1149              		.loc 1 501 30
+ 1150 00ca 1223     		movs	r3, #18
+ 1151 00cc 3B62     		str	r3, [r7, #32]
+ 502:Core/Src/stm32746g_discovery.c ****     gpio_init_structure.Speed = GPIO_SPEED_FAST;
+ 1152              		.loc 1 502 30
+ 1153 00ce 0023     		movs	r3, #0
+ 1154 00d0 7B62     		str	r3, [r7, #36]
+ 503:Core/Src/stm32746g_discovery.c ****     gpio_init_structure.Alternate = DISCOVERY_EXT_I2Cx_SCL_SDA_AF;
+ 1155              		.loc 1 503 31
+ 1156 00d2 0223     		movs	r3, #2
+ 1157 00d4 BB62     		str	r3, [r7, #40]
+ 504:Core/Src/stm32746g_discovery.c ****     HAL_GPIO_Init(DISCOVERY_EXT_I2Cx_SCL_SDA_GPIO_PORT, &gpio_init_structure);
+ 1158              		.loc 1 504 35
+ 1159 00d6 0423     		movs	r3, #4
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s 			page 30
+
+
+ 1160 00d8 FB62     		str	r3, [r7, #44]
+ 505:Core/Src/stm32746g_discovery.c **** 
+ 1161              		.loc 1 505 5
+ 1162 00da 07F11C03 		add	r3, r7, #28
+ 1163 00de 1946     		mov	r1, r3
+ 1164 00e0 1E48     		ldr	r0, .L64+12
+ 1165 00e2 FFF7FEFF 		bl	HAL_GPIO_Init
+ 508:Core/Src/stm32746g_discovery.c ****     HAL_GPIO_Init(DISCOVERY_EXT_I2Cx_SCL_SDA_GPIO_PORT, &gpio_init_structure);
+ 1166              		.loc 1 508 29
+ 1167 00e6 4FF40073 		mov	r3, #512
+ 1168 00ea FB61     		str	r3, [r7, #28]
+ 509:Core/Src/stm32746g_discovery.c **** 
+ 1169              		.loc 1 509 5
+ 1170 00ec 07F11C03 		add	r3, r7, #28
+ 1171 00f0 1946     		mov	r1, r3
+ 1172 00f2 1A48     		ldr	r0, .L64+12
+ 1173 00f4 FFF7FEFF 		bl	HAL_GPIO_Init
+ 1174              	.LBB12:
+ 513:Core/Src/stm32746g_discovery.c **** 
+ 1175              		.loc 1 513 5
+ 1176 00f8 164B     		ldr	r3, .L64+4
+ 1177 00fa 1B6C     		ldr	r3, [r3, #64]
+ 1178 00fc 154A     		ldr	r2, .L64+4
+ 1179 00fe 43F40013 		orr	r3, r3, #2097152
+ 1180 0102 1364     		str	r3, [r2, #64]
+ 1181 0104 134B     		ldr	r3, .L64+4
+ 1182 0106 1B6C     		ldr	r3, [r3, #64]
+ 1183 0108 03F40013 		and	r3, r3, #2097152
+ 1184 010c FB60     		str	r3, [r7, #12]
+ 1185 010e FB68     		ldr	r3, [r7, #12]
+ 1186              	.LBE12:
+ 516:Core/Src/stm32746g_discovery.c **** 
+ 1187              		.loc 1 516 5
+ 1188 0110 104B     		ldr	r3, .L64+4
+ 1189 0112 1B6A     		ldr	r3, [r3, #32]
+ 1190 0114 0F4A     		ldr	r2, .L64+4
+ 1191 0116 43F40013 		orr	r3, r3, #2097152
+ 1192 011a 1362     		str	r3, [r2, #32]
+ 519:Core/Src/stm32746g_discovery.c **** 
+ 1193              		.loc 1 519 5
+ 1194 011c 0D4B     		ldr	r3, .L64+4
+ 1195 011e 1B6A     		ldr	r3, [r3, #32]
+ 1196 0120 0C4A     		ldr	r2, .L64+4
+ 1197 0122 23F40013 		bic	r3, r3, #2097152
+ 1198 0126 1362     		str	r3, [r2, #32]
+ 522:Core/Src/stm32746g_discovery.c ****     HAL_NVIC_EnableIRQ(DISCOVERY_EXT_I2Cx_EV_IRQn);
+ 1199              		.loc 1 522 5
+ 1200 0128 0022     		movs	r2, #0
+ 1201 012a 0F21     		movs	r1, #15
+ 1202 012c 1F20     		movs	r0, #31
+ 1203 012e FFF7FEFF 		bl	HAL_NVIC_SetPriority
+ 523:Core/Src/stm32746g_discovery.c **** 
+ 1204              		.loc 1 523 5
+ 1205 0132 1F20     		movs	r0, #31
+ 1206 0134 FFF7FEFF 		bl	HAL_NVIC_EnableIRQ
+ 526:Core/Src/stm32746g_discovery.c ****     HAL_NVIC_EnableIRQ(DISCOVERY_EXT_I2Cx_ER_IRQn);
+ 1207              		.loc 1 526 5
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s 			page 31
+
+
+ 1208 0138 0022     		movs	r2, #0
+ 1209 013a 0F21     		movs	r1, #15
+ 1210 013c 2020     		movs	r0, #32
+ 1211 013e FFF7FEFF 		bl	HAL_NVIC_SetPriority
+ 527:Core/Src/stm32746g_discovery.c ****   }
+ 1212              		.loc 1 527 5
+ 1213 0142 2020     		movs	r0, #32
+ 1214 0144 FFF7FEFF 		bl	HAL_NVIC_EnableIRQ
+ 1215              	.L63:
+ 1216              		.loc 1 529 1
+ 1217 0148 00BF     		nop
+ 1218 014a 3037     		adds	r7, r7, #48
+ 1219              	.LCFI57:
+ 1220              		.cfi_def_cfa_offset 8
+ 1221 014c BD46     		mov	sp, r7
+ 1222              	.LCFI58:
+ 1223              		.cfi_def_cfa_register 13
+ 1224              		@ sp needed
+ 1225 014e 80BD     		pop	{r7, pc}
+ 1226              	.L65:
+ 1227              		.align	2
+ 1228              	.L64:
+ 1229 0150 00000000 		.word	hI2cAudioHandler
+ 1230 0154 00380240 		.word	1073887232
+ 1231 0158 001C0240 		.word	1073880064
+ 1232 015c 00040240 		.word	1073873920
+ 1233              		.cfi_endproc
+ 1234              	.LFE152:
+ 1236              		.section	.text.I2Cx_Init,"ax",%progbits
+ 1237              		.align	1
+ 1238              		.syntax unified
+ 1239              		.thumb
+ 1240              		.thumb_func
+ 1242              	I2Cx_Init:
+ 1243              	.LFB153:
+ 530:Core/Src/stm32746g_discovery.c **** 
+ 531:Core/Src/stm32746g_discovery.c **** /**
+ 532:Core/Src/stm32746g_discovery.c ****   * @brief  Initializes I2C HAL.
+ 533:Core/Src/stm32746g_discovery.c ****   * @param  i2c_handler : I2C handler
+ 534:Core/Src/stm32746g_discovery.c ****   * @retval None
+ 535:Core/Src/stm32746g_discovery.c ****   */
+ 536:Core/Src/stm32746g_discovery.c **** static void I2Cx_Init(I2C_HandleTypeDef *i2c_handler)
+ 537:Core/Src/stm32746g_discovery.c **** {
+ 1244              		.loc 1 537 1
+ 1245              		.cfi_startproc
+ 1246              		@ args = 0, pretend = 0, frame = 8
+ 1247              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1248 0000 80B5     		push	{r7, lr}
+ 1249              	.LCFI59:
+ 1250              		.cfi_def_cfa_offset 8
+ 1251              		.cfi_offset 7, -8
+ 1252              		.cfi_offset 14, -4
+ 1253 0002 82B0     		sub	sp, sp, #8
+ 1254              	.LCFI60:
+ 1255              		.cfi_def_cfa_offset 16
+ 1256 0004 00AF     		add	r7, sp, #0
+ 1257              	.LCFI61:
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s 			page 32
+
+
+ 1258              		.cfi_def_cfa_register 7
+ 1259 0006 7860     		str	r0, [r7, #4]
+ 538:Core/Src/stm32746g_discovery.c ****   if(HAL_I2C_GetState(i2c_handler) == HAL_I2C_STATE_RESET)
+ 1260              		.loc 1 538 6
+ 1261 0008 7868     		ldr	r0, [r7, #4]
+ 1262 000a FFF7FEFF 		bl	HAL_I2C_GetState
+ 1263 000e 0346     		mov	r3, r0
+ 1264              		.loc 1 538 5
+ 1265 0010 002B     		cmp	r3, #0
+ 1266 0012 25D1     		bne	.L70
+ 539:Core/Src/stm32746g_discovery.c ****   {
+ 540:Core/Src/stm32746g_discovery.c ****     if (i2c_handler == (I2C_HandleTypeDef*)(&hI2cAudioHandler))
+ 1267              		.loc 1 540 8
+ 1268 0014 7B68     		ldr	r3, [r7, #4]
+ 1269 0016 144A     		ldr	r2, .L71
+ 1270 0018 9342     		cmp	r3, r2
+ 1271 001a 03D1     		bne	.L68
+ 541:Core/Src/stm32746g_discovery.c ****     {
+ 542:Core/Src/stm32746g_discovery.c ****       /* Audio and LCD I2C configuration */
+ 543:Core/Src/stm32746g_discovery.c ****       i2c_handler->Instance = DISCOVERY_AUDIO_I2Cx;
+ 1272              		.loc 1 543 29
+ 1273 001c 7B68     		ldr	r3, [r7, #4]
+ 1274 001e 134A     		ldr	r2, .L71+4
+ 1275 0020 1A60     		str	r2, [r3]
+ 1276 0022 02E0     		b	.L69
+ 1277              	.L68:
+ 544:Core/Src/stm32746g_discovery.c ****     }
+ 545:Core/Src/stm32746g_discovery.c ****     else
+ 546:Core/Src/stm32746g_discovery.c ****     {
+ 547:Core/Src/stm32746g_discovery.c ****       /* External, camera and Arduino connector  I2C configuration */
+ 548:Core/Src/stm32746g_discovery.c ****       i2c_handler->Instance = DISCOVERY_EXT_I2Cx;
+ 1278              		.loc 1 548 29
+ 1279 0024 7B68     		ldr	r3, [r7, #4]
+ 1280 0026 124A     		ldr	r2, .L71+8
+ 1281 0028 1A60     		str	r2, [r3]
+ 1282              	.L69:
+ 549:Core/Src/stm32746g_discovery.c ****     }
+ 550:Core/Src/stm32746g_discovery.c ****     i2c_handler->Init.Timing           = DISCOVERY_I2Cx_TIMING;
+ 1283              		.loc 1 550 40
+ 1284 002a 7B68     		ldr	r3, [r7, #4]
+ 1285 002c 114A     		ldr	r2, .L71+12
+ 1286 002e 5A60     		str	r2, [r3, #4]
+ 551:Core/Src/stm32746g_discovery.c ****     i2c_handler->Init.OwnAddress1      = 0;
+ 1287              		.loc 1 551 40
+ 1288 0030 7B68     		ldr	r3, [r7, #4]
+ 1289 0032 0022     		movs	r2, #0
+ 1290 0034 9A60     		str	r2, [r3, #8]
+ 552:Core/Src/stm32746g_discovery.c ****     i2c_handler->Init.AddressingMode   = I2C_ADDRESSINGMODE_7BIT;
+ 1291              		.loc 1 552 40
+ 1292 0036 7B68     		ldr	r3, [r7, #4]
+ 1293 0038 0122     		movs	r2, #1
+ 1294 003a DA60     		str	r2, [r3, #12]
+ 553:Core/Src/stm32746g_discovery.c ****     i2c_handler->Init.DualAddressMode  = I2C_DUALADDRESS_DISABLE;
+ 1295              		.loc 1 553 40
+ 1296 003c 7B68     		ldr	r3, [r7, #4]
+ 1297 003e 0022     		movs	r2, #0
+ 1298 0040 1A61     		str	r2, [r3, #16]
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s 			page 33
+
+
+ 554:Core/Src/stm32746g_discovery.c ****     i2c_handler->Init.OwnAddress2      = 0;
+ 1299              		.loc 1 554 40
+ 1300 0042 7B68     		ldr	r3, [r7, #4]
+ 1301 0044 0022     		movs	r2, #0
+ 1302 0046 5A61     		str	r2, [r3, #20]
+ 555:Core/Src/stm32746g_discovery.c ****     i2c_handler->Init.GeneralCallMode  = I2C_GENERALCALL_DISABLE;
+ 1303              		.loc 1 555 40
+ 1304 0048 7B68     		ldr	r3, [r7, #4]
+ 1305 004a 0022     		movs	r2, #0
+ 1306 004c DA61     		str	r2, [r3, #28]
+ 556:Core/Src/stm32746g_discovery.c ****     i2c_handler->Init.NoStretchMode    = I2C_NOSTRETCH_DISABLE;
+ 1307              		.loc 1 556 40
+ 1308 004e 7B68     		ldr	r3, [r7, #4]
+ 1309 0050 0022     		movs	r2, #0
+ 1310 0052 1A62     		str	r2, [r3, #32]
+ 557:Core/Src/stm32746g_discovery.c **** 
+ 558:Core/Src/stm32746g_discovery.c ****     /* Init the I2C */
+ 559:Core/Src/stm32746g_discovery.c ****     I2Cx_MspInit(i2c_handler);
+ 1311              		.loc 1 559 5
+ 1312 0054 7868     		ldr	r0, [r7, #4]
+ 1313 0056 FFF7FEFF 		bl	I2Cx_MspInit
+ 560:Core/Src/stm32746g_discovery.c ****     HAL_I2C_Init(i2c_handler);
+ 1314              		.loc 1 560 5
+ 1315 005a 7868     		ldr	r0, [r7, #4]
+ 1316 005c FFF7FEFF 		bl	HAL_I2C_Init
+ 1317              	.L70:
+ 561:Core/Src/stm32746g_discovery.c ****   }
+ 562:Core/Src/stm32746g_discovery.c **** }
+ 1318              		.loc 1 562 1
+ 1319 0060 00BF     		nop
+ 1320 0062 0837     		adds	r7, r7, #8
+ 1321              	.LCFI62:
+ 1322              		.cfi_def_cfa_offset 8
+ 1323 0064 BD46     		mov	sp, r7
+ 1324              	.LCFI63:
+ 1325              		.cfi_def_cfa_register 13
+ 1326              		@ sp needed
+ 1327 0066 80BD     		pop	{r7, pc}
+ 1328              	.L72:
+ 1329              		.align	2
+ 1330              	.L71:
+ 1331 0068 00000000 		.word	hI2cAudioHandler
+ 1332 006c 005C0040 		.word	1073765376
+ 1333 0070 00540040 		.word	1073763328
+ 1334 0074 32279140 		.word	1083254578
+ 1335              		.cfi_endproc
+ 1336              	.LFE153:
+ 1338              		.section	.text.I2Cx_ReadMultiple,"ax",%progbits
+ 1339              		.align	1
+ 1340              		.syntax unified
+ 1341              		.thumb
+ 1342              		.thumb_func
+ 1344              	I2Cx_ReadMultiple:
+ 1345              	.LFB154:
+ 563:Core/Src/stm32746g_discovery.c **** 
+ 564:Core/Src/stm32746g_discovery.c **** /**
+ 565:Core/Src/stm32746g_discovery.c ****   * @brief  Reads multiple data.
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s 			page 34
+
+
+ 566:Core/Src/stm32746g_discovery.c ****   * @param  i2c_handler : I2C handler
+ 567:Core/Src/stm32746g_discovery.c ****   * @param  Addr: I2C address
+ 568:Core/Src/stm32746g_discovery.c ****   * @param  Reg: Reg address 
+ 569:Core/Src/stm32746g_discovery.c ****   * @param  MemAddress: Memory address 
+ 570:Core/Src/stm32746g_discovery.c ****   * @param  Buffer: Pointer to data buffer
+ 571:Core/Src/stm32746g_discovery.c ****   * @param  Length: Length of the data
+ 572:Core/Src/stm32746g_discovery.c ****   * @retval Number of read data
+ 573:Core/Src/stm32746g_discovery.c ****   */
+ 574:Core/Src/stm32746g_discovery.c **** static HAL_StatusTypeDef I2Cx_ReadMultiple(I2C_HandleTypeDef *i2c_handler,
+ 575:Core/Src/stm32746g_discovery.c ****                                            uint8_t Addr,
+ 576:Core/Src/stm32746g_discovery.c ****                                            uint16_t Reg,
+ 577:Core/Src/stm32746g_discovery.c ****                                            uint16_t MemAddress,
+ 578:Core/Src/stm32746g_discovery.c ****                                            uint8_t *Buffer,
+ 579:Core/Src/stm32746g_discovery.c ****                                            uint16_t Length)
+ 580:Core/Src/stm32746g_discovery.c **** {
+ 1346              		.loc 1 580 1
+ 1347              		.cfi_startproc
+ 1348              		@ args = 8, pretend = 0, frame = 24
+ 1349              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1350 0000 80B5     		push	{r7, lr}
+ 1351              	.LCFI64:
+ 1352              		.cfi_def_cfa_offset 8
+ 1353              		.cfi_offset 7, -8
+ 1354              		.cfi_offset 14, -4
+ 1355 0002 8AB0     		sub	sp, sp, #40
+ 1356              	.LCFI65:
+ 1357              		.cfi_def_cfa_offset 48
+ 1358 0004 04AF     		add	r7, sp, #16
+ 1359              	.LCFI66:
+ 1360              		.cfi_def_cfa 7, 32
+ 1361 0006 F860     		str	r0, [r7, #12]
+ 1362 0008 0846     		mov	r0, r1
+ 1363 000a 1146     		mov	r1, r2
+ 1364 000c 1A46     		mov	r2, r3
+ 1365 000e 0346     		mov	r3, r0
+ 1366 0010 FB72     		strb	r3, [r7, #11]
+ 1367 0012 0B46     		mov	r3, r1	@ movhi
+ 1368 0014 3B81     		strh	r3, [r7, #8]	@ movhi
+ 1369 0016 1346     		mov	r3, r2	@ movhi
+ 1370 0018 FB80     		strh	r3, [r7, #6]	@ movhi
+ 581:Core/Src/stm32746g_discovery.c ****   HAL_StatusTypeDef status = HAL_OK;
+ 1371              		.loc 1 581 21
+ 1372 001a 0023     		movs	r3, #0
+ 1373 001c FB75     		strb	r3, [r7, #23]
+ 582:Core/Src/stm32746g_discovery.c **** 
+ 583:Core/Src/stm32746g_discovery.c ****   status = HAL_I2C_Mem_Read(i2c_handler, Addr, (uint16_t)Reg, MemAddress, Buffer, Length, 1000);
+ 1374              		.loc 1 583 12
+ 1375 001e FB7A     		ldrb	r3, [r7, #11]	@ zero_extendqisi2
+ 1376 0020 99B2     		uxth	r1, r3
+ 1377 0022 F888     		ldrh	r0, [r7, #6]
+ 1378 0024 3A89     		ldrh	r2, [r7, #8]
+ 1379 0026 4FF47A73 		mov	r3, #1000
+ 1380 002a 0293     		str	r3, [sp, #8]
+ 1381 002c BB8C     		ldrh	r3, [r7, #36]
+ 1382 002e 0193     		str	r3, [sp, #4]
+ 1383 0030 3B6A     		ldr	r3, [r7, #32]
+ 1384 0032 0093     		str	r3, [sp]
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s 			page 35
+
+
+ 1385 0034 0346     		mov	r3, r0
+ 1386 0036 F868     		ldr	r0, [r7, #12]
+ 1387 0038 FFF7FEFF 		bl	HAL_I2C_Mem_Read
+ 1388 003c 0346     		mov	r3, r0
+ 1389 003e FB75     		strb	r3, [r7, #23]
+ 584:Core/Src/stm32746g_discovery.c **** 
+ 585:Core/Src/stm32746g_discovery.c ****   /* Check the communication status */
+ 586:Core/Src/stm32746g_discovery.c ****   if(status != HAL_OK)
+ 1390              		.loc 1 586 5
+ 1391 0040 FB7D     		ldrb	r3, [r7, #23]	@ zero_extendqisi2
+ 1392 0042 002B     		cmp	r3, #0
+ 1393 0044 04D0     		beq	.L74
+ 587:Core/Src/stm32746g_discovery.c ****   {
+ 588:Core/Src/stm32746g_discovery.c ****     /* I2C error occurred */
+ 589:Core/Src/stm32746g_discovery.c ****     I2Cx_Error(i2c_handler, Addr);
+ 1394              		.loc 1 589 5
+ 1395 0046 FB7A     		ldrb	r3, [r7, #11]	@ zero_extendqisi2
+ 1396 0048 1946     		mov	r1, r3
+ 1397 004a F868     		ldr	r0, [r7, #12]
+ 1398 004c FFF7FEFF 		bl	I2Cx_Error
+ 1399              	.L74:
+ 590:Core/Src/stm32746g_discovery.c ****   }
+ 591:Core/Src/stm32746g_discovery.c ****   return status;    
+ 1400              		.loc 1 591 10
+ 1401 0050 FB7D     		ldrb	r3, [r7, #23]	@ zero_extendqisi2
+ 592:Core/Src/stm32746g_discovery.c **** }
+ 1402              		.loc 1 592 1
+ 1403 0052 1846     		mov	r0, r3
+ 1404 0054 1837     		adds	r7, r7, #24
+ 1405              	.LCFI67:
+ 1406              		.cfi_def_cfa_offset 8
+ 1407 0056 BD46     		mov	sp, r7
+ 1408              	.LCFI68:
+ 1409              		.cfi_def_cfa_register 13
+ 1410              		@ sp needed
+ 1411 0058 80BD     		pop	{r7, pc}
+ 1412              		.cfi_endproc
+ 1413              	.LFE154:
+ 1415              		.section	.text.I2Cx_WriteMultiple,"ax",%progbits
+ 1416              		.align	1
+ 1417              		.syntax unified
+ 1418              		.thumb
+ 1419              		.thumb_func
+ 1421              	I2Cx_WriteMultiple:
+ 1422              	.LFB155:
+ 593:Core/Src/stm32746g_discovery.c **** 
+ 594:Core/Src/stm32746g_discovery.c **** /**
+ 595:Core/Src/stm32746g_discovery.c ****   * @brief  Writes a value in a register of the device through BUS in using DMA mode.
+ 596:Core/Src/stm32746g_discovery.c ****   * @param  i2c_handler : I2C handler
+ 597:Core/Src/stm32746g_discovery.c ****   * @param  Addr: Device address on BUS Bus.  
+ 598:Core/Src/stm32746g_discovery.c ****   * @param  Reg: The target register address to write
+ 599:Core/Src/stm32746g_discovery.c ****   * @param  MemAddress: Memory address 
+ 600:Core/Src/stm32746g_discovery.c ****   * @param  Buffer: The target register value to be written 
+ 601:Core/Src/stm32746g_discovery.c ****   * @param  Length: buffer size to be written
+ 602:Core/Src/stm32746g_discovery.c ****   * @retval HAL status
+ 603:Core/Src/stm32746g_discovery.c ****   */
+ 604:Core/Src/stm32746g_discovery.c **** static HAL_StatusTypeDef I2Cx_WriteMultiple(I2C_HandleTypeDef *i2c_handler,
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s 			page 36
+
+
+ 605:Core/Src/stm32746g_discovery.c ****                                             uint8_t Addr,
+ 606:Core/Src/stm32746g_discovery.c ****                                             uint16_t Reg,
+ 607:Core/Src/stm32746g_discovery.c ****                                             uint16_t MemAddress,
+ 608:Core/Src/stm32746g_discovery.c ****                                             uint8_t *Buffer,
+ 609:Core/Src/stm32746g_discovery.c ****                                             uint16_t Length)
+ 610:Core/Src/stm32746g_discovery.c **** {
+ 1423              		.loc 1 610 1
+ 1424              		.cfi_startproc
+ 1425              		@ args = 8, pretend = 0, frame = 24
+ 1426              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1427 0000 80B5     		push	{r7, lr}
+ 1428              	.LCFI69:
+ 1429              		.cfi_def_cfa_offset 8
+ 1430              		.cfi_offset 7, -8
+ 1431              		.cfi_offset 14, -4
+ 1432 0002 8AB0     		sub	sp, sp, #40
+ 1433              	.LCFI70:
+ 1434              		.cfi_def_cfa_offset 48
+ 1435 0004 04AF     		add	r7, sp, #16
+ 1436              	.LCFI71:
+ 1437              		.cfi_def_cfa 7, 32
+ 1438 0006 F860     		str	r0, [r7, #12]
+ 1439 0008 0846     		mov	r0, r1
+ 1440 000a 1146     		mov	r1, r2
+ 1441 000c 1A46     		mov	r2, r3
+ 1442 000e 0346     		mov	r3, r0
+ 1443 0010 FB72     		strb	r3, [r7, #11]
+ 1444 0012 0B46     		mov	r3, r1	@ movhi
+ 1445 0014 3B81     		strh	r3, [r7, #8]	@ movhi
+ 1446 0016 1346     		mov	r3, r2	@ movhi
+ 1447 0018 FB80     		strh	r3, [r7, #6]	@ movhi
+ 611:Core/Src/stm32746g_discovery.c ****   HAL_StatusTypeDef status = HAL_OK;
+ 1448              		.loc 1 611 21
+ 1449 001a 0023     		movs	r3, #0
+ 1450 001c FB75     		strb	r3, [r7, #23]
+ 612:Core/Src/stm32746g_discovery.c ****   
+ 613:Core/Src/stm32746g_discovery.c ****   status = HAL_I2C_Mem_Write(i2c_handler, Addr, (uint16_t)Reg, MemAddress, Buffer, Length, 1000);
+ 1451              		.loc 1 613 12
+ 1452 001e FB7A     		ldrb	r3, [r7, #11]	@ zero_extendqisi2
+ 1453 0020 99B2     		uxth	r1, r3
+ 1454 0022 F888     		ldrh	r0, [r7, #6]
+ 1455 0024 3A89     		ldrh	r2, [r7, #8]
+ 1456 0026 4FF47A73 		mov	r3, #1000
+ 1457 002a 0293     		str	r3, [sp, #8]
+ 1458 002c BB8C     		ldrh	r3, [r7, #36]
+ 1459 002e 0193     		str	r3, [sp, #4]
+ 1460 0030 3B6A     		ldr	r3, [r7, #32]
+ 1461 0032 0093     		str	r3, [sp]
+ 1462 0034 0346     		mov	r3, r0
+ 1463 0036 F868     		ldr	r0, [r7, #12]
+ 1464 0038 FFF7FEFF 		bl	HAL_I2C_Mem_Write
+ 1465 003c 0346     		mov	r3, r0
+ 1466 003e FB75     		strb	r3, [r7, #23]
+ 614:Core/Src/stm32746g_discovery.c ****   
+ 615:Core/Src/stm32746g_discovery.c ****   /* Check the communication status */
+ 616:Core/Src/stm32746g_discovery.c ****   if(status != HAL_OK)
+ 1467              		.loc 1 616 5
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s 			page 37
+
+
+ 1468 0040 FB7D     		ldrb	r3, [r7, #23]	@ zero_extendqisi2
+ 1469 0042 002B     		cmp	r3, #0
+ 1470 0044 04D0     		beq	.L77
+ 617:Core/Src/stm32746g_discovery.c ****   {
+ 618:Core/Src/stm32746g_discovery.c ****     /* Re-Initiaize the I2C Bus */
+ 619:Core/Src/stm32746g_discovery.c ****     I2Cx_Error(i2c_handler, Addr);
+ 1471              		.loc 1 619 5
+ 1472 0046 FB7A     		ldrb	r3, [r7, #11]	@ zero_extendqisi2
+ 1473 0048 1946     		mov	r1, r3
+ 1474 004a F868     		ldr	r0, [r7, #12]
+ 1475 004c FFF7FEFF 		bl	I2Cx_Error
+ 1476              	.L77:
+ 620:Core/Src/stm32746g_discovery.c ****   }
+ 621:Core/Src/stm32746g_discovery.c ****   return status;
+ 1477              		.loc 1 621 10
+ 1478 0050 FB7D     		ldrb	r3, [r7, #23]	@ zero_extendqisi2
+ 622:Core/Src/stm32746g_discovery.c **** }
+ 1479              		.loc 1 622 1
+ 1480 0052 1846     		mov	r0, r3
+ 1481 0054 1837     		adds	r7, r7, #24
+ 1482              	.LCFI72:
+ 1483              		.cfi_def_cfa_offset 8
+ 1484 0056 BD46     		mov	sp, r7
+ 1485              	.LCFI73:
+ 1486              		.cfi_def_cfa_register 13
+ 1487              		@ sp needed
+ 1488 0058 80BD     		pop	{r7, pc}
+ 1489              		.cfi_endproc
+ 1490              	.LFE155:
+ 1492              		.section	.text.I2Cx_IsDeviceReady,"ax",%progbits
+ 1493              		.align	1
+ 1494              		.syntax unified
+ 1495              		.thumb
+ 1496              		.thumb_func
+ 1498              	I2Cx_IsDeviceReady:
+ 1499              	.LFB156:
+ 623:Core/Src/stm32746g_discovery.c **** 
+ 624:Core/Src/stm32746g_discovery.c **** /**
+ 625:Core/Src/stm32746g_discovery.c ****   * @brief  Checks if target device is ready for communication. 
+ 626:Core/Src/stm32746g_discovery.c ****   * @note   This function is used with Memory devices
+ 627:Core/Src/stm32746g_discovery.c ****   * @param  i2c_handler : I2C handler
+ 628:Core/Src/stm32746g_discovery.c ****   * @param  DevAddress: Target device address
+ 629:Core/Src/stm32746g_discovery.c ****   * @param  Trials: Number of trials
+ 630:Core/Src/stm32746g_discovery.c ****   * @retval HAL status
+ 631:Core/Src/stm32746g_discovery.c ****   */
+ 632:Core/Src/stm32746g_discovery.c **** static HAL_StatusTypeDef I2Cx_IsDeviceReady(I2C_HandleTypeDef *i2c_handler, uint16_t DevAddress, ui
+ 633:Core/Src/stm32746g_discovery.c **** { 
+ 1500              		.loc 1 633 1
+ 1501              		.cfi_startproc
+ 1502              		@ args = 0, pretend = 0, frame = 16
+ 1503              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1504 0000 80B5     		push	{r7, lr}
+ 1505              	.LCFI74:
+ 1506              		.cfi_def_cfa_offset 8
+ 1507              		.cfi_offset 7, -8
+ 1508              		.cfi_offset 14, -4
+ 1509 0002 84B0     		sub	sp, sp, #16
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s 			page 38
+
+
+ 1510              	.LCFI75:
+ 1511              		.cfi_def_cfa_offset 24
+ 1512 0004 00AF     		add	r7, sp, #0
+ 1513              	.LCFI76:
+ 1514              		.cfi_def_cfa_register 7
+ 1515 0006 F860     		str	r0, [r7, #12]
+ 1516 0008 0B46     		mov	r3, r1
+ 1517 000a 7A60     		str	r2, [r7, #4]
+ 1518 000c 7B81     		strh	r3, [r7, #10]	@ movhi
+ 634:Core/Src/stm32746g_discovery.c ****   return (HAL_I2C_IsDeviceReady(i2c_handler, DevAddress, Trials, 1000));
+ 1519              		.loc 1 634 11
+ 1520 000e 7989     		ldrh	r1, [r7, #10]
+ 1521 0010 4FF47A73 		mov	r3, #1000
+ 1522 0014 7A68     		ldr	r2, [r7, #4]
+ 1523 0016 F868     		ldr	r0, [r7, #12]
+ 1524 0018 FFF7FEFF 		bl	HAL_I2C_IsDeviceReady
+ 1525 001c 0346     		mov	r3, r0
+ 635:Core/Src/stm32746g_discovery.c **** }
+ 1526              		.loc 1 635 1
+ 1527 001e 1846     		mov	r0, r3
+ 1528 0020 1037     		adds	r7, r7, #16
+ 1529              	.LCFI77:
+ 1530              		.cfi_def_cfa_offset 8
+ 1531 0022 BD46     		mov	sp, r7
+ 1532              	.LCFI78:
+ 1533              		.cfi_def_cfa_register 13
+ 1534              		@ sp needed
+ 1535 0024 80BD     		pop	{r7, pc}
+ 1536              		.cfi_endproc
+ 1537              	.LFE156:
+ 1539              		.section	.text.I2Cx_Error,"ax",%progbits
+ 1540              		.align	1
+ 1541              		.syntax unified
+ 1542              		.thumb
+ 1543              		.thumb_func
+ 1545              	I2Cx_Error:
+ 1546              	.LFB157:
+ 636:Core/Src/stm32746g_discovery.c **** 
+ 637:Core/Src/stm32746g_discovery.c **** /**
+ 638:Core/Src/stm32746g_discovery.c ****   * @brief  Manages error callback by re-initializing I2C.
+ 639:Core/Src/stm32746g_discovery.c ****   * @param  i2c_handler : I2C handler
+ 640:Core/Src/stm32746g_discovery.c ****   * @param  Addr: I2C Address
+ 641:Core/Src/stm32746g_discovery.c ****   * @retval None
+ 642:Core/Src/stm32746g_discovery.c ****   */
+ 643:Core/Src/stm32746g_discovery.c **** static void I2Cx_Error(I2C_HandleTypeDef *i2c_handler, uint8_t Addr)
+ 644:Core/Src/stm32746g_discovery.c **** {
+ 1547              		.loc 1 644 1
+ 1548              		.cfi_startproc
+ 1549              		@ args = 0, pretend = 0, frame = 8
+ 1550              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1551 0000 80B5     		push	{r7, lr}
+ 1552              	.LCFI79:
+ 1553              		.cfi_def_cfa_offset 8
+ 1554              		.cfi_offset 7, -8
+ 1555              		.cfi_offset 14, -4
+ 1556 0002 82B0     		sub	sp, sp, #8
+ 1557              	.LCFI80:
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s 			page 39
+
+
+ 1558              		.cfi_def_cfa_offset 16
+ 1559 0004 00AF     		add	r7, sp, #0
+ 1560              	.LCFI81:
+ 1561              		.cfi_def_cfa_register 7
+ 1562 0006 7860     		str	r0, [r7, #4]
+ 1563 0008 0B46     		mov	r3, r1
+ 1564 000a FB70     		strb	r3, [r7, #3]
+ 645:Core/Src/stm32746g_discovery.c ****   /* De-initialize the I2C communication bus */
+ 646:Core/Src/stm32746g_discovery.c ****   HAL_I2C_DeInit(i2c_handler);
+ 1565              		.loc 1 646 3
+ 1566 000c 7868     		ldr	r0, [r7, #4]
+ 1567 000e FFF7FEFF 		bl	HAL_I2C_DeInit
+ 647:Core/Src/stm32746g_discovery.c ****   
+ 648:Core/Src/stm32746g_discovery.c ****   /* Re-Initialize the I2C communication bus */
+ 649:Core/Src/stm32746g_discovery.c ****   I2Cx_Init(i2c_handler);
+ 1568              		.loc 1 649 3
+ 1569 0012 7868     		ldr	r0, [r7, #4]
+ 1570 0014 FFF7FEFF 		bl	I2Cx_Init
+ 650:Core/Src/stm32746g_discovery.c **** }
+ 1571              		.loc 1 650 1
+ 1572 0018 00BF     		nop
+ 1573 001a 0837     		adds	r7, r7, #8
+ 1574              	.LCFI82:
+ 1575              		.cfi_def_cfa_offset 8
+ 1576 001c BD46     		mov	sp, r7
+ 1577              	.LCFI83:
+ 1578              		.cfi_def_cfa_register 13
+ 1579              		@ sp needed
+ 1580 001e 80BD     		pop	{r7, pc}
+ 1581              		.cfi_endproc
+ 1582              	.LFE157:
+ 1584              		.section	.text.AUDIO_IO_Init,"ax",%progbits
+ 1585              		.align	1
+ 1586              		.global	AUDIO_IO_Init
+ 1587              		.syntax unified
+ 1588              		.thumb
+ 1589              		.thumb_func
+ 1591              	AUDIO_IO_Init:
+ 1592              	.LFB158:
+ 651:Core/Src/stm32746g_discovery.c **** 
+ 652:Core/Src/stm32746g_discovery.c **** /*******************************************************************************
+ 653:Core/Src/stm32746g_discovery.c ****                             LINK OPERATIONS
+ 654:Core/Src/stm32746g_discovery.c **** *******************************************************************************/
+ 655:Core/Src/stm32746g_discovery.c **** 
+ 656:Core/Src/stm32746g_discovery.c **** /********************************* LINK AUDIO *********************************/
+ 657:Core/Src/stm32746g_discovery.c **** 
+ 658:Core/Src/stm32746g_discovery.c **** /**
+ 659:Core/Src/stm32746g_discovery.c ****   * @brief  Initializes Audio low level.
+ 660:Core/Src/stm32746g_discovery.c ****   * @retval None
+ 661:Core/Src/stm32746g_discovery.c ****   */
+ 662:Core/Src/stm32746g_discovery.c **** void AUDIO_IO_Init(void) 
+ 663:Core/Src/stm32746g_discovery.c **** {
+ 1593              		.loc 1 663 1
+ 1594              		.cfi_startproc
+ 1595              		@ args = 0, pretend = 0, frame = 0
+ 1596              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1597 0000 80B5     		push	{r7, lr}
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s 			page 40
+
+
+ 1598              	.LCFI84:
+ 1599              		.cfi_def_cfa_offset 8
+ 1600              		.cfi_offset 7, -8
+ 1601              		.cfi_offset 14, -4
+ 1602 0002 00AF     		add	r7, sp, #0
+ 1603              	.LCFI85:
+ 1604              		.cfi_def_cfa_register 7
+ 664:Core/Src/stm32746g_discovery.c ****   I2Cx_Init(&hI2cAudioHandler);
+ 1605              		.loc 1 664 3
+ 1606 0004 0248     		ldr	r0, .L83
+ 1607 0006 FFF7FEFF 		bl	I2Cx_Init
+ 665:Core/Src/stm32746g_discovery.c **** }
+ 1608              		.loc 1 665 1
+ 1609 000a 00BF     		nop
+ 1610 000c 80BD     		pop	{r7, pc}
+ 1611              	.L84:
+ 1612 000e 00BF     		.align	2
+ 1613              	.L83:
+ 1614 0010 00000000 		.word	hI2cAudioHandler
+ 1615              		.cfi_endproc
+ 1616              	.LFE158:
+ 1618              		.section	.text.AUDIO_IO_DeInit,"ax",%progbits
+ 1619              		.align	1
+ 1620              		.global	AUDIO_IO_DeInit
+ 1621              		.syntax unified
+ 1622              		.thumb
+ 1623              		.thumb_func
+ 1625              	AUDIO_IO_DeInit:
+ 1626              	.LFB159:
+ 666:Core/Src/stm32746g_discovery.c **** 
+ 667:Core/Src/stm32746g_discovery.c **** /**
+ 668:Core/Src/stm32746g_discovery.c ****   * @brief  Deinitializes Audio low level.
+ 669:Core/Src/stm32746g_discovery.c ****   * @retval None
+ 670:Core/Src/stm32746g_discovery.c ****   */
+ 671:Core/Src/stm32746g_discovery.c **** void AUDIO_IO_DeInit(void)
+ 672:Core/Src/stm32746g_discovery.c **** {
+ 1627              		.loc 1 672 1
+ 1628              		.cfi_startproc
+ 1629              		@ args = 0, pretend = 0, frame = 0
+ 1630              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1631              		@ link register save eliminated.
+ 1632 0000 80B4     		push	{r7}
+ 1633              	.LCFI86:
+ 1634              		.cfi_def_cfa_offset 4
+ 1635              		.cfi_offset 7, -4
+ 1636 0002 00AF     		add	r7, sp, #0
+ 1637              	.LCFI87:
+ 1638              		.cfi_def_cfa_register 7
+ 673:Core/Src/stm32746g_discovery.c **** }
+ 1639              		.loc 1 673 1
+ 1640 0004 00BF     		nop
+ 1641 0006 BD46     		mov	sp, r7
+ 1642              	.LCFI88:
+ 1643              		.cfi_def_cfa_register 13
+ 1644              		@ sp needed
+ 1645 0008 5DF8047B 		ldr	r7, [sp], #4
+ 1646              	.LCFI89:
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s 			page 41
+
+
+ 1647              		.cfi_restore 7
+ 1648              		.cfi_def_cfa_offset 0
+ 1649 000c 7047     		bx	lr
+ 1650              		.cfi_endproc
+ 1651              	.LFE159:
+ 1653              		.section	.text.AUDIO_IO_Write,"ax",%progbits
+ 1654              		.align	1
+ 1655              		.global	AUDIO_IO_Write
+ 1656              		.syntax unified
+ 1657              		.thumb
+ 1658              		.thumb_func
+ 1660              	AUDIO_IO_Write:
+ 1661              	.LFB160:
+ 674:Core/Src/stm32746g_discovery.c **** 
+ 675:Core/Src/stm32746g_discovery.c **** /**
+ 676:Core/Src/stm32746g_discovery.c ****   * @brief  Writes a single data.
+ 677:Core/Src/stm32746g_discovery.c ****   * @param  Addr: I2C address
+ 678:Core/Src/stm32746g_discovery.c ****   * @param  Reg: Reg address 
+ 679:Core/Src/stm32746g_discovery.c ****   * @param  Value: Data to be written
+ 680:Core/Src/stm32746g_discovery.c ****   * @retval None
+ 681:Core/Src/stm32746g_discovery.c ****   */
+ 682:Core/Src/stm32746g_discovery.c **** void AUDIO_IO_Write(uint8_t Addr, uint16_t Reg, uint16_t Value)
+ 683:Core/Src/stm32746g_discovery.c **** {
+ 1662              		.loc 1 683 1
+ 1663              		.cfi_startproc
+ 1664              		@ args = 0, pretend = 0, frame = 16
+ 1665              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1666 0000 80B5     		push	{r7, lr}
+ 1667              	.LCFI90:
+ 1668              		.cfi_def_cfa_offset 8
+ 1669              		.cfi_offset 7, -8
+ 1670              		.cfi_offset 14, -4
+ 1671 0002 86B0     		sub	sp, sp, #24
+ 1672              	.LCFI91:
+ 1673              		.cfi_def_cfa_offset 32
+ 1674 0004 02AF     		add	r7, sp, #8
+ 1675              	.LCFI92:
+ 1676              		.cfi_def_cfa 7, 24
+ 1677 0006 0346     		mov	r3, r0
+ 1678 0008 FB71     		strb	r3, [r7, #7]
+ 1679 000a 0B46     		mov	r3, r1	@ movhi
+ 1680 000c BB80     		strh	r3, [r7, #4]	@ movhi
+ 1681 000e 1346     		mov	r3, r2	@ movhi
+ 1682 0010 7B80     		strh	r3, [r7, #2]	@ movhi
+ 684:Core/Src/stm32746g_discovery.c ****   uint16_t tmp = Value;
+ 1683              		.loc 1 684 12
+ 1684 0012 7B88     		ldrh	r3, [r7, #2]	@ movhi
+ 1685 0014 FB81     		strh	r3, [r7, #14]	@ movhi
+ 685:Core/Src/stm32746g_discovery.c ****   
+ 686:Core/Src/stm32746g_discovery.c ****   Value = ((uint16_t)(tmp >> 8) & 0x00FF);
+ 1686              		.loc 1 686 12
+ 1687 0016 FB89     		ldrh	r3, [r7, #14]
+ 1688 0018 1B0A     		lsrs	r3, r3, #8
+ 1689 001a 9BB2     		uxth	r3, r3
+ 1690              		.loc 1 686 9
+ 1691 001c 7B80     		strh	r3, [r7, #2]	@ movhi
+ 687:Core/Src/stm32746g_discovery.c ****   
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s 			page 42
+
+
+ 688:Core/Src/stm32746g_discovery.c ****   Value |= ((uint16_t)(tmp << 8)& 0xFF00);
+ 1692              		.loc 1 688 13
+ 1693 001e FB89     		ldrh	r3, [r7, #14]	@ movhi
+ 1694 0020 1B02     		lsls	r3, r3, #8
+ 1695 0022 9BB2     		uxth	r3, r3
+ 1696 0024 1AB2     		sxth	r2, r3
+ 1697              		.loc 1 688 9
+ 1698 0026 7B88     		ldrh	r3, [r7, #2]
+ 1699 0028 1BB2     		sxth	r3, r3
+ 1700 002a 1343     		orrs	r3, r3, r2
+ 1701 002c 1BB2     		sxth	r3, r3
+ 1702 002e 9BB2     		uxth	r3, r3
+ 1703 0030 7B80     		strh	r3, [r7, #2]	@ movhi
+ 689:Core/Src/stm32746g_discovery.c ****   
+ 690:Core/Src/stm32746g_discovery.c ****   I2Cx_WriteMultiple(&hI2cAudioHandler, Addr, Reg, I2C_MEMADD_SIZE_16BIT,(uint8_t*)&Value, 2);
+ 1704              		.loc 1 690 3
+ 1705 0032 BA88     		ldrh	r2, [r7, #4]
+ 1706 0034 F979     		ldrb	r1, [r7, #7]	@ zero_extendqisi2
+ 1707 0036 0223     		movs	r3, #2
+ 1708 0038 0193     		str	r3, [sp, #4]
+ 1709 003a BB1C     		adds	r3, r7, #2
+ 1710 003c 0093     		str	r3, [sp]
+ 1711 003e 0223     		movs	r3, #2
+ 1712 0040 0348     		ldr	r0, .L87
+ 1713 0042 FFF7FEFF 		bl	I2Cx_WriteMultiple
+ 691:Core/Src/stm32746g_discovery.c **** }
+ 1714              		.loc 1 691 1
+ 1715 0046 00BF     		nop
+ 1716 0048 1037     		adds	r7, r7, #16
+ 1717              	.LCFI93:
+ 1718              		.cfi_def_cfa_offset 8
+ 1719 004a BD46     		mov	sp, r7
+ 1720              	.LCFI94:
+ 1721              		.cfi_def_cfa_register 13
+ 1722              		@ sp needed
+ 1723 004c 80BD     		pop	{r7, pc}
+ 1724              	.L88:
+ 1725 004e 00BF     		.align	2
+ 1726              	.L87:
+ 1727 0050 00000000 		.word	hI2cAudioHandler
+ 1728              		.cfi_endproc
+ 1729              	.LFE160:
+ 1731              		.section	.text.AUDIO_IO_Read,"ax",%progbits
+ 1732              		.align	1
+ 1733              		.global	AUDIO_IO_Read
+ 1734              		.syntax unified
+ 1735              		.thumb
+ 1736              		.thumb_func
+ 1738              	AUDIO_IO_Read:
+ 1739              	.LFB161:
+ 692:Core/Src/stm32746g_discovery.c **** 
+ 693:Core/Src/stm32746g_discovery.c **** /**
+ 694:Core/Src/stm32746g_discovery.c ****   * @brief  Reads a single data.
+ 695:Core/Src/stm32746g_discovery.c ****   * @param  Addr: I2C address
+ 696:Core/Src/stm32746g_discovery.c ****   * @param  Reg: Reg address 
+ 697:Core/Src/stm32746g_discovery.c ****   * @retval Data to be read
+ 698:Core/Src/stm32746g_discovery.c ****   */
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s 			page 43
+
+
+ 699:Core/Src/stm32746g_discovery.c **** uint16_t AUDIO_IO_Read(uint8_t Addr, uint16_t Reg)
+ 700:Core/Src/stm32746g_discovery.c **** {
+ 1740              		.loc 1 700 1
+ 1741              		.cfi_startproc
+ 1742              		@ args = 0, pretend = 0, frame = 16
+ 1743              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1744 0000 80B5     		push	{r7, lr}
+ 1745              	.LCFI95:
+ 1746              		.cfi_def_cfa_offset 8
+ 1747              		.cfi_offset 7, -8
+ 1748              		.cfi_offset 14, -4
+ 1749 0002 86B0     		sub	sp, sp, #24
+ 1750              	.LCFI96:
+ 1751              		.cfi_def_cfa_offset 32
+ 1752 0004 02AF     		add	r7, sp, #8
+ 1753              	.LCFI97:
+ 1754              		.cfi_def_cfa 7, 24
+ 1755 0006 0346     		mov	r3, r0
+ 1756 0008 0A46     		mov	r2, r1
+ 1757 000a FB71     		strb	r3, [r7, #7]
+ 1758 000c 1346     		mov	r3, r2	@ movhi
+ 1759 000e BB80     		strh	r3, [r7, #4]	@ movhi
+ 701:Core/Src/stm32746g_discovery.c ****   uint16_t read_value = 0, tmp = 0;
+ 1760              		.loc 1 701 12
+ 1761 0010 0023     		movs	r3, #0
+ 1762 0012 BB81     		strh	r3, [r7, #12]	@ movhi
+ 1763              		.loc 1 701 28
+ 1764 0014 0023     		movs	r3, #0
+ 1765 0016 FB81     		strh	r3, [r7, #14]	@ movhi
+ 702:Core/Src/stm32746g_discovery.c ****   
+ 703:Core/Src/stm32746g_discovery.c ****   I2Cx_ReadMultiple(&hI2cAudioHandler, Addr, Reg, I2C_MEMADD_SIZE_16BIT, (uint8_t*)&read_value, 2);
+ 1766              		.loc 1 703 3
+ 1767 0018 BA88     		ldrh	r2, [r7, #4]
+ 1768 001a F979     		ldrb	r1, [r7, #7]	@ zero_extendqisi2
+ 1769 001c 0223     		movs	r3, #2
+ 1770 001e 0193     		str	r3, [sp, #4]
+ 1771 0020 07F10C03 		add	r3, r7, #12
+ 1772 0024 0093     		str	r3, [sp]
+ 1773 0026 0223     		movs	r3, #2
+ 1774 0028 0A48     		ldr	r0, .L91
+ 1775 002a FFF7FEFF 		bl	I2Cx_ReadMultiple
+ 704:Core/Src/stm32746g_discovery.c ****   
+ 705:Core/Src/stm32746g_discovery.c ****   tmp = ((uint16_t)(read_value >> 8) & 0x00FF);
+ 1776              		.loc 1 705 10
+ 1777 002e BB89     		ldrh	r3, [r7, #12]
+ 1778              		.loc 1 705 7
+ 1779 0030 1B0A     		lsrs	r3, r3, #8
+ 1780 0032 FB81     		strh	r3, [r7, #14]	@ movhi
+ 706:Core/Src/stm32746g_discovery.c ****   
+ 707:Core/Src/stm32746g_discovery.c ****   tmp |= ((uint16_t)(read_value << 8)& 0xFF00);
+ 1781              		.loc 1 707 11
+ 1782 0034 BB89     		ldrh	r3, [r7, #12]
+ 1783 0036 1B02     		lsls	r3, r3, #8
+ 1784 0038 9BB2     		uxth	r3, r3
+ 1785 003a 1AB2     		sxth	r2, r3
+ 1786              		.loc 1 707 7
+ 1787 003c B7F90E30 		ldrsh	r3, [r7, #14]
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s 			page 44
+
+
+ 1788 0040 1343     		orrs	r3, r3, r2
+ 1789 0042 1BB2     		sxth	r3, r3
+ 1790 0044 FB81     		strh	r3, [r7, #14]	@ movhi
+ 708:Core/Src/stm32746g_discovery.c ****   
+ 709:Core/Src/stm32746g_discovery.c ****   read_value = tmp;
+ 1791              		.loc 1 709 14
+ 1792 0046 FB89     		ldrh	r3, [r7, #14]	@ movhi
+ 1793 0048 BB81     		strh	r3, [r7, #12]	@ movhi
+ 710:Core/Src/stm32746g_discovery.c ****   
+ 711:Core/Src/stm32746g_discovery.c ****   return read_value;
+ 1794              		.loc 1 711 10
+ 1795 004a BB89     		ldrh	r3, [r7, #12]
+ 712:Core/Src/stm32746g_discovery.c **** }
+ 1796              		.loc 1 712 1
+ 1797 004c 1846     		mov	r0, r3
+ 1798 004e 1037     		adds	r7, r7, #16
+ 1799              	.LCFI98:
+ 1800              		.cfi_def_cfa_offset 8
+ 1801 0050 BD46     		mov	sp, r7
+ 1802              	.LCFI99:
+ 1803              		.cfi_def_cfa_register 13
+ 1804              		@ sp needed
+ 1805 0052 80BD     		pop	{r7, pc}
+ 1806              	.L92:
+ 1807              		.align	2
+ 1808              	.L91:
+ 1809 0054 00000000 		.word	hI2cAudioHandler
+ 1810              		.cfi_endproc
+ 1811              	.LFE161:
+ 1813              		.section	.text.AUDIO_IO_Delay,"ax",%progbits
+ 1814              		.align	1
+ 1815              		.global	AUDIO_IO_Delay
+ 1816              		.syntax unified
+ 1817              		.thumb
+ 1818              		.thumb_func
+ 1820              	AUDIO_IO_Delay:
+ 1821              	.LFB162:
+ 713:Core/Src/stm32746g_discovery.c **** 
+ 714:Core/Src/stm32746g_discovery.c **** /**
+ 715:Core/Src/stm32746g_discovery.c ****   * @brief  AUDIO Codec delay 
+ 716:Core/Src/stm32746g_discovery.c ****   * @param  Delay: Delay in ms
+ 717:Core/Src/stm32746g_discovery.c ****   * @retval None
+ 718:Core/Src/stm32746g_discovery.c ****   */
+ 719:Core/Src/stm32746g_discovery.c **** void AUDIO_IO_Delay(uint32_t Delay)
+ 720:Core/Src/stm32746g_discovery.c **** {
+ 1822              		.loc 1 720 1
+ 1823              		.cfi_startproc
+ 1824              		@ args = 0, pretend = 0, frame = 8
+ 1825              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1826 0000 80B5     		push	{r7, lr}
+ 1827              	.LCFI100:
+ 1828              		.cfi_def_cfa_offset 8
+ 1829              		.cfi_offset 7, -8
+ 1830              		.cfi_offset 14, -4
+ 1831 0002 82B0     		sub	sp, sp, #8
+ 1832              	.LCFI101:
+ 1833              		.cfi_def_cfa_offset 16
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s 			page 45
+
+
+ 1834 0004 00AF     		add	r7, sp, #0
+ 1835              	.LCFI102:
+ 1836              		.cfi_def_cfa_register 7
+ 1837 0006 7860     		str	r0, [r7, #4]
+ 721:Core/Src/stm32746g_discovery.c ****   HAL_Delay(Delay);
+ 1838              		.loc 1 721 3
+ 1839 0008 7868     		ldr	r0, [r7, #4]
+ 1840 000a FFF7FEFF 		bl	HAL_Delay
+ 722:Core/Src/stm32746g_discovery.c **** }
+ 1841              		.loc 1 722 1
+ 1842 000e 00BF     		nop
+ 1843 0010 0837     		adds	r7, r7, #8
+ 1844              	.LCFI103:
+ 1845              		.cfi_def_cfa_offset 8
+ 1846 0012 BD46     		mov	sp, r7
+ 1847              	.LCFI104:
+ 1848              		.cfi_def_cfa_register 13
+ 1849              		@ sp needed
+ 1850 0014 80BD     		pop	{r7, pc}
+ 1851              		.cfi_endproc
+ 1852              	.LFE162:
+ 1854              		.section	.text.CAMERA_IO_Init,"ax",%progbits
+ 1855              		.align	1
+ 1856              		.global	CAMERA_IO_Init
+ 1857              		.syntax unified
+ 1858              		.thumb
+ 1859              		.thumb_func
+ 1861              	CAMERA_IO_Init:
+ 1862              	.LFB163:
+ 723:Core/Src/stm32746g_discovery.c **** 
+ 724:Core/Src/stm32746g_discovery.c **** /********************************* LINK CAMERA ********************************/
+ 725:Core/Src/stm32746g_discovery.c **** 
+ 726:Core/Src/stm32746g_discovery.c **** /**
+ 727:Core/Src/stm32746g_discovery.c ****   * @brief  Initializes Camera low level.
+ 728:Core/Src/stm32746g_discovery.c ****   * @retval None
+ 729:Core/Src/stm32746g_discovery.c ****   */
+ 730:Core/Src/stm32746g_discovery.c **** void CAMERA_IO_Init(void) 
+ 731:Core/Src/stm32746g_discovery.c **** {
+ 1863              		.loc 1 731 1
+ 1864              		.cfi_startproc
+ 1865              		@ args = 0, pretend = 0, frame = 0
+ 1866              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1867 0000 80B5     		push	{r7, lr}
+ 1868              	.LCFI105:
+ 1869              		.cfi_def_cfa_offset 8
+ 1870              		.cfi_offset 7, -8
+ 1871              		.cfi_offset 14, -4
+ 1872 0002 00AF     		add	r7, sp, #0
+ 1873              	.LCFI106:
+ 1874              		.cfi_def_cfa_register 7
+ 732:Core/Src/stm32746g_discovery.c ****   I2Cx_Init(&hI2cExtHandler);
+ 1875              		.loc 1 732 3
+ 1876 0004 0248     		ldr	r0, .L95
+ 1877 0006 FFF7FEFF 		bl	I2Cx_Init
+ 733:Core/Src/stm32746g_discovery.c **** }
+ 1878              		.loc 1 733 1
+ 1879 000a 00BF     		nop
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s 			page 46
+
+
+ 1880 000c 80BD     		pop	{r7, pc}
+ 1881              	.L96:
+ 1882 000e 00BF     		.align	2
+ 1883              	.L95:
+ 1884 0010 00000000 		.word	hI2cExtHandler
+ 1885              		.cfi_endproc
+ 1886              	.LFE163:
+ 1888              		.section	.text.CAMERA_IO_Write,"ax",%progbits
+ 1889              		.align	1
+ 1890              		.global	CAMERA_IO_Write
+ 1891              		.syntax unified
+ 1892              		.thumb
+ 1893              		.thumb_func
+ 1895              	CAMERA_IO_Write:
+ 1896              	.LFB164:
+ 734:Core/Src/stm32746g_discovery.c **** 
+ 735:Core/Src/stm32746g_discovery.c **** /**
+ 736:Core/Src/stm32746g_discovery.c ****   * @brief  Camera writes single data.
+ 737:Core/Src/stm32746g_discovery.c ****   * @param  Addr: I2C address
+ 738:Core/Src/stm32746g_discovery.c ****   * @param  Reg: Register address 
+ 739:Core/Src/stm32746g_discovery.c ****   * @param  Value: Data to be written
+ 740:Core/Src/stm32746g_discovery.c ****   * @retval None
+ 741:Core/Src/stm32746g_discovery.c ****   */
+ 742:Core/Src/stm32746g_discovery.c **** void CAMERA_IO_Write(uint8_t Addr, uint8_t Reg, uint8_t Value)
+ 743:Core/Src/stm32746g_discovery.c **** {
+ 1897              		.loc 1 743 1
+ 1898              		.cfi_startproc
+ 1899              		@ args = 0, pretend = 0, frame = 8
+ 1900              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1901 0000 80B5     		push	{r7, lr}
+ 1902              	.LCFI107:
+ 1903              		.cfi_def_cfa_offset 8
+ 1904              		.cfi_offset 7, -8
+ 1905              		.cfi_offset 14, -4
+ 1906 0002 84B0     		sub	sp, sp, #16
+ 1907              	.LCFI108:
+ 1908              		.cfi_def_cfa_offset 24
+ 1909 0004 02AF     		add	r7, sp, #8
+ 1910              	.LCFI109:
+ 1911              		.cfi_def_cfa 7, 16
+ 1912 0006 0346     		mov	r3, r0
+ 1913 0008 FB71     		strb	r3, [r7, #7]
+ 1914 000a 0B46     		mov	r3, r1
+ 1915 000c BB71     		strb	r3, [r7, #6]
+ 1916 000e 1346     		mov	r3, r2
+ 1917 0010 7B71     		strb	r3, [r7, #5]
+ 744:Core/Src/stm32746g_discovery.c ****   I2Cx_WriteMultiple(&hI2cExtHandler, Addr, (uint16_t)Reg, I2C_MEMADD_SIZE_8BIT,(uint8_t*)&Value, 1
+ 1918              		.loc 1 744 3
+ 1919 0012 BB79     		ldrb	r3, [r7, #6]	@ zero_extendqisi2
+ 1920 0014 9AB2     		uxth	r2, r3
+ 1921 0016 F979     		ldrb	r1, [r7, #7]	@ zero_extendqisi2
+ 1922 0018 0123     		movs	r3, #1
+ 1923 001a 0193     		str	r3, [sp, #4]
+ 1924 001c 7B1D     		adds	r3, r7, #5
+ 1925 001e 0093     		str	r3, [sp]
+ 1926 0020 0123     		movs	r3, #1
+ 1927 0022 0348     		ldr	r0, .L98
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s 			page 47
+
+
+ 1928 0024 FFF7FEFF 		bl	I2Cx_WriteMultiple
+ 745:Core/Src/stm32746g_discovery.c **** }
+ 1929              		.loc 1 745 1
+ 1930 0028 00BF     		nop
+ 1931 002a 0837     		adds	r7, r7, #8
+ 1932              	.LCFI110:
+ 1933              		.cfi_def_cfa_offset 8
+ 1934 002c BD46     		mov	sp, r7
+ 1935              	.LCFI111:
+ 1936              		.cfi_def_cfa_register 13
+ 1937              		@ sp needed
+ 1938 002e 80BD     		pop	{r7, pc}
+ 1939              	.L99:
+ 1940              		.align	2
+ 1941              	.L98:
+ 1942 0030 00000000 		.word	hI2cExtHandler
+ 1943              		.cfi_endproc
+ 1944              	.LFE164:
+ 1946              		.section	.text.CAMERA_IO_Read,"ax",%progbits
+ 1947              		.align	1
+ 1948              		.global	CAMERA_IO_Read
+ 1949              		.syntax unified
+ 1950              		.thumb
+ 1951              		.thumb_func
+ 1953              	CAMERA_IO_Read:
+ 1954              	.LFB165:
+ 746:Core/Src/stm32746g_discovery.c **** 
+ 747:Core/Src/stm32746g_discovery.c **** /**
+ 748:Core/Src/stm32746g_discovery.c ****   * @brief  Camera reads single data.
+ 749:Core/Src/stm32746g_discovery.c ****   * @param  Addr: I2C address
+ 750:Core/Src/stm32746g_discovery.c ****   * @param  Reg: Register address 
+ 751:Core/Src/stm32746g_discovery.c ****   * @retval Read data
+ 752:Core/Src/stm32746g_discovery.c ****   */
+ 753:Core/Src/stm32746g_discovery.c **** uint8_t CAMERA_IO_Read(uint8_t Addr, uint8_t Reg)
+ 754:Core/Src/stm32746g_discovery.c **** {
+ 1955              		.loc 1 754 1
+ 1956              		.cfi_startproc
+ 1957              		@ args = 0, pretend = 0, frame = 16
+ 1958              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1959 0000 80B5     		push	{r7, lr}
+ 1960              	.LCFI112:
+ 1961              		.cfi_def_cfa_offset 8
+ 1962              		.cfi_offset 7, -8
+ 1963              		.cfi_offset 14, -4
+ 1964 0002 86B0     		sub	sp, sp, #24
+ 1965              	.LCFI113:
+ 1966              		.cfi_def_cfa_offset 32
+ 1967 0004 02AF     		add	r7, sp, #8
+ 1968              	.LCFI114:
+ 1969              		.cfi_def_cfa 7, 24
+ 1970 0006 0346     		mov	r3, r0
+ 1971 0008 0A46     		mov	r2, r1
+ 1972 000a FB71     		strb	r3, [r7, #7]
+ 1973 000c 1346     		mov	r3, r2
+ 1974 000e BB71     		strb	r3, [r7, #6]
+ 755:Core/Src/stm32746g_discovery.c ****   uint8_t read_value = 0;
+ 1975              		.loc 1 755 11
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s 			page 48
+
+
+ 1976 0010 0023     		movs	r3, #0
+ 1977 0012 FB73     		strb	r3, [r7, #15]
+ 756:Core/Src/stm32746g_discovery.c **** 
+ 757:Core/Src/stm32746g_discovery.c ****   I2Cx_ReadMultiple(&hI2cExtHandler, Addr, Reg, I2C_MEMADD_SIZE_8BIT, (uint8_t*)&read_value, 1);
+ 1978              		.loc 1 757 3
+ 1979 0014 BB79     		ldrb	r3, [r7, #6]	@ zero_extendqisi2
+ 1980 0016 9AB2     		uxth	r2, r3
+ 1981 0018 F979     		ldrb	r1, [r7, #7]	@ zero_extendqisi2
+ 1982 001a 0123     		movs	r3, #1
+ 1983 001c 0193     		str	r3, [sp, #4]
+ 1984 001e 07F10F03 		add	r3, r7, #15
+ 1985 0022 0093     		str	r3, [sp]
+ 1986 0024 0123     		movs	r3, #1
+ 1987 0026 0448     		ldr	r0, .L102
+ 1988 0028 FFF7FEFF 		bl	I2Cx_ReadMultiple
+ 758:Core/Src/stm32746g_discovery.c **** 
+ 759:Core/Src/stm32746g_discovery.c ****   return read_value;
+ 1989              		.loc 1 759 10
+ 1990 002c FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
+ 760:Core/Src/stm32746g_discovery.c **** }
+ 1991              		.loc 1 760 1
+ 1992 002e 1846     		mov	r0, r3
+ 1993 0030 1037     		adds	r7, r7, #16
+ 1994              	.LCFI115:
+ 1995              		.cfi_def_cfa_offset 8
+ 1996 0032 BD46     		mov	sp, r7
+ 1997              	.LCFI116:
+ 1998              		.cfi_def_cfa_register 13
+ 1999              		@ sp needed
+ 2000 0034 80BD     		pop	{r7, pc}
+ 2001              	.L103:
+ 2002 0036 00BF     		.align	2
+ 2003              	.L102:
+ 2004 0038 00000000 		.word	hI2cExtHandler
+ 2005              		.cfi_endproc
+ 2006              	.LFE165:
+ 2008              		.section	.text.CAMERA_Delay,"ax",%progbits
+ 2009              		.align	1
+ 2010              		.global	CAMERA_Delay
+ 2011              		.syntax unified
+ 2012              		.thumb
+ 2013              		.thumb_func
+ 2015              	CAMERA_Delay:
+ 2016              	.LFB166:
+ 761:Core/Src/stm32746g_discovery.c **** 
+ 762:Core/Src/stm32746g_discovery.c **** /**
+ 763:Core/Src/stm32746g_discovery.c ****   * @brief  Camera delay 
+ 764:Core/Src/stm32746g_discovery.c ****   * @param  Delay: Delay in ms
+ 765:Core/Src/stm32746g_discovery.c ****   * @retval None
+ 766:Core/Src/stm32746g_discovery.c ****   */
+ 767:Core/Src/stm32746g_discovery.c **** void CAMERA_Delay(uint32_t Delay)
+ 768:Core/Src/stm32746g_discovery.c **** {
+ 2017              		.loc 1 768 1
+ 2018              		.cfi_startproc
+ 2019              		@ args = 0, pretend = 0, frame = 8
+ 2020              		@ frame_needed = 1, uses_anonymous_args = 0
+ 2021 0000 80B5     		push	{r7, lr}
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s 			page 49
+
+
+ 2022              	.LCFI117:
+ 2023              		.cfi_def_cfa_offset 8
+ 2024              		.cfi_offset 7, -8
+ 2025              		.cfi_offset 14, -4
+ 2026 0002 82B0     		sub	sp, sp, #8
+ 2027              	.LCFI118:
+ 2028              		.cfi_def_cfa_offset 16
+ 2029 0004 00AF     		add	r7, sp, #0
+ 2030              	.LCFI119:
+ 2031              		.cfi_def_cfa_register 7
+ 2032 0006 7860     		str	r0, [r7, #4]
+ 769:Core/Src/stm32746g_discovery.c ****   HAL_Delay(Delay);
+ 2033              		.loc 1 769 3
+ 2034 0008 7868     		ldr	r0, [r7, #4]
+ 2035 000a FFF7FEFF 		bl	HAL_Delay
+ 770:Core/Src/stm32746g_discovery.c **** }
+ 2036              		.loc 1 770 1
+ 2037 000e 00BF     		nop
+ 2038 0010 0837     		adds	r7, r7, #8
+ 2039              	.LCFI120:
+ 2040              		.cfi_def_cfa_offset 8
+ 2041 0012 BD46     		mov	sp, r7
+ 2042              	.LCFI121:
+ 2043              		.cfi_def_cfa_register 13
+ 2044              		@ sp needed
+ 2045 0014 80BD     		pop	{r7, pc}
+ 2046              		.cfi_endproc
+ 2047              	.LFE166:
+ 2049              		.section	.text.EEPROM_IO_Init,"ax",%progbits
+ 2050              		.align	1
+ 2051              		.global	EEPROM_IO_Init
+ 2052              		.syntax unified
+ 2053              		.thumb
+ 2054              		.thumb_func
+ 2056              	EEPROM_IO_Init:
+ 2057              	.LFB167:
+ 771:Core/Src/stm32746g_discovery.c **** 
+ 772:Core/Src/stm32746g_discovery.c **** /******************************** LINK I2C EEPROM *****************************/
+ 773:Core/Src/stm32746g_discovery.c **** 
+ 774:Core/Src/stm32746g_discovery.c **** /**
+ 775:Core/Src/stm32746g_discovery.c ****   * @brief  Initializes peripherals used by the I2C EEPROM driver.
+ 776:Core/Src/stm32746g_discovery.c ****   * @retval None
+ 777:Core/Src/stm32746g_discovery.c ****   */
+ 778:Core/Src/stm32746g_discovery.c **** void EEPROM_IO_Init(void)
+ 779:Core/Src/stm32746g_discovery.c **** {
+ 2058              		.loc 1 779 1
+ 2059              		.cfi_startproc
+ 2060              		@ args = 0, pretend = 0, frame = 0
+ 2061              		@ frame_needed = 1, uses_anonymous_args = 0
+ 2062 0000 80B5     		push	{r7, lr}
+ 2063              	.LCFI122:
+ 2064              		.cfi_def_cfa_offset 8
+ 2065              		.cfi_offset 7, -8
+ 2066              		.cfi_offset 14, -4
+ 2067 0002 00AF     		add	r7, sp, #0
+ 2068              	.LCFI123:
+ 2069              		.cfi_def_cfa_register 7
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s 			page 50
+
+
+ 780:Core/Src/stm32746g_discovery.c ****   I2Cx_Init(&hI2cExtHandler);
+ 2070              		.loc 1 780 3
+ 2071 0004 0248     		ldr	r0, .L106
+ 2072 0006 FFF7FEFF 		bl	I2Cx_Init
+ 781:Core/Src/stm32746g_discovery.c **** }
+ 2073              		.loc 1 781 1
+ 2074 000a 00BF     		nop
+ 2075 000c 80BD     		pop	{r7, pc}
+ 2076              	.L107:
+ 2077 000e 00BF     		.align	2
+ 2078              	.L106:
+ 2079 0010 00000000 		.word	hI2cExtHandler
+ 2080              		.cfi_endproc
+ 2081              	.LFE167:
+ 2083              		.section	.text.EEPROM_IO_WriteData,"ax",%progbits
+ 2084              		.align	1
+ 2085              		.global	EEPROM_IO_WriteData
+ 2086              		.syntax unified
+ 2087              		.thumb
+ 2088              		.thumb_func
+ 2090              	EEPROM_IO_WriteData:
+ 2091              	.LFB168:
+ 782:Core/Src/stm32746g_discovery.c **** 
+ 783:Core/Src/stm32746g_discovery.c **** /**
+ 784:Core/Src/stm32746g_discovery.c ****   * @brief  Write data to I2C EEPROM driver in using DMA channel.
+ 785:Core/Src/stm32746g_discovery.c ****   * @param  DevAddress: Target device address
+ 786:Core/Src/stm32746g_discovery.c ****   * @param  MemAddress: Internal memory address
+ 787:Core/Src/stm32746g_discovery.c ****   * @param  pBuffer: Pointer to data buffer
+ 788:Core/Src/stm32746g_discovery.c ****   * @param  BufferSize: Amount of data to be sent
+ 789:Core/Src/stm32746g_discovery.c ****   * @retval HAL status
+ 790:Core/Src/stm32746g_discovery.c ****   */
+ 791:Core/Src/stm32746g_discovery.c **** HAL_StatusTypeDef EEPROM_IO_WriteData(uint16_t DevAddress, uint16_t MemAddress, uint8_t* pBuffer, u
+ 792:Core/Src/stm32746g_discovery.c **** {
+ 2092              		.loc 1 792 1
+ 2093              		.cfi_startproc
+ 2094              		@ args = 0, pretend = 0, frame = 16
+ 2095              		@ frame_needed = 1, uses_anonymous_args = 0
+ 2096 0000 80B5     		push	{r7, lr}
+ 2097              	.LCFI124:
+ 2098              		.cfi_def_cfa_offset 8
+ 2099              		.cfi_offset 7, -8
+ 2100              		.cfi_offset 14, -4
+ 2101 0002 86B0     		sub	sp, sp, #24
+ 2102              	.LCFI125:
+ 2103              		.cfi_def_cfa_offset 32
+ 2104 0004 02AF     		add	r7, sp, #8
+ 2105              	.LCFI126:
+ 2106              		.cfi_def_cfa 7, 24
+ 2107 0006 BA60     		str	r2, [r7, #8]
+ 2108 0008 7B60     		str	r3, [r7, #4]
+ 2109 000a 0346     		mov	r3, r0	@ movhi
+ 2110 000c FB81     		strh	r3, [r7, #14]	@ movhi
+ 2111 000e 0B46     		mov	r3, r1	@ movhi
+ 2112 0010 BB81     		strh	r3, [r7, #12]	@ movhi
+ 793:Core/Src/stm32746g_discovery.c ****   return (I2Cx_WriteMultiple(&hI2cExtHandler, DevAddress, MemAddress, I2C_MEMADD_SIZE_16BIT, pBuffe
+ 2113              		.loc 1 793 11
+ 2114 0012 FB89     		ldrh	r3, [r7, #14]	@ movhi
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s 			page 51
+
+
+ 2115 0014 D9B2     		uxtb	r1, r3
+ 2116 0016 7B68     		ldr	r3, [r7, #4]
+ 2117 0018 9BB2     		uxth	r3, r3
+ 2118 001a BA89     		ldrh	r2, [r7, #12]
+ 2119 001c 0193     		str	r3, [sp, #4]
+ 2120 001e BB68     		ldr	r3, [r7, #8]
+ 2121 0020 0093     		str	r3, [sp]
+ 2122 0022 0223     		movs	r3, #2
+ 2123 0024 0348     		ldr	r0, .L110
+ 2124 0026 FFF7FEFF 		bl	I2Cx_WriteMultiple
+ 2125 002a 0346     		mov	r3, r0
+ 794:Core/Src/stm32746g_discovery.c **** }
+ 2126              		.loc 1 794 1
+ 2127 002c 1846     		mov	r0, r3
+ 2128 002e 1037     		adds	r7, r7, #16
+ 2129              	.LCFI127:
+ 2130              		.cfi_def_cfa_offset 8
+ 2131 0030 BD46     		mov	sp, r7
+ 2132              	.LCFI128:
+ 2133              		.cfi_def_cfa_register 13
+ 2134              		@ sp needed
+ 2135 0032 80BD     		pop	{r7, pc}
+ 2136              	.L111:
+ 2137              		.align	2
+ 2138              	.L110:
+ 2139 0034 00000000 		.word	hI2cExtHandler
+ 2140              		.cfi_endproc
+ 2141              	.LFE168:
+ 2143              		.section	.text.EEPROM_IO_ReadData,"ax",%progbits
+ 2144              		.align	1
+ 2145              		.global	EEPROM_IO_ReadData
+ 2146              		.syntax unified
+ 2147              		.thumb
+ 2148              		.thumb_func
+ 2150              	EEPROM_IO_ReadData:
+ 2151              	.LFB169:
+ 795:Core/Src/stm32746g_discovery.c **** 
+ 796:Core/Src/stm32746g_discovery.c **** /**
+ 797:Core/Src/stm32746g_discovery.c ****   * @brief  Read data from I2C EEPROM driver in using DMA channel.
+ 798:Core/Src/stm32746g_discovery.c ****   * @param  DevAddress: Target device address
+ 799:Core/Src/stm32746g_discovery.c ****   * @param  MemAddress: Internal memory address
+ 800:Core/Src/stm32746g_discovery.c ****   * @param  pBuffer: Pointer to data buffer
+ 801:Core/Src/stm32746g_discovery.c ****   * @param  BufferSize: Amount of data to be read
+ 802:Core/Src/stm32746g_discovery.c ****   * @retval HAL status
+ 803:Core/Src/stm32746g_discovery.c ****   */
+ 804:Core/Src/stm32746g_discovery.c **** HAL_StatusTypeDef EEPROM_IO_ReadData(uint16_t DevAddress, uint16_t MemAddress, uint8_t* pBuffer, ui
+ 805:Core/Src/stm32746g_discovery.c **** {
+ 2152              		.loc 1 805 1
+ 2153              		.cfi_startproc
+ 2154              		@ args = 0, pretend = 0, frame = 16
+ 2155              		@ frame_needed = 1, uses_anonymous_args = 0
+ 2156 0000 80B5     		push	{r7, lr}
+ 2157              	.LCFI129:
+ 2158              		.cfi_def_cfa_offset 8
+ 2159              		.cfi_offset 7, -8
+ 2160              		.cfi_offset 14, -4
+ 2161 0002 86B0     		sub	sp, sp, #24
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s 			page 52
+
+
+ 2162              	.LCFI130:
+ 2163              		.cfi_def_cfa_offset 32
+ 2164 0004 02AF     		add	r7, sp, #8
+ 2165              	.LCFI131:
+ 2166              		.cfi_def_cfa 7, 24
+ 2167 0006 BA60     		str	r2, [r7, #8]
+ 2168 0008 7B60     		str	r3, [r7, #4]
+ 2169 000a 0346     		mov	r3, r0	@ movhi
+ 2170 000c FB81     		strh	r3, [r7, #14]	@ movhi
+ 2171 000e 0B46     		mov	r3, r1	@ movhi
+ 2172 0010 BB81     		strh	r3, [r7, #12]	@ movhi
+ 806:Core/Src/stm32746g_discovery.c ****   return (I2Cx_ReadMultiple(&hI2cExtHandler, DevAddress, MemAddress, I2C_MEMADD_SIZE_16BIT, pBuffer
+ 2173              		.loc 1 806 11
+ 2174 0012 FB89     		ldrh	r3, [r7, #14]	@ movhi
+ 2175 0014 D9B2     		uxtb	r1, r3
+ 2176 0016 7B68     		ldr	r3, [r7, #4]
+ 2177 0018 9BB2     		uxth	r3, r3
+ 2178 001a BA89     		ldrh	r2, [r7, #12]
+ 2179 001c 0193     		str	r3, [sp, #4]
+ 2180 001e BB68     		ldr	r3, [r7, #8]
+ 2181 0020 0093     		str	r3, [sp]
+ 2182 0022 0223     		movs	r3, #2
+ 2183 0024 0348     		ldr	r0, .L114
+ 2184 0026 FFF7FEFF 		bl	I2Cx_ReadMultiple
+ 2185 002a 0346     		mov	r3, r0
+ 807:Core/Src/stm32746g_discovery.c **** }
+ 2186              		.loc 1 807 1
+ 2187 002c 1846     		mov	r0, r3
+ 2188 002e 1037     		adds	r7, r7, #16
+ 2189              	.LCFI132:
+ 2190              		.cfi_def_cfa_offset 8
+ 2191 0030 BD46     		mov	sp, r7
+ 2192              	.LCFI133:
+ 2193              		.cfi_def_cfa_register 13
+ 2194              		@ sp needed
+ 2195 0032 80BD     		pop	{r7, pc}
+ 2196              	.L115:
+ 2197              		.align	2
+ 2198              	.L114:
+ 2199 0034 00000000 		.word	hI2cExtHandler
+ 2200              		.cfi_endproc
+ 2201              	.LFE169:
+ 2203              		.section	.text.EEPROM_IO_IsDeviceReady,"ax",%progbits
+ 2204              		.align	1
+ 2205              		.global	EEPROM_IO_IsDeviceReady
+ 2206              		.syntax unified
+ 2207              		.thumb
+ 2208              		.thumb_func
+ 2210              	EEPROM_IO_IsDeviceReady:
+ 2211              	.LFB170:
+ 808:Core/Src/stm32746g_discovery.c **** 
+ 809:Core/Src/stm32746g_discovery.c **** /**
+ 810:Core/Src/stm32746g_discovery.c ****   * @brief  Checks if target device is ready for communication. 
+ 811:Core/Src/stm32746g_discovery.c ****   * @note   This function is used with Memory devices
+ 812:Core/Src/stm32746g_discovery.c ****   * @param  DevAddress: Target device address
+ 813:Core/Src/stm32746g_discovery.c ****   * @param  Trials: Number of trials
+ 814:Core/Src/stm32746g_discovery.c ****   * @retval HAL status
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s 			page 53
+
+
+ 815:Core/Src/stm32746g_discovery.c ****   */
+ 816:Core/Src/stm32746g_discovery.c **** HAL_StatusTypeDef EEPROM_IO_IsDeviceReady(uint16_t DevAddress, uint32_t Trials)
+ 817:Core/Src/stm32746g_discovery.c **** { 
+ 2212              		.loc 1 817 1
+ 2213              		.cfi_startproc
+ 2214              		@ args = 0, pretend = 0, frame = 8
+ 2215              		@ frame_needed = 1, uses_anonymous_args = 0
+ 2216 0000 80B5     		push	{r7, lr}
+ 2217              	.LCFI134:
+ 2218              		.cfi_def_cfa_offset 8
+ 2219              		.cfi_offset 7, -8
+ 2220              		.cfi_offset 14, -4
+ 2221 0002 82B0     		sub	sp, sp, #8
+ 2222              	.LCFI135:
+ 2223              		.cfi_def_cfa_offset 16
+ 2224 0004 00AF     		add	r7, sp, #0
+ 2225              	.LCFI136:
+ 2226              		.cfi_def_cfa_register 7
+ 2227 0006 0346     		mov	r3, r0
+ 2228 0008 3960     		str	r1, [r7]
+ 2229 000a FB80     		strh	r3, [r7, #6]	@ movhi
+ 818:Core/Src/stm32746g_discovery.c ****   return (I2Cx_IsDeviceReady(&hI2cExtHandler, DevAddress, Trials));
+ 2230              		.loc 1 818 11
+ 2231 000c FB88     		ldrh	r3, [r7, #6]
+ 2232 000e 3A68     		ldr	r2, [r7]
+ 2233 0010 1946     		mov	r1, r3
+ 2234 0012 0448     		ldr	r0, .L118
+ 2235 0014 FFF7FEFF 		bl	I2Cx_IsDeviceReady
+ 2236 0018 0346     		mov	r3, r0
+ 819:Core/Src/stm32746g_discovery.c **** }
+ 2237              		.loc 1 819 1
+ 2238 001a 1846     		mov	r0, r3
+ 2239 001c 0837     		adds	r7, r7, #8
+ 2240              	.LCFI137:
+ 2241              		.cfi_def_cfa_offset 8
+ 2242 001e BD46     		mov	sp, r7
+ 2243              	.LCFI138:
+ 2244              		.cfi_def_cfa_register 13
+ 2245              		@ sp needed
+ 2246 0020 80BD     		pop	{r7, pc}
+ 2247              	.L119:
+ 2248 0022 00BF     		.align	2
+ 2249              	.L118:
+ 2250 0024 00000000 		.word	hI2cExtHandler
+ 2251              		.cfi_endproc
+ 2252              	.LFE170:
+ 2254              		.section	.text.TS_IO_Init,"ax",%progbits
+ 2255              		.align	1
+ 2256              		.global	TS_IO_Init
+ 2257              		.syntax unified
+ 2258              		.thumb
+ 2259              		.thumb_func
+ 2261              	TS_IO_Init:
+ 2262              	.LFB171:
+ 820:Core/Src/stm32746g_discovery.c **** 
+ 821:Core/Src/stm32746g_discovery.c **** /********************************* LINK TOUCHSCREEN *********************************/
+ 822:Core/Src/stm32746g_discovery.c **** 
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s 			page 54
+
+
+ 823:Core/Src/stm32746g_discovery.c **** /**
+ 824:Core/Src/stm32746g_discovery.c ****   * @brief  Initializes Touchscreen low level.
+ 825:Core/Src/stm32746g_discovery.c ****   * @retval None
+ 826:Core/Src/stm32746g_discovery.c ****   */
+ 827:Core/Src/stm32746g_discovery.c **** void TS_IO_Init(void)
+ 828:Core/Src/stm32746g_discovery.c **** {
+ 2263              		.loc 1 828 1
+ 2264              		.cfi_startproc
+ 2265              		@ args = 0, pretend = 0, frame = 0
+ 2266              		@ frame_needed = 1, uses_anonymous_args = 0
+ 2267 0000 80B5     		push	{r7, lr}
+ 2268              	.LCFI139:
+ 2269              		.cfi_def_cfa_offset 8
+ 2270              		.cfi_offset 7, -8
+ 2271              		.cfi_offset 14, -4
+ 2272 0002 00AF     		add	r7, sp, #0
+ 2273              	.LCFI140:
+ 2274              		.cfi_def_cfa_register 7
+ 829:Core/Src/stm32746g_discovery.c ****   I2Cx_Init(&hI2cAudioHandler);
+ 2275              		.loc 1 829 3
+ 2276 0004 0248     		ldr	r0, .L121
+ 2277 0006 FFF7FEFF 		bl	I2Cx_Init
+ 830:Core/Src/stm32746g_discovery.c **** }
+ 2278              		.loc 1 830 1
+ 2279 000a 00BF     		nop
+ 2280 000c 80BD     		pop	{r7, pc}
+ 2281              	.L122:
+ 2282 000e 00BF     		.align	2
+ 2283              	.L121:
+ 2284 0010 00000000 		.word	hI2cAudioHandler
+ 2285              		.cfi_endproc
+ 2286              	.LFE171:
+ 2288              		.section	.text.TS_IO_Write,"ax",%progbits
+ 2289              		.align	1
+ 2290              		.global	TS_IO_Write
+ 2291              		.syntax unified
+ 2292              		.thumb
+ 2293              		.thumb_func
+ 2295              	TS_IO_Write:
+ 2296              	.LFB172:
+ 831:Core/Src/stm32746g_discovery.c **** 
+ 832:Core/Src/stm32746g_discovery.c **** /**
+ 833:Core/Src/stm32746g_discovery.c ****   * @brief  Writes a single data.
+ 834:Core/Src/stm32746g_discovery.c ****   * @param  Addr: I2C address
+ 835:Core/Src/stm32746g_discovery.c ****   * @param  Reg: Reg address
+ 836:Core/Src/stm32746g_discovery.c ****   * @param  Value: Data to be written
+ 837:Core/Src/stm32746g_discovery.c ****   * @retval None
+ 838:Core/Src/stm32746g_discovery.c ****   */
+ 839:Core/Src/stm32746g_discovery.c **** void TS_IO_Write(uint8_t Addr, uint8_t Reg, uint8_t Value)
+ 840:Core/Src/stm32746g_discovery.c **** {
+ 2297              		.loc 1 840 1
+ 2298              		.cfi_startproc
+ 2299              		@ args = 0, pretend = 0, frame = 8
+ 2300              		@ frame_needed = 1, uses_anonymous_args = 0
+ 2301 0000 80B5     		push	{r7, lr}
+ 2302              	.LCFI141:
+ 2303              		.cfi_def_cfa_offset 8
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s 			page 55
+
+
+ 2304              		.cfi_offset 7, -8
+ 2305              		.cfi_offset 14, -4
+ 2306 0002 84B0     		sub	sp, sp, #16
+ 2307              	.LCFI142:
+ 2308              		.cfi_def_cfa_offset 24
+ 2309 0004 02AF     		add	r7, sp, #8
+ 2310              	.LCFI143:
+ 2311              		.cfi_def_cfa 7, 16
+ 2312 0006 0346     		mov	r3, r0
+ 2313 0008 FB71     		strb	r3, [r7, #7]
+ 2314 000a 0B46     		mov	r3, r1
+ 2315 000c BB71     		strb	r3, [r7, #6]
+ 2316 000e 1346     		mov	r3, r2
+ 2317 0010 7B71     		strb	r3, [r7, #5]
+ 841:Core/Src/stm32746g_discovery.c ****   I2Cx_WriteMultiple(&hI2cAudioHandler, Addr, (uint16_t)Reg, I2C_MEMADD_SIZE_8BIT,(uint8_t*)&Value,
+ 2318              		.loc 1 841 3
+ 2319 0012 BB79     		ldrb	r3, [r7, #6]	@ zero_extendqisi2
+ 2320 0014 9AB2     		uxth	r2, r3
+ 2321 0016 F979     		ldrb	r1, [r7, #7]	@ zero_extendqisi2
+ 2322 0018 0123     		movs	r3, #1
+ 2323 001a 0193     		str	r3, [sp, #4]
+ 2324 001c 7B1D     		adds	r3, r7, #5
+ 2325 001e 0093     		str	r3, [sp]
+ 2326 0020 0123     		movs	r3, #1
+ 2327 0022 0348     		ldr	r0, .L124
+ 2328 0024 FFF7FEFF 		bl	I2Cx_WriteMultiple
+ 842:Core/Src/stm32746g_discovery.c **** }
+ 2329              		.loc 1 842 1
+ 2330 0028 00BF     		nop
+ 2331 002a 0837     		adds	r7, r7, #8
+ 2332              	.LCFI144:
+ 2333              		.cfi_def_cfa_offset 8
+ 2334 002c BD46     		mov	sp, r7
+ 2335              	.LCFI145:
+ 2336              		.cfi_def_cfa_register 13
+ 2337              		@ sp needed
+ 2338 002e 80BD     		pop	{r7, pc}
+ 2339              	.L125:
+ 2340              		.align	2
+ 2341              	.L124:
+ 2342 0030 00000000 		.word	hI2cAudioHandler
+ 2343              		.cfi_endproc
+ 2344              	.LFE172:
+ 2346              		.section	.text.TS_IO_Read,"ax",%progbits
+ 2347              		.align	1
+ 2348              		.global	TS_IO_Read
+ 2349              		.syntax unified
+ 2350              		.thumb
+ 2351              		.thumb_func
+ 2353              	TS_IO_Read:
+ 2354              	.LFB173:
+ 843:Core/Src/stm32746g_discovery.c **** 
+ 844:Core/Src/stm32746g_discovery.c **** /**
+ 845:Core/Src/stm32746g_discovery.c ****   * @brief  Reads a single data.
+ 846:Core/Src/stm32746g_discovery.c ****   * @param  Addr: I2C address
+ 847:Core/Src/stm32746g_discovery.c ****   * @param  Reg: Reg address
+ 848:Core/Src/stm32746g_discovery.c ****   * @retval Data to be read
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s 			page 56
+
+
+ 849:Core/Src/stm32746g_discovery.c ****   */
+ 850:Core/Src/stm32746g_discovery.c **** uint8_t TS_IO_Read(uint8_t Addr, uint8_t Reg)
+ 851:Core/Src/stm32746g_discovery.c **** {
+ 2355              		.loc 1 851 1
+ 2356              		.cfi_startproc
+ 2357              		@ args = 0, pretend = 0, frame = 16
+ 2358              		@ frame_needed = 1, uses_anonymous_args = 0
+ 2359 0000 80B5     		push	{r7, lr}
+ 2360              	.LCFI146:
+ 2361              		.cfi_def_cfa_offset 8
+ 2362              		.cfi_offset 7, -8
+ 2363              		.cfi_offset 14, -4
+ 2364 0002 86B0     		sub	sp, sp, #24
+ 2365              	.LCFI147:
+ 2366              		.cfi_def_cfa_offset 32
+ 2367 0004 02AF     		add	r7, sp, #8
+ 2368              	.LCFI148:
+ 2369              		.cfi_def_cfa 7, 24
+ 2370 0006 0346     		mov	r3, r0
+ 2371 0008 0A46     		mov	r2, r1
+ 2372 000a FB71     		strb	r3, [r7, #7]
+ 2373 000c 1346     		mov	r3, r2
+ 2374 000e BB71     		strb	r3, [r7, #6]
+ 852:Core/Src/stm32746g_discovery.c ****   uint8_t read_value = 0;
+ 2375              		.loc 1 852 11
+ 2376 0010 0023     		movs	r3, #0
+ 2377 0012 FB73     		strb	r3, [r7, #15]
+ 853:Core/Src/stm32746g_discovery.c **** 
+ 854:Core/Src/stm32746g_discovery.c ****   I2Cx_ReadMultiple(&hI2cAudioHandler, Addr, Reg, I2C_MEMADD_SIZE_8BIT, (uint8_t*)&read_value, 1);
+ 2378              		.loc 1 854 3
+ 2379 0014 BB79     		ldrb	r3, [r7, #6]	@ zero_extendqisi2
+ 2380 0016 9AB2     		uxth	r2, r3
+ 2381 0018 F979     		ldrb	r1, [r7, #7]	@ zero_extendqisi2
+ 2382 001a 0123     		movs	r3, #1
+ 2383 001c 0193     		str	r3, [sp, #4]
+ 2384 001e 07F10F03 		add	r3, r7, #15
+ 2385 0022 0093     		str	r3, [sp]
+ 2386 0024 0123     		movs	r3, #1
+ 2387 0026 0448     		ldr	r0, .L128
+ 2388 0028 FFF7FEFF 		bl	I2Cx_ReadMultiple
+ 855:Core/Src/stm32746g_discovery.c **** 
+ 856:Core/Src/stm32746g_discovery.c ****   return read_value;
+ 2389              		.loc 1 856 10
+ 2390 002c FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
+ 857:Core/Src/stm32746g_discovery.c **** }
+ 2391              		.loc 1 857 1
+ 2392 002e 1846     		mov	r0, r3
+ 2393 0030 1037     		adds	r7, r7, #16
+ 2394              	.LCFI149:
+ 2395              		.cfi_def_cfa_offset 8
+ 2396 0032 BD46     		mov	sp, r7
+ 2397              	.LCFI150:
+ 2398              		.cfi_def_cfa_register 13
+ 2399              		@ sp needed
+ 2400 0034 80BD     		pop	{r7, pc}
+ 2401              	.L129:
+ 2402 0036 00BF     		.align	2
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s 			page 57
+
+
+ 2403              	.L128:
+ 2404 0038 00000000 		.word	hI2cAudioHandler
+ 2405              		.cfi_endproc
+ 2406              	.LFE173:
+ 2408              		.section	.text.TS_IO_Delay,"ax",%progbits
+ 2409              		.align	1
+ 2410              		.global	TS_IO_Delay
+ 2411              		.syntax unified
+ 2412              		.thumb
+ 2413              		.thumb_func
+ 2415              	TS_IO_Delay:
+ 2416              	.LFB174:
+ 858:Core/Src/stm32746g_discovery.c **** 
+ 859:Core/Src/stm32746g_discovery.c **** /**
+ 860:Core/Src/stm32746g_discovery.c ****   * @brief  TS delay
+ 861:Core/Src/stm32746g_discovery.c ****   * @param  Delay: Delay in ms
+ 862:Core/Src/stm32746g_discovery.c ****   * @retval None
+ 863:Core/Src/stm32746g_discovery.c ****   */
+ 864:Core/Src/stm32746g_discovery.c **** void TS_IO_Delay(uint32_t Delay)
+ 865:Core/Src/stm32746g_discovery.c **** {
+ 2417              		.loc 1 865 1
+ 2418              		.cfi_startproc
+ 2419              		@ args = 0, pretend = 0, frame = 8
+ 2420              		@ frame_needed = 1, uses_anonymous_args = 0
+ 2421 0000 80B5     		push	{r7, lr}
+ 2422              	.LCFI151:
+ 2423              		.cfi_def_cfa_offset 8
+ 2424              		.cfi_offset 7, -8
+ 2425              		.cfi_offset 14, -4
+ 2426 0002 82B0     		sub	sp, sp, #8
+ 2427              	.LCFI152:
+ 2428              		.cfi_def_cfa_offset 16
+ 2429 0004 00AF     		add	r7, sp, #0
+ 2430              	.LCFI153:
+ 2431              		.cfi_def_cfa_register 7
+ 2432 0006 7860     		str	r0, [r7, #4]
+ 866:Core/Src/stm32746g_discovery.c ****   HAL_Delay(Delay);
+ 2433              		.loc 1 866 3
+ 2434 0008 7868     		ldr	r0, [r7, #4]
+ 2435 000a FFF7FEFF 		bl	HAL_Delay
+ 867:Core/Src/stm32746g_discovery.c **** }
+ 2436              		.loc 1 867 1
+ 2437 000e 00BF     		nop
+ 2438 0010 0837     		adds	r7, r7, #8
+ 2439              	.LCFI154:
+ 2440              		.cfi_def_cfa_offset 8
+ 2441 0012 BD46     		mov	sp, r7
+ 2442              	.LCFI155:
+ 2443              		.cfi_def_cfa_register 13
+ 2444              		@ sp needed
+ 2445 0014 80BD     		pop	{r7, pc}
+ 2446              		.cfi_endproc
+ 2447              	.LFE174:
+ 2449              		.text
+ 2450              	.Letext0:
+ 2451              		.file 2 "Drivers/CMSIS/Device/ST/STM32F7xx/Include/stm32f746xx.h"
+ 2452              		.file 3 "d:\\3.tools\\arm_gcc_toolchain\\arm-none-eabi\\include\\machine\\_default_types.h"
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s 			page 58
+
+
+ 2453              		.file 4 "d:\\3.tools\\arm_gcc_toolchain\\arm-none-eabi\\include\\sys\\_stdint.h"
+ 2454              		.file 5 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_def.h"
+ 2455              		.file 6 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_gpio.h"
+ 2456              		.file 7 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_dma.h"
+ 2457              		.file 8 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_i2c.h"
+ 2458              		.file 9 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart.h"
+ 2459              		.file 10 "Core/Inc/stm32746g_discovery.h"
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s 			page 59
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 stm32746g_discovery.c
+C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s:24     .rodata.GPIO_PIN:00000000 GPIO_PIN
+C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s:21     .rodata.GPIO_PIN:00000000 $d
+C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s:31     .data.BUTTON_PORT:00000000 BUTTON_PORT
+C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s:28     .data.BUTTON_PORT:00000000 $d
+C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s:40     .rodata.BUTTON_PIN:00000000 BUTTON_PIN
+C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s:37     .rodata.BUTTON_PIN:00000000 $d
+C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s:49     .rodata.BUTTON_IRQn:00000000 BUTTON_IRQn
+C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s:46     .rodata.BUTTON_IRQn:00000000 $d
+C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s:58     .data.COM_USART:00000000 COM_USART
+C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s:55     .data.COM_USART:00000000 $d
+C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s:65     .data.COM_TX_PORT:00000000 COM_TX_PORT
+C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s:62     .data.COM_TX_PORT:00000000 $d
+C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s:72     .data.COM_RX_PORT:00000000 COM_RX_PORT
+C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s:69     .data.COM_RX_PORT:00000000 $d
+C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s:79     .rodata.COM_TX_PIN:00000000 COM_TX_PIN
+C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s:76     .rodata.COM_TX_PIN:00000000 $d
+C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s:86     .rodata.COM_RX_PIN:00000000 COM_RX_PIN
+C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s:83     .rodata.COM_RX_PIN:00000000 $d
+C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s:93     .rodata.COM_TX_AF:00000000 COM_TX_AF
+C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s:90     .rodata.COM_TX_AF:00000000 $d
+C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s:100    .rodata.COM_RX_AF:00000000 COM_RX_AF
+C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s:97     .rodata.COM_RX_AF:00000000 $d
+C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s:103    .bss.hI2cAudioHandler:00000000 $d
+C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s:106    .bss.hI2cAudioHandler:00000000 hI2cAudioHandler
+C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s:109    .bss.hI2cExtHandler:00000000 $d
+C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s:112    .bss.hI2cExtHandler:00000000 hI2cExtHandler
+C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s:115    .text.BSP_GetVersion:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s:121    .text.BSP_GetVersion:00000000 BSP_GetVersion
+C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s:152    .text.BSP_GetVersion:00000010 $d
+C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s:157    .text.BSP_LED_Init:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s:163    .text.BSP_LED_Init:00000000 BSP_LED_Init
+C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s:242    .text.BSP_LED_Init:00000060 $d
+C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s:248    .text.BSP_LED_DeInit:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s:254    .text.BSP_LED_DeInit:00000000 BSP_LED_DeInit
+C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s:311    .text.BSP_LED_DeInit:00000038 $d
+C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s:316    .text.BSP_LED_On:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s:322    .text.BSP_LED_On:00000000 BSP_LED_On
+C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s:370    .text.BSP_LED_On:0000002c $d
+C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s:375    .text.BSP_LED_Off:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s:381    .text.BSP_LED_Off:00000000 BSP_LED_Off
+C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s:429    .text.BSP_LED_Off:0000002c $d
+C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s:434    .text.BSP_LED_Toggle:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s:440    .text.BSP_LED_Toggle:00000000 BSP_LED_Toggle
+C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s:487    .text.BSP_LED_Toggle:00000028 $d
+C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s:492    .text.BSP_PB_Init:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s:498    .text.BSP_PB_Init:00000000 BSP_PB_Init
+C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s:669    .text.BSP_PB_Init:00000104 $d
+C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s:677    .text.BSP_PB_DeInit:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s:683    .text.BSP_PB_DeInit:00000000 BSP_PB_DeInit
+C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s:737    .text.BSP_PB_DeInit:00000040 $d
+C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s:744    .text.BSP_PB_GetState:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s:750    .text.BSP_PB_GetState:00000000 BSP_PB_GetState
+C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s:793    .text.BSP_PB_GetState:0000002c $d
+C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s:799    .text.BSP_COM_Init:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s:805    .text.BSP_COM_Init:00000000 BSP_COM_Init
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s 			page 60
+
+
+C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s:946    .text.BSP_COM_Init:000000cc $d
+C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s:954    .text.BSP_COM_DeInit:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s:960    .text.BSP_COM_DeInit:00000000 BSP_COM_DeInit
+C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s:1014   .text.BSP_COM_DeInit:00000038 $d
+C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s:1020   .text.I2Cx_MspInit:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s:1025   .text.I2Cx_MspInit:00000000 I2Cx_MspInit
+C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s:1229   .text.I2Cx_MspInit:00000150 $d
+C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s:1237   .text.I2Cx_Init:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s:1242   .text.I2Cx_Init:00000000 I2Cx_Init
+C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s:1331   .text.I2Cx_Init:00000068 $d
+C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s:1339   .text.I2Cx_ReadMultiple:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s:1344   .text.I2Cx_ReadMultiple:00000000 I2Cx_ReadMultiple
+C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s:1545   .text.I2Cx_Error:00000000 I2Cx_Error
+C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s:1416   .text.I2Cx_WriteMultiple:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s:1421   .text.I2Cx_WriteMultiple:00000000 I2Cx_WriteMultiple
+C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s:1493   .text.I2Cx_IsDeviceReady:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s:1498   .text.I2Cx_IsDeviceReady:00000000 I2Cx_IsDeviceReady
+C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s:1540   .text.I2Cx_Error:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s:1585   .text.AUDIO_IO_Init:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s:1591   .text.AUDIO_IO_Init:00000000 AUDIO_IO_Init
+C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s:1614   .text.AUDIO_IO_Init:00000010 $d
+C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s:1619   .text.AUDIO_IO_DeInit:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s:1625   .text.AUDIO_IO_DeInit:00000000 AUDIO_IO_DeInit
+C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s:1654   .text.AUDIO_IO_Write:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s:1660   .text.AUDIO_IO_Write:00000000 AUDIO_IO_Write
+C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s:1727   .text.AUDIO_IO_Write:00000050 $d
+C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s:1732   .text.AUDIO_IO_Read:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s:1738   .text.AUDIO_IO_Read:00000000 AUDIO_IO_Read
+C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s:1809   .text.AUDIO_IO_Read:00000054 $d
+C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s:1814   .text.AUDIO_IO_Delay:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s:1820   .text.AUDIO_IO_Delay:00000000 AUDIO_IO_Delay
+C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s:1855   .text.CAMERA_IO_Init:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s:1861   .text.CAMERA_IO_Init:00000000 CAMERA_IO_Init
+C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s:1884   .text.CAMERA_IO_Init:00000010 $d
+C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s:1889   .text.CAMERA_IO_Write:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s:1895   .text.CAMERA_IO_Write:00000000 CAMERA_IO_Write
+C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s:1942   .text.CAMERA_IO_Write:00000030 $d
+C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s:1947   .text.CAMERA_IO_Read:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s:1953   .text.CAMERA_IO_Read:00000000 CAMERA_IO_Read
+C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s:2004   .text.CAMERA_IO_Read:00000038 $d
+C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s:2009   .text.CAMERA_Delay:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s:2015   .text.CAMERA_Delay:00000000 CAMERA_Delay
+C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s:2050   .text.EEPROM_IO_Init:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s:2056   .text.EEPROM_IO_Init:00000000 EEPROM_IO_Init
+C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s:2079   .text.EEPROM_IO_Init:00000010 $d
+C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s:2084   .text.EEPROM_IO_WriteData:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s:2090   .text.EEPROM_IO_WriteData:00000000 EEPROM_IO_WriteData
+C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s:2139   .text.EEPROM_IO_WriteData:00000034 $d
+C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s:2144   .text.EEPROM_IO_ReadData:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s:2150   .text.EEPROM_IO_ReadData:00000000 EEPROM_IO_ReadData
+C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s:2199   .text.EEPROM_IO_ReadData:00000034 $d
+C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s:2204   .text.EEPROM_IO_IsDeviceReady:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s:2210   .text.EEPROM_IO_IsDeviceReady:00000000 EEPROM_IO_IsDeviceReady
+C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s:2250   .text.EEPROM_IO_IsDeviceReady:00000024 $d
+C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s:2255   .text.TS_IO_Init:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s:2261   .text.TS_IO_Init:00000000 TS_IO_Init
+C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s:2284   .text.TS_IO_Init:00000010 $d
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s 			page 61
+
+
+C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s:2289   .text.TS_IO_Write:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s:2295   .text.TS_IO_Write:00000000 TS_IO_Write
+C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s:2342   .text.TS_IO_Write:00000030 $d
+C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s:2347   .text.TS_IO_Read:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s:2353   .text.TS_IO_Read:00000000 TS_IO_Read
+C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s:2404   .text.TS_IO_Read:00000038 $d
+C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s:2409   .text.TS_IO_Delay:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\cc7rqzcQ.s:2415   .text.TS_IO_Delay:00000000 TS_IO_Delay
+
+UNDEFINED SYMBOLS
+HAL_GPIO_Init
+HAL_GPIO_WritePin
+HAL_GPIO_DeInit
+HAL_GPIO_TogglePin
+HAL_NVIC_SetPriority
+HAL_NVIC_EnableIRQ
+HAL_NVIC_DisableIRQ
+HAL_GPIO_ReadPin
+HAL_UART_Init
+HAL_UART_DeInit
+HAL_I2C_GetState
+HAL_I2C_Init
+HAL_I2C_Mem_Read
+HAL_I2C_Mem_Write
+HAL_I2C_IsDeviceReady
+HAL_I2C_DeInit
+HAL_Delay
