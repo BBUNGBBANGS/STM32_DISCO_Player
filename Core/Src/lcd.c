@@ -119,11 +119,9 @@ EndDependencies */
 /** @defgroup STM32746G_DISCOVERY_LCD_Private_Variables STM32746G_DISCOVERY_LCD Private Variables
   * @{
   */ 
-extern LTDC_HandleTypeDef hltdc;
-extern DMA2D_HandleTypeDef hdma2d;
 
 /* Default LCD configuration with LCD Layer 1 */
-static uint32_t            ActiveLayer = 0;
+static uint32_t ActiveLayer = 0;
 static LCD_DrawPropTypeDef DrawProp[MAX_LAYER_NUMBER];
 /**
   * @}
@@ -166,7 +164,9 @@ void LCD_Display_Init(void)
     BSP_LCD_DrawHLine(0,150,BSP_LCD_GetXSize());
     BSP_LCD_DrawHLine(0,180,BSP_LCD_GetXSize());
     BSP_LCD_DrawHLine(0,210,BSP_LCD_GetXSize());
+    BSP_LCD_DrawVLine(0,30,BSP_LCD_GetYSize());
     BSP_LCD_DrawVLine(30,30,BSP_LCD_GetYSize());
+    BSP_LCD_DrawVLine(479,30,BSP_LCD_GetYSize());
 
     BSP_LCD_DisplayStringAt(7, 36, (uint8_t *)"1", LEFT_MODE);
     BSP_LCD_DisplayStringAt(7, 66, (uint8_t *)"2", LEFT_MODE);
@@ -188,8 +188,8 @@ void LCD_Display_Init(void)
     BSP_LCD_SetBackColor(LCD_COLOR_BROWN);
     BSP_LCD_SetTextColor(LCD_COLOR_BROWN);
     BSP_LCD_FillRect(320, 211, 160, 61);
-    BSP_LCD_SetTextColor(LCD_COLOR_LIGHTYELLOW);
-    BSP_LCD_DisplayStringAt(370, 232, (uint8_t *)"MENU", LEFT_MODE);
+    //BSP_LCD_SetTextColor(LCD_COLOR_LIGHTYELLOW);
+    //BSP_LCD_DisplayStringAt(370, 232, (uint8_t *)"MENU", LEFT_MODE);
 }
 /**
   * @brief  Initializes the LCD.
@@ -207,27 +207,6 @@ uint8_t BSP_LCD_Init(void)
     BSP_LCD_SetFont(&LCD_DEFAULT_FONT);
     
     return LCD_OK;
-}
-
-/**
-  * @brief  DeInitializes the LCD.
-  * @retval LCD state
-  */
-uint8_t BSP_LCD_DeInit(void)
-{ 
-  /* Initialize the hltdc Instance parameter */
-  hltdc.Instance = LTDC;
-
- /* Disable LTDC block */
-  __HAL_LTDC_DISABLE(&hltdc);
-
-  /* DeInit the LTDC */
-  HAL_LTDC_DeInit(&hltdc);
-
-  /* DeInit the LTDC MSP : this __weak function can be rewritten by the application */
-  BSP_LCD_MspDeInit(&hltdc, NULL);
-
-  return LCD_OK;
 }
 
 /**
@@ -1256,149 +1235,6 @@ void BSP_LCD_DisplayOff(void)
   HAL_GPIO_WritePin(LCD_BL_CTRL_GPIO_PORT, LCD_BL_CTRL_PIN, GPIO_PIN_RESET);/* De-assert LCD_BL_CTRL pin */
 }
 
-/**
-  * @brief  Initializes the LTDC MSP.
-  * @param  hltdc: LTDC handle
-  * @param  Params
-  * @retval None
-  */
-__weak void BSP_LCD_MspInit(LTDC_HandleTypeDef *hltdc, void *Params)
-{
-  GPIO_InitTypeDef gpio_init_structure;
-  
-  /* Enable the LTDC and DMA2D clocks */
-  __HAL_RCC_LTDC_CLK_ENABLE();
-  __HAL_RCC_DMA2D_CLK_ENABLE();
-  
-  /* Enable GPIOs clock */
-  __HAL_RCC_GPIOE_CLK_ENABLE();
-  __HAL_RCC_GPIOG_CLK_ENABLE();
-  __HAL_RCC_GPIOI_CLK_ENABLE();
-  __HAL_RCC_GPIOJ_CLK_ENABLE();
-  __HAL_RCC_GPIOK_CLK_ENABLE();
-  LCD_DISP_GPIO_CLK_ENABLE();
-  LCD_BL_CTRL_GPIO_CLK_ENABLE();
-
-  /*** LTDC Pins configuration ***/
-  /* GPIOE configuration */
-  gpio_init_structure.Pin       = GPIO_PIN_4;
-  gpio_init_structure.Mode      = GPIO_MODE_AF_PP;
-  gpio_init_structure.Pull      = GPIO_NOPULL;
-  gpio_init_structure.Speed     = GPIO_SPEED_FAST;
-  gpio_init_structure.Alternate = GPIO_AF14_LTDC;  
-  HAL_GPIO_Init(GPIOE, &gpio_init_structure);
-
-  /* GPIOG configuration */
-  gpio_init_structure.Pin       = GPIO_PIN_12;
-  gpio_init_structure.Mode      = GPIO_MODE_AF_PP;
-  gpio_init_structure.Alternate = GPIO_AF9_LTDC;
-  HAL_GPIO_Init(GPIOG, &gpio_init_structure);
-
-  /* GPIOI LTDC alternate configuration */
-  gpio_init_structure.Pin       = GPIO_PIN_9 | GPIO_PIN_10 | \
-                                  GPIO_PIN_14 | GPIO_PIN_15;
-  gpio_init_structure.Mode      = GPIO_MODE_AF_PP;
-  gpio_init_structure.Alternate = GPIO_AF14_LTDC;
-  HAL_GPIO_Init(GPIOI, &gpio_init_structure);
-
-  /* GPIOJ configuration */  
-  gpio_init_structure.Pin       = GPIO_PIN_0 | GPIO_PIN_1 | GPIO_PIN_2 | GPIO_PIN_3 | \
-                                  GPIO_PIN_4 | GPIO_PIN_5 | GPIO_PIN_6 | GPIO_PIN_7 | \
-                                  GPIO_PIN_8 | GPIO_PIN_9 | GPIO_PIN_10 | GPIO_PIN_11 | \
-                                  GPIO_PIN_13 | GPIO_PIN_14 | GPIO_PIN_15;
-  gpio_init_structure.Mode      = GPIO_MODE_AF_PP;
-  gpio_init_structure.Alternate = GPIO_AF14_LTDC;
-  HAL_GPIO_Init(GPIOJ, &gpio_init_structure);  
-
-  /* GPIOK configuration */  
-  gpio_init_structure.Pin       = GPIO_PIN_0 | GPIO_PIN_1 | GPIO_PIN_2 | GPIO_PIN_4 | \
-                                  GPIO_PIN_5 | GPIO_PIN_6 | GPIO_PIN_7;
-  gpio_init_structure.Mode      = GPIO_MODE_AF_PP;
-  gpio_init_structure.Alternate = GPIO_AF14_LTDC;
-  HAL_GPIO_Init(GPIOK, &gpio_init_structure);
-
-  /* LCD_DISP GPIO configuration */
-  gpio_init_structure.Pin       = LCD_DISP_PIN;     /* LCD_DISP pin has to be manually controlled */
-  gpio_init_structure.Mode      = GPIO_MODE_OUTPUT_PP;
-  HAL_GPIO_Init(LCD_DISP_GPIO_PORT, &gpio_init_structure);
-
-  /* LCD_BL_CTRL GPIO configuration */
-  gpio_init_structure.Pin       = LCD_BL_CTRL_PIN;  /* LCD_BL_CTRL pin has to be manually controlled */
-  gpio_init_structure.Mode      = GPIO_MODE_OUTPUT_PP;
-  HAL_GPIO_Init(LCD_BL_CTRL_GPIO_PORT, &gpio_init_structure);
-}
-
-/**
-  * @brief  DeInitializes BSP_LCD MSP.
-  * @param  hltdc: LTDC handle
-  * @param  Params
-  * @retval None
-  */
-__weak void BSP_LCD_MspDeInit(LTDC_HandleTypeDef *hltdc, void *Params)
-{
-  GPIO_InitTypeDef  gpio_init_structure;
-
-  /* Disable LTDC block */
-  __HAL_LTDC_DISABLE(hltdc);
-
-  /* LTDC Pins deactivation */
-
-  /* GPIOE deactivation */
-  gpio_init_structure.Pin       = GPIO_PIN_4;
-  HAL_GPIO_DeInit(GPIOE, gpio_init_structure.Pin);
-
-  /* GPIOG deactivation */
-  gpio_init_structure.Pin       = GPIO_PIN_12;
-  HAL_GPIO_DeInit(GPIOG, gpio_init_structure.Pin);
-
-  /* GPIOI deactivation */
-  gpio_init_structure.Pin       = GPIO_PIN_8 | GPIO_PIN_9 | GPIO_PIN_10 | GPIO_PIN_12 | \
-                                  GPIO_PIN_13 | GPIO_PIN_14 | GPIO_PIN_15;
-  HAL_GPIO_DeInit(GPIOI, gpio_init_structure.Pin);
-
-  /* GPIOJ deactivation */
-  gpio_init_structure.Pin       = GPIO_PIN_0 | GPIO_PIN_1 | GPIO_PIN_2 | GPIO_PIN_3 | \
-                                  GPIO_PIN_4 | GPIO_PIN_5 | GPIO_PIN_6 | GPIO_PIN_7 | \
-                                  GPIO_PIN_8 | GPIO_PIN_9 | GPIO_PIN_10 | GPIO_PIN_11 | \
-                                  GPIO_PIN_13 | GPIO_PIN_14 | GPIO_PIN_15;
-  HAL_GPIO_DeInit(GPIOJ, gpio_init_structure.Pin);
-
-  /* GPIOK deactivation */
-  gpio_init_structure.Pin       = GPIO_PIN_0 | GPIO_PIN_1 | GPIO_PIN_2 | GPIO_PIN_4 | \
-                                  GPIO_PIN_5 | GPIO_PIN_6 | GPIO_PIN_7;
-  HAL_GPIO_DeInit(GPIOK, gpio_init_structure.Pin);
-
-  /* Disable LTDC clock */
-  __HAL_RCC_LTDC_CLK_DISABLE();
-
-  /* GPIO pins clock can be shut down in the application
-     by surcharging this __weak function */
-}
-
-/**
-  * @brief  Clock Config.
-  * @param  hltdc: LTDC handle
-  * @param  Params
-  * @note   This API is called by BSP_LCD_Init()
-  *         Being __weak it can be overwritten by the application
-  * @retval None
-  */
-__weak void BSP_LCD_ClockConfig(LTDC_HandleTypeDef *hltdc, void *Params)
-{
-  static RCC_PeriphCLKInitTypeDef  periph_clk_init_struct;
-
-  /* RK043FN48H LCD clock configuration */
-  /* PLLSAI_VCO Input = HSE_VALUE/PLL_M = 1 Mhz */
-  /* PLLSAI_VCO Output = PLLSAI_VCO Input * PLLSAIN = 192 Mhz */
-  /* PLLLCDCLK = PLLSAI_VCO Output/PLLSAIR = 192/5 = 38.4 Mhz */
-  /* LTDC clock frequency = PLLLCDCLK / LTDC_PLLSAI_DIVR_4 = 38.4/4 = 9.6Mhz */
-  periph_clk_init_struct.PeriphClockSelection = RCC_PERIPHCLK_LTDC;
-  periph_clk_init_struct.PLLSAI.PLLSAIN = 192;
-  periph_clk_init_struct.PLLSAI.PLLSAIR = RK043FN48H_FREQUENCY_DIVIDER;
-  periph_clk_init_struct.PLLSAIDivR = RCC_PLLSAIDIVR_4;
-  HAL_RCCEx_PeriphCLKConfig(&periph_clk_init_struct);
-}
-
 
 /*******************************************************************************
                             Static Functions
@@ -1614,20 +1450,3 @@ static void LL_ConvertLineToARGB8888(void *pSrc, void *pDst, uint32_t xSize, uin
     }
   } 
 }
-
-/**
-  * @}
-  */
-
-/**
-  * @}
-  */
-  
-/**
-  * @}
-  */
-  
-/**
-  * @}
-  */        
-

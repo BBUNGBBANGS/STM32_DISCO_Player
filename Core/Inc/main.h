@@ -38,7 +38,27 @@ extern "C" {
 
 /* Exported types ------------------------------------------------------------*/
 /* USER CODE BEGIN ET */
+extern CRC_HandleTypeDef hcrc;
 
+extern DMA2D_HandleTypeDef hdma2d;
+
+extern I2C_HandleTypeDef hi2c1;
+extern I2C_HandleTypeDef hi2c3;
+
+extern LTDC_HandleTypeDef hltdc;
+
+extern QSPI_HandleTypeDef hqspi;
+
+extern SD_HandleTypeDef hsd1;
+extern DMA_HandleTypeDef hdma_sdmmc1_rx;
+extern DMA_HandleTypeDef hdma_sdmmc1_tx;
+
+extern SPI_HandleTypeDef hspi2;
+
+extern UART_HandleTypeDef huart1;
+extern UART_HandleTypeDef huart6;
+
+extern SDRAM_HandleTypeDef hsdram1;
 /* USER CODE END ET */
 
 /* Exported constants --------------------------------------------------------*/

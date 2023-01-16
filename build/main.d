@@ -70,7 +70,10 @@ build/main.o: Core/Src/main.c Core/Inc/main.h \
  Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_def.h \
  USB_DEVICE/Target/usbd_conf.h Core/Inc/lcd.h Core/Inc/main.h \
  Core/Inc/../../Components/rk043fn48h/rk043fn48h.h \
- Drivers/STM32F7xx_HAL_Driver/Inc/../../../Utilities/Fonts/fonts.h
+ Drivers/STM32F7xx_HAL_Driver/Inc/../../../Utilities/Fonts/fonts.h \
+ Core/Inc/touch.h Components/../Components/ft5336/ft5336.h \
+ Components/../Components/ft5336/../Common/ts.h \
+ Core/Inc/stm32746g_discovery.h Core/Inc/sdram.h
 Core/Inc/main.h:
 Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal.h:
 Core/Inc/stm32f7xx_hal_conf.h:
@@ -153,3 +156,8 @@ Core/Inc/lcd.h:
 Core/Inc/main.h:
 Core/Inc/../../Components/rk043fn48h/rk043fn48h.h:
 Drivers/STM32F7xx_HAL_Driver/Inc/../../../Utilities/Fonts/fonts.h:
+Core/Inc/touch.h:
+Components/../Components/ft5336/ft5336.h:
+Components/../Components/ft5336/../Common/ts.h:
+Core/Inc/stm32746g_discovery.h:
+Core/Inc/sdram.h:

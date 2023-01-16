@@ -5,6 +5,9 @@
         "stm32f7xx_hal.h": "c",
         "usb_host.h": "c",
         "stm32f7xx_hal_pcd.h": "c",
-        "stm32746g_discovery_lcd.h": "c"
+        "stm32746g_discovery_lcd.h": "c",
+        "touch.h": "c",
+        "main.h": "c",
+        "music.h": "c"
     }
 }

@@ -1,0 +1,2080 @@
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s 			page 1
+
+
+   1              		.cpu cortex-m7
+   2              		.arch armv7e-m
+   3              		.fpu fpv5-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 6
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"ft5336.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.global	ft5336_ts_drv
+  20              		.section	.data.ft5336_ts_drv,"aw"
+  21              		.align	2
+  24              	ft5336_ts_drv:
+  25 0000 00000000 		.word	ft5336_Init
+  26 0004 00000000 		.word	ft5336_ReadID
+  27 0008 00000000 		.word	ft5336_Reset
+  28 000c 00000000 		.word	ft5336_TS_Start
+  29 0010 00000000 		.word	ft5336_TS_DetectTouch
+  30 0014 00000000 		.word	ft5336_TS_GetXY
+  31 0018 00000000 		.word	ft5336_TS_EnableIT
+  32 001c 00000000 		.word	ft5336_TS_ClearIT
+  33 0020 00000000 		.word	ft5336_TS_ITStatus
+  34 0024 00000000 		.word	ft5336_TS_DisableIT
+  35              		.section	.bss.ft5336_handle,"aw",%nobits
+  36              		.align	2
+  39              	ft5336_handle:
+  40 0000 000000   		.space	3
+  41              		.section	.text.ft5336_Init,"ax",%progbits
+  42              		.align	1
+  43              		.global	ft5336_Init
+  44              		.syntax unified
+  45              		.thumb
+  46              		.thumb_func
+  48              	ft5336_Init:
+  49              	.LFB0:
+  50              		.file 1 "Components/ft5336/ft5336.c"
+   1:Components/ft5336/ft5336.c **** /**
+   2:Components/ft5336/ft5336.c ****   ******************************************************************************
+   3:Components/ft5336/ft5336.c ****   * @file    ft5336.c
+   4:Components/ft5336/ft5336.c ****   * @author  MCD Application Team
+   5:Components/ft5336/ft5336.c ****   * @brief   This file provides a set of functions needed to manage the FT5336
+   6:Components/ft5336/ft5336.c ****   *          touch screen devices.
+   7:Components/ft5336/ft5336.c ****   ******************************************************************************
+   8:Components/ft5336/ft5336.c ****   * @attention
+   9:Components/ft5336/ft5336.c ****   *
+  10:Components/ft5336/ft5336.c ****   * <h2><center>&copy; COPYRIGHT(c) 2015 STMicroelectronics</center></h2>
+  11:Components/ft5336/ft5336.c ****   *
+  12:Components/ft5336/ft5336.c ****   * Redistribution and use in source and binary forms, with or without modification,
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s 			page 2
+
+
+  13:Components/ft5336/ft5336.c ****   * are permitted provided that the following conditions are met:
+  14:Components/ft5336/ft5336.c ****   *   1. Redistributions of source code must retain the above copyright notice,
+  15:Components/ft5336/ft5336.c ****   *      this list of conditions and the following disclaimer.
+  16:Components/ft5336/ft5336.c ****   *   2. Redistributions in binary form must reproduce the above copyright notice,
+  17:Components/ft5336/ft5336.c ****   *      this list of conditions and the following disclaimer in the documentation
+  18:Components/ft5336/ft5336.c ****   *      and/or other materials provided with the distribution.
+  19:Components/ft5336/ft5336.c ****   *   3. Neither the name of STMicroelectronics nor the names of its contributors
+  20:Components/ft5336/ft5336.c ****   *      may be used to endorse or promote products derived from this software
+  21:Components/ft5336/ft5336.c ****   *      without specific prior written permission.
+  22:Components/ft5336/ft5336.c ****   *
+  23:Components/ft5336/ft5336.c ****   * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+  24:Components/ft5336/ft5336.c ****   * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+  25:Components/ft5336/ft5336.c ****   * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+  26:Components/ft5336/ft5336.c ****   * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+  27:Components/ft5336/ft5336.c ****   * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+  28:Components/ft5336/ft5336.c ****   * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+  29:Components/ft5336/ft5336.c ****   * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+  30:Components/ft5336/ft5336.c ****   * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+  31:Components/ft5336/ft5336.c ****   * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+  32:Components/ft5336/ft5336.c ****   * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+  33:Components/ft5336/ft5336.c ****   *
+  34:Components/ft5336/ft5336.c ****   ******************************************************************************
+  35:Components/ft5336/ft5336.c ****   */
+  36:Components/ft5336/ft5336.c **** 
+  37:Components/ft5336/ft5336.c **** /* Includes ------------------------------------------------------------------*/
+  38:Components/ft5336/ft5336.c **** #include "ft5336.h"
+  39:Components/ft5336/ft5336.c **** 
+  40:Components/ft5336/ft5336.c **** /** @addtogroup BSP
+  41:Components/ft5336/ft5336.c ****   * @{
+  42:Components/ft5336/ft5336.c ****   */
+  43:Components/ft5336/ft5336.c **** 
+  44:Components/ft5336/ft5336.c **** /** @addtogroup Component
+  45:Components/ft5336/ft5336.c ****   * @{
+  46:Components/ft5336/ft5336.c ****   */
+  47:Components/ft5336/ft5336.c **** 
+  48:Components/ft5336/ft5336.c **** /** @defgroup FT5336
+  49:Components/ft5336/ft5336.c ****   * @{
+  50:Components/ft5336/ft5336.c ****   */
+  51:Components/ft5336/ft5336.c **** 
+  52:Components/ft5336/ft5336.c **** /* Private typedef -----------------------------------------------------------*/
+  53:Components/ft5336/ft5336.c **** 
+  54:Components/ft5336/ft5336.c **** /** @defgroup FT5336_Private_Types_Definitions
+  55:Components/ft5336/ft5336.c ****   * @{
+  56:Components/ft5336/ft5336.c ****   */
+  57:Components/ft5336/ft5336.c **** 
+  58:Components/ft5336/ft5336.c **** /* Private define ------------------------------------------------------------*/
+  59:Components/ft5336/ft5336.c **** 
+  60:Components/ft5336/ft5336.c **** /** @defgroup FT5336_Private_Defines
+  61:Components/ft5336/ft5336.c ****   * @{
+  62:Components/ft5336/ft5336.c ****   */
+  63:Components/ft5336/ft5336.c **** 
+  64:Components/ft5336/ft5336.c **** /* Private macro -------------------------------------------------------------*/
+  65:Components/ft5336/ft5336.c **** 
+  66:Components/ft5336/ft5336.c **** /** @defgroup FT5336_Private_Macros
+  67:Components/ft5336/ft5336.c ****   * @{
+  68:Components/ft5336/ft5336.c ****   */
+  69:Components/ft5336/ft5336.c **** 
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s 			page 3
+
+
+  70:Components/ft5336/ft5336.c **** /* Private variables ---------------------------------------------------------*/
+  71:Components/ft5336/ft5336.c **** 
+  72:Components/ft5336/ft5336.c **** /** @defgroup FT5336_Private_Variables
+  73:Components/ft5336/ft5336.c ****   * @{
+  74:Components/ft5336/ft5336.c ****   */
+  75:Components/ft5336/ft5336.c **** 
+  76:Components/ft5336/ft5336.c **** /* Touch screen driver structure initialization */
+  77:Components/ft5336/ft5336.c **** TS_DrvTypeDef ft5336_ts_drv =
+  78:Components/ft5336/ft5336.c **** {
+  79:Components/ft5336/ft5336.c ****   ft5336_Init,
+  80:Components/ft5336/ft5336.c ****   ft5336_ReadID,
+  81:Components/ft5336/ft5336.c ****   ft5336_Reset,
+  82:Components/ft5336/ft5336.c **** 
+  83:Components/ft5336/ft5336.c ****   ft5336_TS_Start,
+  84:Components/ft5336/ft5336.c ****   ft5336_TS_DetectTouch,
+  85:Components/ft5336/ft5336.c ****   ft5336_TS_GetXY,
+  86:Components/ft5336/ft5336.c **** 
+  87:Components/ft5336/ft5336.c ****   ft5336_TS_EnableIT,
+  88:Components/ft5336/ft5336.c ****   ft5336_TS_ClearIT,
+  89:Components/ft5336/ft5336.c ****   ft5336_TS_ITStatus,
+  90:Components/ft5336/ft5336.c ****   ft5336_TS_DisableIT
+  91:Components/ft5336/ft5336.c **** 
+  92:Components/ft5336/ft5336.c **** };
+  93:Components/ft5336/ft5336.c **** 
+  94:Components/ft5336/ft5336.c **** /* Global ft5336 handle */
+  95:Components/ft5336/ft5336.c **** static ft5336_handle_TypeDef ft5336_handle = { FT5336_I2C_NOT_INITIALIZED, 0, 0};
+  96:Components/ft5336/ft5336.c **** 
+  97:Components/ft5336/ft5336.c **** /**
+  98:Components/ft5336/ft5336.c ****   * @}
+  99:Components/ft5336/ft5336.c ****   */
+ 100:Components/ft5336/ft5336.c **** 
+ 101:Components/ft5336/ft5336.c **** /** @defgroup ft5336_Private_Function_Prototypes
+ 102:Components/ft5336/ft5336.c ****   * @{
+ 103:Components/ft5336/ft5336.c ****   */
+ 104:Components/ft5336/ft5336.c **** 
+ 105:Components/ft5336/ft5336.c **** /* Private functions prototypes-----------------------------------------------*/
+ 106:Components/ft5336/ft5336.c **** 
+ 107:Components/ft5336/ft5336.c **** /**
+ 108:Components/ft5336/ft5336.c ****   * @brief  Return the status of I2C was initialized or not.
+ 109:Components/ft5336/ft5336.c ****   * @param  None.
+ 110:Components/ft5336/ft5336.c ****   * @retval : I2C initialization status.
+ 111:Components/ft5336/ft5336.c ****   */
+ 112:Components/ft5336/ft5336.c **** static uint8_t ft5336_Get_I2C_InitializedStatus(void);
+ 113:Components/ft5336/ft5336.c **** 
+ 114:Components/ft5336/ft5336.c **** /**
+ 115:Components/ft5336/ft5336.c ****   * @brief  I2C initialize if needed.
+ 116:Components/ft5336/ft5336.c ****   * @param  None.
+ 117:Components/ft5336/ft5336.c ****   * @retval : None.
+ 118:Components/ft5336/ft5336.c ****   */
+ 119:Components/ft5336/ft5336.c **** static void ft5336_I2C_InitializeIfRequired(void);
+ 120:Components/ft5336/ft5336.c **** 
+ 121:Components/ft5336/ft5336.c **** /**
+ 122:Components/ft5336/ft5336.c ****   * @brief  Basic static configuration of TouchScreen
+ 123:Components/ft5336/ft5336.c ****   * @param  DeviceAddr: FT5336 Device address for communication on I2C Bus.
+ 124:Components/ft5336/ft5336.c ****   * @retval Status FT5336_STATUS_OK or FT5336_STATUS_NOT_OK.
+ 125:Components/ft5336/ft5336.c ****   */
+ 126:Components/ft5336/ft5336.c **** static uint32_t ft5336_TS_Configure(uint16_t DeviceAddr);
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s 			page 4
+
+
+ 127:Components/ft5336/ft5336.c **** 
+ 128:Components/ft5336/ft5336.c **** /** @defgroup ft5336_Private_Functions
+ 129:Components/ft5336/ft5336.c ****   * @{
+ 130:Components/ft5336/ft5336.c ****   */
+ 131:Components/ft5336/ft5336.c **** 
+ 132:Components/ft5336/ft5336.c **** /** @defgroup ft5336_Public_Function_Body
+ 133:Components/ft5336/ft5336.c ****   * @{
+ 134:Components/ft5336/ft5336.c ****   */
+ 135:Components/ft5336/ft5336.c **** 
+ 136:Components/ft5336/ft5336.c **** /* Public functions bodies-----------------------------------------------*/
+ 137:Components/ft5336/ft5336.c **** 
+ 138:Components/ft5336/ft5336.c **** 
+ 139:Components/ft5336/ft5336.c **** /**
+ 140:Components/ft5336/ft5336.c ****   * @brief  Initialize the ft5336 communication bus
+ 141:Components/ft5336/ft5336.c ****   *         from MCU to FT5336 : ie I2C channel initialization (if required).
+ 142:Components/ft5336/ft5336.c ****   * @param  DeviceAddr: Device address on communication Bus (I2C slave address of FT5336).
+ 143:Components/ft5336/ft5336.c ****   * @retval None
+ 144:Components/ft5336/ft5336.c ****   */
+ 145:Components/ft5336/ft5336.c **** void ft5336_Init(uint16_t DeviceAddr)
+ 146:Components/ft5336/ft5336.c **** {
+  51              		.loc 1 146 1
+  52              		.cfi_startproc
+  53              		@ args = 0, pretend = 0, frame = 8
+  54              		@ frame_needed = 1, uses_anonymous_args = 0
+  55 0000 80B5     		push	{r7, lr}
+  56              	.LCFI0:
+  57              		.cfi_def_cfa_offset 8
+  58              		.cfi_offset 7, -8
+  59              		.cfi_offset 14, -4
+  60 0002 82B0     		sub	sp, sp, #8
+  61              	.LCFI1:
+  62              		.cfi_def_cfa_offset 16
+  63 0004 00AF     		add	r7, sp, #0
+  64              	.LCFI2:
+  65              		.cfi_def_cfa_register 7
+  66 0006 0346     		mov	r3, r0
+  67 0008 FB80     		strh	r3, [r7, #6]	@ movhi
+ 147:Components/ft5336/ft5336.c ****   /* Wait at least 200ms after power up before accessing registers
+ 148:Components/ft5336/ft5336.c ****    * Trsi timing (Time of starting to report point after resetting) from FT5336GQQ datasheet */
+ 149:Components/ft5336/ft5336.c ****   TS_IO_Delay(200);
+  68              		.loc 1 149 3
+  69 000a C820     		movs	r0, #200
+  70 000c FFF7FEFF 		bl	TS_IO_Delay
+ 150:Components/ft5336/ft5336.c **** 
+ 151:Components/ft5336/ft5336.c ****   /* Initialize I2C link if needed */
+ 152:Components/ft5336/ft5336.c ****   ft5336_I2C_InitializeIfRequired();
+  71              		.loc 1 152 3
+  72 0010 FFF7FEFF 		bl	ft5336_I2C_InitializeIfRequired
+ 153:Components/ft5336/ft5336.c **** }
+  73              		.loc 1 153 1
+  74 0014 00BF     		nop
+  75 0016 0837     		adds	r7, r7, #8
+  76              	.LCFI3:
+  77              		.cfi_def_cfa_offset 8
+  78 0018 BD46     		mov	sp, r7
+  79              	.LCFI4:
+  80              		.cfi_def_cfa_register 13
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s 			page 5
+
+
+  81              		@ sp needed
+  82 001a 80BD     		pop	{r7, pc}
+  83              		.cfi_endproc
+  84              	.LFE0:
+  86              		.section	.text.ft5336_Reset,"ax",%progbits
+  87              		.align	1
+  88              		.global	ft5336_Reset
+  89              		.syntax unified
+  90              		.thumb
+  91              		.thumb_func
+  93              	ft5336_Reset:
+  94              	.LFB1:
+ 154:Components/ft5336/ft5336.c **** 
+ 155:Components/ft5336/ft5336.c **** /**
+ 156:Components/ft5336/ft5336.c ****   * @brief  Software Reset the ft5336.
+ 157:Components/ft5336/ft5336.c ****   *         @note : Not applicable to FT5336.
+ 158:Components/ft5336/ft5336.c ****   * @param  DeviceAddr: Device address on communication Bus (I2C slave address of FT5336).
+ 159:Components/ft5336/ft5336.c ****   * @retval None
+ 160:Components/ft5336/ft5336.c ****   */
+ 161:Components/ft5336/ft5336.c **** void ft5336_Reset(uint16_t DeviceAddr)
+ 162:Components/ft5336/ft5336.c **** {
+  95              		.loc 1 162 1
+  96              		.cfi_startproc
+  97              		@ args = 0, pretend = 0, frame = 8
+  98              		@ frame_needed = 1, uses_anonymous_args = 0
+  99              		@ link register save eliminated.
+ 100 0000 80B4     		push	{r7}
+ 101              	.LCFI5:
+ 102              		.cfi_def_cfa_offset 4
+ 103              		.cfi_offset 7, -4
+ 104 0002 83B0     		sub	sp, sp, #12
+ 105              	.LCFI6:
+ 106              		.cfi_def_cfa_offset 16
+ 107 0004 00AF     		add	r7, sp, #0
+ 108              	.LCFI7:
+ 109              		.cfi_def_cfa_register 7
+ 110 0006 0346     		mov	r3, r0
+ 111 0008 FB80     		strh	r3, [r7, #6]	@ movhi
+ 163:Components/ft5336/ft5336.c ****   /* Do nothing */
+ 164:Components/ft5336/ft5336.c ****   /* No software reset sequence available in FT5336 IC */
+ 165:Components/ft5336/ft5336.c **** }
+ 112              		.loc 1 165 1
+ 113 000a 00BF     		nop
+ 114 000c 0C37     		adds	r7, r7, #12
+ 115              	.LCFI8:
+ 116              		.cfi_def_cfa_offset 4
+ 117 000e BD46     		mov	sp, r7
+ 118              	.LCFI9:
+ 119              		.cfi_def_cfa_register 13
+ 120              		@ sp needed
+ 121 0010 5DF8047B 		ldr	r7, [sp], #4
+ 122              	.LCFI10:
+ 123              		.cfi_restore 7
+ 124              		.cfi_def_cfa_offset 0
+ 125 0014 7047     		bx	lr
+ 126              		.cfi_endproc
+ 127              	.LFE1:
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s 			page 6
+
+
+ 129              		.section	.text.ft5336_ReadID,"ax",%progbits
+ 130              		.align	1
+ 131              		.global	ft5336_ReadID
+ 132              		.syntax unified
+ 133              		.thumb
+ 134              		.thumb_func
+ 136              	ft5336_ReadID:
+ 137              	.LFB2:
+ 166:Components/ft5336/ft5336.c **** 
+ 167:Components/ft5336/ft5336.c **** /**
+ 168:Components/ft5336/ft5336.c ****   * @brief  Read the ft5336 device ID, pre initialize I2C in case of need to be
+ 169:Components/ft5336/ft5336.c ****   *         able to read the FT5336 device ID, and verify this is a FT5336.
+ 170:Components/ft5336/ft5336.c ****   * @param  DeviceAddr: I2C FT5336 Slave address.
+ 171:Components/ft5336/ft5336.c ****   * @retval The Device ID (two bytes).
+ 172:Components/ft5336/ft5336.c ****   */
+ 173:Components/ft5336/ft5336.c **** uint16_t ft5336_ReadID(uint16_t DeviceAddr)
+ 174:Components/ft5336/ft5336.c **** {
+ 138              		.loc 1 174 1
+ 139              		.cfi_startproc
+ 140              		@ args = 0, pretend = 0, frame = 16
+ 141              		@ frame_needed = 1, uses_anonymous_args = 0
+ 142 0000 80B5     		push	{r7, lr}
+ 143              	.LCFI11:
+ 144              		.cfi_def_cfa_offset 8
+ 145              		.cfi_offset 7, -8
+ 146              		.cfi_offset 14, -4
+ 147 0002 84B0     		sub	sp, sp, #16
+ 148              	.LCFI12:
+ 149              		.cfi_def_cfa_offset 24
+ 150 0004 00AF     		add	r7, sp, #0
+ 151              	.LCFI13:
+ 152              		.cfi_def_cfa_register 7
+ 153 0006 0346     		mov	r3, r0
+ 154 0008 FB80     		strh	r3, [r7, #6]	@ movhi
+ 175:Components/ft5336/ft5336.c ****   volatile uint8_t ucReadId = 0;
+ 155              		.loc 1 175 20
+ 156 000a 0023     		movs	r3, #0
+ 157 000c 7B73     		strb	r3, [r7, #13]
+ 176:Components/ft5336/ft5336.c ****   uint8_t nbReadAttempts = 0;
+ 158              		.loc 1 176 11
+ 159 000e 0023     		movs	r3, #0
+ 160 0010 FB73     		strb	r3, [r7, #15]
+ 177:Components/ft5336/ft5336.c ****   uint8_t bFoundDevice = 0; /* Device not found by default */
+ 161              		.loc 1 177 11
+ 162 0012 0023     		movs	r3, #0
+ 163 0014 BB73     		strb	r3, [r7, #14]
+ 178:Components/ft5336/ft5336.c **** 
+ 179:Components/ft5336/ft5336.c ****   /* Initialize I2C link if needed */
+ 180:Components/ft5336/ft5336.c ****   ft5336_I2C_InitializeIfRequired();
+ 164              		.loc 1 180 3
+ 165 0016 FFF7FEFF 		bl	ft5336_I2C_InitializeIfRequired
+ 181:Components/ft5336/ft5336.c **** 
+ 182:Components/ft5336/ft5336.c ****   /* At maximum 4 attempts to read ID : exit at first finding of the searched device ID */
+ 183:Components/ft5336/ft5336.c ****   for(nbReadAttempts = 0; ((nbReadAttempts < 3) && !(bFoundDevice)); nbReadAttempts++)
+ 166              		.loc 1 183 22
+ 167 001a 0023     		movs	r3, #0
+ 168 001c FB73     		strb	r3, [r7, #15]
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s 			page 7
+
+
+ 169              		.loc 1 183 3
+ 170 001e 10E0     		b	.L4
+ 171              	.L7:
+ 184:Components/ft5336/ft5336.c ****   {
+ 185:Components/ft5336/ft5336.c ****     /* Read register FT5336_CHIP_ID_REG as DeviceID detection */
+ 186:Components/ft5336/ft5336.c ****     ucReadId = TS_IO_Read(DeviceAddr, FT5336_CHIP_ID_REG);
+ 172              		.loc 1 186 16
+ 173 0020 FB88     		ldrh	r3, [r7, #6]	@ movhi
+ 174 0022 DBB2     		uxtb	r3, r3
+ 175 0024 A821     		movs	r1, #168
+ 176 0026 1846     		mov	r0, r3
+ 177 0028 FFF7FEFF 		bl	TS_IO_Read
+ 178 002c 0346     		mov	r3, r0
+ 179              		.loc 1 186 14
+ 180 002e 7B73     		strb	r3, [r7, #13]
+ 187:Components/ft5336/ft5336.c **** 
+ 188:Components/ft5336/ft5336.c ****     /* Found the searched device ID ? */
+ 189:Components/ft5336/ft5336.c ****     if(ucReadId == FT5336_ID_VALUE)
+ 181              		.loc 1 189 17
+ 182 0030 7B7B     		ldrb	r3, [r7, #13]
+ 183 0032 DBB2     		uxtb	r3, r3
+ 184              		.loc 1 189 7
+ 185 0034 512B     		cmp	r3, #81
+ 186 0036 01D1     		bne	.L5
+ 190:Components/ft5336/ft5336.c ****     {
+ 191:Components/ft5336/ft5336.c ****       /* Set device as found */
+ 192:Components/ft5336/ft5336.c ****       bFoundDevice = 1;
+ 187              		.loc 1 192 20
+ 188 0038 0123     		movs	r3, #1
+ 189 003a BB73     		strb	r3, [r7, #14]
+ 190              	.L5:
+ 183:Components/ft5336/ft5336.c ****   {
+ 191              		.loc 1 183 84 discriminator 2
+ 192 003c FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
+ 193 003e 0133     		adds	r3, r3, #1
+ 194 0040 FB73     		strb	r3, [r7, #15]
+ 195              	.L4:
+ 183:Components/ft5336/ft5336.c ****   {
+ 196              		.loc 1 183 3 discriminator 1
+ 197 0042 FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
+ 198 0044 022B     		cmp	r3, #2
+ 199 0046 02D8     		bhi	.L6
+ 183:Components/ft5336/ft5336.c ****   {
+ 200              		.loc 1 183 49 discriminator 3
+ 201 0048 BB7B     		ldrb	r3, [r7, #14]	@ zero_extendqisi2
+ 202 004a 002B     		cmp	r3, #0
+ 203 004c E8D0     		beq	.L7
+ 204              	.L6:
+ 193:Components/ft5336/ft5336.c ****     }
+ 194:Components/ft5336/ft5336.c ****   }
+ 195:Components/ft5336/ft5336.c **** 
+ 196:Components/ft5336/ft5336.c ****   /* Return the device ID value */
+ 197:Components/ft5336/ft5336.c ****   return (ucReadId);
+ 205              		.loc 1 197 10
+ 206 004e 7B7B     		ldrb	r3, [r7, #13]
+ 207 0050 DBB2     		uxtb	r3, r3
+ 208 0052 9BB2     		uxth	r3, r3
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s 			page 8
+
+
+ 198:Components/ft5336/ft5336.c **** }
+ 209              		.loc 1 198 1
+ 210 0054 1846     		mov	r0, r3
+ 211 0056 1037     		adds	r7, r7, #16
+ 212              	.LCFI14:
+ 213              		.cfi_def_cfa_offset 8
+ 214 0058 BD46     		mov	sp, r7
+ 215              	.LCFI15:
+ 216              		.cfi_def_cfa_register 13
+ 217              		@ sp needed
+ 218 005a 80BD     		pop	{r7, pc}
+ 219              		.cfi_endproc
+ 220              	.LFE2:
+ 222              		.section	.text.ft5336_TS_Start,"ax",%progbits
+ 223              		.align	1
+ 224              		.global	ft5336_TS_Start
+ 225              		.syntax unified
+ 226              		.thumb
+ 227              		.thumb_func
+ 229              	ft5336_TS_Start:
+ 230              	.LFB3:
+ 199:Components/ft5336/ft5336.c **** 
+ 200:Components/ft5336/ft5336.c **** /**
+ 201:Components/ft5336/ft5336.c ****   * @brief  Configures the touch Screen IC device to start detecting touches
+ 202:Components/ft5336/ft5336.c ****   * @param  DeviceAddr: Device address on communication Bus (I2C slave address).
+ 203:Components/ft5336/ft5336.c ****   * @retval None.
+ 204:Components/ft5336/ft5336.c ****   */
+ 205:Components/ft5336/ft5336.c **** void ft5336_TS_Start(uint16_t DeviceAddr)
+ 206:Components/ft5336/ft5336.c **** {
+ 231              		.loc 1 206 1
+ 232              		.cfi_startproc
+ 233              		@ args = 0, pretend = 0, frame = 8
+ 234              		@ frame_needed = 1, uses_anonymous_args = 0
+ 235 0000 80B5     		push	{r7, lr}
+ 236              	.LCFI16:
+ 237              		.cfi_def_cfa_offset 8
+ 238              		.cfi_offset 7, -8
+ 239              		.cfi_offset 14, -4
+ 240 0002 82B0     		sub	sp, sp, #8
+ 241              	.LCFI17:
+ 242              		.cfi_def_cfa_offset 16
+ 243 0004 00AF     		add	r7, sp, #0
+ 244              	.LCFI18:
+ 245              		.cfi_def_cfa_register 7
+ 246 0006 0346     		mov	r3, r0
+ 247 0008 FB80     		strh	r3, [r7, #6]	@ movhi
+ 207:Components/ft5336/ft5336.c ****   /* Minimum static configuration of FT5336 */
+ 208:Components/ft5336/ft5336.c ****   FT5336_ASSERT(ft5336_TS_Configure(DeviceAddr));
+ 248              		.loc 1 208 3
+ 249 000a FB88     		ldrh	r3, [r7, #6]
+ 250 000c 1846     		mov	r0, r3
+ 251 000e FFF7FEFF 		bl	ft5336_TS_Configure
+ 209:Components/ft5336/ft5336.c **** 
+ 210:Components/ft5336/ft5336.c ****   /* By default set FT5336 IC in Polling mode : no INT generation on FT5336 for new touch available
+ 211:Components/ft5336/ft5336.c ****   /* Note TS_INT is active low                                                                     
+ 212:Components/ft5336/ft5336.c ****   ft5336_TS_DisableIT(DeviceAddr);
+ 252              		.loc 1 212 3
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s 			page 9
+
+
+ 253 0012 FB88     		ldrh	r3, [r7, #6]
+ 254 0014 1846     		mov	r0, r3
+ 255 0016 FFF7FEFF 		bl	ft5336_TS_DisableIT
+ 213:Components/ft5336/ft5336.c **** }
+ 256              		.loc 1 213 1
+ 257 001a 00BF     		nop
+ 258 001c 0837     		adds	r7, r7, #8
+ 259              	.LCFI19:
+ 260              		.cfi_def_cfa_offset 8
+ 261 001e BD46     		mov	sp, r7
+ 262              	.LCFI20:
+ 263              		.cfi_def_cfa_register 13
+ 264              		@ sp needed
+ 265 0020 80BD     		pop	{r7, pc}
+ 266              		.cfi_endproc
+ 267              	.LFE3:
+ 269              		.section	.text.ft5336_TS_DetectTouch,"ax",%progbits
+ 270              		.align	1
+ 271              		.global	ft5336_TS_DetectTouch
+ 272              		.syntax unified
+ 273              		.thumb
+ 274              		.thumb_func
+ 276              	ft5336_TS_DetectTouch:
+ 277              	.LFB4:
+ 214:Components/ft5336/ft5336.c **** 
+ 215:Components/ft5336/ft5336.c **** /**
+ 216:Components/ft5336/ft5336.c ****   * @brief  Return if there is touches detected or not.
+ 217:Components/ft5336/ft5336.c ****   *         Try to detect new touches and forget the old ones (reset internal global
+ 218:Components/ft5336/ft5336.c ****   *         variables).
+ 219:Components/ft5336/ft5336.c ****   * @param  DeviceAddr: Device address on communication Bus.
+ 220:Components/ft5336/ft5336.c ****   * @retval : Number of active touches detected (can be 0, 1 or 2).
+ 221:Components/ft5336/ft5336.c ****   */
+ 222:Components/ft5336/ft5336.c **** uint8_t ft5336_TS_DetectTouch(uint16_t DeviceAddr)
+ 223:Components/ft5336/ft5336.c **** {
+ 278              		.loc 1 223 1
+ 279              		.cfi_startproc
+ 280              		@ args = 0, pretend = 0, frame = 16
+ 281              		@ frame_needed = 1, uses_anonymous_args = 0
+ 282 0000 80B5     		push	{r7, lr}
+ 283              	.LCFI21:
+ 284              		.cfi_def_cfa_offset 8
+ 285              		.cfi_offset 7, -8
+ 286              		.cfi_offset 14, -4
+ 287 0002 84B0     		sub	sp, sp, #16
+ 288              	.LCFI22:
+ 289              		.cfi_def_cfa_offset 24
+ 290 0004 00AF     		add	r7, sp, #0
+ 291              	.LCFI23:
+ 292              		.cfi_def_cfa_register 7
+ 293 0006 0346     		mov	r3, r0
+ 294 0008 FB80     		strh	r3, [r7, #6]	@ movhi
+ 224:Components/ft5336/ft5336.c ****   volatile uint8_t nbTouch = 0;
+ 295              		.loc 1 224 20
+ 296 000a 0023     		movs	r3, #0
+ 297 000c FB73     		strb	r3, [r7, #15]
+ 225:Components/ft5336/ft5336.c **** 
+ 226:Components/ft5336/ft5336.c ****   /* Read register FT5336_TD_STAT_REG to check number of touches detection */
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s 			page 10
+
+
+ 227:Components/ft5336/ft5336.c ****   nbTouch = TS_IO_Read(DeviceAddr, FT5336_TD_STAT_REG);
+ 298              		.loc 1 227 13
+ 299 000e FB88     		ldrh	r3, [r7, #6]	@ movhi
+ 300 0010 DBB2     		uxtb	r3, r3
+ 301 0012 0221     		movs	r1, #2
+ 302 0014 1846     		mov	r0, r3
+ 303 0016 FFF7FEFF 		bl	TS_IO_Read
+ 304 001a 0346     		mov	r3, r0
+ 305              		.loc 1 227 11
+ 306 001c FB73     		strb	r3, [r7, #15]
+ 228:Components/ft5336/ft5336.c ****   nbTouch &= FT5336_TD_STAT_MASK;
+ 307              		.loc 1 228 11
+ 308 001e FB7B     		ldrb	r3, [r7, #15]
+ 309 0020 DBB2     		uxtb	r3, r3
+ 310 0022 03F00F03 		and	r3, r3, #15
+ 311 0026 DBB2     		uxtb	r3, r3
+ 312 0028 FB73     		strb	r3, [r7, #15]
+ 229:Components/ft5336/ft5336.c **** 
+ 230:Components/ft5336/ft5336.c ****   if(nbTouch > FT5336_MAX_DETECTABLE_TOUCH)
+ 313              		.loc 1 230 14
+ 314 002a FB7B     		ldrb	r3, [r7, #15]
+ 315 002c DBB2     		uxtb	r3, r3
+ 316              		.loc 1 230 5
+ 317 002e 052B     		cmp	r3, #5
+ 318 0030 01D9     		bls	.L11
+ 231:Components/ft5336/ft5336.c ****   {
+ 232:Components/ft5336/ft5336.c ****     /* If invalid number of touch detected, set it to zero */
+ 233:Components/ft5336/ft5336.c ****     nbTouch = 0;
+ 319              		.loc 1 233 13
+ 320 0032 0023     		movs	r3, #0
+ 321 0034 FB73     		strb	r3, [r7, #15]
+ 322              	.L11:
+ 234:Components/ft5336/ft5336.c ****   }
+ 235:Components/ft5336/ft5336.c **** 
+ 236:Components/ft5336/ft5336.c ****   /* Update ft5336 driver internal global : current number of active touches */
+ 237:Components/ft5336/ft5336.c ****   ft5336_handle.currActiveTouchNb = nbTouch;
+ 323              		.loc 1 237 35
+ 324 0036 FB7B     		ldrb	r3, [r7, #15]
+ 325 0038 DAB2     		uxtb	r2, r3
+ 326 003a 054B     		ldr	r3, .L13
+ 327 003c 5A70     		strb	r2, [r3, #1]
+ 238:Components/ft5336/ft5336.c **** 
+ 239:Components/ft5336/ft5336.c ****   /* Reset current active touch index on which to work on */
+ 240:Components/ft5336/ft5336.c ****   ft5336_handle.currActiveTouchIdx = 0;
+ 328              		.loc 1 240 36
+ 329 003e 044B     		ldr	r3, .L13
+ 330 0040 0022     		movs	r2, #0
+ 331 0042 9A70     		strb	r2, [r3, #2]
+ 241:Components/ft5336/ft5336.c **** 
+ 242:Components/ft5336/ft5336.c ****   return(nbTouch);
+ 332              		.loc 1 242 9
+ 333 0044 FB7B     		ldrb	r3, [r7, #15]
+ 334 0046 DBB2     		uxtb	r3, r3
+ 243:Components/ft5336/ft5336.c **** }
+ 335              		.loc 1 243 1
+ 336 0048 1846     		mov	r0, r3
+ 337 004a 1037     		adds	r7, r7, #16
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s 			page 11
+
+
+ 338              	.LCFI24:
+ 339              		.cfi_def_cfa_offset 8
+ 340 004c BD46     		mov	sp, r7
+ 341              	.LCFI25:
+ 342              		.cfi_def_cfa_register 13
+ 343              		@ sp needed
+ 344 004e 80BD     		pop	{r7, pc}
+ 345              	.L14:
+ 346              		.align	2
+ 347              	.L13:
+ 348 0050 00000000 		.word	ft5336_handle
+ 349              		.cfi_endproc
+ 350              	.LFE4:
+ 352              		.section	.text.ft5336_TS_GetXY,"ax",%progbits
+ 353              		.align	1
+ 354              		.global	ft5336_TS_GetXY
+ 355              		.syntax unified
+ 356              		.thumb
+ 357              		.thumb_func
+ 359              	ft5336_TS_GetXY:
+ 360              	.LFB5:
+ 244:Components/ft5336/ft5336.c **** 
+ 245:Components/ft5336/ft5336.c **** /**
+ 246:Components/ft5336/ft5336.c ****   * @brief  Get the touch screen X and Y positions values
+ 247:Components/ft5336/ft5336.c ****   *         Manage multi touch thanks to touch Index global
+ 248:Components/ft5336/ft5336.c ****   *         variable 'ft5336_handle.currActiveTouchIdx'.
+ 249:Components/ft5336/ft5336.c ****   * @param  DeviceAddr: Device address on communication Bus.
+ 250:Components/ft5336/ft5336.c ****   * @param  X: Pointer to X position value
+ 251:Components/ft5336/ft5336.c ****   * @param  Y: Pointer to Y position value
+ 252:Components/ft5336/ft5336.c ****   * @retval None.
+ 253:Components/ft5336/ft5336.c ****   */
+ 254:Components/ft5336/ft5336.c **** void ft5336_TS_GetXY(uint16_t DeviceAddr, uint16_t *X, uint16_t *Y)
+ 255:Components/ft5336/ft5336.c **** {
+ 361              		.loc 1 255 1
+ 362              		.cfi_startproc
+ 363              		@ args = 0, pretend = 0, frame = 24
+ 364              		@ frame_needed = 1, uses_anonymous_args = 0
+ 365 0000 80B5     		push	{r7, lr}
+ 366              	.LCFI26:
+ 367              		.cfi_def_cfa_offset 8
+ 368              		.cfi_offset 7, -8
+ 369              		.cfi_offset 14, -4
+ 370 0002 86B0     		sub	sp, sp, #24
+ 371              	.LCFI27:
+ 372              		.cfi_def_cfa_offset 32
+ 373 0004 00AF     		add	r7, sp, #0
+ 374              	.LCFI28:
+ 375              		.cfi_def_cfa_register 7
+ 376 0006 0346     		mov	r3, r0
+ 377 0008 B960     		str	r1, [r7, #8]
+ 378 000a 7A60     		str	r2, [r7, #4]
+ 379 000c FB81     		strh	r3, [r7, #14]	@ movhi
+ 256:Components/ft5336/ft5336.c ****   volatile uint8_t ucReadData = 0;
+ 380              		.loc 1 256 20
+ 381 000e 0023     		movs	r3, #0
+ 382 0010 FB74     		strb	r3, [r7, #19]
+ 257:Components/ft5336/ft5336.c ****   static uint16_t coord;
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s 			page 12
+
+
+ 258:Components/ft5336/ft5336.c ****   uint8_t regAddressXLow = 0;
+ 383              		.loc 1 258 11
+ 384 0012 0023     		movs	r3, #0
+ 385 0014 FB75     		strb	r3, [r7, #23]
+ 259:Components/ft5336/ft5336.c ****   uint8_t regAddressXHigh = 0;
+ 386              		.loc 1 259 11
+ 387 0016 0023     		movs	r3, #0
+ 388 0018 BB75     		strb	r3, [r7, #22]
+ 260:Components/ft5336/ft5336.c ****   uint8_t regAddressYLow = 0;
+ 389              		.loc 1 260 11
+ 390 001a 0023     		movs	r3, #0
+ 391 001c 7B75     		strb	r3, [r7, #21]
+ 261:Components/ft5336/ft5336.c ****   uint8_t regAddressYHigh = 0;
+ 392              		.loc 1 261 11
+ 393 001e 0023     		movs	r3, #0
+ 394 0020 3B75     		strb	r3, [r7, #20]
+ 262:Components/ft5336/ft5336.c **** 
+ 263:Components/ft5336/ft5336.c ****   if(ft5336_handle.currActiveTouchIdx < ft5336_handle.currActiveTouchNb)
+ 395              		.loc 1 263 19
+ 396 0022 6D4B     		ldr	r3, .L32
+ 397 0024 9A78     		ldrb	r2, [r3, #2]	@ zero_extendqisi2
+ 398              		.loc 1 263 54
+ 399 0026 6C4B     		ldr	r3, .L32
+ 400 0028 5B78     		ldrb	r3, [r3, #1]	@ zero_extendqisi2
+ 401              		.loc 1 263 5
+ 402 002a 9A42     		cmp	r2, r3
+ 403 002c 80F0CF80 		bcs	.L30
+ 264:Components/ft5336/ft5336.c ****   {
+ 265:Components/ft5336/ft5336.c ****     switch(ft5336_handle.currActiveTouchIdx)
+ 404              		.loc 1 265 25
+ 405 0030 694B     		ldr	r3, .L32
+ 406 0032 9B78     		ldrb	r3, [r3, #2]	@ zero_extendqisi2
+ 407              		.loc 1 265 5
+ 408 0034 092B     		cmp	r3, #9
+ 409 0036 71D8     		bhi	.L31
+ 410 0038 01A2     		adr	r2, .L19
+ 411 003a 52F823F0 		ldr	pc, [r2, r3, lsl #2]
+ 412 003e 00BF     		.p2align 2
+ 413              	.L19:
+ 414 0040 69000000 		.word	.L28+1
+ 415 0044 7B000000 		.word	.L27+1
+ 416 0048 8D000000 		.word	.L26+1
+ 417 004c 9F000000 		.word	.L25+1
+ 418 0050 B1000000 		.word	.L24+1
+ 419 0054 C3000000 		.word	.L23+1
+ 420 0058 D5000000 		.word	.L22+1
+ 421 005c E7000000 		.word	.L21+1
+ 422 0060 F9000000 		.word	.L20+1
+ 423 0064 0B010000 		.word	.L18+1
+ 424              		.p2align 1
+ 425              	.L28:
+ 266:Components/ft5336/ft5336.c ****     {
+ 267:Components/ft5336/ft5336.c ****     case 0 :
+ 268:Components/ft5336/ft5336.c ****       regAddressXLow  = FT5336_P1_XL_REG;
+ 426              		.loc 1 268 23
+ 427 0068 0423     		movs	r3, #4
+ 428 006a FB75     		strb	r3, [r7, #23]
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s 			page 13
+
+
+ 269:Components/ft5336/ft5336.c ****       regAddressXHigh = FT5336_P1_XH_REG;
+ 429              		.loc 1 269 23
+ 430 006c 0323     		movs	r3, #3
+ 431 006e BB75     		strb	r3, [r7, #22]
+ 270:Components/ft5336/ft5336.c ****       regAddressYLow  = FT5336_P1_YL_REG;
+ 432              		.loc 1 270 23
+ 433 0070 0623     		movs	r3, #6
+ 434 0072 7B75     		strb	r3, [r7, #21]
+ 271:Components/ft5336/ft5336.c ****       regAddressYHigh = FT5336_P1_YH_REG;
+ 435              		.loc 1 271 23
+ 436 0074 0523     		movs	r3, #5
+ 437 0076 3B75     		strb	r3, [r7, #20]
+ 272:Components/ft5336/ft5336.c ****       break;
+ 438              		.loc 1 272 7
+ 439 0078 51E0     		b	.L29
+ 440              	.L27:
+ 273:Components/ft5336/ft5336.c **** 
+ 274:Components/ft5336/ft5336.c ****     case 1 :
+ 275:Components/ft5336/ft5336.c ****       regAddressXLow  = FT5336_P2_XL_REG;
+ 441              		.loc 1 275 23
+ 442 007a 0A23     		movs	r3, #10
+ 443 007c FB75     		strb	r3, [r7, #23]
+ 276:Components/ft5336/ft5336.c ****       regAddressXHigh = FT5336_P2_XH_REG;
+ 444              		.loc 1 276 23
+ 445 007e 0923     		movs	r3, #9
+ 446 0080 BB75     		strb	r3, [r7, #22]
+ 277:Components/ft5336/ft5336.c ****       regAddressYLow  = FT5336_P2_YL_REG;
+ 447              		.loc 1 277 23
+ 448 0082 0C23     		movs	r3, #12
+ 449 0084 7B75     		strb	r3, [r7, #21]
+ 278:Components/ft5336/ft5336.c ****       regAddressYHigh = FT5336_P2_YH_REG;
+ 450              		.loc 1 278 23
+ 451 0086 0B23     		movs	r3, #11
+ 452 0088 3B75     		strb	r3, [r7, #20]
+ 279:Components/ft5336/ft5336.c ****       break;
+ 453              		.loc 1 279 7
+ 454 008a 48E0     		b	.L29
+ 455              	.L26:
+ 280:Components/ft5336/ft5336.c **** 
+ 281:Components/ft5336/ft5336.c ****     case 2 :
+ 282:Components/ft5336/ft5336.c ****       regAddressXLow  = FT5336_P3_XL_REG;
+ 456              		.loc 1 282 23
+ 457 008c 1023     		movs	r3, #16
+ 458 008e FB75     		strb	r3, [r7, #23]
+ 283:Components/ft5336/ft5336.c ****       regAddressXHigh = FT5336_P3_XH_REG;
+ 459              		.loc 1 283 23
+ 460 0090 0F23     		movs	r3, #15
+ 461 0092 BB75     		strb	r3, [r7, #22]
+ 284:Components/ft5336/ft5336.c ****       regAddressYLow  = FT5336_P3_YL_REG;
+ 462              		.loc 1 284 23
+ 463 0094 1223     		movs	r3, #18
+ 464 0096 7B75     		strb	r3, [r7, #21]
+ 285:Components/ft5336/ft5336.c ****       regAddressYHigh = FT5336_P3_YH_REG;
+ 465              		.loc 1 285 23
+ 466 0098 1123     		movs	r3, #17
+ 467 009a 3B75     		strb	r3, [r7, #20]
+ 286:Components/ft5336/ft5336.c ****       break;
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s 			page 14
+
+
+ 468              		.loc 1 286 7
+ 469 009c 3FE0     		b	.L29
+ 470              	.L25:
+ 287:Components/ft5336/ft5336.c **** 
+ 288:Components/ft5336/ft5336.c ****     case 3 :
+ 289:Components/ft5336/ft5336.c ****       regAddressXLow  = FT5336_P4_XL_REG;
+ 471              		.loc 1 289 23
+ 472 009e 1623     		movs	r3, #22
+ 473 00a0 FB75     		strb	r3, [r7, #23]
+ 290:Components/ft5336/ft5336.c ****       regAddressXHigh = FT5336_P4_XH_REG;
+ 474              		.loc 1 290 23
+ 475 00a2 1523     		movs	r3, #21
+ 476 00a4 BB75     		strb	r3, [r7, #22]
+ 291:Components/ft5336/ft5336.c ****       regAddressYLow  = FT5336_P4_YL_REG;
+ 477              		.loc 1 291 23
+ 478 00a6 1823     		movs	r3, #24
+ 479 00a8 7B75     		strb	r3, [r7, #21]
+ 292:Components/ft5336/ft5336.c ****       regAddressYHigh = FT5336_P4_YH_REG;
+ 480              		.loc 1 292 23
+ 481 00aa 1723     		movs	r3, #23
+ 482 00ac 3B75     		strb	r3, [r7, #20]
+ 293:Components/ft5336/ft5336.c ****       break;
+ 483              		.loc 1 293 7
+ 484 00ae 36E0     		b	.L29
+ 485              	.L24:
+ 294:Components/ft5336/ft5336.c **** 
+ 295:Components/ft5336/ft5336.c ****     case 4 :
+ 296:Components/ft5336/ft5336.c ****       regAddressXLow  = FT5336_P5_XL_REG;
+ 486              		.loc 1 296 23
+ 487 00b0 1C23     		movs	r3, #28
+ 488 00b2 FB75     		strb	r3, [r7, #23]
+ 297:Components/ft5336/ft5336.c ****       regAddressXHigh = FT5336_P5_XH_REG;
+ 489              		.loc 1 297 23
+ 490 00b4 1B23     		movs	r3, #27
+ 491 00b6 BB75     		strb	r3, [r7, #22]
+ 298:Components/ft5336/ft5336.c ****       regAddressYLow  = FT5336_P5_YL_REG;
+ 492              		.loc 1 298 23
+ 493 00b8 1E23     		movs	r3, #30
+ 494 00ba 7B75     		strb	r3, [r7, #21]
+ 299:Components/ft5336/ft5336.c ****       regAddressYHigh = FT5336_P5_YH_REG;
+ 495              		.loc 1 299 23
+ 496 00bc 1D23     		movs	r3, #29
+ 497 00be 3B75     		strb	r3, [r7, #20]
+ 300:Components/ft5336/ft5336.c ****       break;
+ 498              		.loc 1 300 7
+ 499 00c0 2DE0     		b	.L29
+ 500              	.L23:
+ 301:Components/ft5336/ft5336.c **** 
+ 302:Components/ft5336/ft5336.c ****     case 5 :
+ 303:Components/ft5336/ft5336.c ****       regAddressXLow  = FT5336_P6_XL_REG;
+ 501              		.loc 1 303 23
+ 502 00c2 2223     		movs	r3, #34
+ 503 00c4 FB75     		strb	r3, [r7, #23]
+ 304:Components/ft5336/ft5336.c ****       regAddressXHigh = FT5336_P6_XH_REG;
+ 504              		.loc 1 304 23
+ 505 00c6 2123     		movs	r3, #33
+ 506 00c8 BB75     		strb	r3, [r7, #22]
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s 			page 15
+
+
+ 305:Components/ft5336/ft5336.c ****       regAddressYLow  = FT5336_P6_YL_REG;
+ 507              		.loc 1 305 23
+ 508 00ca 2423     		movs	r3, #36
+ 509 00cc 7B75     		strb	r3, [r7, #21]
+ 306:Components/ft5336/ft5336.c ****       regAddressYHigh = FT5336_P6_YH_REG;
+ 510              		.loc 1 306 23
+ 511 00ce 2323     		movs	r3, #35
+ 512 00d0 3B75     		strb	r3, [r7, #20]
+ 307:Components/ft5336/ft5336.c ****       break;
+ 513              		.loc 1 307 7
+ 514 00d2 24E0     		b	.L29
+ 515              	.L22:
+ 308:Components/ft5336/ft5336.c **** 
+ 309:Components/ft5336/ft5336.c ****     case 6 :
+ 310:Components/ft5336/ft5336.c ****       regAddressXLow  = FT5336_P7_XL_REG;
+ 516              		.loc 1 310 23
+ 517 00d4 2823     		movs	r3, #40
+ 518 00d6 FB75     		strb	r3, [r7, #23]
+ 311:Components/ft5336/ft5336.c ****       regAddressXHigh = FT5336_P7_XH_REG;
+ 519              		.loc 1 311 23
+ 520 00d8 2723     		movs	r3, #39
+ 521 00da BB75     		strb	r3, [r7, #22]
+ 312:Components/ft5336/ft5336.c ****       regAddressYLow  = FT5336_P7_YL_REG;
+ 522              		.loc 1 312 23
+ 523 00dc 2A23     		movs	r3, #42
+ 524 00de 7B75     		strb	r3, [r7, #21]
+ 313:Components/ft5336/ft5336.c ****       regAddressYHigh = FT5336_P7_YH_REG;
+ 525              		.loc 1 313 23
+ 526 00e0 2923     		movs	r3, #41
+ 527 00e2 3B75     		strb	r3, [r7, #20]
+ 314:Components/ft5336/ft5336.c ****       break;
+ 528              		.loc 1 314 7
+ 529 00e4 1BE0     		b	.L29
+ 530              	.L21:
+ 315:Components/ft5336/ft5336.c **** 
+ 316:Components/ft5336/ft5336.c ****     case 7 :
+ 317:Components/ft5336/ft5336.c ****       regAddressXLow  = FT5336_P8_XL_REG;
+ 531              		.loc 1 317 23
+ 532 00e6 2E23     		movs	r3, #46
+ 533 00e8 FB75     		strb	r3, [r7, #23]
+ 318:Components/ft5336/ft5336.c ****       regAddressXHigh = FT5336_P8_XH_REG;
+ 534              		.loc 1 318 23
+ 535 00ea 2D23     		movs	r3, #45
+ 536 00ec BB75     		strb	r3, [r7, #22]
+ 319:Components/ft5336/ft5336.c ****       regAddressYLow  = FT5336_P8_YL_REG;
+ 537              		.loc 1 319 23
+ 538 00ee 3023     		movs	r3, #48
+ 539 00f0 7B75     		strb	r3, [r7, #21]
+ 320:Components/ft5336/ft5336.c ****       regAddressYHigh = FT5336_P8_YH_REG;
+ 540              		.loc 1 320 23
+ 541 00f2 2F23     		movs	r3, #47
+ 542 00f4 3B75     		strb	r3, [r7, #20]
+ 321:Components/ft5336/ft5336.c ****       break;
+ 543              		.loc 1 321 7
+ 544 00f6 12E0     		b	.L29
+ 545              	.L20:
+ 322:Components/ft5336/ft5336.c **** 
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s 			page 16
+
+
+ 323:Components/ft5336/ft5336.c ****     case 8 :
+ 324:Components/ft5336/ft5336.c ****       regAddressXLow  = FT5336_P9_XL_REG;
+ 546              		.loc 1 324 23
+ 547 00f8 3423     		movs	r3, #52
+ 548 00fa FB75     		strb	r3, [r7, #23]
+ 325:Components/ft5336/ft5336.c ****       regAddressXHigh = FT5336_P9_XH_REG;
+ 549              		.loc 1 325 23
+ 550 00fc 3323     		movs	r3, #51
+ 551 00fe BB75     		strb	r3, [r7, #22]
+ 326:Components/ft5336/ft5336.c ****       regAddressYLow  = FT5336_P9_YL_REG;
+ 552              		.loc 1 326 23
+ 553 0100 3623     		movs	r3, #54
+ 554 0102 7B75     		strb	r3, [r7, #21]
+ 327:Components/ft5336/ft5336.c ****       regAddressYHigh = FT5336_P9_YH_REG;
+ 555              		.loc 1 327 23
+ 556 0104 3523     		movs	r3, #53
+ 557 0106 3B75     		strb	r3, [r7, #20]
+ 328:Components/ft5336/ft5336.c ****       break;
+ 558              		.loc 1 328 7
+ 559 0108 09E0     		b	.L29
+ 560              	.L18:
+ 329:Components/ft5336/ft5336.c **** 
+ 330:Components/ft5336/ft5336.c ****     case 9 :
+ 331:Components/ft5336/ft5336.c ****       regAddressXLow  = FT5336_P10_XL_REG;
+ 561              		.loc 1 331 23
+ 562 010a 3A23     		movs	r3, #58
+ 563 010c FB75     		strb	r3, [r7, #23]
+ 332:Components/ft5336/ft5336.c ****       regAddressXHigh = FT5336_P10_XH_REG;
+ 564              		.loc 1 332 23
+ 565 010e 3923     		movs	r3, #57
+ 566 0110 BB75     		strb	r3, [r7, #22]
+ 333:Components/ft5336/ft5336.c ****       regAddressYLow  = FT5336_P10_YL_REG;
+ 567              		.loc 1 333 23
+ 568 0112 3C23     		movs	r3, #60
+ 569 0114 7B75     		strb	r3, [r7, #21]
+ 334:Components/ft5336/ft5336.c ****       regAddressYHigh = FT5336_P10_YH_REG;
+ 570              		.loc 1 334 23
+ 571 0116 3B23     		movs	r3, #59
+ 572 0118 3B75     		strb	r3, [r7, #20]
+ 335:Components/ft5336/ft5336.c ****       break;
+ 573              		.loc 1 335 7
+ 574 011a 00E0     		b	.L29
+ 575              	.L31:
+ 336:Components/ft5336/ft5336.c **** 
+ 337:Components/ft5336/ft5336.c ****     default :
+ 338:Components/ft5336/ft5336.c ****       break;
+ 576              		.loc 1 338 7
+ 577 011c 00BF     		nop
+ 578              	.L29:
+ 339:Components/ft5336/ft5336.c **** 
+ 340:Components/ft5336/ft5336.c ****     } /* end switch(ft5336_handle.currActiveTouchIdx) */
+ 341:Components/ft5336/ft5336.c **** 
+ 342:Components/ft5336/ft5336.c ****     /* Read low part of X position */
+ 343:Components/ft5336/ft5336.c ****     ucReadData = TS_IO_Read(DeviceAddr, regAddressXLow);
+ 579              		.loc 1 343 18
+ 580 011e FB89     		ldrh	r3, [r7, #14]	@ movhi
+ 581 0120 DBB2     		uxtb	r3, r3
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s 			page 17
+
+
+ 582 0122 FA7D     		ldrb	r2, [r7, #23]	@ zero_extendqisi2
+ 583 0124 1146     		mov	r1, r2
+ 584 0126 1846     		mov	r0, r3
+ 585 0128 FFF7FEFF 		bl	TS_IO_Read
+ 586 012c 0346     		mov	r3, r0
+ 587              		.loc 1 343 16
+ 588 012e FB74     		strb	r3, [r7, #19]
+ 344:Components/ft5336/ft5336.c ****     coord = (ucReadData & FT5336_TOUCH_POS_LSB_MASK) >> FT5336_TOUCH_POS_LSB_SHIFT;
+ 589              		.loc 1 344 11
+ 590 0130 FB7C     		ldrb	r3, [r7, #19]
+ 591 0132 DBB2     		uxtb	r3, r3
+ 592 0134 9AB2     		uxth	r2, r3
+ 593 0136 294B     		ldr	r3, .L32+4
+ 594 0138 1A80     		strh	r2, [r3]	@ movhi
+ 345:Components/ft5336/ft5336.c **** 
+ 346:Components/ft5336/ft5336.c ****     /* Read high part of X position */
+ 347:Components/ft5336/ft5336.c ****     ucReadData = TS_IO_Read(DeviceAddr, regAddressXHigh);
+ 595              		.loc 1 347 18
+ 596 013a FB89     		ldrh	r3, [r7, #14]	@ movhi
+ 597 013c DBB2     		uxtb	r3, r3
+ 598 013e BA7D     		ldrb	r2, [r7, #22]	@ zero_extendqisi2
+ 599 0140 1146     		mov	r1, r2
+ 600 0142 1846     		mov	r0, r3
+ 601 0144 FFF7FEFF 		bl	TS_IO_Read
+ 602 0148 0346     		mov	r3, r0
+ 603              		.loc 1 347 16
+ 604 014a FB74     		strb	r3, [r7, #19]
+ 348:Components/ft5336/ft5336.c ****     coord |= ((ucReadData & FT5336_TOUCH_POS_MSB_MASK) >> FT5336_TOUCH_POS_MSB_SHIFT) << 8;
+ 605              		.loc 1 348 87
+ 606 014c FB7C     		ldrb	r3, [r7, #19]
+ 607 014e DBB2     		uxtb	r3, r3
+ 608 0150 1B02     		lsls	r3, r3, #8
+ 609 0152 03F47063 		and	r3, r3, #3840
+ 610              		.loc 1 348 11
+ 611 0156 1AB2     		sxth	r2, r3
+ 612 0158 204B     		ldr	r3, .L32+4
+ 613 015a 1B88     		ldrh	r3, [r3]
+ 614 015c 1BB2     		sxth	r3, r3
+ 615 015e 1343     		orrs	r3, r3, r2
+ 616 0160 1BB2     		sxth	r3, r3
+ 617 0162 9AB2     		uxth	r2, r3
+ 618 0164 1D4B     		ldr	r3, .L32+4
+ 619 0166 1A80     		strh	r2, [r3]	@ movhi
+ 349:Components/ft5336/ft5336.c **** 
+ 350:Components/ft5336/ft5336.c ****     /* Send back ready X position to caller */
+ 351:Components/ft5336/ft5336.c ****     *X = coord;
+ 620              		.loc 1 351 8
+ 621 0168 1C4B     		ldr	r3, .L32+4
+ 622 016a 1A88     		ldrh	r2, [r3]
+ 623 016c BB68     		ldr	r3, [r7, #8]
+ 624 016e 1A80     		strh	r2, [r3]	@ movhi
+ 352:Components/ft5336/ft5336.c **** 
+ 353:Components/ft5336/ft5336.c ****     /* Read low part of Y position */
+ 354:Components/ft5336/ft5336.c ****     ucReadData = TS_IO_Read(DeviceAddr, regAddressYLow);
+ 625              		.loc 1 354 18
+ 626 0170 FB89     		ldrh	r3, [r7, #14]	@ movhi
+ 627 0172 DBB2     		uxtb	r3, r3
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s 			page 18
+
+
+ 628 0174 7A7D     		ldrb	r2, [r7, #21]	@ zero_extendqisi2
+ 629 0176 1146     		mov	r1, r2
+ 630 0178 1846     		mov	r0, r3
+ 631 017a FFF7FEFF 		bl	TS_IO_Read
+ 632 017e 0346     		mov	r3, r0
+ 633              		.loc 1 354 16
+ 634 0180 FB74     		strb	r3, [r7, #19]
+ 355:Components/ft5336/ft5336.c ****     coord = (ucReadData & FT5336_TOUCH_POS_LSB_MASK) >> FT5336_TOUCH_POS_LSB_SHIFT;
+ 635              		.loc 1 355 11
+ 636 0182 FB7C     		ldrb	r3, [r7, #19]
+ 637 0184 DBB2     		uxtb	r3, r3
+ 638 0186 9AB2     		uxth	r2, r3
+ 639 0188 144B     		ldr	r3, .L32+4
+ 640 018a 1A80     		strh	r2, [r3]	@ movhi
+ 356:Components/ft5336/ft5336.c **** 
+ 357:Components/ft5336/ft5336.c ****     /* Read high part of Y position */
+ 358:Components/ft5336/ft5336.c ****     ucReadData = TS_IO_Read(DeviceAddr, regAddressYHigh);
+ 641              		.loc 1 358 18
+ 642 018c FB89     		ldrh	r3, [r7, #14]	@ movhi
+ 643 018e DBB2     		uxtb	r3, r3
+ 644 0190 3A7D     		ldrb	r2, [r7, #20]	@ zero_extendqisi2
+ 645 0192 1146     		mov	r1, r2
+ 646 0194 1846     		mov	r0, r3
+ 647 0196 FFF7FEFF 		bl	TS_IO_Read
+ 648 019a 0346     		mov	r3, r0
+ 649              		.loc 1 358 16
+ 650 019c FB74     		strb	r3, [r7, #19]
+ 359:Components/ft5336/ft5336.c ****     coord |= ((ucReadData & FT5336_TOUCH_POS_MSB_MASK) >> FT5336_TOUCH_POS_MSB_SHIFT) << 8;
+ 651              		.loc 1 359 87
+ 652 019e FB7C     		ldrb	r3, [r7, #19]
+ 653 01a0 DBB2     		uxtb	r3, r3
+ 654 01a2 1B02     		lsls	r3, r3, #8
+ 655 01a4 03F47063 		and	r3, r3, #3840
+ 656              		.loc 1 359 11
+ 657 01a8 1AB2     		sxth	r2, r3
+ 658 01aa 0C4B     		ldr	r3, .L32+4
+ 659 01ac 1B88     		ldrh	r3, [r3]
+ 660 01ae 1BB2     		sxth	r3, r3
+ 661 01b0 1343     		orrs	r3, r3, r2
+ 662 01b2 1BB2     		sxth	r3, r3
+ 663 01b4 9AB2     		uxth	r2, r3
+ 664 01b6 094B     		ldr	r3, .L32+4
+ 665 01b8 1A80     		strh	r2, [r3]	@ movhi
+ 360:Components/ft5336/ft5336.c **** 
+ 361:Components/ft5336/ft5336.c ****     /* Send back ready Y position to caller */
+ 362:Components/ft5336/ft5336.c ****     *Y = coord;
+ 666              		.loc 1 362 8
+ 667 01ba 084B     		ldr	r3, .L32+4
+ 668 01bc 1A88     		ldrh	r2, [r3]
+ 669 01be 7B68     		ldr	r3, [r7, #4]
+ 670 01c0 1A80     		strh	r2, [r3]	@ movhi
+ 363:Components/ft5336/ft5336.c **** 
+ 364:Components/ft5336/ft5336.c ****     ft5336_handle.currActiveTouchIdx++; /* next call will work on next touch */
+ 671              		.loc 1 364 18
+ 672 01c2 054B     		ldr	r3, .L32
+ 673 01c4 9B78     		ldrb	r3, [r3, #2]	@ zero_extendqisi2
+ 674              		.loc 1 364 37
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s 			page 19
+
+
+ 675 01c6 0133     		adds	r3, r3, #1
+ 676 01c8 DAB2     		uxtb	r2, r3
+ 677 01ca 034B     		ldr	r3, .L32
+ 678 01cc 9A70     		strb	r2, [r3, #2]
+ 679              	.L30:
+ 365:Components/ft5336/ft5336.c **** 
+ 366:Components/ft5336/ft5336.c ****   } /* of if(ft5336_handle.currActiveTouchIdx < ft5336_handle.currActiveTouchNb) */
+ 367:Components/ft5336/ft5336.c **** }
+ 680              		.loc 1 367 1
+ 681 01ce 00BF     		nop
+ 682 01d0 1837     		adds	r7, r7, #24
+ 683              	.LCFI29:
+ 684              		.cfi_def_cfa_offset 8
+ 685 01d2 BD46     		mov	sp, r7
+ 686              	.LCFI30:
+ 687              		.cfi_def_cfa_register 13
+ 688              		@ sp needed
+ 689 01d4 80BD     		pop	{r7, pc}
+ 690              	.L33:
+ 691 01d6 00BF     		.align	2
+ 692              	.L32:
+ 693 01d8 00000000 		.word	ft5336_handle
+ 694 01dc 00000000 		.word	coord.0
+ 695              		.cfi_endproc
+ 696              	.LFE5:
+ 698              		.section	.text.ft5336_TS_EnableIT,"ax",%progbits
+ 699              		.align	1
+ 700              		.global	ft5336_TS_EnableIT
+ 701              		.syntax unified
+ 702              		.thumb
+ 703              		.thumb_func
+ 705              	ft5336_TS_EnableIT:
+ 706              	.LFB6:
+ 368:Components/ft5336/ft5336.c **** 
+ 369:Components/ft5336/ft5336.c **** /**
+ 370:Components/ft5336/ft5336.c ****   * @brief  Configure the FT5336 device to generate IT on given INT pin
+ 371:Components/ft5336/ft5336.c ****   *         connected to MCU as EXTI.
+ 372:Components/ft5336/ft5336.c ****   * @param  DeviceAddr: Device address on communication Bus (Slave I2C address of FT5336).
+ 373:Components/ft5336/ft5336.c ****   * @retval None
+ 374:Components/ft5336/ft5336.c ****   */
+ 375:Components/ft5336/ft5336.c **** void ft5336_TS_EnableIT(uint16_t DeviceAddr)
+ 376:Components/ft5336/ft5336.c **** {
+ 707              		.loc 1 376 1
+ 708              		.cfi_startproc
+ 709              		@ args = 0, pretend = 0, frame = 16
+ 710              		@ frame_needed = 1, uses_anonymous_args = 0
+ 711 0000 80B5     		push	{r7, lr}
+ 712              	.LCFI31:
+ 713              		.cfi_def_cfa_offset 8
+ 714              		.cfi_offset 7, -8
+ 715              		.cfi_offset 14, -4
+ 716 0002 84B0     		sub	sp, sp, #16
+ 717              	.LCFI32:
+ 718              		.cfi_def_cfa_offset 24
+ 719 0004 00AF     		add	r7, sp, #0
+ 720              	.LCFI33:
+ 721              		.cfi_def_cfa_register 7
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s 			page 20
+
+
+ 722 0006 0346     		mov	r3, r0
+ 723 0008 FB80     		strh	r3, [r7, #6]	@ movhi
+ 377:Components/ft5336/ft5336.c ****    uint8_t regValue = 0;
+ 724              		.loc 1 377 12
+ 725 000a 0023     		movs	r3, #0
+ 726 000c FB73     		strb	r3, [r7, #15]
+ 378:Components/ft5336/ft5336.c ****    regValue = (FT5336_G_MODE_INTERRUPT_TRIGGER & (FT5336_G_MODE_INTERRUPT_MASK >> FT5336_G_MODE_INT
+ 727              		.loc 1 378 13
+ 728 000e 0123     		movs	r3, #1
+ 729 0010 FB73     		strb	r3, [r7, #15]
+ 379:Components/ft5336/ft5336.c **** 
+ 380:Components/ft5336/ft5336.c ****    /* Set interrupt trigger mode in FT5336_GMODE_REG */
+ 381:Components/ft5336/ft5336.c ****    TS_IO_Write(DeviceAddr, FT5336_GMODE_REG, regValue);
+ 730              		.loc 1 381 4
+ 731 0012 FB88     		ldrh	r3, [r7, #6]	@ movhi
+ 732 0014 DBB2     		uxtb	r3, r3
+ 733 0016 FA7B     		ldrb	r2, [r7, #15]	@ zero_extendqisi2
+ 734 0018 A421     		movs	r1, #164
+ 735 001a 1846     		mov	r0, r3
+ 736 001c FFF7FEFF 		bl	TS_IO_Write
+ 382:Components/ft5336/ft5336.c **** }
+ 737              		.loc 1 382 1
+ 738 0020 00BF     		nop
+ 739 0022 1037     		adds	r7, r7, #16
+ 740              	.LCFI34:
+ 741              		.cfi_def_cfa_offset 8
+ 742 0024 BD46     		mov	sp, r7
+ 743              	.LCFI35:
+ 744              		.cfi_def_cfa_register 13
+ 745              		@ sp needed
+ 746 0026 80BD     		pop	{r7, pc}
+ 747              		.cfi_endproc
+ 748              	.LFE6:
+ 750              		.section	.text.ft5336_TS_DisableIT,"ax",%progbits
+ 751              		.align	1
+ 752              		.global	ft5336_TS_DisableIT
+ 753              		.syntax unified
+ 754              		.thumb
+ 755              		.thumb_func
+ 757              	ft5336_TS_DisableIT:
+ 758              	.LFB7:
+ 383:Components/ft5336/ft5336.c **** 
+ 384:Components/ft5336/ft5336.c **** /**
+ 385:Components/ft5336/ft5336.c ****   * @brief  Configure the FT5336 device to stop generating IT on the given INT pin
+ 386:Components/ft5336/ft5336.c ****   *         connected to MCU as EXTI.
+ 387:Components/ft5336/ft5336.c ****   * @param  DeviceAddr: Device address on communication Bus (Slave I2C address of FT5336).
+ 388:Components/ft5336/ft5336.c ****   * @retval None
+ 389:Components/ft5336/ft5336.c ****   */
+ 390:Components/ft5336/ft5336.c **** void ft5336_TS_DisableIT(uint16_t DeviceAddr)
+ 391:Components/ft5336/ft5336.c **** {
+ 759              		.loc 1 391 1
+ 760              		.cfi_startproc
+ 761              		@ args = 0, pretend = 0, frame = 16
+ 762              		@ frame_needed = 1, uses_anonymous_args = 0
+ 763 0000 80B5     		push	{r7, lr}
+ 764              	.LCFI36:
+ 765              		.cfi_def_cfa_offset 8
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s 			page 21
+
+
+ 766              		.cfi_offset 7, -8
+ 767              		.cfi_offset 14, -4
+ 768 0002 84B0     		sub	sp, sp, #16
+ 769              	.LCFI37:
+ 770              		.cfi_def_cfa_offset 24
+ 771 0004 00AF     		add	r7, sp, #0
+ 772              	.LCFI38:
+ 773              		.cfi_def_cfa_register 7
+ 774 0006 0346     		mov	r3, r0
+ 775 0008 FB80     		strh	r3, [r7, #6]	@ movhi
+ 392:Components/ft5336/ft5336.c ****   uint8_t regValue = 0;
+ 776              		.loc 1 392 11
+ 777 000a 0023     		movs	r3, #0
+ 778 000c FB73     		strb	r3, [r7, #15]
+ 393:Components/ft5336/ft5336.c ****   regValue = (FT5336_G_MODE_INTERRUPT_POLLING & (FT5336_G_MODE_INTERRUPT_MASK >> FT5336_G_MODE_INTE
+ 779              		.loc 1 393 12
+ 780 000e 0023     		movs	r3, #0
+ 781 0010 FB73     		strb	r3, [r7, #15]
+ 394:Components/ft5336/ft5336.c **** 
+ 395:Components/ft5336/ft5336.c ****   /* Set interrupt polling mode in FT5336_GMODE_REG */
+ 396:Components/ft5336/ft5336.c ****   TS_IO_Write(DeviceAddr, FT5336_GMODE_REG, regValue);
+ 782              		.loc 1 396 3
+ 783 0012 FB88     		ldrh	r3, [r7, #6]	@ movhi
+ 784 0014 DBB2     		uxtb	r3, r3
+ 785 0016 FA7B     		ldrb	r2, [r7, #15]	@ zero_extendqisi2
+ 786 0018 A421     		movs	r1, #164
+ 787 001a 1846     		mov	r0, r3
+ 788 001c FFF7FEFF 		bl	TS_IO_Write
+ 397:Components/ft5336/ft5336.c **** }
+ 789              		.loc 1 397 1
+ 790 0020 00BF     		nop
+ 791 0022 1037     		adds	r7, r7, #16
+ 792              	.LCFI39:
+ 793              		.cfi_def_cfa_offset 8
+ 794 0024 BD46     		mov	sp, r7
+ 795              	.LCFI40:
+ 796              		.cfi_def_cfa_register 13
+ 797              		@ sp needed
+ 798 0026 80BD     		pop	{r7, pc}
+ 799              		.cfi_endproc
+ 800              	.LFE7:
+ 802              		.section	.text.ft5336_TS_ITStatus,"ax",%progbits
+ 803              		.align	1
+ 804              		.global	ft5336_TS_ITStatus
+ 805              		.syntax unified
+ 806              		.thumb
+ 807              		.thumb_func
+ 809              	ft5336_TS_ITStatus:
+ 810              	.LFB8:
+ 398:Components/ft5336/ft5336.c **** 
+ 399:Components/ft5336/ft5336.c **** /**
+ 400:Components/ft5336/ft5336.c ****   * @brief  Get IT status from FT5336 interrupt status registers
+ 401:Components/ft5336/ft5336.c ****   *         Should be called Following an EXTI coming to the MCU to know the detailed
+ 402:Components/ft5336/ft5336.c ****   *         reason of the interrupt.
+ 403:Components/ft5336/ft5336.c ****   *         @note : This feature is not applicable to FT5336.
+ 404:Components/ft5336/ft5336.c ****   * @param  DeviceAddr: Device address on communication Bus (I2C slave address of FT5336).
+ 405:Components/ft5336/ft5336.c ****   * @retval TS interrupts status : always return 0 here
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s 			page 22
+
+
+ 406:Components/ft5336/ft5336.c ****   */
+ 407:Components/ft5336/ft5336.c **** uint8_t ft5336_TS_ITStatus(uint16_t DeviceAddr)
+ 408:Components/ft5336/ft5336.c **** {
+ 811              		.loc 1 408 1
+ 812              		.cfi_startproc
+ 813              		@ args = 0, pretend = 0, frame = 8
+ 814              		@ frame_needed = 1, uses_anonymous_args = 0
+ 815              		@ link register save eliminated.
+ 816 0000 80B4     		push	{r7}
+ 817              	.LCFI41:
+ 818              		.cfi_def_cfa_offset 4
+ 819              		.cfi_offset 7, -4
+ 820 0002 83B0     		sub	sp, sp, #12
+ 821              	.LCFI42:
+ 822              		.cfi_def_cfa_offset 16
+ 823 0004 00AF     		add	r7, sp, #0
+ 824              	.LCFI43:
+ 825              		.cfi_def_cfa_register 7
+ 826 0006 0346     		mov	r3, r0
+ 827 0008 FB80     		strh	r3, [r7, #6]	@ movhi
+ 409:Components/ft5336/ft5336.c ****   /* Always return 0 as feature not applicable to FT5336 */
+ 410:Components/ft5336/ft5336.c ****   return 0;
+ 828              		.loc 1 410 10
+ 829 000a 0023     		movs	r3, #0
+ 411:Components/ft5336/ft5336.c **** }
+ 830              		.loc 1 411 1
+ 831 000c 1846     		mov	r0, r3
+ 832 000e 0C37     		adds	r7, r7, #12
+ 833              	.LCFI44:
+ 834              		.cfi_def_cfa_offset 4
+ 835 0010 BD46     		mov	sp, r7
+ 836              	.LCFI45:
+ 837              		.cfi_def_cfa_register 13
+ 838              		@ sp needed
+ 839 0012 5DF8047B 		ldr	r7, [sp], #4
+ 840              	.LCFI46:
+ 841              		.cfi_restore 7
+ 842              		.cfi_def_cfa_offset 0
+ 843 0016 7047     		bx	lr
+ 844              		.cfi_endproc
+ 845              	.LFE8:
+ 847              		.section	.text.ft5336_TS_ClearIT,"ax",%progbits
+ 848              		.align	1
+ 849              		.global	ft5336_TS_ClearIT
+ 850              		.syntax unified
+ 851              		.thumb
+ 852              		.thumb_func
+ 854              	ft5336_TS_ClearIT:
+ 855              	.LFB9:
+ 412:Components/ft5336/ft5336.c **** 
+ 413:Components/ft5336/ft5336.c **** /**
+ 414:Components/ft5336/ft5336.c ****   * @brief  Clear IT status in FT5336 interrupt status clear registers
+ 415:Components/ft5336/ft5336.c ****   *         Should be called Following an EXTI coming to the MCU.
+ 416:Components/ft5336/ft5336.c ****   *         @note : This feature is not applicable to FT5336.
+ 417:Components/ft5336/ft5336.c ****   * @param  DeviceAddr: Device address on communication Bus (I2C slave address of FT5336).
+ 418:Components/ft5336/ft5336.c ****   * @retval None
+ 419:Components/ft5336/ft5336.c ****   */
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s 			page 23
+
+
+ 420:Components/ft5336/ft5336.c **** void ft5336_TS_ClearIT(uint16_t DeviceAddr)
+ 421:Components/ft5336/ft5336.c **** {
+ 856              		.loc 1 421 1
+ 857              		.cfi_startproc
+ 858              		@ args = 0, pretend = 0, frame = 8
+ 859              		@ frame_needed = 1, uses_anonymous_args = 0
+ 860              		@ link register save eliminated.
+ 861 0000 80B4     		push	{r7}
+ 862              	.LCFI47:
+ 863              		.cfi_def_cfa_offset 4
+ 864              		.cfi_offset 7, -4
+ 865 0002 83B0     		sub	sp, sp, #12
+ 866              	.LCFI48:
+ 867              		.cfi_def_cfa_offset 16
+ 868 0004 00AF     		add	r7, sp, #0
+ 869              	.LCFI49:
+ 870              		.cfi_def_cfa_register 7
+ 871 0006 0346     		mov	r3, r0
+ 872 0008 FB80     		strh	r3, [r7, #6]	@ movhi
+ 422:Components/ft5336/ft5336.c ****   /* Nothing to be done here for FT5336 */
+ 423:Components/ft5336/ft5336.c **** }
+ 873              		.loc 1 423 1
+ 874 000a 00BF     		nop
+ 875 000c 0C37     		adds	r7, r7, #12
+ 876              	.LCFI50:
+ 877              		.cfi_def_cfa_offset 4
+ 878 000e BD46     		mov	sp, r7
+ 879              	.LCFI51:
+ 880              		.cfi_def_cfa_register 13
+ 881              		@ sp needed
+ 882 0010 5DF8047B 		ldr	r7, [sp], #4
+ 883              	.LCFI52:
+ 884              		.cfi_restore 7
+ 885              		.cfi_def_cfa_offset 0
+ 886 0014 7047     		bx	lr
+ 887              		.cfi_endproc
+ 888              	.LFE9:
+ 890              		.section	.text.ft5336_TS_GetGestureID,"ax",%progbits
+ 891              		.align	1
+ 892              		.global	ft5336_TS_GetGestureID
+ 893              		.syntax unified
+ 894              		.thumb
+ 895              		.thumb_func
+ 897              	ft5336_TS_GetGestureID:
+ 898              	.LFB10:
+ 424:Components/ft5336/ft5336.c **** 
+ 425:Components/ft5336/ft5336.c **** /**** NEW FEATURES enabled when Multi-touch support is enabled ****/
+ 426:Components/ft5336/ft5336.c **** 
+ 427:Components/ft5336/ft5336.c **** #if (TS_MULTI_TOUCH_SUPPORTED == 1)
+ 428:Components/ft5336/ft5336.c **** 
+ 429:Components/ft5336/ft5336.c **** /**
+ 430:Components/ft5336/ft5336.c ****   * @brief  Get the last touch gesture identification (zoom, move up/down...).
+ 431:Components/ft5336/ft5336.c ****   * @param  DeviceAddr: Device address on communication Bus (I2C slave address of FT5336).
+ 432:Components/ft5336/ft5336.c ****   * @param  pGestureId : Pointer to get last touch gesture Identification.
+ 433:Components/ft5336/ft5336.c ****   * @retval None.
+ 434:Components/ft5336/ft5336.c ****   */
+ 435:Components/ft5336/ft5336.c **** void ft5336_TS_GetGestureID(uint16_t DeviceAddr, uint32_t * pGestureId)
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s 			page 24
+
+
+ 436:Components/ft5336/ft5336.c **** {
+ 899              		.loc 1 436 1
+ 900              		.cfi_startproc
+ 901              		@ args = 0, pretend = 0, frame = 16
+ 902              		@ frame_needed = 1, uses_anonymous_args = 0
+ 903 0000 80B5     		push	{r7, lr}
+ 904              	.LCFI53:
+ 905              		.cfi_def_cfa_offset 8
+ 906              		.cfi_offset 7, -8
+ 907              		.cfi_offset 14, -4
+ 908 0002 84B0     		sub	sp, sp, #16
+ 909              	.LCFI54:
+ 910              		.cfi_def_cfa_offset 24
+ 911 0004 00AF     		add	r7, sp, #0
+ 912              	.LCFI55:
+ 913              		.cfi_def_cfa_register 7
+ 914 0006 0346     		mov	r3, r0
+ 915 0008 3960     		str	r1, [r7]
+ 916 000a FB80     		strh	r3, [r7, #6]	@ movhi
+ 437:Components/ft5336/ft5336.c ****   volatile uint8_t ucReadData = 0;
+ 917              		.loc 1 437 20
+ 918 000c 0023     		movs	r3, #0
+ 919 000e FB73     		strb	r3, [r7, #15]
+ 438:Components/ft5336/ft5336.c **** 
+ 439:Components/ft5336/ft5336.c ****   ucReadData = TS_IO_Read(DeviceAddr, FT5336_GEST_ID_REG);
+ 920              		.loc 1 439 16
+ 921 0010 FB88     		ldrh	r3, [r7, #6]	@ movhi
+ 922 0012 DBB2     		uxtb	r3, r3
+ 923 0014 0121     		movs	r1, #1
+ 924 0016 1846     		mov	r0, r3
+ 925 0018 FFF7FEFF 		bl	TS_IO_Read
+ 926 001c 0346     		mov	r3, r0
+ 927              		.loc 1 439 14
+ 928 001e FB73     		strb	r3, [r7, #15]
+ 440:Components/ft5336/ft5336.c **** 
+ 441:Components/ft5336/ft5336.c ****   * pGestureId = ucReadData;
+ 929              		.loc 1 441 16
+ 930 0020 FB7B     		ldrb	r3, [r7, #15]
+ 931 0022 DBB2     		uxtb	r3, r3
+ 932 0024 1A46     		mov	r2, r3
+ 933 0026 3B68     		ldr	r3, [r7]
+ 934 0028 1A60     		str	r2, [r3]
+ 442:Components/ft5336/ft5336.c **** }
+ 935              		.loc 1 442 1
+ 936 002a 00BF     		nop
+ 937 002c 1037     		adds	r7, r7, #16
+ 938              	.LCFI56:
+ 939              		.cfi_def_cfa_offset 8
+ 940 002e BD46     		mov	sp, r7
+ 941              	.LCFI57:
+ 942              		.cfi_def_cfa_register 13
+ 943              		@ sp needed
+ 944 0030 80BD     		pop	{r7, pc}
+ 945              		.cfi_endproc
+ 946              	.LFE10:
+ 948              		.section	.text.ft5336_TS_GetTouchInfo,"ax",%progbits
+ 949              		.align	1
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s 			page 25
+
+
+ 950              		.global	ft5336_TS_GetTouchInfo
+ 951              		.syntax unified
+ 952              		.thumb
+ 953              		.thumb_func
+ 955              	ft5336_TS_GetTouchInfo:
+ 956              	.LFB11:
+ 443:Components/ft5336/ft5336.c **** 
+ 444:Components/ft5336/ft5336.c **** /**
+ 445:Components/ft5336/ft5336.c ****   * @brief  Get the touch detailed informations on touch number 'touchIdx' (0..1)
+ 446:Components/ft5336/ft5336.c ****   *         This touch detailed information contains :
+ 447:Components/ft5336/ft5336.c ****   *         - weight that was applied to this touch
+ 448:Components/ft5336/ft5336.c ****   *         - sub-area of the touch in the touch panel
+ 449:Components/ft5336/ft5336.c ****   *         - event of linked to the touch (press down, lift up, ...)
+ 450:Components/ft5336/ft5336.c ****   * @param  DeviceAddr: Device address on communication Bus (I2C slave address of FT5336).
+ 451:Components/ft5336/ft5336.c ****   * @param  touchIdx : Passed index of the touch (0..1) on which we want to get the
+ 452:Components/ft5336/ft5336.c ****   *                    detailed information.
+ 453:Components/ft5336/ft5336.c ****   * @param  pWeight : Pointer to to get the weight information of 'touchIdx'.
+ 454:Components/ft5336/ft5336.c ****   * @param  pArea   : Pointer to to get the sub-area information of 'touchIdx'.
+ 455:Components/ft5336/ft5336.c ****   * @param  pEvent  : Pointer to to get the event information of 'touchIdx'.
+ 456:Components/ft5336/ft5336.c **** 
+ 457:Components/ft5336/ft5336.c ****   * @retval None.
+ 458:Components/ft5336/ft5336.c ****   */
+ 459:Components/ft5336/ft5336.c **** void ft5336_TS_GetTouchInfo(uint16_t   DeviceAddr,
+ 460:Components/ft5336/ft5336.c ****                             uint32_t   touchIdx,
+ 461:Components/ft5336/ft5336.c ****                             uint32_t * pWeight,
+ 462:Components/ft5336/ft5336.c ****                             uint32_t * pArea,
+ 463:Components/ft5336/ft5336.c ****                             uint32_t * pEvent)
+ 464:Components/ft5336/ft5336.c **** {
+ 957              		.loc 1 464 1
+ 958              		.cfi_startproc
+ 959              		@ args = 4, pretend = 0, frame = 24
+ 960              		@ frame_needed = 1, uses_anonymous_args = 0
+ 961 0000 80B5     		push	{r7, lr}
+ 962              	.LCFI58:
+ 963              		.cfi_def_cfa_offset 8
+ 964              		.cfi_offset 7, -8
+ 965              		.cfi_offset 14, -4
+ 966 0002 86B0     		sub	sp, sp, #24
+ 967              	.LCFI59:
+ 968              		.cfi_def_cfa_offset 32
+ 969 0004 00AF     		add	r7, sp, #0
+ 970              	.LCFI60:
+ 971              		.cfi_def_cfa_register 7
+ 972 0006 B960     		str	r1, [r7, #8]
+ 973 0008 7A60     		str	r2, [r7, #4]
+ 974 000a 3B60     		str	r3, [r7]
+ 975 000c 0346     		mov	r3, r0	@ movhi
+ 976 000e FB81     		strh	r3, [r7, #14]	@ movhi
+ 465:Components/ft5336/ft5336.c ****   volatile uint8_t ucReadData = 0;
+ 977              		.loc 1 465 20
+ 978 0010 0023     		movs	r3, #0
+ 979 0012 3B75     		strb	r3, [r7, #20]
+ 466:Components/ft5336/ft5336.c ****   uint8_t regAddressXHigh = 0;
+ 980              		.loc 1 466 11
+ 981 0014 0023     		movs	r3, #0
+ 982 0016 FB75     		strb	r3, [r7, #23]
+ 467:Components/ft5336/ft5336.c ****   uint8_t regAddressPWeight = 0;
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s 			page 26
+
+
+ 983              		.loc 1 467 11
+ 984 0018 0023     		movs	r3, #0
+ 985 001a BB75     		strb	r3, [r7, #22]
+ 468:Components/ft5336/ft5336.c ****   uint8_t regAddressPMisc = 0;
+ 986              		.loc 1 468 11
+ 987 001c 0023     		movs	r3, #0
+ 988 001e 7B75     		strb	r3, [r7, #21]
+ 469:Components/ft5336/ft5336.c **** 
+ 470:Components/ft5336/ft5336.c ****   if(touchIdx < ft5336_handle.currActiveTouchNb)
+ 989              		.loc 1 470 30
+ 990 0020 4D4B     		ldr	r3, .L57
+ 991 0022 5B78     		ldrb	r3, [r3, #1]	@ zero_extendqisi2
+ 992 0024 1A46     		mov	r2, r3
+ 993              		.loc 1 470 5
+ 994 0026 BB68     		ldr	r3, [r7, #8]
+ 995 0028 9342     		cmp	r3, r2
+ 996 002a 80F09080 		bcs	.L55
+ 471:Components/ft5336/ft5336.c ****   {
+ 472:Components/ft5336/ft5336.c ****     switch(touchIdx)
+ 997              		.loc 1 472 5
+ 998 002e BB68     		ldr	r3, [r7, #8]
+ 999 0030 092B     		cmp	r3, #9
+ 1000 0032 5DD8     		bhi	.L56
+ 1001 0034 01A2     		adr	r2, .L44
+ 1002 0036 52F823F0 		ldr	pc, [r2, r3, lsl #2]
+ 1003 003a 00BF     		.p2align 2
+ 1004              	.L44:
+ 1005 003c 65000000 		.word	.L53+1
+ 1006 0040 73000000 		.word	.L52+1
+ 1007 0044 81000000 		.word	.L51+1
+ 1008 0048 8F000000 		.word	.L50+1
+ 1009 004c 9D000000 		.word	.L49+1
+ 1010 0050 AB000000 		.word	.L48+1
+ 1011 0054 B9000000 		.word	.L47+1
+ 1012 0058 C7000000 		.word	.L46+1
+ 1013 005c D5000000 		.word	.L45+1
+ 1014 0060 E3000000 		.word	.L43+1
+ 1015              		.p2align 1
+ 1016              	.L53:
+ 473:Components/ft5336/ft5336.c ****     {
+ 474:Components/ft5336/ft5336.c ****     case 0 :
+ 475:Components/ft5336/ft5336.c ****       regAddressXHigh   = FT5336_P1_XH_REG;
+ 1017              		.loc 1 475 25
+ 1018 0064 0323     		movs	r3, #3
+ 1019 0066 FB75     		strb	r3, [r7, #23]
+ 476:Components/ft5336/ft5336.c ****       regAddressPWeight = FT5336_P1_WEIGHT_REG;
+ 1020              		.loc 1 476 25
+ 1021 0068 0723     		movs	r3, #7
+ 1022 006a BB75     		strb	r3, [r7, #22]
+ 477:Components/ft5336/ft5336.c ****       regAddressPMisc   = FT5336_P1_MISC_REG;
+ 1023              		.loc 1 477 25
+ 1024 006c 0823     		movs	r3, #8
+ 1025 006e 7B75     		strb	r3, [r7, #21]
+ 478:Components/ft5336/ft5336.c ****       break;
+ 1026              		.loc 1 478 7
+ 1027 0070 3FE0     		b	.L54
+ 1028              	.L52:
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s 			page 27
+
+
+ 479:Components/ft5336/ft5336.c **** 
+ 480:Components/ft5336/ft5336.c ****     case 1 :
+ 481:Components/ft5336/ft5336.c ****       regAddressXHigh   = FT5336_P2_XH_REG;
+ 1029              		.loc 1 481 25
+ 1030 0072 0923     		movs	r3, #9
+ 1031 0074 FB75     		strb	r3, [r7, #23]
+ 482:Components/ft5336/ft5336.c ****       regAddressPWeight = FT5336_P2_WEIGHT_REG;
+ 1032              		.loc 1 482 25
+ 1033 0076 0D23     		movs	r3, #13
+ 1034 0078 BB75     		strb	r3, [r7, #22]
+ 483:Components/ft5336/ft5336.c ****       regAddressPMisc   = FT5336_P2_MISC_REG;
+ 1035              		.loc 1 483 25
+ 1036 007a 0E23     		movs	r3, #14
+ 1037 007c 7B75     		strb	r3, [r7, #21]
+ 484:Components/ft5336/ft5336.c ****       break;
+ 1038              		.loc 1 484 7
+ 1039 007e 38E0     		b	.L54
+ 1040              	.L51:
+ 485:Components/ft5336/ft5336.c **** 
+ 486:Components/ft5336/ft5336.c ****     case 2 :
+ 487:Components/ft5336/ft5336.c ****       regAddressXHigh   = FT5336_P3_XH_REG;
+ 1041              		.loc 1 487 25
+ 1042 0080 0F23     		movs	r3, #15
+ 1043 0082 FB75     		strb	r3, [r7, #23]
+ 488:Components/ft5336/ft5336.c ****       regAddressPWeight = FT5336_P3_WEIGHT_REG;
+ 1044              		.loc 1 488 25
+ 1045 0084 1323     		movs	r3, #19
+ 1046 0086 BB75     		strb	r3, [r7, #22]
+ 489:Components/ft5336/ft5336.c ****       regAddressPMisc   = FT5336_P3_MISC_REG;
+ 1047              		.loc 1 489 25
+ 1048 0088 1423     		movs	r3, #20
+ 1049 008a 7B75     		strb	r3, [r7, #21]
+ 490:Components/ft5336/ft5336.c ****       break;
+ 1050              		.loc 1 490 7
+ 1051 008c 31E0     		b	.L54
+ 1052              	.L50:
+ 491:Components/ft5336/ft5336.c **** 
+ 492:Components/ft5336/ft5336.c ****     case 3 :
+ 493:Components/ft5336/ft5336.c ****       regAddressXHigh   = FT5336_P4_XH_REG;
+ 1053              		.loc 1 493 25
+ 1054 008e 1523     		movs	r3, #21
+ 1055 0090 FB75     		strb	r3, [r7, #23]
+ 494:Components/ft5336/ft5336.c ****       regAddressPWeight = FT5336_P4_WEIGHT_REG;
+ 1056              		.loc 1 494 25
+ 1057 0092 1923     		movs	r3, #25
+ 1058 0094 BB75     		strb	r3, [r7, #22]
+ 495:Components/ft5336/ft5336.c ****       regAddressPMisc   = FT5336_P4_MISC_REG;
+ 1059              		.loc 1 495 25
+ 1060 0096 1A23     		movs	r3, #26
+ 1061 0098 7B75     		strb	r3, [r7, #21]
+ 496:Components/ft5336/ft5336.c ****       break;
+ 1062              		.loc 1 496 7
+ 1063 009a 2AE0     		b	.L54
+ 1064              	.L49:
+ 497:Components/ft5336/ft5336.c **** 
+ 498:Components/ft5336/ft5336.c ****     case 4 :
+ 499:Components/ft5336/ft5336.c ****       regAddressXHigh   = FT5336_P5_XH_REG;
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s 			page 28
+
+
+ 1065              		.loc 1 499 25
+ 1066 009c 1B23     		movs	r3, #27
+ 1067 009e FB75     		strb	r3, [r7, #23]
+ 500:Components/ft5336/ft5336.c ****       regAddressPWeight = FT5336_P5_WEIGHT_REG;
+ 1068              		.loc 1 500 25
+ 1069 00a0 1F23     		movs	r3, #31
+ 1070 00a2 BB75     		strb	r3, [r7, #22]
+ 501:Components/ft5336/ft5336.c ****       regAddressPMisc   = FT5336_P5_MISC_REG;
+ 1071              		.loc 1 501 25
+ 1072 00a4 2023     		movs	r3, #32
+ 1073 00a6 7B75     		strb	r3, [r7, #21]
+ 502:Components/ft5336/ft5336.c ****       break;
+ 1074              		.loc 1 502 7
+ 1075 00a8 23E0     		b	.L54
+ 1076              	.L48:
+ 503:Components/ft5336/ft5336.c **** 
+ 504:Components/ft5336/ft5336.c ****     case 5 :
+ 505:Components/ft5336/ft5336.c ****       regAddressXHigh   = FT5336_P6_XH_REG;
+ 1077              		.loc 1 505 25
+ 1078 00aa 2123     		movs	r3, #33
+ 1079 00ac FB75     		strb	r3, [r7, #23]
+ 506:Components/ft5336/ft5336.c ****       regAddressPWeight = FT5336_P6_WEIGHT_REG;
+ 1080              		.loc 1 506 25
+ 1081 00ae 2523     		movs	r3, #37
+ 1082 00b0 BB75     		strb	r3, [r7, #22]
+ 507:Components/ft5336/ft5336.c ****       regAddressPMisc   = FT5336_P6_MISC_REG;
+ 1083              		.loc 1 507 25
+ 1084 00b2 2623     		movs	r3, #38
+ 1085 00b4 7B75     		strb	r3, [r7, #21]
+ 508:Components/ft5336/ft5336.c ****       break;
+ 1086              		.loc 1 508 7
+ 1087 00b6 1CE0     		b	.L54
+ 1088              	.L47:
+ 509:Components/ft5336/ft5336.c **** 
+ 510:Components/ft5336/ft5336.c ****     case 6 :
+ 511:Components/ft5336/ft5336.c ****       regAddressXHigh   = FT5336_P7_XH_REG;
+ 1089              		.loc 1 511 25
+ 1090 00b8 2723     		movs	r3, #39
+ 1091 00ba FB75     		strb	r3, [r7, #23]
+ 512:Components/ft5336/ft5336.c ****       regAddressPWeight = FT5336_P7_WEIGHT_REG;
+ 1092              		.loc 1 512 25
+ 1093 00bc 2B23     		movs	r3, #43
+ 1094 00be BB75     		strb	r3, [r7, #22]
+ 513:Components/ft5336/ft5336.c ****       regAddressPMisc   = FT5336_P7_MISC_REG;
+ 1095              		.loc 1 513 25
+ 1096 00c0 2C23     		movs	r3, #44
+ 1097 00c2 7B75     		strb	r3, [r7, #21]
+ 514:Components/ft5336/ft5336.c ****       break;
+ 1098              		.loc 1 514 7
+ 1099 00c4 15E0     		b	.L54
+ 1100              	.L46:
+ 515:Components/ft5336/ft5336.c **** 
+ 516:Components/ft5336/ft5336.c ****     case 7 :
+ 517:Components/ft5336/ft5336.c ****       regAddressXHigh   = FT5336_P8_XH_REG;
+ 1101              		.loc 1 517 25
+ 1102 00c6 2D23     		movs	r3, #45
+ 1103 00c8 FB75     		strb	r3, [r7, #23]
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s 			page 29
+
+
+ 518:Components/ft5336/ft5336.c ****       regAddressPWeight = FT5336_P8_WEIGHT_REG;
+ 1104              		.loc 1 518 25
+ 1105 00ca 3123     		movs	r3, #49
+ 1106 00cc BB75     		strb	r3, [r7, #22]
+ 519:Components/ft5336/ft5336.c ****       regAddressPMisc   = FT5336_P8_MISC_REG;
+ 1107              		.loc 1 519 25
+ 1108 00ce 3223     		movs	r3, #50
+ 1109 00d0 7B75     		strb	r3, [r7, #21]
+ 520:Components/ft5336/ft5336.c ****       break;
+ 1110              		.loc 1 520 7
+ 1111 00d2 0EE0     		b	.L54
+ 1112              	.L45:
+ 521:Components/ft5336/ft5336.c **** 
+ 522:Components/ft5336/ft5336.c ****     case 8 :
+ 523:Components/ft5336/ft5336.c ****       regAddressXHigh   = FT5336_P9_XH_REG;
+ 1113              		.loc 1 523 25
+ 1114 00d4 3323     		movs	r3, #51
+ 1115 00d6 FB75     		strb	r3, [r7, #23]
+ 524:Components/ft5336/ft5336.c ****       regAddressPWeight = FT5336_P9_WEIGHT_REG;
+ 1116              		.loc 1 524 25
+ 1117 00d8 3723     		movs	r3, #55
+ 1118 00da BB75     		strb	r3, [r7, #22]
+ 525:Components/ft5336/ft5336.c ****       regAddressPMisc   = FT5336_P9_MISC_REG;
+ 1119              		.loc 1 525 25
+ 1120 00dc 3823     		movs	r3, #56
+ 1121 00de 7B75     		strb	r3, [r7, #21]
+ 526:Components/ft5336/ft5336.c ****       break;
+ 1122              		.loc 1 526 7
+ 1123 00e0 07E0     		b	.L54
+ 1124              	.L43:
+ 527:Components/ft5336/ft5336.c **** 
+ 528:Components/ft5336/ft5336.c ****     case 9 :
+ 529:Components/ft5336/ft5336.c ****       regAddressXHigh   = FT5336_P10_XH_REG;
+ 1125              		.loc 1 529 25
+ 1126 00e2 3923     		movs	r3, #57
+ 1127 00e4 FB75     		strb	r3, [r7, #23]
+ 530:Components/ft5336/ft5336.c ****       regAddressPWeight = FT5336_P10_WEIGHT_REG;
+ 1128              		.loc 1 530 25
+ 1129 00e6 3D23     		movs	r3, #61
+ 1130 00e8 BB75     		strb	r3, [r7, #22]
+ 531:Components/ft5336/ft5336.c ****       regAddressPMisc   = FT5336_P10_MISC_REG;
+ 1131              		.loc 1 531 25
+ 1132 00ea 3E23     		movs	r3, #62
+ 1133 00ec 7B75     		strb	r3, [r7, #21]
+ 532:Components/ft5336/ft5336.c ****       break;
+ 1134              		.loc 1 532 7
+ 1135 00ee 00E0     		b	.L54
+ 1136              	.L56:
+ 533:Components/ft5336/ft5336.c **** 
+ 534:Components/ft5336/ft5336.c ****     default :
+ 535:Components/ft5336/ft5336.c ****       break;
+ 1137              		.loc 1 535 7
+ 1138 00f0 00BF     		nop
+ 1139              	.L54:
+ 536:Components/ft5336/ft5336.c **** 
+ 537:Components/ft5336/ft5336.c ****     } /* end switch(touchIdx) */
+ 538:Components/ft5336/ft5336.c **** 
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s 			page 30
+
+
+ 539:Components/ft5336/ft5336.c ****     /* Read Event Id of touch index */
+ 540:Components/ft5336/ft5336.c ****     ucReadData = TS_IO_Read(DeviceAddr, regAddressXHigh);
+ 1140              		.loc 1 540 18
+ 1141 00f2 FB89     		ldrh	r3, [r7, #14]	@ movhi
+ 1142 00f4 DBB2     		uxtb	r3, r3
+ 1143 00f6 FA7D     		ldrb	r2, [r7, #23]	@ zero_extendqisi2
+ 1144 00f8 1146     		mov	r1, r2
+ 1145 00fa 1846     		mov	r0, r3
+ 1146 00fc FFF7FEFF 		bl	TS_IO_Read
+ 1147 0100 0346     		mov	r3, r0
+ 1148              		.loc 1 540 16
+ 1149 0102 3B75     		strb	r3, [r7, #20]
+ 541:Components/ft5336/ft5336.c ****     * pEvent = (ucReadData & FT5336_TOUCH_EVT_FLAG_MASK) >> FT5336_TOUCH_EVT_FLAG_SHIFT;
+ 1150              		.loc 1 541 58
+ 1151 0104 3B7D     		ldrb	r3, [r7, #20]
+ 1152 0106 DBB2     		uxtb	r3, r3
+ 1153 0108 9B11     		asrs	r3, r3, #6
+ 1154 010a 03F00302 		and	r2, r3, #3
+ 1155              		.loc 1 541 14
+ 1156 010e 3B6A     		ldr	r3, [r7, #32]
+ 1157 0110 1A60     		str	r2, [r3]
+ 542:Components/ft5336/ft5336.c **** 
+ 543:Components/ft5336/ft5336.c ****     /* Read weight of touch index */
+ 544:Components/ft5336/ft5336.c ****     ucReadData = TS_IO_Read(DeviceAddr, regAddressPWeight);
+ 1158              		.loc 1 544 18
+ 1159 0112 FB89     		ldrh	r3, [r7, #14]	@ movhi
+ 1160 0114 DBB2     		uxtb	r3, r3
+ 1161 0116 BA7D     		ldrb	r2, [r7, #22]	@ zero_extendqisi2
+ 1162 0118 1146     		mov	r1, r2
+ 1163 011a 1846     		mov	r0, r3
+ 1164 011c FFF7FEFF 		bl	TS_IO_Read
+ 1165 0120 0346     		mov	r3, r0
+ 1166              		.loc 1 544 16
+ 1167 0122 3B75     		strb	r3, [r7, #20]
+ 545:Components/ft5336/ft5336.c ****     * pWeight = (ucReadData & FT5336_TOUCH_WEIGHT_MASK) >> FT5336_TOUCH_WEIGHT_SHIFT;
+ 1168              		.loc 1 545 57
+ 1169 0124 3B7D     		ldrb	r3, [r7, #20]
+ 1170 0126 DBB2     		uxtb	r3, r3
+ 1171 0128 1A46     		mov	r2, r3
+ 1172              		.loc 1 545 15
+ 1173 012a 7B68     		ldr	r3, [r7, #4]
+ 1174 012c 1A60     		str	r2, [r3]
+ 546:Components/ft5336/ft5336.c **** 
+ 547:Components/ft5336/ft5336.c ****     /* Read area of touch index */
+ 548:Components/ft5336/ft5336.c ****     ucReadData = TS_IO_Read(DeviceAddr, regAddressPMisc);
+ 1175              		.loc 1 548 18
+ 1176 012e FB89     		ldrh	r3, [r7, #14]	@ movhi
+ 1177 0130 DBB2     		uxtb	r3, r3
+ 1178 0132 7A7D     		ldrb	r2, [r7, #21]	@ zero_extendqisi2
+ 1179 0134 1146     		mov	r1, r2
+ 1180 0136 1846     		mov	r0, r3
+ 1181 0138 FFF7FEFF 		bl	TS_IO_Read
+ 1182 013c 0346     		mov	r3, r0
+ 1183              		.loc 1 548 16
+ 1184 013e 3B75     		strb	r3, [r7, #20]
+ 549:Components/ft5336/ft5336.c ****     * pArea = (ucReadData & FT5336_TOUCH_AREA_MASK) >> FT5336_TOUCH_AREA_SHIFT;
+ 1185              		.loc 1 549 53
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s 			page 31
+
+
+ 1186 0140 3B7D     		ldrb	r3, [r7, #20]
+ 1187 0142 DBB2     		uxtb	r3, r3
+ 1188 0144 1B11     		asrs	r3, r3, #4
+ 1189 0146 03F00402 		and	r2, r3, #4
+ 1190              		.loc 1 549 13
+ 1191 014a 3B68     		ldr	r3, [r7]
+ 1192 014c 1A60     		str	r2, [r3]
+ 1193              	.L55:
+ 550:Components/ft5336/ft5336.c **** 
+ 551:Components/ft5336/ft5336.c ****   } /* of if(touchIdx < ft5336_handle.currActiveTouchNb) */
+ 552:Components/ft5336/ft5336.c **** }
+ 1194              		.loc 1 552 1
+ 1195 014e 00BF     		nop
+ 1196 0150 1837     		adds	r7, r7, #24
+ 1197              	.LCFI61:
+ 1198              		.cfi_def_cfa_offset 8
+ 1199 0152 BD46     		mov	sp, r7
+ 1200              	.LCFI62:
+ 1201              		.cfi_def_cfa_register 13
+ 1202              		@ sp needed
+ 1203 0154 80BD     		pop	{r7, pc}
+ 1204              	.L58:
+ 1205 0156 00BF     		.align	2
+ 1206              	.L57:
+ 1207 0158 00000000 		.word	ft5336_handle
+ 1208              		.cfi_endproc
+ 1209              	.LFE11:
+ 1211              		.section	.text.ft5336_Get_I2C_InitializedStatus,"ax",%progbits
+ 1212              		.align	1
+ 1213              		.syntax unified
+ 1214              		.thumb
+ 1215              		.thumb_func
+ 1217              	ft5336_Get_I2C_InitializedStatus:
+ 1218              	.LFB12:
+ 553:Components/ft5336/ft5336.c **** 
+ 554:Components/ft5336/ft5336.c **** #endif /* TS_MULTI_TOUCH_SUPPORTED == 1 */
+ 555:Components/ft5336/ft5336.c **** 
+ 556:Components/ft5336/ft5336.c **** /** @defgroup ft5336_Static_Function_Body
+ 557:Components/ft5336/ft5336.c ****   * @{
+ 558:Components/ft5336/ft5336.c ****   */
+ 559:Components/ft5336/ft5336.c **** 
+ 560:Components/ft5336/ft5336.c **** /* Static functions bodies-----------------------------------------------*/
+ 561:Components/ft5336/ft5336.c **** 
+ 562:Components/ft5336/ft5336.c **** 
+ 563:Components/ft5336/ft5336.c **** /**
+ 564:Components/ft5336/ft5336.c ****   * @brief  Return the status of I2C was initialized or not.
+ 565:Components/ft5336/ft5336.c ****   * @param  None.
+ 566:Components/ft5336/ft5336.c ****   * @retval : I2C initialization status.
+ 567:Components/ft5336/ft5336.c ****   */
+ 568:Components/ft5336/ft5336.c **** static uint8_t ft5336_Get_I2C_InitializedStatus(void)
+ 569:Components/ft5336/ft5336.c **** {
+ 1219              		.loc 1 569 1
+ 1220              		.cfi_startproc
+ 1221              		@ args = 0, pretend = 0, frame = 0
+ 1222              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1223              		@ link register save eliminated.
+ 1224 0000 80B4     		push	{r7}
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s 			page 32
+
+
+ 1225              	.LCFI63:
+ 1226              		.cfi_def_cfa_offset 4
+ 1227              		.cfi_offset 7, -4
+ 1228 0002 00AF     		add	r7, sp, #0
+ 1229              	.LCFI64:
+ 1230              		.cfi_def_cfa_register 7
+ 570:Components/ft5336/ft5336.c ****   return(ft5336_handle.i2cInitialized);
+ 1231              		.loc 1 570 23
+ 1232 0004 034B     		ldr	r3, .L61
+ 1233 0006 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 571:Components/ft5336/ft5336.c **** }
+ 1234              		.loc 1 571 1
+ 1235 0008 1846     		mov	r0, r3
+ 1236 000a BD46     		mov	sp, r7
+ 1237              	.LCFI65:
+ 1238              		.cfi_def_cfa_register 13
+ 1239              		@ sp needed
+ 1240 000c 5DF8047B 		ldr	r7, [sp], #4
+ 1241              	.LCFI66:
+ 1242              		.cfi_restore 7
+ 1243              		.cfi_def_cfa_offset 0
+ 1244 0010 7047     		bx	lr
+ 1245              	.L62:
+ 1246 0012 00BF     		.align	2
+ 1247              	.L61:
+ 1248 0014 00000000 		.word	ft5336_handle
+ 1249              		.cfi_endproc
+ 1250              	.LFE12:
+ 1252              		.section	.text.ft5336_I2C_InitializeIfRequired,"ax",%progbits
+ 1253              		.align	1
+ 1254              		.syntax unified
+ 1255              		.thumb
+ 1256              		.thumb_func
+ 1258              	ft5336_I2C_InitializeIfRequired:
+ 1259              	.LFB13:
+ 572:Components/ft5336/ft5336.c **** 
+ 573:Components/ft5336/ft5336.c **** /**
+ 574:Components/ft5336/ft5336.c ****   * @brief  I2C initialize if needed.
+ 575:Components/ft5336/ft5336.c ****   * @param  None.
+ 576:Components/ft5336/ft5336.c ****   * @retval : None.
+ 577:Components/ft5336/ft5336.c ****   */
+ 578:Components/ft5336/ft5336.c **** static void ft5336_I2C_InitializeIfRequired(void)
+ 579:Components/ft5336/ft5336.c **** {
+ 1260              		.loc 1 579 1
+ 1261              		.cfi_startproc
+ 1262              		@ args = 0, pretend = 0, frame = 0
+ 1263              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1264 0000 80B5     		push	{r7, lr}
+ 1265              	.LCFI67:
+ 1266              		.cfi_def_cfa_offset 8
+ 1267              		.cfi_offset 7, -8
+ 1268              		.cfi_offset 14, -4
+ 1269 0002 00AF     		add	r7, sp, #0
+ 1270              	.LCFI68:
+ 1271              		.cfi_def_cfa_register 7
+ 580:Components/ft5336/ft5336.c ****   if(ft5336_Get_I2C_InitializedStatus() == FT5336_I2C_NOT_INITIALIZED)
+ 1272              		.loc 1 580 6
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s 			page 33
+
+
+ 1273 0004 FFF7FEFF 		bl	ft5336_Get_I2C_InitializedStatus
+ 1274 0008 0346     		mov	r3, r0
+ 1275              		.loc 1 580 5
+ 1276 000a 002B     		cmp	r3, #0
+ 1277 000c 04D1     		bne	.L65
+ 581:Components/ft5336/ft5336.c ****   {
+ 582:Components/ft5336/ft5336.c ****     /* Initialize TS IO BUS layer (I2C) */
+ 583:Components/ft5336/ft5336.c ****     TS_IO_Init();
+ 1278              		.loc 1 583 5
+ 1279 000e FFF7FEFF 		bl	TS_IO_Init
+ 584:Components/ft5336/ft5336.c **** 
+ 585:Components/ft5336/ft5336.c ****     /* Set state to initialized */
+ 586:Components/ft5336/ft5336.c ****     ft5336_handle.i2cInitialized = FT5336_I2C_INITIALIZED;
+ 1280              		.loc 1 586 34
+ 1281 0012 024B     		ldr	r3, .L66
+ 1282 0014 0122     		movs	r2, #1
+ 1283 0016 1A70     		strb	r2, [r3]
+ 1284              	.L65:
+ 587:Components/ft5336/ft5336.c ****   }
+ 588:Components/ft5336/ft5336.c **** }
+ 1285              		.loc 1 588 1
+ 1286 0018 00BF     		nop
+ 1287 001a 80BD     		pop	{r7, pc}
+ 1288              	.L67:
+ 1289              		.align	2
+ 1290              	.L66:
+ 1291 001c 00000000 		.word	ft5336_handle
+ 1292              		.cfi_endproc
+ 1293              	.LFE13:
+ 1295              		.section	.text.ft5336_TS_Configure,"ax",%progbits
+ 1296              		.align	1
+ 1297              		.syntax unified
+ 1298              		.thumb
+ 1299              		.thumb_func
+ 1301              	ft5336_TS_Configure:
+ 1302              	.LFB14:
+ 589:Components/ft5336/ft5336.c **** 
+ 590:Components/ft5336/ft5336.c **** /**
+ 591:Components/ft5336/ft5336.c ****   * @brief  Basic static configuration of TouchScreen
+ 592:Components/ft5336/ft5336.c ****   * @param  DeviceAddr: FT5336 Device address for communication on I2C Bus.
+ 593:Components/ft5336/ft5336.c ****   * @retval Status FT5336_STATUS_OK or FT5336_STATUS_NOT_OK.
+ 594:Components/ft5336/ft5336.c ****   */
+ 595:Components/ft5336/ft5336.c **** static uint32_t ft5336_TS_Configure(uint16_t DeviceAddr)
+ 596:Components/ft5336/ft5336.c **** {
+ 1303              		.loc 1 596 1
+ 1304              		.cfi_startproc
+ 1305              		@ args = 0, pretend = 0, frame = 16
+ 1306              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1307              		@ link register save eliminated.
+ 1308 0000 80B4     		push	{r7}
+ 1309              	.LCFI69:
+ 1310              		.cfi_def_cfa_offset 4
+ 1311              		.cfi_offset 7, -4
+ 1312 0002 85B0     		sub	sp, sp, #20
+ 1313              	.LCFI70:
+ 1314              		.cfi_def_cfa_offset 24
+ 1315 0004 00AF     		add	r7, sp, #0
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s 			page 34
+
+
+ 1316              	.LCFI71:
+ 1317              		.cfi_def_cfa_register 7
+ 1318 0006 0346     		mov	r3, r0
+ 1319 0008 FB80     		strh	r3, [r7, #6]	@ movhi
+ 597:Components/ft5336/ft5336.c ****   uint32_t status = FT5336_STATUS_OK;
+ 1320              		.loc 1 597 12
+ 1321 000a 0023     		movs	r3, #0
+ 1322 000c FB60     		str	r3, [r7, #12]
+ 598:Components/ft5336/ft5336.c **** 
+ 599:Components/ft5336/ft5336.c ****   /* Nothing special to be done for FT5336 */
+ 600:Components/ft5336/ft5336.c **** 
+ 601:Components/ft5336/ft5336.c ****   return(status);
+ 1323              		.loc 1 601 9
+ 1324 000e FB68     		ldr	r3, [r7, #12]
+ 602:Components/ft5336/ft5336.c **** }
+ 1325              		.loc 1 602 1
+ 1326 0010 1846     		mov	r0, r3
+ 1327 0012 1437     		adds	r7, r7, #20
+ 1328              	.LCFI72:
+ 1329              		.cfi_def_cfa_offset 4
+ 1330 0014 BD46     		mov	sp, r7
+ 1331              	.LCFI73:
+ 1332              		.cfi_def_cfa_register 13
+ 1333              		@ sp needed
+ 1334 0016 5DF8047B 		ldr	r7, [sp], #4
+ 1335              	.LCFI74:
+ 1336              		.cfi_restore 7
+ 1337              		.cfi_def_cfa_offset 0
+ 1338 001a 7047     		bx	lr
+ 1339              		.cfi_endproc
+ 1340              	.LFE14:
+ 1342              		.section	.bss.coord.0,"aw",%nobits
+ 1343              		.align	1
+ 1346              	coord.0:
+ 1347 0000 0000     		.space	2
+ 1348              		.text
+ 1349              	.Letext0:
+ 1350              		.file 2 "d:\\3.tools\\arm_gcc_toolchain\\arm-none-eabi\\include\\machine\\_default_types.h"
+ 1351              		.file 3 "d:\\3.tools\\arm_gcc_toolchain\\arm-none-eabi\\include\\sys\\_stdint.h"
+ 1352              		.file 4 "Components/ft5336/../Common/ts.h"
+ 1353              		.file 5 "Components/ft5336/ft5336.h"
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s 			page 35
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 ft5336.c
+C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s:24     .data.ft5336_ts_drv:00000000 ft5336_ts_drv
+C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s:21     .data.ft5336_ts_drv:00000000 $d
+C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s:48     .text.ft5336_Init:00000000 ft5336_Init
+C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s:136    .text.ft5336_ReadID:00000000 ft5336_ReadID
+C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s:93     .text.ft5336_Reset:00000000 ft5336_Reset
+C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s:229    .text.ft5336_TS_Start:00000000 ft5336_TS_Start
+C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s:276    .text.ft5336_TS_DetectTouch:00000000 ft5336_TS_DetectTouch
+C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s:359    .text.ft5336_TS_GetXY:00000000 ft5336_TS_GetXY
+C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s:705    .text.ft5336_TS_EnableIT:00000000 ft5336_TS_EnableIT
+C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s:854    .text.ft5336_TS_ClearIT:00000000 ft5336_TS_ClearIT
+C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s:809    .text.ft5336_TS_ITStatus:00000000 ft5336_TS_ITStatus
+C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s:757    .text.ft5336_TS_DisableIT:00000000 ft5336_TS_DisableIT
+C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s:36     .bss.ft5336_handle:00000000 $d
+C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s:39     .bss.ft5336_handle:00000000 ft5336_handle
+C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s:42     .text.ft5336_Init:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s:1258   .text.ft5336_I2C_InitializeIfRequired:00000000 ft5336_I2C_InitializeIfRequired
+C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s:87     .text.ft5336_Reset:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s:130    .text.ft5336_ReadID:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s:223    .text.ft5336_TS_Start:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s:1301   .text.ft5336_TS_Configure:00000000 ft5336_TS_Configure
+C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s:270    .text.ft5336_TS_DetectTouch:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s:348    .text.ft5336_TS_DetectTouch:00000050 $d
+C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s:353    .text.ft5336_TS_GetXY:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s:414    .text.ft5336_TS_GetXY:00000040 $d
+C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s:424    .text.ft5336_TS_GetXY:00000068 $t
+C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s:693    .text.ft5336_TS_GetXY:000001d8 $d
+C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s:1346   .bss.coord.0:00000000 coord.0
+C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s:699    .text.ft5336_TS_EnableIT:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s:751    .text.ft5336_TS_DisableIT:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s:803    .text.ft5336_TS_ITStatus:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s:848    .text.ft5336_TS_ClearIT:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s:891    .text.ft5336_TS_GetGestureID:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s:897    .text.ft5336_TS_GetGestureID:00000000 ft5336_TS_GetGestureID
+C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s:949    .text.ft5336_TS_GetTouchInfo:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s:955    .text.ft5336_TS_GetTouchInfo:00000000 ft5336_TS_GetTouchInfo
+C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s:1005   .text.ft5336_TS_GetTouchInfo:0000003c $d
+C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s:1015   .text.ft5336_TS_GetTouchInfo:00000064 $t
+C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s:1207   .text.ft5336_TS_GetTouchInfo:00000158 $d
+C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s:1212   .text.ft5336_Get_I2C_InitializedStatus:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s:1217   .text.ft5336_Get_I2C_InitializedStatus:00000000 ft5336_Get_I2C_InitializedStatus
+C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s:1248   .text.ft5336_Get_I2C_InitializedStatus:00000014 $d
+C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s:1253   .text.ft5336_I2C_InitializeIfRequired:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s:1291   .text.ft5336_I2C_InitializeIfRequired:0000001c $d
+C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s:1296   .text.ft5336_TS_Configure:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s:1343   .bss.coord.0:00000000 $d
+
+UNDEFINED SYMBOLS
+TS_IO_Delay
+TS_IO_Read
+TS_IO_Write
+TS_IO_Init

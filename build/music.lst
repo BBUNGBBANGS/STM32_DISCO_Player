@@ -1,0 +1,385 @@
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccIzRuX0.s 			page 1
+
+
+   1              		.cpu cortex-m7
+   2              		.arch armv7e-m
+   3              		.fpu fpv5-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 6
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"music.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.global	SDFatFs
+  20              		.section	.bss.SDFatFs,"aw",%nobits
+  21              		.align	2
+  24              	SDFatFs:
+  25 0000 00000000 		.space	572
+  25      00000000 
+  25      00000000 
+  25      00000000 
+  25      00000000 
+  26              		.global	MyFile
+  27              		.section	.bss.MyFile,"aw",%nobits
+  28              		.align	3
+  31              	MyFile:
+  32 0000 00000000 		.space	600
+  32      00000000 
+  32      00000000 
+  32      00000000 
+  32      00000000 
+  33              		.global	dir
+  34              		.section	.bss.dir,"aw",%nobits
+  35              		.align	3
+  38              	dir:
+  39 0000 00000000 		.space	80
+  39      00000000 
+  39      00000000 
+  39      00000000 
+  39      00000000 
+  40              		.global	fno
+  41              		.section	.bss.fno,"aw",%nobits
+  42              		.align	3
+  45              	fno:
+  46 0000 00000000 		.space	288
+  46      00000000 
+  46      00000000 
+  46      00000000 
+  46      00000000 
+  47              		.global	SDPath
+  48              		.section	.bss.SDPath,"aw",%nobits
+  49              		.align	2
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccIzRuX0.s 			page 2
+
+
+  52              	SDPath:
+  53 0000 00000000 		.space	4
+  54              		.global	Music_file_count
+  55              		.section	.bss.Music_file_count,"aw",%nobits
+  56              		.align	1
+  59              	Music_file_count:
+  60 0000 0000     		.space	2
+  61              		.section	.text.Music_SdCard_Init,"ax",%progbits
+  62              		.align	1
+  63              		.global	Music_SdCard_Init
+  64              		.syntax unified
+  65              		.thumb
+  66              		.thumb_func
+  68              	Music_SdCard_Init:
+  69              	.LFB149:
+  70              		.file 1 "Core/Src/music.c"
+   1:Core/Src/music.c **** 
+   2:Core/Src/music.c **** #include "music.h"
+   3:Core/Src/music.c **** #include "lcd.h"
+   4:Core/Src/music.c **** 
+   5:Core/Src/music.c **** FATFS SDFatFs; /* File system object for SD card logical drive */
+   6:Core/Src/music.c **** FIL MyFile; /* File object */
+   7:Core/Src/music.c **** DIR dir;                    // Directory
+   8:Core/Src/music.c **** FILINFO fno;                // File Info
+   9:Core/Src/music.c **** char SDPath[4]; /* SD card logical drive path */
+  10:Core/Src/music.c **** uint16_t Music_file_count;
+  11:Core/Src/music.c **** 
+  12:Core/Src/music.c **** void Music_SdCard_Init(void)
+  13:Core/Src/music.c **** {
+  71              		.loc 1 13 1
+  72              		.cfi_startproc
+  73              		@ args = 0, pretend = 0, frame = 0
+  74              		@ frame_needed = 1, uses_anonymous_args = 0
+  75 0000 80B5     		push	{r7, lr}
+  76              	.LCFI0:
+  77              		.cfi_def_cfa_offset 8
+  78              		.cfi_offset 7, -8
+  79              		.cfi_offset 14, -4
+  80 0002 00AF     		add	r7, sp, #0
+  81              	.LCFI1:
+  82              		.cfi_def_cfa_register 7
+  14:Core/Src/music.c ****     f_mount(&SDFatFs, (TCHAR const*) SDPath, 0);
+  83              		.loc 1 14 5
+  84 0004 0022     		movs	r2, #0
+  85 0006 0349     		ldr	r1, .L2
+  86 0008 0348     		ldr	r0, .L2+4
+  87 000a FFF7FEFF 		bl	f_mount
+  15:Core/Src/music.c **** }
+  88              		.loc 1 15 1
+  89 000e 00BF     		nop
+  90 0010 80BD     		pop	{r7, pc}
+  91              	.L3:
+  92 0012 00BF     		.align	2
+  93              	.L2:
+  94 0014 00000000 		.word	SDPath
+  95 0018 00000000 		.word	SDFatFs
+  96              		.cfi_endproc
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccIzRuX0.s 			page 3
+
+
+  97              	.LFE149:
+  99              		.section	.rodata
+ 100              		.align	2
+ 101              	.LC0:
+ 102 0000 2F00     		.ascii	"/\000"
+ 103 0002 0000     		.align	2
+ 104              	.LC1:
+ 105 0004 257300   		.ascii	"%s\000"
+ 106              		.section	.text.Music_File_Read,"ax",%progbits
+ 107              		.align	1
+ 108              		.global	Music_File_Read
+ 109              		.syntax unified
+ 110              		.thumb
+ 111              		.thumb_func
+ 113              	Music_File_Read:
+ 114              	.LFB150:
+  16:Core/Src/music.c **** 
+  17:Core/Src/music.c **** void Music_File_Read(void)
+  18:Core/Src/music.c **** {
+ 115              		.loc 1 18 1
+ 116              		.cfi_startproc
+ 117              		@ args = 0, pretend = 0, frame = 56
+ 118              		@ frame_needed = 1, uses_anonymous_args = 0
+ 119 0000 80B5     		push	{r7, lr}
+ 120              	.LCFI2:
+ 121              		.cfi_def_cfa_offset 8
+ 122              		.cfi_offset 7, -8
+ 123              		.cfi_offset 14, -4
+ 124 0002 8EB0     		sub	sp, sp, #56
+ 125              	.LCFI3:
+ 126              		.cfi_def_cfa_offset 64
+ 127 0004 00AF     		add	r7, sp, #0
+ 128              	.LCFI4:
+ 129              		.cfi_def_cfa_register 7
+  19:Core/Src/music.c ****     BSP_LCD_SetBackColor(LCD_COLOR_DARKGRAY);
+ 130              		.loc 1 19 5
+ 131 0006 2748     		ldr	r0, .L8
+ 132 0008 FFF7FEFF 		bl	BSP_LCD_SetBackColor
+  20:Core/Src/music.c ****     BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
+ 133              		.loc 1 20 5
+ 134 000c 4FF0FF30 		mov	r0, #-1
+ 135 0010 FFF7FEFF 		bl	BSP_LCD_SetTextColor
+  21:Core/Src/music.c ****     f_opendir(&dir, "/");   // Open Root
+ 136              		.loc 1 21 5
+ 137 0014 2449     		ldr	r1, .L8+4
+ 138 0016 2548     		ldr	r0, .L8+8
+ 139 0018 FFF7FEFF 		bl	f_opendir
+ 140              	.L7:
+ 141              	.LBB2:
+  22:Core/Src/music.c ****     do
+  23:Core/Src/music.c ****     {
+  24:Core/Src/music.c ****         uint8_t tx_buf[50] = {0,};
+ 142              		.loc 1 24 17
+ 143 001c 0023     		movs	r3, #0
+ 144 001e 7B60     		str	r3, [r7, #4]
+ 145 0020 07F10803 		add	r3, r7, #8
+ 146 0024 2E22     		movs	r2, #46
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccIzRuX0.s 			page 4
+
+
+ 147 0026 0021     		movs	r1, #0
+ 148 0028 1846     		mov	r0, r3
+ 149 002a FFF7FEFF 		bl	memset
+  25:Core/Src/music.c ****         f_readdir(&dir, &fno);
+ 150              		.loc 1 25 9
+ 151 002e 2049     		ldr	r1, .L8+12
+ 152 0030 1E48     		ldr	r0, .L8+8
+ 153 0032 FFF7FEFF 		bl	f_readdir
+  26:Core/Src/music.c ****         if (fno.fname[0] != 0)
+ 154              		.loc 1 26 22
+ 155 0036 1E4B     		ldr	r3, .L8+12
+ 156 0038 9B7E     		ldrb	r3, [r3, #26]	@ zero_extendqisi2
+ 157              		.loc 1 26 12
+ 158 003a 002B     		cmp	r3, #0
+ 159 003c 05D0     		beq	.L5
+  27:Core/Src/music.c ****         {
+  28:Core/Src/music.c ****             Music_file_count++;
+ 160              		.loc 1 28 29
+ 161 003e 1D4B     		ldr	r3, .L8+16
+ 162 0040 1B88     		ldrh	r3, [r3]
+ 163 0042 0133     		adds	r3, r3, #1
+ 164 0044 9AB2     		uxth	r2, r3
+ 165 0046 1B4B     		ldr	r3, .L8+16
+ 166 0048 1A80     		strh	r2, [r3]	@ movhi
+ 167              	.L5:
+  29:Core/Src/music.c ****         }
+  30:Core/Src/music.c ****         if ((Music_file_count > 1) && (Music_file_count < 8))
+ 168              		.loc 1 30 31
+ 169 004a 1A4B     		ldr	r3, .L8+16
+ 170 004c 1B88     		ldrh	r3, [r3]
+ 171              		.loc 1 30 12
+ 172 004e 012B     		cmp	r3, #1
+ 173 0050 17D9     		bls	.L6
+ 174              		.loc 1 30 57 discriminator 1
+ 175 0052 184B     		ldr	r3, .L8+16
+ 176 0054 1B88     		ldrh	r3, [r3]
+ 177              		.loc 1 30 36 discriminator 1
+ 178 0056 072B     		cmp	r3, #7
+ 179 0058 13D8     		bhi	.L6
+  31:Core/Src/music.c ****         {
+  32:Core/Src/music.c ****             sprintf((char*)tx_buf, "%s", (char *)fno.fname);
+ 180              		.loc 1 32 13
+ 181 005a 3B1D     		adds	r3, r7, #4
+ 182 005c 164A     		ldr	r2, .L8+20
+ 183 005e 1749     		ldr	r1, .L8+24
+ 184 0060 1846     		mov	r0, r3
+ 185 0062 FFF7FEFF 		bl	sprintf
+  33:Core/Src/music.c ****             BSP_LCD_DisplayStringAt(37, 30 * (Music_file_count - 1) + 6, (uint8_t *)&tx_buf, LEFT_M
+ 186              		.loc 1 33 13
+ 187 0066 134B     		ldr	r3, .L8+16
+ 188 0068 1B88     		ldrh	r3, [r3]
+ 189 006a 1A46     		mov	r2, r3	@ movhi
+ 190 006c 1201     		lsls	r2, r2, #4
+ 191 006e D31A     		subs	r3, r2, r3
+ 192 0070 5B00     		lsls	r3, r3, #1
+ 193 0072 9BB2     		uxth	r3, r3
+ 194 0074 183B     		subs	r3, r3, #24
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccIzRuX0.s 			page 5
+
+
+ 195 0076 99B2     		uxth	r1, r3
+ 196 0078 3A1D     		adds	r2, r7, #4
+ 197 007a 0323     		movs	r3, #3
+ 198 007c 2520     		movs	r0, #37
+ 199 007e FFF7FEFF 		bl	BSP_LCD_DisplayStringAt
+ 200              	.L6:
+ 201              	.LBE2:
+  34:Core/Src/music.c ****         }
+  35:Core/Src/music.c **** 
+  36:Core/Src/music.c ****     } while(fno.fname[0] != 0);
+ 202              		.loc 1 36 22
+ 203 0082 0B4B     		ldr	r3, .L8+12
+ 204 0084 9B7E     		ldrb	r3, [r3, #26]	@ zero_extendqisi2
+ 205              		.loc 1 36 5
+ 206 0086 002B     		cmp	r3, #0
+ 207 0088 C8D1     		bne	.L7
+  37:Core/Src/music.c **** 
+  38:Core/Src/music.c ****     f_closedir(&dir);
+ 208              		.loc 1 38 5
+ 209 008a 0848     		ldr	r0, .L8+8
+ 210 008c FFF7FEFF 		bl	f_closedir
+  39:Core/Src/music.c ****     Music_file_count = Music_file_count - 1;
+ 211              		.loc 1 39 41
+ 212 0090 084B     		ldr	r3, .L8+16
+ 213 0092 1B88     		ldrh	r3, [r3]
+ 214 0094 013B     		subs	r3, r3, #1
+ 215 0096 9AB2     		uxth	r2, r3
+ 216              		.loc 1 39 22
+ 217 0098 064B     		ldr	r3, .L8+16
+ 218 009a 1A80     		strh	r2, [r3]	@ movhi
+  40:Core/Src/music.c **** }
+ 219              		.loc 1 40 1
+ 220 009c 00BF     		nop
+ 221 009e 3837     		adds	r7, r7, #56
+ 222              	.LCFI5:
+ 223              		.cfi_def_cfa_offset 8
+ 224 00a0 BD46     		mov	sp, r7
+ 225              	.LCFI6:
+ 226              		.cfi_def_cfa_register 13
+ 227              		@ sp needed
+ 228 00a2 80BD     		pop	{r7, pc}
+ 229              	.L9:
+ 230              		.align	2
+ 231              	.L8:
+ 232 00a4 404040FF 		.word	-12566464
+ 233 00a8 00000000 		.word	.LC0
+ 234 00ac 00000000 		.word	dir
+ 235 00b0 00000000 		.word	fno
+ 236 00b4 00000000 		.word	Music_file_count
+ 237 00b8 1A000000 		.word	fno+26
+ 238 00bc 04000000 		.word	.LC1
+ 239              		.cfi_endproc
+ 240              	.LFE150:
+ 242              		.section	.text.Music_Play,"ax",%progbits
+ 243              		.align	1
+ 244              		.global	Music_Play
+ 245              		.syntax unified
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccIzRuX0.s 			page 6
+
+
+ 246              		.thumb
+ 247              		.thumb_func
+ 249              	Music_Play:
+ 250              	.LFB151:
+  41:Core/Src/music.c ****  
+  42:Core/Src/music.c **** void Music_Play(void)
+  43:Core/Src/music.c **** {
+ 251              		.loc 1 43 1
+ 252              		.cfi_startproc
+ 253              		@ args = 0, pretend = 0, frame = 0
+ 254              		@ frame_needed = 1, uses_anonymous_args = 0
+ 255              		@ link register save eliminated.
+ 256 0000 80B4     		push	{r7}
+ 257              	.LCFI7:
+ 258              		.cfi_def_cfa_offset 4
+ 259              		.cfi_offset 7, -4
+ 260 0002 00AF     		add	r7, sp, #0
+ 261              	.LCFI8:
+ 262              		.cfi_def_cfa_register 7
+  44:Core/Src/music.c **** 
+  45:Core/Src/music.c **** }...
+ 263              		.loc 1 45 1
+ 264 0004 00BF     		nop
+ 265 0006 BD46     		mov	sp, r7
+ 266              	.LCFI9:
+ 267              		.cfi_def_cfa_register 13
+ 268              		@ sp needed
+ 269 0008 5DF8047B 		ldr	r7, [sp], #4
+ 270              	.LCFI10:
+ 271              		.cfi_restore 7
+ 272              		.cfi_def_cfa_offset 0
+ 273 000c 7047     		bx	lr
+ 274              		.cfi_endproc
+ 275              	.LFE151:
+ 277              		.text
+ 278              	.Letext0:
+ 279              		.file 2 "d:\\3.tools\\arm_gcc_toolchain\\arm-none-eabi\\include\\machine\\_default_types.h"
+ 280              		.file 3 "d:\\3.tools\\arm_gcc_toolchain\\arm-none-eabi\\include\\sys\\_stdint.h"
+ 281              		.file 4 "Middlewares/Third_Party/FatFs/src/integer.h"
+ 282              		.file 5 "Middlewares/Third_Party/FreeRTOS/Source/include/queue.h"
+ 283              		.file 6 "Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h"
+ 284              		.file 7 "Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h"
+ 285              		.file 8 "Middlewares/Third_Party/FatFs/src/ff.h"
+ 286              		.file 9 "FATFS/App/fatfs.h"
+ 287              		.file 10 "Core/Inc/lcd.h"
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccIzRuX0.s 			page 7
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 music.c
+C:\Users\jisu8\AppData\Local\Temp\ccIzRuX0.s:24     .bss.SDFatFs:00000000 SDFatFs
+C:\Users\jisu8\AppData\Local\Temp\ccIzRuX0.s:21     .bss.SDFatFs:00000000 $d
+C:\Users\jisu8\AppData\Local\Temp\ccIzRuX0.s:31     .bss.MyFile:00000000 MyFile
+C:\Users\jisu8\AppData\Local\Temp\ccIzRuX0.s:28     .bss.MyFile:00000000 $d
+C:\Users\jisu8\AppData\Local\Temp\ccIzRuX0.s:38     .bss.dir:00000000 dir
+C:\Users\jisu8\AppData\Local\Temp\ccIzRuX0.s:35     .bss.dir:00000000 $d
+C:\Users\jisu8\AppData\Local\Temp\ccIzRuX0.s:45     .bss.fno:00000000 fno
+C:\Users\jisu8\AppData\Local\Temp\ccIzRuX0.s:42     .bss.fno:00000000 $d
+C:\Users\jisu8\AppData\Local\Temp\ccIzRuX0.s:52     .bss.SDPath:00000000 SDPath
+C:\Users\jisu8\AppData\Local\Temp\ccIzRuX0.s:49     .bss.SDPath:00000000 $d
+C:\Users\jisu8\AppData\Local\Temp\ccIzRuX0.s:59     .bss.Music_file_count:00000000 Music_file_count
+C:\Users\jisu8\AppData\Local\Temp\ccIzRuX0.s:56     .bss.Music_file_count:00000000 $d
+C:\Users\jisu8\AppData\Local\Temp\ccIzRuX0.s:62     .text.Music_SdCard_Init:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\ccIzRuX0.s:68     .text.Music_SdCard_Init:00000000 Music_SdCard_Init
+C:\Users\jisu8\AppData\Local\Temp\ccIzRuX0.s:94     .text.Music_SdCard_Init:00000014 $d
+C:\Users\jisu8\AppData\Local\Temp\ccIzRuX0.s:100    .rodata:00000000 $d
+C:\Users\jisu8\AppData\Local\Temp\ccIzRuX0.s:107    .text.Music_File_Read:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\ccIzRuX0.s:113    .text.Music_File_Read:00000000 Music_File_Read
+C:\Users\jisu8\AppData\Local\Temp\ccIzRuX0.s:232    .text.Music_File_Read:000000a4 $d
+C:\Users\jisu8\AppData\Local\Temp\ccIzRuX0.s:243    .text.Music_Play:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\ccIzRuX0.s:249    .text.Music_Play:00000000 Music_Play
+
+UNDEFINED SYMBOLS
+f_mount
+BSP_LCD_SetBackColor
+BSP_LCD_SetTextColor
+f_opendir
+memset
+f_readdir
+sprintf
+BSP_LCD_DisplayStringAt
+f_closedir

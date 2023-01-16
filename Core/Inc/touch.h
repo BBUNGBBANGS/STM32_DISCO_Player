@@ -155,6 +155,9 @@ extern char * ts_gesture_id_string_tab[GEST_ID_NB_MAX];
   * @}
   */ 
 
+extern uint8_t Toutch_Status;
+
+extern void Touch_Operation(void);
 /** @addtogroup STM32746G_DISCOVERY_TS_Exported_Functions
   * @{
   */

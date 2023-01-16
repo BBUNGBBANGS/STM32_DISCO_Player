@@ -154,88 +154,66 @@ typedef enum
 /**
   * @}
   */ 
-extern void LCD_Test(void);
+extern void LCD_Display_Init(void);
 /** @addtogroup STM32746G_DISCOVERY_LCD_Exported_Functions
   * @{
   */
-uint8_t  BSP_LCD_Init(void);
-uint8_t  BSP_LCD_DeInit(void);
+uint8_t BSP_LCD_Init(void);
+uint8_t BSP_LCD_DeInit(void);
 uint32_t BSP_LCD_GetXSize(void);
 uint32_t BSP_LCD_GetYSize(void);
-void     BSP_LCD_SetXSize(uint32_t imageWidthPixels);
-void     BSP_LCD_SetYSize(uint32_t imageHeightPixels);
+void BSP_LCD_SetXSize(uint32_t imageWidthPixels);
+void BSP_LCD_SetYSize(uint32_t imageHeightPixels);
 
 /* Functions using the LTDC controller */
-void     BSP_LCD_LayerDefaultInit(uint16_t LayerIndex, uint32_t FrameBuffer);
-void     BSP_LCD_LayerRgb565Init(uint16_t LayerIndex, uint32_t FB_Address);
-void     BSP_LCD_SetTransparency(uint32_t LayerIndex, uint8_t Transparency);
-void     BSP_LCD_SetTransparency_NoReload(uint32_t LayerIndex, uint8_t Transparency);
-void     BSP_LCD_SetLayerAddress(uint32_t LayerIndex, uint32_t Address);
-void     BSP_LCD_SetLayerAddress_NoReload(uint32_t LayerIndex, uint32_t Address);
-void     BSP_LCD_SetColorKeying(uint32_t LayerIndex, uint32_t RGBValue);
-void     BSP_LCD_SetColorKeying_NoReload(uint32_t LayerIndex, uint32_t RGBValue);
-void     BSP_LCD_ResetColorKeying(uint32_t LayerIndex);
-void     BSP_LCD_ResetColorKeying_NoReload(uint32_t LayerIndex);
-void     BSP_LCD_SetLayerWindow(uint16_t LayerIndex, uint16_t Xpos, uint16_t Ypos, uint16_t Width, uint16_t Height);
-void     BSP_LCD_SetLayerWindow_NoReload(uint16_t LayerIndex, uint16_t Xpos, uint16_t Ypos, uint16_t Width, uint16_t Height);
-void     BSP_LCD_SelectLayer(uint32_t LayerIndex);
-void     BSP_LCD_SetLayerVisible(uint32_t LayerIndex, FunctionalState State);
-void     BSP_LCD_SetLayerVisible_NoReload(uint32_t LayerIndex, FunctionalState State);
-void     BSP_LCD_Reload(uint32_t ReloadType);
+void BSP_LCD_LayerDefaultInit(uint16_t LayerIndex, uint32_t FrameBuffer);
+void BSP_LCD_LayerRgb565Init(uint16_t LayerIndex, uint32_t FB_Address);
+void BSP_LCD_SetTransparency(uint32_t LayerIndex, uint8_t Transparency);
+void BSP_LCD_SetTransparency_NoReload(uint32_t LayerIndex, uint8_t Transparency);
+void BSP_LCD_SetLayerAddress(uint32_t LayerIndex, uint32_t Address);
+void BSP_LCD_SetLayerAddress_NoReload(uint32_t LayerIndex, uint32_t Address);
+void BSP_LCD_SetColorKeying(uint32_t LayerIndex, uint32_t RGBValue);
+void BSP_LCD_SetColorKeying_NoReload(uint32_t LayerIndex, uint32_t RGBValue);
+void BSP_LCD_ResetColorKeying(uint32_t LayerIndex);
+void BSP_LCD_ResetColorKeying_NoReload(uint32_t LayerIndex);
+void BSP_LCD_SetLayerWindow(uint16_t LayerIndex, uint16_t Xpos, uint16_t Ypos, uint16_t Width, uint16_t Height);
+void BSP_LCD_SetLayerWindow_NoReload(uint16_t LayerIndex, uint16_t Xpos, uint16_t Ypos, uint16_t Width, uint16_t Height);
+void BSP_LCD_SelectLayer(uint32_t LayerIndex);
+void BSP_LCD_SetLayerVisible(uint32_t LayerIndex, FunctionalState State);
+void BSP_LCD_SetLayerVisible_NoReload(uint32_t LayerIndex, FunctionalState State);
+void BSP_LCD_Reload(uint32_t ReloadType);
 
-void     BSP_LCD_SetTextColor(uint32_t Color);
+void BSP_LCD_SetTextColor(uint32_t Color);
 uint32_t BSP_LCD_GetTextColor(void);
-void     BSP_LCD_SetBackColor(uint32_t Color);
+void BSP_LCD_SetBackColor(uint32_t Color);
 uint32_t BSP_LCD_GetBackColor(void);
-void     BSP_LCD_SetFont(sFONT *fonts);
-sFONT    *BSP_LCD_GetFont(void);
+void BSP_LCD_SetFont(sFONT *fonts);
+sFONT *BSP_LCD_GetFont(void);
 
 uint32_t BSP_LCD_ReadPixel(uint16_t Xpos, uint16_t Ypos);
-void     BSP_LCD_DrawPixel(uint16_t Xpos, uint16_t Ypos, uint32_t pixel);
-void     BSP_LCD_Clear(uint32_t Color);
-void     BSP_LCD_ClearStringLine(uint32_t Line);
-void     BSP_LCD_DisplayStringAtLine(uint16_t Line, uint8_t *ptr);
-void     BSP_LCD_DisplayStringAt(uint16_t Xpos, uint16_t Ypos, uint8_t *Text, Text_AlignModeTypdef Mode);
-void     BSP_LCD_DisplayChar(uint16_t Xpos, uint16_t Ypos, uint8_t Ascii);
+void BSP_LCD_DrawPixel(uint16_t Xpos, uint16_t Ypos, uint32_t pixel);
+void BSP_LCD_Clear(uint32_t Color);
+void BSP_LCD_ClearStringLine(uint32_t Line);
+void BSP_LCD_DisplayStringAtLine(uint16_t Line, uint8_t *ptr);
+void BSP_LCD_DisplayStringAt(uint16_t Xpos, uint16_t Ypos, uint8_t *Text, Text_AlignModeTypdef Mode);
+void BSP_LCD_DisplayChar(uint16_t Xpos, uint16_t Ypos, uint8_t Ascii);
 
-void     BSP_LCD_DrawHLine(uint16_t Xpos, uint16_t Ypos, uint16_t Length);
-void     BSP_LCD_DrawVLine(uint16_t Xpos, uint16_t Ypos, uint16_t Length);
-void     BSP_LCD_DrawLine(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2);
-void     BSP_LCD_DrawRect(uint16_t Xpos, uint16_t Ypos, uint16_t Width, uint16_t Height);
-void     BSP_LCD_DrawCircle(uint16_t Xpos, uint16_t Ypos, uint16_t Radius);
-void     BSP_LCD_DrawPolygon(pPoint Points, uint16_t PointCount);
-void     BSP_LCD_DrawEllipse(int Xpos, int Ypos, int XRadius, int YRadius);
-void     BSP_LCD_DrawBitmap(uint32_t Xpos, uint32_t Ypos, uint8_t *pbmp);
+void BSP_LCD_DrawHLine(uint16_t Xpos, uint16_t Ypos, uint16_t Length);
+void BSP_LCD_DrawVLine(uint16_t Xpos, uint16_t Ypos, uint16_t Length);
+void BSP_LCD_DrawLine(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2);
+void BSP_LCD_DrawRect(uint16_t Xpos, uint16_t Ypos, uint16_t Width, uint16_t Height);
+void BSP_LCD_DrawCircle(uint16_t Xpos, uint16_t Ypos, uint16_t Radius);
+void BSP_LCD_DrawPolygon(pPoint Points, uint16_t PointCount);
+void BSP_LCD_DrawEllipse(int Xpos, int Ypos, int XRadius, int YRadius);
+void BSP_LCD_DrawBitmap(uint32_t Xpos, uint32_t Ypos, uint8_t *pbmp);
 
-void     BSP_LCD_FillRect(uint16_t Xpos, uint16_t Ypos, uint16_t Width, uint16_t Height);
-void     BSP_LCD_FillCircle(uint16_t Xpos, uint16_t Ypos, uint16_t Radius);
-void     BSP_LCD_FillPolygon(pPoint Points, uint16_t PointCount);
-void     BSP_LCD_FillEllipse(int Xpos, int Ypos, int XRadius, int YRadius);
+void BSP_LCD_FillRect(uint16_t Xpos, uint16_t Ypos, uint16_t Width, uint16_t Height);
+void BSP_LCD_FillCircle(uint16_t Xpos, uint16_t Ypos, uint16_t Radius);
+void BSP_LCD_FillPolygon(pPoint Points, uint16_t PointCount);
+void BSP_LCD_FillEllipse(int Xpos, int Ypos, int XRadius, int YRadius);
 
-void     BSP_LCD_DisplayOff(void);
-void     BSP_LCD_DisplayOn(void);
-
-/* These functions can be modified in case the current settings
-   need to be changed for specific application needs */
-void     BSP_LCD_MspInit(LTDC_HandleTypeDef *hltdc, void *Params);
-void     BSP_LCD_MspDeInit(LTDC_HandleTypeDef *hltdc, void *Params);
-void     BSP_LCD_ClockConfig(LTDC_HandleTypeDef *hltdc, void *Params);
-
-/**
-  * @}
-  */ 
-
-/**
-  * @}
-  */ 
-  
-/**
-  * @}
-  */
- 
-/**
-  * @}
-  */ 
+void BSP_LCD_DisplayOff(void);
+void BSP_LCD_DisplayOn(void);
 
 #ifdef __cplusplus
 }

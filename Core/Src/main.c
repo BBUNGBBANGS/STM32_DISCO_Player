@@ -23,14 +23,11 @@
 #include "usb_host.h"
 #include "usb_device.h"
 #include "lcd.h"
-
+#include "touch.h"
+#include "sdram.h"
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 
-FATFS SDFatFs; /* File system object for SD card logical drive */
-
-FIL MyFile; /* File object */
-char SDPath[4]; /* SD card logical drive path */
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -1026,14 +1023,7 @@ static void MX_GPIO_Init(void)
 /* USER CODE END Header_StartDefaultTask */
 void StartDefaultTask(void const * argument)
 {
-    uint8_t desc[50];
-    uint8_t tx_buf[100] = {0,};
-    uint32_t byteswritten; /* File write count */
-    uint8_t wtext[] = "SD card test in STM32F746G-DISCO board"; 
-    f_mount(&SDFatFs, (TCHAR const*) SDPath, 0);
-    f_open(&MyFile, "Example.txt", FA_CREATE_ALWAYS | FA_WRITE);
-    f_write(&MyFile, wtext, sizeof(wtext), (void *) &byteswritten);
-    f_close(&MyFile);
+    Music_SdCard_Init();
     /* init code for USB_HOST */
     //MX_USB_HOST_Init();
     /* init code for USB_DEVICE */
@@ -1041,12 +1031,14 @@ void StartDefaultTask(void const * argument)
 
     BSP_SDRAM_Init();
     BSP_LCD_Init();
-    LCD_Test();
+    BSP_TS_Init(BSP_LCD_GetXSize(), BSP_LCD_GetYSize());
+    LCD_Display_Init();
+    Music_File_Read();
     /* Infinite loop */
     for(;;)
     {
-        //LCD_Test();
-        osDelay(1000);
+        Touch_Operation();
+        osDelay(100);
     }
 }
 

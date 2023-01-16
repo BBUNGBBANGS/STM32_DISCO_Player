@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 1
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s 			page 1
 
 
    1              		.cpu cortex-m7
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 1
   28:Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Src/usbd_msc_scsi.c **** #include "usbd_msc.h"
   29:Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Src/usbd_msc_scsi.c **** #include "usbd_msc_data.h"
   30:Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Src/usbd_msc_scsi.c **** 
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 2
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s 			page 2
 
 
   31:Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Src/usbd_msc_scsi.c **** 
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 1
   85:Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Src/usbd_msc_scsi.c **** static int8_t SCSI_RequestSense(USBD_HandleTypeDef *pdev, uint8_t lun, uint8_t *params);
   86:Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Src/usbd_msc_scsi.c **** static int8_t SCSI_StartStopUnit(USBD_HandleTypeDef *pdev, uint8_t lun, uint8_t *params);
   87:Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Src/usbd_msc_scsi.c **** static int8_t SCSI_AllowPreventRemovable(USBD_HandleTypeDef *pdev, uint8_t lun, uint8_t *params);
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 3
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s 			page 3
 
 
   88:Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Src/usbd_msc_scsi.c **** static int8_t SCSI_ModeSense6(USBD_HandleTypeDef *pdev, uint8_t lun, uint8_t *params);
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 1
  123:Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Src/usbd_msc_scsi.c ****   int8_t ret;
  124:Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Src/usbd_msc_scsi.c ****   USBD_MSC_BOT_HandleTypeDef *hmsc = (USBD_MSC_BOT_HandleTypeDef *)pdev->pClassDataCmsit[pdev->clas
   48              		.loc 1 124 94
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 4
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s 			page 4
 
 
   49 000e FB68     		ldr	r3, [r7, #12]
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 1
   96 0088 E1020000 		.word	.L5+1
   97 008c E1020000 		.word	.L5+1
   98 0090 E1020000 		.word	.L5+1
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 5
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s 			page 5
 
 
   99 0094 E1020000 		.word	.L5+1
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 1
  153 016c E1020000 		.word	.L5+1
  154 0170 E1020000 		.word	.L5+1
  155 0174 E1020000 		.word	.L5+1
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 6
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s 			page 6
 
 
  156 0178 E1020000 		.word	.L5+1
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 1
  202              		.loc 1 139 7
  203 01f4 80E0     		b	.L22
  204              	.L18:
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 7
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s 			page 7
 
 
  140:Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Src/usbd_msc_scsi.c **** 
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 1
  244 0238 0346     		mov	r3, r0
  245 023a FB75     		strb	r3, [r7, #23]
  155:Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Src/usbd_msc_scsi.c ****       break;
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 8
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s 			page 8
 
 
  246              		.loc 1 155 7
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 1
  285 0278 1946     		mov	r1, r3
  286 027a F868     		ldr	r0, [r7, #12]
  287 027c FFF7FEFF 		bl	SCSI_ReadCapacity16
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 9
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s 			page 9
 
 
  288 0280 0346     		mov	r3, r0
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 1
  326              		.loc 1 186 13
  327 02bc FB7A     		ldrb	r3, [r7, #11]	@ zero_extendqisi2
  328 02be 7A68     		ldr	r2, [r7, #4]
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 10
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s 			page 10
 
 
  329 02c0 1946     		mov	r1, r3
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 1
  368 02fc 1846     		mov	r0, r3
  369 02fe 1837     		adds	r7, r7, #24
  370              	.LCFI3:
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 11
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s 			page 11
 
 
  371              		.cfi_def_cfa_offset 8
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 1
  414 001c 7B61     		str	r3, [r7, #20]
  215:Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Src/usbd_msc_scsi.c **** 
  216:Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Src/usbd_msc_scsi.c ****   if (hmsc == NULL)
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 12
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s 			page 12
 
 
  415              		.loc 1 216 6
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 1
  453 0060 7B69     		ldr	r3, [r7, #20]
  454 0062 0522     		movs	r2, #5
  455 0064 1A72     		strb	r2, [r3, #8]
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 13
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s 			page 13
 
 
  233:Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Src/usbd_msc_scsi.c ****     return -1;
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 1
  245:Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Src/usbd_msc_scsi.c ****   return 0;
  498              		.loc 1 245 10
  499 00a8 0023     		movs	r3, #0
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 14
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s 			page 14
 
 
  500              	.L25:
@@ -838,7 +838,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 1
  541              		.loc 1 260 94
  542 000e FB68     		ldr	r3, [r7, #12]
  543 0010 D3F8D422 		ldr	r2, [r3, #724]
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 15
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s 			page 15
 
 
  544              		.loc 1 260 31
@@ -898,7 +898,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 1
  583              		.loc 1 275 15
  584 0058 7B68     		ldr	r3, [r7, #4]
  585 005a 0233     		adds	r3, r3, #2
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 16
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s 			page 16
 
 
  586 005c 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
@@ -958,7 +958,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 1
  294:Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Src/usbd_msc_scsi.c ****     pPage = (uint8_t *) & ((USBD_StorageTypeDef *)pdev->pUserData[pdev->classId])->pInquiry[lun * S
  622              		.loc 1 294 71
  623 009a FB68     		ldr	r3, [r7, #12]
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 17
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s 			page 17
 
 
  624 009c D3F8D432 		ldr	r3, [r3, #724]
@@ -1018,7 +1018,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 1
  670 00e2 B869     		ldr	r0, [r7, #24]
  671 00e4 FFF7FEFF 		bl	SCSI_UpdateBotData
  672              	.L35:
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 18
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s 			page 18
 
 
  303:Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Src/usbd_msc_scsi.c ****   }
@@ -1078,7 +1078,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 1
  714 0004 00AF     		add	r7, sp, #0
  715              	.LCFI17:
  716              		.cfi_def_cfa_register 7
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 19
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s 			page 19
 
 
  717 0006 F860     		str	r0, [r7, #12]
@@ -1138,7 +1138,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 1
  759 0050 97F91330 		ldrsb	r3, [r7, #19]
  760 0054 002B     		cmp	r3, #0
  761 0056 04D1     		bne	.L43
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 20
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s 			page 20
 
 
  762              		.loc 1 329 26 discriminator 1
@@ -1198,7 +1198,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 1
  808              		.loc 1 337 59
  809 009c 1B0A     		lsrs	r3, r3, #8
  810              		.loc 1 337 23
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 21
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s 			page 21
 
 
  811 009e DAB2     		uxtb	r2, r3
@@ -1258,7 +1258,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 1
  859 00e6 DAB2     		uxtb	r2, r3
  860              		.loc 1 343 21
  861 00e8 7B69     		ldr	r3, [r7, #20]
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 22
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s 			page 22
 
 
  862 00ea DA75     		strb	r2, [r3, #23]
@@ -1318,7 +1318,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 1
  901              	.LCFI21:
  902              		.cfi_def_cfa_offset 40
  903 0004 00AF     		add	r7, sp, #0
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 23
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s 			page 23
 
 
  904              	.LCFI22:
@@ -1378,7 +1378,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 1
  372:Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Src/usbd_msc_scsi.c **** 
  373:Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Src/usbd_msc_scsi.c ****   if ((ret != 0) || (hmsc->scsi_medium_state == SCSI_MEDIUM_EJECTED))
  947              		.loc 1 373 6
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 24
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s 			page 24
 
 
  948 0050 97F91730 		ldrsb	r3, [r7, #23]
@@ -1438,7 +1438,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 1
  991 0090 7A68     		ldr	r2, [r7, #4]
  992 0092 0D32     		adds	r2, r2, #13
  993 0094 1278     		ldrb	r2, [r2]	@ zero_extendqisi2
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 25
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s 			page 25
 
 
  381:Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Src/usbd_msc_scsi.c ****                           ((uint32_t)params[12] <<  8) |
@@ -1498,7 +1498,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 1
  1035 00c8 BB69     		ldr	r3, [r7, #24]
  1036 00ca 1A75     		strb	r2, [r3, #20]
  390:Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Src/usbd_msc_scsi.c ****   hmsc->bot_data[5] = (uint8_t)((hmsc->scsi_blk_nbr - 1U) >> 16);
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 26
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s 			page 26
 
 
  1037              		.loc 1 390 38
@@ -1558,7 +1558,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 1
  1086              		.loc 1 395 23
  1087 0112 DAB2     		uxtb	r2, r3
  1088              		.loc 1 395 21
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 27
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s 			page 27
 
 
  1089 0114 BB69     		ldr	r3, [r7, #24]
@@ -1618,7 +1618,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 1
  1134 0154 1278     		ldrb	r2, [r2]	@ zero_extendqisi2
  401:Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Src/usbd_msc_scsi.c ****                           ((uint32_t)params[12] <<  8) |
  1135              		.loc 1 401 56
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 28
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s 			page 28
 
 
  1136 0156 1A43     		orrs	r2, r2, r3
@@ -1678,7 +1678,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 1
  1177              	.LCFI27:
  1178              		.cfi_def_cfa_register 7
  1179 0006 F860     		str	r0, [r7, #12]
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 29
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s 			page 29
 
 
  1180 0008 0B46     		mov	r3, r1
@@ -1738,7 +1738,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 1
  1219 004c 97F91730 		ldrsb	r3, [r7, #23]
  1220 0050 002B     		cmp	r3, #0
  1221 0052 04D1     		bne	.L55
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 30
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s 			page 30
 
 
  1222              		.loc 1 431 26 discriminator 1
@@ -1798,7 +1798,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 1
  1263 008e 0822     		movs	r2, #8
  1264 0090 DA74     		strb	r2, [r3, #19]
  443:Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Src/usbd_msc_scsi.c ****   hmsc->bot_data[4] = (uint8_t)((blk_nbr - 1U) >> 24);
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 31
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s 			page 31
 
 
  1265              		.loc 1 443 42
@@ -1858,7 +1858,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 1
  1313 00ce BB69     		ldr	r3, [r7, #24]
  1314 00d0 5A76     		strb	r2, [r3, #25]
  450:Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Src/usbd_msc_scsi.c ****   hmsc->bot_data[10] = (uint8_t)(blk_size >>  8);
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 32
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s 			page 32
 
 
  1315              		.loc 1 450 24
@@ -1918,7 +1918,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 1
  465:Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Src/usbd_msc_scsi.c ****   */
  466:Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Src/usbd_msc_scsi.c **** static int8_t SCSI_ModeSense6(USBD_HandleTypeDef *pdev, uint8_t lun, uint8_t *params)
  467:Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Src/usbd_msc_scsi.c **** {
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 33
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s 			page 33
 
 
  1357              		.loc 1 467 1
@@ -1978,7 +1978,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 1
  1401 0036 FA8A     		ldrh	r2, [r7, #22]
  1402 0038 9A42     		cmp	r2, r3
  1403 003a 03D3     		bcc	.L63
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 34
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s 			page 34
 
 
  478:Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Src/usbd_msc_scsi.c ****   {
@@ -2038,7 +2038,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 1
  493:Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Src/usbd_msc_scsi.c ****   * @retval status
  494:Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Src/usbd_msc_scsi.c ****   */
  495:Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Src/usbd_msc_scsi.c **** static int8_t SCSI_ModeSense10(USBD_HandleTypeDef *pdev, uint8_t lun, uint8_t *params)
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 35
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s 			page 35
 
 
  496:Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Src/usbd_msc_scsi.c **** {
@@ -2098,7 +2098,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 1
  1488              		.loc 1 506 6
  1489 0036 FA8A     		ldrh	r2, [r7, #22]
  1490 0038 9A42     		cmp	r2, r3
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 36
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s 			page 36
 
 
  1491 003a 03D3     		bcc	.L69
@@ -2158,7 +2158,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 1
  521:Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Src/usbd_msc_scsi.c ****   * @param  params: Command parameters
  522:Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Src/usbd_msc_scsi.c ****   * @retval status
  523:Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Src/usbd_msc_scsi.c ****   */
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 37
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s 			page 37
 
 
  524:Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Src/usbd_msc_scsi.c **** static int8_t SCSI_RequestSense(USBD_HandleTypeDef *pdev, uint8_t lun, uint8_t *params)
@@ -2218,7 +2218,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 1
  537:Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Src/usbd_msc_scsi.c ****     SCSI_SenseCode(pdev, hmsc->cbw.bLUN, ILLEGAL_REQUEST, INVALID_CDB);
  1574              		.loc 1 537 5
  1575 0034 3B69     		ldr	r3, [r7, #16]
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 38
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s 			page 38
 
 
  1576 0036 93F81D12 		ldrb	r1, [r3, #541]	@ zero_extendqisi2
@@ -2278,7 +2278,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 1
  1616 0072 3B69     		ldr	r3, [r7, #16]
  1617 0074 93F86022 		ldrb	r2, [r3, #608]	@ zero_extendqisi2
  1618              		.loc 1 549 37
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 39
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s 			page 39
 
 
  1619 0078 3B69     		ldr	r3, [r7, #16]
@@ -2338,7 +2338,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 1
  556:Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Src/usbd_msc_scsi.c ****     if (hmsc->scsi_sense_head == SENSE_LIST_DEEPTH)
  1667              		.loc 1 556 13
  1668 00ce 3B69     		ldr	r3, [r7, #16]
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 40
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s 			page 40
 
 
  1669 00d0 93F86032 		ldrb	r3, [r3, #608]	@ zero_extendqisi2
@@ -2398,7 +2398,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 1
  1709              		@ sp needed
  1710 0104 80BD     		pop	{r7, pc}
  1711              		.cfi_endproc
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 41
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s 			page 41
 
 
  1712              	.LFE153:
@@ -2458,7 +2458,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 1
  1753 0022 B032     		adds	r2, r2, #176
  1754 0024 53F82230 		ldr	r3, [r3, r2, lsl #2]
  1755 0028 FB60     		str	r3, [r7, #12]
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 42
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s 			page 42
 
 
  586:Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Src/usbd_msc_scsi.c **** 
@@ -2518,7 +2518,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 1
  1798 0076 FB68     		ldr	r3, [r7, #12]
  1799 0078 93F86132 		ldrb	r3, [r3, #609]	@ zero_extendqisi2
  1800              		.loc 1 597 6
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 43
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s 			page 43
 
 
  1801 007c 042B     		cmp	r3, #4
@@ -2578,7 +2578,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 1
  1841              	.LCFI51:
  1842              		.cfi_def_cfa_offset 8
  1843              		.cfi_offset 7, -8
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 44
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s 			page 44
 
 
  1844              		.cfi_offset 14, -4
@@ -2638,7 +2638,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 1
  1887 0042 F97A     		ldrb	r1, [r7, #11]	@ zero_extendqisi2
  1888 0044 2423     		movs	r3, #36
  1889 0046 0522     		movs	r2, #5
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 45
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s 			page 45
 
 
  1890 0048 F868     		ldr	r0, [r7, #12]
@@ -2698,7 +2698,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 1
  1931 008a 03F00303 		and	r3, r3, #3
  1932              		.loc 1 636 11
  1933 008e 032B     		cmp	r3, #3
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 46
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s 			page 46
 
 
  1934 0090 03D1     		bne	.L89
@@ -2758,7 +2758,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 1
  1968              		.loc 1 658 1
  1969              		.cfi_startproc
  1970              		@ args = 0, pretend = 0, frame = 24
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 47
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s 			page 47
 
 
  1971              		@ frame_needed = 1, uses_anonymous_args = 0
@@ -2818,7 +2818,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 1
  2014 003c 03E0     		b	.L95
  2015              	.L94:
  670:Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Src/usbd_msc_scsi.c ****   }
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 48
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s 			page 48
 
 
  671:Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Src/usbd_msc_scsi.c ****   else
@@ -2878,7 +2878,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 1
  690:Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Src/usbd_msc_scsi.c **** {
  2053              		.loc 1 690 1
  2054              		.cfi_startproc
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 49
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s 			page 49
 
 
  2055              		@ args = 0, pretend = 0, frame = 24
@@ -2938,7 +2938,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 1
  2098 003a 5BB2     		sxtb	r3, r3
  2099              		.loc 1 701 8
  2100 003c 002B     		cmp	r3, #0
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 50
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s 			page 50
 
 
  2101 003e 0ADB     		blt	.L100
@@ -2998,7 +2998,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 1
  2142 0086 1046     		mov	r0, r2
  2143 0088 9847     		blx	r3
  2144              	.LVL4:
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 51
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s 			page 51
 
 
  2145 008a 0346     		mov	r3, r0
@@ -3058,7 +3058,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 1
  720:Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Src/usbd_msc_scsi.c ****                           ((uint32_t)params[3] << 16) |
  2187              		.loc 1 720 25
  2188 00c6 7B69     		ldr	r3, [r7, #20]
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 52
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s 			page 52
 
 
  2189 00c8 C3F86C22 		str	r2, [r3, #620]
@@ -3118,7 +3118,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 1
  2232              		.loc 1 734 8
  2233 0118 9A42     		cmp	r2, r3
  2234 011a 0AD0     		beq	.L104
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 53
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s 			page 53
 
 
  735:Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Src/usbd_msc_scsi.c ****     {
@@ -3178,7 +3178,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 1
  2279              		.thumb_func
  2281              	SCSI_Read12:
  2282              	.LFB158:
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 54
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s 			page 54
 
 
  746:Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Src/usbd_msc_scsi.c **** 
@@ -3238,7 +3238,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 1
  2318              		.loc 1 764 11
  2319 002a 7B69     		ldr	r3, [r7, #20]
  2320 002c 1B7A     		ldrb	r3, [r3, #8]	@ zero_extendqisi2
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 55
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s 			page 55
 
 
  2321              		.loc 1 764 6
@@ -3298,7 +3298,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 1
  2360 0072 FB68     		ldr	r3, [r7, #12]
  2361 0074 D3F8D432 		ldr	r3, [r3, #724]
  2362              		.loc 1 779 48
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 56
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s 			page 56
 
 
  2363 0078 FA68     		ldr	r2, [r7, #12]
@@ -3358,7 +3358,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 1
  2408 00ba 1B02     		lsls	r3, r3, #8
  786:Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Src/usbd_msc_scsi.c ****                           ((uint32_t)params[3] << 16) |
  2409              		.loc 1 786 55
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 57
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s 			page 57
 
 
  2410 00bc 1343     		orrs	r3, r3, r2
@@ -3418,7 +3418,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 1
  795:Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Src/usbd_msc_scsi.c ****     if (SCSI_CheckAddressRange(pdev, lun, hmsc->scsi_blk_addr,
  2451              		.loc 1 795 9
  2452 00f6 7B69     		ldr	r3, [r7, #20]
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 58
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s 			page 58
 
 
  2453 00f8 D3F86C22 		ldr	r2, [r3, #620]
@@ -3478,7 +3478,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 1
  2494 0148 0222     		movs	r2, #2
  2495 014a 1A72     		strb	r2, [r3, #8]
  2496              	.L108:
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 59
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s 			page 59
 
 
  809:Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Src/usbd_msc_scsi.c ****   }
@@ -3538,7 +3538,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 1
  2537              		.cfi_offset 14, -4
  2538 0002 86B0     		sub	sp, sp, #24
  2539              	.LCFI73:
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 60
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s 			page 60
 
 
  2540              		.cfi_def_cfa_offset 32
@@ -3598,7 +3598,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 1
  2576              		.loc 1 842 7
  2577 003e 7B69     		ldr	r3, [r7, #20]
  2578 0040 93F81D12 		ldrb	r1, [r3, #541]	@ zero_extendqisi2
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 61
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s 			page 61
 
 
  2579 0044 2023     		movs	r3, #32
@@ -3658,7 +3658,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 1
  2621              	.LVL6:
  2622 008e 0346     		mov	r3, r0
  2623              		.loc 1 854 8
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 62
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s 			page 62
 
 
  2624 0090 002B     		cmp	r3, #0
@@ -3718,7 +3718,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 1
  867:Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Src/usbd_msc_scsi.c ****     hmsc->scsi_blk_addr = ((uint32_t)params[2] << 24) |
  2666              		.loc 1 867 44
  2667 00d6 7B68     		ldr	r3, [r7, #4]
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 63
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s 			page 63
 
 
  2668 00d8 0233     		adds	r3, r3, #2
@@ -3778,7 +3778,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 1
  2710 0110 7B69     		ldr	r3, [r7, #20]
  2711 0112 C3F87022 		str	r2, [r3, #624]
  874:Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Src/usbd_msc_scsi.c **** 
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 64
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s 			page 64
 
 
  875:Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Src/usbd_msc_scsi.c ****     /* check if LBA address is in the right range */
@@ -3838,7 +3838,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 1
  2752 0164 4FF0FF33 		mov	r3, #-1
  2753 0168 1AE0     		b	.L116
  2754              	.L123:
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 65
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s 			page 65
 
 
  889:Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Src/usbd_msc_scsi.c ****     }
@@ -3898,7 +3898,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 1
  2793              		.cfi_def_cfa_register 13
  2794              		@ sp needed
  2795 01a6 80BD     		pop	{r7, pc}
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 66
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s 			page 66
 
 
  2796              	.L126:
@@ -3958,7 +3958,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 1
  918:Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Src/usbd_msc_scsi.c ****   if (hmsc == NULL)
  2838              		.loc 1 918 6
  2839 001e 7B69     		ldr	r3, [r7, #20]
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 67
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s 			page 67
 
 
  2840 0020 002B     		cmp	r3, #0
@@ -4018,7 +4018,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 1
  2876 005e 0ADA     		bge	.L132
  937:Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Src/usbd_msc_scsi.c ****     {
  938:Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Src/usbd_msc_scsi.c ****       SCSI_SenseCode(pdev, hmsc->cbw.bLUN, ILLEGAL_REQUEST, INVALID_CDB);
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 68
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s 			page 68
 
 
  2877              		.loc 1 938 7
@@ -4078,7 +4078,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 1
  948:Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Src/usbd_msc_scsi.c ****     }
  949:Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Src/usbd_msc_scsi.c **** 
  950:Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Src/usbd_msc_scsi.c ****     /* Check If media is write-protected */
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 69
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s 			page 69
 
 
  951:Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Src/usbd_msc_scsi.c ****     if (((USBD_StorageTypeDef *)pdev->pUserData[pdev->classId])->IsWriteProtected(lun) != 0)
@@ -4138,7 +4138,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 1
  2967 00f0 1B04     		lsls	r3, r3, #16
  958:Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Src/usbd_msc_scsi.c ****                           ((uint32_t)params[3] << 16) |
  2968              		.loc 1 958 55
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 70
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s 			page 70
 
 
  2969 00f2 1A43     		orrs	r2, r2, r3
@@ -4198,7 +4198,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 1
  3011 012a 0932     		adds	r2, r2, #9
  3012 012c 1278     		ldrb	r2, [r2]	@ zero_extendqisi2
  965:Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Src/usbd_msc_scsi.c ****                          ((uint32_t)params[8] << 8) |
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 71
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s 			page 71
 
 
  3013              		.loc 1 965 53
@@ -4258,7 +4258,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 1
  3052 0176 93F81D12 		ldrb	r1, [r3, #541]	@ zero_extendqisi2
  3053 017a 2023     		movs	r3, #32
  3054 017c 0522     		movs	r2, #5
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 72
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s 			page 72
 
 
  3055 017e F868     		ldr	r0, [r7, #12]
@@ -4318,7 +4318,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 1
  3092              		.loc 1 996 1
  3093 01c0 1846     		mov	r0, r3
  3094 01c2 1837     		adds	r7, r7, #24
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 73
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s 			page 73
 
 
  3095              	.LCFI80:
@@ -4378,7 +4378,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 1
  3139              		.loc 1 1008 31
  3140 0014 FB68     		ldr	r3, [r7, #12]
  3141 0016 B032     		adds	r2, r2, #176
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 74
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s 			page 74
 
 
  3142 0018 53F82230 		ldr	r3, [r3, r2, lsl #2]
@@ -4438,7 +4438,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 1
 1022:Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Src/usbd_msc_scsi.c ****   {
 1023:Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Src/usbd_msc_scsi.c ****     return -1; /* error */
  3183              		.loc 1 1023 12
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 75
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s 			page 75
 
 
  3184 0064 4FF0FF33 		mov	r3, #-1
@@ -4498,7 +4498,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 1
  3222              		.cfi_offset 7, -8
  3223              		.cfi_offset 14, -4
  3224 0002 86B0     		sub	sp, sp, #24
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 76
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s 			page 76
 
 
  3225              	.LCFI88:
@@ -4558,7 +4558,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 1
  3268 0048 4FF0FF33 		mov	r3, #-1
  3269 004c 00E0     		b	.L147
  3270              	.L148:
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 77
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s 			page 77
 
 
 1053:Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Src/usbd_msc_scsi.c ****   }
@@ -4618,7 +4618,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 1
 1066:Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Src/usbd_msc_scsi.c ****   USBD_MSC_BOT_HandleTypeDef *hmsc = (USBD_MSC_BOT_HandleTypeDef *)pdev->pClassDataCmsit[pdev->clas
  3314              		.loc 1 1066 94
  3315 000c 7B68     		ldr	r3, [r7, #4]
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 78
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s 			page 78
 
 
  3316 000e D3F8D422 		ldr	r2, [r3, #724]
@@ -4678,7 +4678,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 1
  3353 0056 5B68     		ldr	r3, [r3, #4]
  3354              		.loc 1 1083 62
  3355 0058 1C69     		ldr	r4, [r3, #16]
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 79
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s 			page 79
 
 
  3356              		.loc 1 1083 78
@@ -4738,7 +4738,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 1
  3398              		.loc 1 1093 23
  3399 00a4 FB68     		ldr	r3, [r7, #12]
  3400 00a6 D3F86C22 		ldr	r2, [r3, #620]
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 80
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s 			page 80
 
 
  3401              		.loc 1 1093 37
@@ -4798,7 +4798,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 1
  3444              		.loc 1 1104 10
  3445 00fc 0023     		movs	r3, #0
  3446              	.L151:
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 81
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s 			page 81
 
 
 1105:Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Src/usbd_msc_scsi.c **** }
@@ -4858,7 +4858,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 1
  3492 000c 7B68     		ldr	r3, [r7, #4]
  3493 000e D3F8D422 		ldr	r2, [r3, #724]
  3494              		.loc 1 1115 31
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 82
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s 			page 82
 
 
  3495 0012 7B68     		ldr	r3, [r7, #4]
@@ -4918,7 +4918,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 1
  3532 0058 5C69     		ldr	r4, [r3, #20]
  3533              		.loc 1 1132 79
  3534 005a FB68     		ldr	r3, [r7, #12]
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 83
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s 			page 83
 
 
  3535 005c 03F11001 		add	r1, r3, #16
@@ -4978,7 +4978,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 1
 1141:Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Src/usbd_msc_scsi.c ****   hmsc->scsi_blk_len -= (len / hmsc->scsi_blk_size);
  3579              		.loc 1 1141 22
  3580 00ae FB68     		ldr	r3, [r7, #12]
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 84
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s 			page 84
 
 
  3581 00b0 D3F87022 		ldr	r2, [r3, #624]
@@ -5038,7 +5038,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 1
 1154:Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Src/usbd_msc_scsi.c ****     /* Prepare EP to Receive next packet */
 1155:Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Src/usbd_msc_scsi.c ****     (void)USBD_LL_PrepareReceive(pdev, MSCOutEpAdd, hmsc->bot_data, len);
  3623              		.loc 1 1155 5
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 85
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s 			page 85
 
 
  3624 010a 074B     		ldr	r3, .L162
@@ -5098,7 +5098,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 1
  3663              		.cfi_startproc
  3664              		@ args = 0, pretend = 0, frame = 24
  3665              		@ frame_needed = 1, uses_anonymous_args = 0
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 86
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s 			page 86
 
 
  3666              		@ link register save eliminated.
@@ -5158,7 +5158,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 1
  3707              		.loc 1 1185 19
  3708 0032 FB8A     		ldrh	r3, [r7, #22]
  3709              		.loc 1 1185 32
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 87
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s 			page 87
 
 
  3710 0034 1178     		ldrb	r1, [r2]	@ zero_extendqisi2
@@ -5205,67 +5205,67 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 1
  3747              		.file 6 "Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Inc/usbd_msc_scsi.h"
  3748              		.file 7 "Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Inc/usbd_msc.h"
  3749              		.file 8 "Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Inc/usbd_msc_data.h"
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 88
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s 			page 88
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 usbd_msc_scsi.c
-C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s:20     .text.SCSI_ProcessCmd:00000000 $t
-C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s:26     .text.SCSI_ProcessCmd:00000000 SCSI_ProcessCmd
-C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s:86     .text.SCSI_ProcessCmd:00000060 $d
-C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s:177    .text.SCSI_ProcessCmd:000001cc $t
-C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s:386    .text.SCSI_TestUnitReady:00000000 SCSI_TestUnitReady
-C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s:1531   .text.SCSI_RequestSense:00000000 SCSI_RequestSense
-C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s:520    .text.SCSI_Inquiry:00000000 SCSI_Inquiry
-C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s:1834   .text.SCSI_StartStopUnit:00000000 SCSI_StartStopUnit
-C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s:1966   .text.SCSI_AllowPreventRemovable:00000000 SCSI_AllowPreventRemovable
-C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s:1355   .text.SCSI_ModeSense6:00000000 SCSI_ModeSense6
-C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s:1443   .text.SCSI_ModeSense10:00000000 SCSI_ModeSense10
-C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s:1162   .text.SCSI_ReadFormatCapacity:00000000 SCSI_ReadFormatCapacity
-C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s:700    .text.SCSI_ReadCapacity10:00000000 SCSI_ReadCapacity10
-C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s:889    .text.SCSI_ReadCapacity16:00000000 SCSI_ReadCapacity16
-C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s:2051   .text.SCSI_Read10:00000000 SCSI_Read10
-C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s:2281   .text.SCSI_Read12:00000000 SCSI_Read12
-C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s:2527   .text.SCSI_Write10:00000000 SCSI_Write10
-C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s:2809   .text.SCSI_Write12:00000000 SCSI_Write12
-C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s:3115   .text.SCSI_Verify10:00000000 SCSI_Verify10
-C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s:1721   .text.SCSI_SenseCode:00000000 SCSI_SenseCode
-C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s:381    .text.SCSI_TestUnitReady:00000000 $t
-C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s:515    .text.SCSI_Inquiry:00000000 $t
-C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s:3660   .text.SCSI_UpdateBotData:00000000 SCSI_UpdateBotData
-C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s:689    .text.SCSI_Inquiry:000000f4 $d
-C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s:695    .text.SCSI_ReadCapacity10:00000000 $t
-C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s:884    .text.SCSI_ReadCapacity16:00000000 $t
-C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s:1157   .text.SCSI_ReadFormatCapacity:00000000 $t
-C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s:1350   .text.SCSI_ModeSense6:00000000 $t
-C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s:1433   .text.SCSI_ModeSense6:0000005c $d
-C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s:1438   .text.SCSI_ModeSense10:00000000 $t
-C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s:1521   .text.SCSI_ModeSense10:0000005c $d
-C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s:1526   .text.SCSI_RequestSense:00000000 $t
-C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s:1715   .text.SCSI_SenseCode:00000000 $t
-C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s:1829   .text.SCSI_StartStopUnit:00000000 $t
-C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s:1961   .text.SCSI_AllowPreventRemovable:00000000 $t
-C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s:2046   .text.SCSI_Read10:00000000 $t
-C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s:3213   .text.SCSI_CheckAddressRange:00000000 SCSI_CheckAddressRange
-C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s:3293   .text.SCSI_ProcessRead:00000000 SCSI_ProcessRead
-C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s:2276   .text.SCSI_Read12:00000000 $t
-C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s:2522   .text.SCSI_Write10:00000000 $t
-C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s:3470   .text.SCSI_ProcessWrite:00000000 SCSI_ProcessWrite
-C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s:2799   .text.SCSI_Write10:000001a8 $d
-C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s:2804   .text.SCSI_Write12:00000000 $t
-C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s:3105   .text.SCSI_Write12:000001c8 $d
-C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s:3110   .text.SCSI_Verify10:00000000 $t
-C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s:3208   .text.SCSI_CheckAddressRange:00000000 $t
-C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s:3288   .text.SCSI_ProcessRead:00000000 $t
-C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s:3460   .text.SCSI_ProcessRead:00000108 $d
-C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s:3465   .text.SCSI_ProcessWrite:00000000 $t
-C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s:3650   .text.SCSI_ProcessWrite:00000128 $d
-C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s:3655   .text.SCSI_UpdateBotData:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s:20     .text.SCSI_ProcessCmd:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s:26     .text.SCSI_ProcessCmd:00000000 SCSI_ProcessCmd
+C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s:86     .text.SCSI_ProcessCmd:00000060 $d
+C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s:177    .text.SCSI_ProcessCmd:000001cc $t
+C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s:386    .text.SCSI_TestUnitReady:00000000 SCSI_TestUnitReady
+C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s:1531   .text.SCSI_RequestSense:00000000 SCSI_RequestSense
+C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s:520    .text.SCSI_Inquiry:00000000 SCSI_Inquiry
+C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s:1834   .text.SCSI_StartStopUnit:00000000 SCSI_StartStopUnit
+C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s:1966   .text.SCSI_AllowPreventRemovable:00000000 SCSI_AllowPreventRemovable
+C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s:1355   .text.SCSI_ModeSense6:00000000 SCSI_ModeSense6
+C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s:1443   .text.SCSI_ModeSense10:00000000 SCSI_ModeSense10
+C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s:1162   .text.SCSI_ReadFormatCapacity:00000000 SCSI_ReadFormatCapacity
+C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s:700    .text.SCSI_ReadCapacity10:00000000 SCSI_ReadCapacity10
+C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s:889    .text.SCSI_ReadCapacity16:00000000 SCSI_ReadCapacity16
+C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s:2051   .text.SCSI_Read10:00000000 SCSI_Read10
+C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s:2281   .text.SCSI_Read12:00000000 SCSI_Read12
+C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s:2527   .text.SCSI_Write10:00000000 SCSI_Write10
+C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s:2809   .text.SCSI_Write12:00000000 SCSI_Write12
+C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s:3115   .text.SCSI_Verify10:00000000 SCSI_Verify10
+C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s:1721   .text.SCSI_SenseCode:00000000 SCSI_SenseCode
+C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s:381    .text.SCSI_TestUnitReady:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s:515    .text.SCSI_Inquiry:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s:3660   .text.SCSI_UpdateBotData:00000000 SCSI_UpdateBotData
+C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s:689    .text.SCSI_Inquiry:000000f4 $d
+C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s:695    .text.SCSI_ReadCapacity10:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s:884    .text.SCSI_ReadCapacity16:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s:1157   .text.SCSI_ReadFormatCapacity:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s:1350   .text.SCSI_ModeSense6:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s:1433   .text.SCSI_ModeSense6:0000005c $d
+C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s:1438   .text.SCSI_ModeSense10:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s:1521   .text.SCSI_ModeSense10:0000005c $d
+C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s:1526   .text.SCSI_RequestSense:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s:1715   .text.SCSI_SenseCode:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s:1829   .text.SCSI_StartStopUnit:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s:1961   .text.SCSI_AllowPreventRemovable:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s:2046   .text.SCSI_Read10:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s:3213   .text.SCSI_CheckAddressRange:00000000 SCSI_CheckAddressRange
+C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s:3293   .text.SCSI_ProcessRead:00000000 SCSI_ProcessRead
+C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s:2276   .text.SCSI_Read12:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s:2522   .text.SCSI_Write10:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s:3470   .text.SCSI_ProcessWrite:00000000 SCSI_ProcessWrite
+C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s:2799   .text.SCSI_Write10:000001a8 $d
+C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s:2804   .text.SCSI_Write12:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s:3105   .text.SCSI_Write12:000001c8 $d
+C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s:3110   .text.SCSI_Verify10:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s:3208   .text.SCSI_CheckAddressRange:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s:3288   .text.SCSI_ProcessRead:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s:3460   .text.SCSI_ProcessRead:00000108 $d
+C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s:3465   .text.SCSI_ProcessWrite:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s:3650   .text.SCSI_ProcessWrite:00000128 $d
+C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s:3655   .text.SCSI_UpdateBotData:00000000 $t
 
 UNDEFINED SYMBOLS
 MSC_Page00_Inquiry_Data
 MSC_Page80_Inquiry_Data
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccSSLK0F.s 			page 89
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccH0gVB6.s 			page 89
 
 
 MSC_Mode_Sense6_data

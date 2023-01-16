@@ -58,7 +58,7 @@ EndDependencies */
 
 /* Includes ------------------------------------------------------------------*/
 #include "touch.h"
-
+#include "lcd.h"
 /** @addtogroup BSP
   * @{
   */
@@ -104,11 +104,16 @@ EndDependencies */
   */ 
 static TS_DrvTypeDef *tsDriver;
 static uint16_t tsXBoundary, tsYBoundary; 
-static uint8_t  tsOrientation;
-static uint8_t  I2cAddress;
+static uint8_t tsOrientation;
+static uint8_t I2cAddress;
+static TS_StateTypeDef TS_State;
+uint8_t Toutch_Status = 1;
 /**
   * @}
   */ 
+
+static void Touch_Select_Zone(uint8_t x, uint8_t y, uint8_t * status);
+static void Touch_Display_Zone(uint8_t *status,uint32_t color);
 
 /** @defgroup STM32746G_DISCOVERY_TS_Private_Function_Prototypes STM32746G_DISCOVERY_TS Private Function Prototypes
   * @{
@@ -120,7 +125,124 @@ static uint8_t  I2cAddress;
 /** @defgroup STM32746G_DISCOVERY_TS_Exported_Functions STM32746G_DISCOVERY_TS Exported Functions
   * @{
   */ 
+void Touch_Operation(void)
+{
+    uint8_t text[30] = {0,};
+    uint16_t x, y;
+    static uint8_t status_old;
+    BSP_TS_GetState(&TS_State);
+    if(TS_State.touchDetected)
+    {
+        /* Get X and Y position of the touch post calibrated */
+        TS_State.touchX[0]++;
+        TS_State.touchY[0]++;
+        x = TS_State.touchX[0];
+        y = TS_State.touchY[0];
+        Touch_Select_Zone(x,y,&Toutch_Status);
+        if(status_old != Toutch_Status)
+        {
+            Touch_Display_Zone(&status_old,LCD_COLOR_WHITE);
+            Touch_Display_Zone(&Toutch_Status,LCD_COLOR_LIGHTYELLOW);
+        }
+        status_old = Toutch_Status;
+        BSP_LCD_SetTextColor(LCD_COLOR_LIGHTYELLOW);
+        sprintf((char*)text, "%d", Toutch_Status);
+        BSP_LCD_DisplayStringAt(325, 232, (uint8_t *)&text, LEFT_MODE);
+    }
+}
 
+static void Touch_Select_Zone(uint8_t x, uint8_t y, uint8_t * status)
+{       
+    if ((y > 30) && (y < 60))
+    {
+        *status = 1;
+    }
+    else if ((y > 60) && (y < 90))
+    {
+        *status = 2;
+    }
+    else if ((y > 90) && (y < 120))
+    {
+        *status = 3;
+    }
+    else if ((y > 120) && (y < 150))
+    {
+        *status = 4;
+    }
+    else if ((y > 150) && (y < 180))
+    {
+        *status = 5;
+    }
+    else if ((y > 180) && (y < 210))
+    {
+        *status = 6;
+    }
+    else if ((y > 210) && (x > 0) && (x < 160))
+    {
+        *status = 7;
+    }
+    else if ((y > 210) && (x > 160) && (x < 320))
+    {
+        *status = 8;
+    }
+    else if ((y > 210) && (x > 320) && (x < 480))
+    {
+        *status = 9;
+    }
+}
+
+static void Touch_Display_Zone(uint8_t *status,uint32_t color)
+{
+    BSP_LCD_SetTextColor(color);
+    if (*status == 1)
+    {
+        BSP_LCD_DrawHLine(0,30,BSP_LCD_GetXSize());
+        BSP_LCD_DrawHLine(0,60,BSP_LCD_GetXSize());
+        BSP_LCD_DrawVLine(0,30,30);
+        BSP_LCD_DrawVLine(30,30,30);
+        BSP_LCD_DrawVLine(480,30,30);
+    }
+    else if (*status == 2)
+    {
+        BSP_LCD_DrawHLine(0,60,BSP_LCD_GetXSize());
+        BSP_LCD_DrawHLine(0,90,BSP_LCD_GetXSize());
+        BSP_LCD_DrawVLine(0,60,30);
+        BSP_LCD_DrawVLine(30,60,30);
+        BSP_LCD_DrawVLine(480,60,30);        
+    }
+    else if (*status == 3)
+    {
+        BSP_LCD_DrawHLine(0,90,BSP_LCD_GetXSize());
+        BSP_LCD_DrawHLine(0,120,BSP_LCD_GetXSize());
+        BSP_LCD_DrawVLine(0,90,30);
+        BSP_LCD_DrawVLine(30,90,30);
+        BSP_LCD_DrawVLine(480,90,30);                
+    }
+    else if (*status == 4)
+    {
+        BSP_LCD_DrawHLine(0,120,BSP_LCD_GetXSize());
+        BSP_LCD_DrawHLine(0,150,BSP_LCD_GetXSize());
+        BSP_LCD_DrawVLine(0,120,30);
+        BSP_LCD_DrawVLine(30,120,30);
+        BSP_LCD_DrawVLine(480,120,30);                
+    }
+    else if (*status == 5)
+    {
+        BSP_LCD_DrawHLine(0,150,BSP_LCD_GetXSize());
+        BSP_LCD_DrawHLine(0,180,BSP_LCD_GetXSize());
+        BSP_LCD_DrawVLine(0,150,30);
+        BSP_LCD_DrawVLine(30,150,30);
+        BSP_LCD_DrawVLine(480,150,30);                
+    }
+    else if (*status == 6)
+    {
+        BSP_LCD_DrawHLine(0,180,BSP_LCD_GetXSize());
+        BSP_LCD_DrawHLine(0,210,BSP_LCD_GetXSize());
+        BSP_LCD_DrawVLine(0,180,30);
+        BSP_LCD_DrawVLine(30,180,30);
+        BSP_LCD_DrawVLine(480,180,30);                
+    }
+}
 /**
   * @brief  Initializes and configures the touch screen functionalities and 
   *         configures all necessary hardware resources (GPIOs, I2C, clocks..).

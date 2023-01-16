@@ -104,7 +104,7 @@ const uint16_t COM_TX_AF[COMn] = {DISCOVERY_COM1_TX_AF};
 
 const uint16_t COM_RX_AF[COMn] = {DISCOVERY_COM1_RX_AF};
 
-static I2C_HandleTypeDef hI2cAudioHandler = {0};
+static I2C_HandleTypeDef hi2c3 = {0};
 static I2C_HandleTypeDef hI2cExtHandler = {0};
 
 /**
@@ -450,7 +450,7 @@ static void I2Cx_MspInit(I2C_HandleTypeDef *i2c_handler)
 {
   GPIO_InitTypeDef  gpio_init_structure;
   
-  if (i2c_handler == (I2C_HandleTypeDef*)(&hI2cAudioHandler))
+  if (i2c_handler == (I2C_HandleTypeDef*)(&hi2c3))
   {
     /* AUDIO and LCD I2C MSP init */
 
@@ -537,7 +537,7 @@ static void I2Cx_Init(I2C_HandleTypeDef *i2c_handler)
 {
   if(HAL_I2C_GetState(i2c_handler) == HAL_I2C_STATE_RESET)
   {
-    if (i2c_handler == (I2C_HandleTypeDef*)(&hI2cAudioHandler))
+    if (i2c_handler == (I2C_HandleTypeDef*)(&hi2c3))
     {
       /* Audio and LCD I2C configuration */
       i2c_handler->Instance = DISCOVERY_AUDIO_I2Cx;
@@ -661,7 +661,7 @@ static void I2Cx_Error(I2C_HandleTypeDef *i2c_handler, uint8_t Addr)
   */
 void AUDIO_IO_Init(void) 
 {
-  I2Cx_Init(&hI2cAudioHandler);
+  I2Cx_Init(&hi2c3);
 }
 
 /**
@@ -687,7 +687,7 @@ void AUDIO_IO_Write(uint8_t Addr, uint16_t Reg, uint16_t Value)
   
   Value |= ((uint16_t)(tmp << 8)& 0xFF00);
   
-  I2Cx_WriteMultiple(&hI2cAudioHandler, Addr, Reg, I2C_MEMADD_SIZE_16BIT,(uint8_t*)&Value, 2);
+  I2Cx_WriteMultiple(&hi2c3, Addr, Reg, I2C_MEMADD_SIZE_16BIT,(uint8_t*)&Value, 2);
 }
 
 /**
@@ -700,7 +700,7 @@ uint16_t AUDIO_IO_Read(uint8_t Addr, uint16_t Reg)
 {
   uint16_t read_value = 0, tmp = 0;
   
-  I2Cx_ReadMultiple(&hI2cAudioHandler, Addr, Reg, I2C_MEMADD_SIZE_16BIT, (uint8_t*)&read_value, 2);
+  I2Cx_ReadMultiple(&hi2c3, Addr, Reg, I2C_MEMADD_SIZE_16BIT, (uint8_t*)&read_value, 2);
   
   tmp = ((uint16_t)(read_value >> 8) & 0x00FF);
   
@@ -826,7 +826,7 @@ HAL_StatusTypeDef EEPROM_IO_IsDeviceReady(uint16_t DevAddress, uint32_t Trials)
   */
 void TS_IO_Init(void)
 {
-  I2Cx_Init(&hI2cAudioHandler);
+  I2Cx_Init(&hi2c3);
 }
 
 /**
@@ -838,7 +838,7 @@ void TS_IO_Init(void)
   */
 void TS_IO_Write(uint8_t Addr, uint8_t Reg, uint8_t Value)
 {
-  I2Cx_WriteMultiple(&hI2cAudioHandler, Addr, (uint16_t)Reg, I2C_MEMADD_SIZE_8BIT,(uint8_t*)&Value, 1);
+  I2Cx_WriteMultiple(&hi2c3, Addr, (uint16_t)Reg, I2C_MEMADD_SIZE_8BIT,(uint8_t*)&Value, 1);
 }
 
 /**
@@ -851,7 +851,7 @@ uint8_t TS_IO_Read(uint8_t Addr, uint8_t Reg)
 {
   uint8_t read_value = 0;
 
-  I2Cx_ReadMultiple(&hI2cAudioHandler, Addr, Reg, I2C_MEMADD_SIZE_8BIT, (uint8_t*)&read_value, 1);
+  I2Cx_ReadMultiple(&hi2c3, Addr, Reg, I2C_MEMADD_SIZE_8BIT, (uint8_t*)&read_value, 1);
 
   return read_value;
 }

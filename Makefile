@@ -36,17 +36,18 @@ BUILD_DIR = build
 ######################################
 # C sources
 C_SOURCES =  \
+Components/ft5336/ft5336.c \
 Core/Src/main.c \
 Core/Src/freertos.c \
 Core/Src/stm32f7xx_it.c \
 Core/Src/stm32f7xx_hal_msp.c \
 Core/Src/stm32f7xx_hal_timebase_tim.c \
 Core/Src/lcd.c \
-Core/Src/lcd2.c \
 Core/Src/sdram.c \
 Core/Src/touch.c \
 Core/Src/stm32746g_discovery.c \
 Core/Src/logo.c \
+Core/Src/music.c \
 FATFS/Target/bsp_driver_sd.c \
 FATFS/Target/sd_diskio.c \
 FATFS/Target/fatfs_platform.c \
