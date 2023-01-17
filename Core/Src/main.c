@@ -70,7 +70,8 @@ SDRAM_HandleTypeDef hsdram1;
 
 osThreadId defaultTaskHandle;
 /* USER CODE BEGIN PV */
-
+uint8_t Usb_Mode;
+extern USBD_HandleTypeDef hUsbDeviceHS;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -1013,7 +1014,6 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE END 4 */
-
 /* USER CODE BEGIN Header_StartDefaultTask */
 /**
   * @brief  Function implementing the defaultTask thread.
@@ -1023,20 +1023,32 @@ static void MX_GPIO_Init(void)
 /* USER CODE END Header_StartDefaultTask */
 void StartDefaultTask(void const * argument)
 {
+    static uint8_t Usb_Mode_old;
     Music_SdCard_Init();
-    /* init code for USB_HOST */
-    //MX_USB_HOST_Init();
-    /* init code for USB_DEVICE */
-    MX_USB_DEVICE_Init();  
-
+    
     BSP_SDRAM_Init();
     BSP_LCD_Init();
     BSP_TS_Init(BSP_LCD_GetXSize(), BSP_LCD_GetYSize());
     LCD_Display_Init();
     Music_File_Read();
+    /* init code for USB_HOST */
+    //MX_USB_HOST_Init();
+    /* init code for USB_DEVICE */
+    MX_USB_DEVICE_Init();  
+    
     /* Infinite loop */
     for(;;)
     {
+        if((Usb_Mode == 0) && (Usb_Mode_old == 1))
+        {
+          USBD_Stop(&hUsbDeviceHS);
+          Music_File_Read();
+        }
+        else if((Usb_Mode == 1) && (Usb_Mode_old == 0))
+        {
+
+        }
+        Usb_Mode_old == Usb_Mode;
         Touch_Operation();
         osDelay(100);
     }

@@ -60,7 +60,7 @@ extern UART_HandleTypeDef huart6;
 
 extern SDRAM_HandleTypeDef hsdram1;
 /* USER CODE END ET */
-
+extern uint8_t Usb_Mode;
 /* Exported constants --------------------------------------------------------*/
 /* USER CODE BEGIN EC */
 

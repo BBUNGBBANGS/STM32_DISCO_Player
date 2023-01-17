@@ -1,0 +1,10 @@
+../Core/Src/sdram.c:132:9:BSP_SDRAM_Init	8	static
+../Core/Src/sdram.c:144:9:BSP_SDRAM_DeInit	8	static
+../Core/Src/sdram.c:170:6:BSP_SDRAM_Initialization_sequence	24	static
+../Core/Src/sdram.c:232:9:BSP_SDRAM_ReadData	24	static
+../Core/Src/sdram.c:251:9:BSP_SDRAM_ReadData_DMA	24	static
+../Core/Src/sdram.c:270:9:BSP_SDRAM_WriteData	24	static
+../Core/Src/sdram.c:289:9:BSP_SDRAM_WriteData_DMA	24	static
+../Core/Src/sdram.c:306:9:BSP_SDRAM_Sendcmd	16	static
+../Core/Src/sdram.c:324:13:BSP_SDRAM_MspInit	72	static
+../Core/Src/sdram.c:415:13:BSP_SDRAM_MspDeInit	16	static

@@ -188,8 +188,8 @@ void LCD_Display_Init(void)
     BSP_LCD_SetBackColor(LCD_COLOR_BROWN);
     BSP_LCD_SetTextColor(LCD_COLOR_BROWN);
     BSP_LCD_FillRect(320, 211, 160, 61);
-    //BSP_LCD_SetTextColor(LCD_COLOR_LIGHTYELLOW);
-    //BSP_LCD_DisplayStringAt(370, 232, (uint8_t *)"MENU", LEFT_MODE);
+    BSP_LCD_SetTextColor(LCD_COLOR_LIGHTYELLOW);
+    BSP_LCD_DisplayStringAt(370, 232, (uint8_t *)"MENU", LEFT_MODE);
 }
 /**
   * @brief  Initializes the LCD.

@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccXf3B6W.s 			page 1
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccqjonQ9.s 			page 1
 
 
    1              		.cpu cortex-m7
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccXf3B6W.s 			page 1
   65              		.global	Touch_Operation
   66              		.syntax unified
   67              		.thumb
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccXf3B6W.s 			page 2
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccqjonQ9.s 			page 2
 
 
   68              		.thumb_func
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccXf3B6W.s 			page 1
   51:Core/Src/touch.c ****   ******************************************************************************
   52:Core/Src/touch.c ****   */ 
   53:Core/Src/touch.c **** 
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccXf3B6W.s 			page 3
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccqjonQ9.s 			page 3
 
 
   54:Core/Src/touch.c **** /* Dependencies
@@ -178,14 +178,14 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccXf3B6W.s 			page 1
  108:Core/Src/touch.c **** static uint8_t I2cAddress;
  109:Core/Src/touch.c **** static TS_StateTypeDef TS_State;
  110:Core/Src/touch.c **** uint8_t Toutch_Status = 1;
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccXf3B6W.s 			page 4
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccqjonQ9.s 			page 4
 
 
  111:Core/Src/touch.c **** /**
  112:Core/Src/touch.c ****   * @}
  113:Core/Src/touch.c ****   */ 
  114:Core/Src/touch.c **** 
- 115:Core/Src/touch.c **** static void Touch_Select_Zone(uint8_t x, uint8_t y, uint8_t * status);
+ 115:Core/Src/touch.c **** static void Touch_Select_Zone(uint16_t x, uint16_t y, uint8_t * status);
  116:Core/Src/touch.c **** static void Touch_Display_Zone(uint8_t *status,uint32_t color);
  117:Core/Src/touch.c **** 
  118:Core/Src/touch.c **** /** @defgroup STM32746G_DISCOVERY_TS_Private_Function_Prototypes STM32746G_DISCOVERY_TS Private Fun
@@ -232,421 +232,445 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccXf3B6W.s 			page 1
  132:Core/Src/touch.c ****     static uint8_t status_old;
  133:Core/Src/touch.c ****     BSP_TS_GetState(&TS_State);
  100              		.loc 1 133 5
- 101 001e 2648     		ldr	r0, .L5
+ 101 001e 2548     		ldr	r0, .L5
  102 0020 FFF7FEFF 		bl	BSP_TS_GetState
  134:Core/Src/touch.c ****     if(TS_State.touchDetected)
  103              		.loc 1 134 16
- 104 0024 244B     		ldr	r3, .L5
+ 104 0024 234B     		ldr	r3, .L5
  105 0026 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccXf3B6W.s 			page 5
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccqjonQ9.s 			page 5
 
 
  106              		.loc 1 134 7
  107 0028 002B     		cmp	r3, #0
- 108 002a 40D0     		beq	.L4
+ 108 002a 3ED0     		beq	.L4
  135:Core/Src/touch.c ****     {
  136:Core/Src/touch.c ****         /* Get X and Y position of the touch post calibrated */
  137:Core/Src/touch.c ****         TS_State.touchX[0]++;
  109              		.loc 1 137 24
- 110 002c 224B     		ldr	r3, .L5
+ 110 002c 214B     		ldr	r3, .L5
  111 002e 5B88     		ldrh	r3, [r3, #2]
  112              		.loc 1 137 27
  113 0030 0133     		adds	r3, r3, #1
  114 0032 9AB2     		uxth	r2, r3
- 115 0034 204B     		ldr	r3, .L5
+ 115 0034 1F4B     		ldr	r3, .L5
  116 0036 5A80     		strh	r2, [r3, #2]	@ movhi
  138:Core/Src/touch.c ****         TS_State.touchY[0]++;
  117              		.loc 1 138 24
- 118 0038 1F4B     		ldr	r3, .L5
+ 118 0038 1E4B     		ldr	r3, .L5
  119 003a 9B89     		ldrh	r3, [r3, #12]
  120              		.loc 1 138 27
  121 003c 0133     		adds	r3, r3, #1
  122 003e 9AB2     		uxth	r2, r3
- 123 0040 1D4B     		ldr	r3, .L5
+ 123 0040 1C4B     		ldr	r3, .L5
  124 0042 9A81     		strh	r2, [r3, #12]	@ movhi
  139:Core/Src/touch.c ****         x = TS_State.touchX[0];
  125              		.loc 1 139 11
- 126 0044 1C4B     		ldr	r3, .L5
+ 126 0044 1B4B     		ldr	r3, .L5
  127 0046 5B88     		ldrh	r3, [r3, #2]	@ movhi
  128 0048 FB84     		strh	r3, [r7, #38]	@ movhi
  140:Core/Src/touch.c ****         y = TS_State.touchY[0];
  129              		.loc 1 140 11
- 130 004a 1B4B     		ldr	r3, .L5
+ 130 004a 1A4B     		ldr	r3, .L5
  131 004c 9B89     		ldrh	r3, [r3, #12]	@ movhi
  132 004e BB84     		strh	r3, [r7, #36]	@ movhi
  141:Core/Src/touch.c ****         Touch_Select_Zone(x,y,&Toutch_Status);
  133              		.loc 1 141 9
- 134 0050 FB8C     		ldrh	r3, [r7, #38]	@ movhi
- 135 0052 DBB2     		uxtb	r3, r3
- 136 0054 BA8C     		ldrh	r2, [r7, #36]	@ movhi
- 137 0056 D1B2     		uxtb	r1, r2
- 138 0058 184A     		ldr	r2, .L5+4
- 139 005a 1846     		mov	r0, r3
- 140 005c FFF7FEFF 		bl	Touch_Select_Zone
+ 134 0050 B98C     		ldrh	r1, [r7, #36]
+ 135 0052 FB8C     		ldrh	r3, [r7, #38]
+ 136 0054 184A     		ldr	r2, .L5+4
+ 137 0056 1846     		mov	r0, r3
+ 138 0058 FFF7FEFF 		bl	Touch_Select_Zone
  142:Core/Src/touch.c ****         if(status_old != Toutch_Status)
- 141              		.loc 1 142 23
- 142 0060 174B     		ldr	r3, .L5+8
- 143 0062 1A78     		ldrb	r2, [r3]	@ zero_extendqisi2
- 144 0064 154B     		ldr	r3, .L5+4
- 145 0066 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
- 146              		.loc 1 142 11
- 147 0068 9A42     		cmp	r2, r3
- 148 006a 09D0     		beq	.L3
+ 139              		.loc 1 142 23
+ 140 005c 174B     		ldr	r3, .L5+8
+ 141 005e 1A78     		ldrb	r2, [r3]	@ zero_extendqisi2
+ 142 0060 154B     		ldr	r3, .L5+4
+ 143 0062 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 144              		.loc 1 142 11
+ 145 0064 9A42     		cmp	r2, r3
+ 146 0066 09D0     		beq	.L3
  143:Core/Src/touch.c ****         {
  144:Core/Src/touch.c ****             Touch_Display_Zone(&status_old,LCD_COLOR_WHITE);
- 149              		.loc 1 144 13
- 150 006c 4FF0FF31 		mov	r1, #-1
- 151 0070 1348     		ldr	r0, .L5+8
- 152 0072 FFF7FEFF 		bl	Touch_Display_Zone
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccXf3B6W.s 			page 6
-
-
+ 147              		.loc 1 144 13
+ 148 0068 4FF0FF31 		mov	r1, #-1
+ 149 006c 1348     		ldr	r0, .L5+8
+ 150 006e FFF7FEFF 		bl	Touch_Display_Zone
  145:Core/Src/touch.c ****             Touch_Display_Zone(&Toutch_Status,LCD_COLOR_LIGHTYELLOW);
- 153              		.loc 1 145 13
- 154 0076 6FF07F01 		mvn	r1, #127
- 155 007a 1048     		ldr	r0, .L5+4
- 156 007c FFF7FEFF 		bl	Touch_Display_Zone
- 157              	.L3:
+ 151              		.loc 1 145 13
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccqjonQ9.s 			page 6
+
+
+ 152 0072 6FF07F01 		mvn	r1, #127
+ 153 0076 1048     		ldr	r0, .L5+4
+ 154 0078 FFF7FEFF 		bl	Touch_Display_Zone
+ 155              	.L3:
  146:Core/Src/touch.c ****         }
  147:Core/Src/touch.c ****         status_old = Toutch_Status;
- 158              		.loc 1 147 20
- 159 0080 0E4B     		ldr	r3, .L5+4
- 160 0082 1A78     		ldrb	r2, [r3]	@ zero_extendqisi2
- 161 0084 0E4B     		ldr	r3, .L5+8
- 162 0086 1A70     		strb	r2, [r3]
+ 156              		.loc 1 147 20
+ 157 007c 0E4B     		ldr	r3, .L5+4
+ 158 007e 1A78     		ldrb	r2, [r3]	@ zero_extendqisi2
+ 159 0080 0E4B     		ldr	r3, .L5+8
+ 160 0082 1A70     		strb	r2, [r3]
  148:Core/Src/touch.c ****         BSP_LCD_SetTextColor(LCD_COLOR_LIGHTYELLOW);
- 163              		.loc 1 148 9
- 164 0088 6FF07F00 		mvn	r0, #127
- 165 008c FFF7FEFF 		bl	BSP_LCD_SetTextColor
+ 161              		.loc 1 148 9
+ 162 0084 6FF07F00 		mvn	r0, #127
+ 163 0088 FFF7FEFF 		bl	BSP_LCD_SetTextColor
  149:Core/Src/touch.c ****         sprintf((char*)text, "%d", Toutch_Status);
- 166              		.loc 1 149 9
- 167 0090 0A4B     		ldr	r3, .L5+4
- 168 0092 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
- 169 0094 1A46     		mov	r2, r3
- 170 0096 3B1D     		adds	r3, r7, #4
- 171 0098 0A49     		ldr	r1, .L5+12
- 172 009a 1846     		mov	r0, r3
- 173 009c FFF7FEFF 		bl	sprintf
+ 164              		.loc 1 149 9
+ 165 008c 0A4B     		ldr	r3, .L5+4
+ 166 008e 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 167 0090 1A46     		mov	r2, r3
+ 168 0092 3B1D     		adds	r3, r7, #4
+ 169 0094 0A49     		ldr	r1, .L5+12
+ 170 0096 1846     		mov	r0, r3
+ 171 0098 FFF7FEFF 		bl	sprintf
  150:Core/Src/touch.c ****         BSP_LCD_DisplayStringAt(325, 232, (uint8_t *)&text, LEFT_MODE);
- 174              		.loc 1 150 9
- 175 00a0 3A1D     		adds	r2, r7, #4
- 176 00a2 0323     		movs	r3, #3
- 177 00a4 E821     		movs	r1, #232
- 178 00a6 40F24510 		movw	r0, #325
- 179 00aa FFF7FEFF 		bl	BSP_LCD_DisplayStringAt
- 180              	.L4:
+ 172              		.loc 1 150 9
+ 173 009c 3A1D     		adds	r2, r7, #4
+ 174 009e 0323     		movs	r3, #3
+ 175 00a0 E821     		movs	r1, #232
+ 176 00a2 40F24510 		movw	r0, #325
+ 177 00a6 FFF7FEFF 		bl	BSP_LCD_DisplayStringAt
+ 178              	.L4:
  151:Core/Src/touch.c ****     }
  152:Core/Src/touch.c **** }
- 181              		.loc 1 152 1
- 182 00ae 00BF     		nop
- 183 00b0 2837     		adds	r7, r7, #40
- 184              	.LCFI3:
- 185              		.cfi_def_cfa_offset 8
- 186 00b2 BD46     		mov	sp, r7
- 187              	.LCFI4:
- 188              		.cfi_def_cfa_register 13
- 189              		@ sp needed
- 190 00b4 80BD     		pop	{r7, pc}
- 191              	.L6:
- 192 00b6 00BF     		.align	2
- 193              	.L5:
- 194 00b8 00000000 		.word	TS_State
- 195 00bc 00000000 		.word	Toutch_Status
- 196 00c0 00000000 		.word	status_old.2
- 197 00c4 00000000 		.word	.LC0
- 198              		.cfi_endproc
- 199              	.LFE144:
- 201              		.section	.text.Touch_Select_Zone,"ax",%progbits
- 202              		.align	1
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccXf3B6W.s 			page 7
+ 179              		.loc 1 152 1
+ 180 00aa 00BF     		nop
+ 181 00ac 2837     		adds	r7, r7, #40
+ 182              	.LCFI3:
+ 183              		.cfi_def_cfa_offset 8
+ 184 00ae BD46     		mov	sp, r7
+ 185              	.LCFI4:
+ 186              		.cfi_def_cfa_register 13
+ 187              		@ sp needed
+ 188 00b0 80BD     		pop	{r7, pc}
+ 189              	.L6:
+ 190 00b2 00BF     		.align	2
+ 191              	.L5:
+ 192 00b4 00000000 		.word	TS_State
+ 193 00b8 00000000 		.word	Toutch_Status
+ 194 00bc 00000000 		.word	status_old.2
+ 195 00c0 00000000 		.word	.LC0
+ 196              		.cfi_endproc
+ 197              	.LFE144:
+ 199              		.section	.text.Touch_Select_Zone,"ax",%progbits
+ 200              		.align	1
+ 201              		.syntax unified
+ 202              		.thumb
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccqjonQ9.s 			page 7
 
 
- 203              		.syntax unified
- 204              		.thumb
- 205              		.thumb_func
- 207              	Touch_Select_Zone:
- 208              	.LFB145:
+ 203              		.thumb_func
+ 205              	Touch_Select_Zone:
+ 206              	.LFB145:
  153:Core/Src/touch.c **** 
- 154:Core/Src/touch.c **** static void Touch_Select_Zone(uint8_t x, uint8_t y, uint8_t * status)
+ 154:Core/Src/touch.c **** static void Touch_Select_Zone(uint16_t x, uint16_t y, uint8_t * status)
  155:Core/Src/touch.c **** {       
- 209              		.loc 1 155 1
- 210              		.cfi_startproc
- 211              		@ args = 0, pretend = 0, frame = 8
- 212              		@ frame_needed = 1, uses_anonymous_args = 0
- 213              		@ link register save eliminated.
- 214 0000 80B4     		push	{r7}
- 215              	.LCFI5:
- 216              		.cfi_def_cfa_offset 4
- 217              		.cfi_offset 7, -4
- 218 0002 83B0     		sub	sp, sp, #12
- 219              	.LCFI6:
- 220              		.cfi_def_cfa_offset 16
- 221 0004 00AF     		add	r7, sp, #0
- 222              	.LCFI7:
- 223              		.cfi_def_cfa_register 7
- 224 0006 0346     		mov	r3, r0
- 225 0008 3A60     		str	r2, [r7]
- 226 000a FB71     		strb	r3, [r7, #7]
- 227 000c 0B46     		mov	r3, r1
- 228 000e BB71     		strb	r3, [r7, #6]
+ 207              		.loc 1 155 1
+ 208              		.cfi_startproc
+ 209              		@ args = 0, pretend = 0, frame = 8
+ 210              		@ frame_needed = 1, uses_anonymous_args = 0
+ 211              		@ link register save eliminated.
+ 212 0000 80B4     		push	{r7}
+ 213              	.LCFI5:
+ 214              		.cfi_def_cfa_offset 4
+ 215              		.cfi_offset 7, -4
+ 216 0002 83B0     		sub	sp, sp, #12
+ 217              	.LCFI6:
+ 218              		.cfi_def_cfa_offset 16
+ 219 0004 00AF     		add	r7, sp, #0
+ 220              	.LCFI7:
+ 221              		.cfi_def_cfa_register 7
+ 222 0006 0346     		mov	r3, r0
+ 223 0008 3A60     		str	r2, [r7]
+ 224 000a FB80     		strh	r3, [r7, #6]	@ movhi
+ 225 000c 0B46     		mov	r3, r1	@ movhi
+ 226 000e BB80     		strh	r3, [r7, #4]	@ movhi
  156:Core/Src/touch.c ****     if ((y > 30) && (y < 60))
- 229              		.loc 1 156 8
- 230 0010 BB79     		ldrb	r3, [r7, #6]	@ zero_extendqisi2
- 231 0012 1E2B     		cmp	r3, #30
- 232 0014 06D9     		bls	.L8
- 233              		.loc 1 156 18 discriminator 1
- 234 0016 BB79     		ldrb	r3, [r7, #6]	@ zero_extendqisi2
- 235 0018 3B2B     		cmp	r3, #59
- 236 001a 03D8     		bhi	.L8
+ 227              		.loc 1 156 8
+ 228 0010 BB88     		ldrh	r3, [r7, #4]
+ 229 0012 1E2B     		cmp	r3, #30
+ 230 0014 06D9     		bls	.L8
+ 231              		.loc 1 156 18 discriminator 1
+ 232 0016 BB88     		ldrh	r3, [r7, #4]
+ 233 0018 3B2B     		cmp	r3, #59
+ 234 001a 03D8     		bhi	.L8
  157:Core/Src/touch.c ****     {
  158:Core/Src/touch.c ****         *status = 1;
- 237              		.loc 1 158 17
- 238 001c 3B68     		ldr	r3, [r7]
- 239 001e 0122     		movs	r2, #1
- 240 0020 1A70     		strb	r2, [r3]
- 241 0022 47E0     		b	.L9
- 242              	.L8:
+ 235              		.loc 1 158 17
+ 236 001c 3B68     		ldr	r3, [r7]
+ 237 001e 0122     		movs	r2, #1
+ 238 0020 1A70     		strb	r2, [r3]
+ 239 0022 5BE0     		b	.L9
+ 240              	.L8:
  159:Core/Src/touch.c ****     }
  160:Core/Src/touch.c ****     else if ((y > 60) && (y < 90))
- 243              		.loc 1 160 13
- 244 0024 BB79     		ldrb	r3, [r7, #6]	@ zero_extendqisi2
- 245 0026 3C2B     		cmp	r3, #60
- 246 0028 06D9     		bls	.L10
- 247              		.loc 1 160 23 discriminator 1
- 248 002a BB79     		ldrb	r3, [r7, #6]	@ zero_extendqisi2
- 249 002c 592B     		cmp	r3, #89
- 250 002e 03D8     		bhi	.L10
+ 241              		.loc 1 160 13
+ 242 0024 BB88     		ldrh	r3, [r7, #4]
+ 243 0026 3C2B     		cmp	r3, #60
+ 244 0028 06D9     		bls	.L10
+ 245              		.loc 1 160 23 discriminator 1
+ 246 002a BB88     		ldrh	r3, [r7, #4]
+ 247 002c 592B     		cmp	r3, #89
+ 248 002e 03D8     		bhi	.L10
  161:Core/Src/touch.c ****     {
  162:Core/Src/touch.c ****         *status = 2;
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccXf3B6W.s 			page 8
+ 249              		.loc 1 162 17
+ 250 0030 3B68     		ldr	r3, [r7]
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccqjonQ9.s 			page 8
 
 
- 251              		.loc 1 162 17
- 252 0030 3B68     		ldr	r3, [r7]
- 253 0032 0222     		movs	r2, #2
- 254 0034 1A70     		strb	r2, [r3]
- 255 0036 3DE0     		b	.L9
- 256              	.L10:
+ 251 0032 0222     		movs	r2, #2
+ 252 0034 1A70     		strb	r2, [r3]
+ 253 0036 51E0     		b	.L9
+ 254              	.L10:
  163:Core/Src/touch.c ****     }
  164:Core/Src/touch.c ****     else if ((y > 90) && (y < 120))
- 257              		.loc 1 164 13
- 258 0038 BB79     		ldrb	r3, [r7, #6]	@ zero_extendqisi2
- 259 003a 5A2B     		cmp	r3, #90
- 260 003c 06D9     		bls	.L11
- 261              		.loc 1 164 23 discriminator 1
- 262 003e BB79     		ldrb	r3, [r7, #6]	@ zero_extendqisi2
- 263 0040 772B     		cmp	r3, #119
- 264 0042 03D8     		bhi	.L11
+ 255              		.loc 1 164 13
+ 256 0038 BB88     		ldrh	r3, [r7, #4]
+ 257 003a 5A2B     		cmp	r3, #90
+ 258 003c 06D9     		bls	.L11
+ 259              		.loc 1 164 23 discriminator 1
+ 260 003e BB88     		ldrh	r3, [r7, #4]
+ 261 0040 772B     		cmp	r3, #119
+ 262 0042 03D8     		bhi	.L11
  165:Core/Src/touch.c ****     {
  166:Core/Src/touch.c ****         *status = 3;
- 265              		.loc 1 166 17
- 266 0044 3B68     		ldr	r3, [r7]
- 267 0046 0322     		movs	r2, #3
- 268 0048 1A70     		strb	r2, [r3]
- 269 004a 33E0     		b	.L9
- 270              	.L11:
+ 263              		.loc 1 166 17
+ 264 0044 3B68     		ldr	r3, [r7]
+ 265 0046 0322     		movs	r2, #3
+ 266 0048 1A70     		strb	r2, [r3]
+ 267 004a 47E0     		b	.L9
+ 268              	.L11:
  167:Core/Src/touch.c ****     }
  168:Core/Src/touch.c ****     else if ((y > 120) && (y < 150))
- 271              		.loc 1 168 13
- 272 004c BB79     		ldrb	r3, [r7, #6]	@ zero_extendqisi2
- 273 004e 782B     		cmp	r3, #120
- 274 0050 06D9     		bls	.L12
- 275              		.loc 1 168 24 discriminator 1
- 276 0052 BB79     		ldrb	r3, [r7, #6]	@ zero_extendqisi2
- 277 0054 952B     		cmp	r3, #149
- 278 0056 03D8     		bhi	.L12
+ 269              		.loc 1 168 13
+ 270 004c BB88     		ldrh	r3, [r7, #4]
+ 271 004e 782B     		cmp	r3, #120
+ 272 0050 06D9     		bls	.L12
+ 273              		.loc 1 168 24 discriminator 1
+ 274 0052 BB88     		ldrh	r3, [r7, #4]
+ 275 0054 952B     		cmp	r3, #149
+ 276 0056 03D8     		bhi	.L12
  169:Core/Src/touch.c ****     {
  170:Core/Src/touch.c ****         *status = 4;
- 279              		.loc 1 170 17
- 280 0058 3B68     		ldr	r3, [r7]
- 281 005a 0422     		movs	r2, #4
- 282 005c 1A70     		strb	r2, [r3]
- 283 005e 29E0     		b	.L9
- 284              	.L12:
+ 277              		.loc 1 170 17
+ 278 0058 3B68     		ldr	r3, [r7]
+ 279 005a 0422     		movs	r2, #4
+ 280 005c 1A70     		strb	r2, [r3]
+ 281 005e 3DE0     		b	.L9
+ 282              	.L12:
  171:Core/Src/touch.c ****     }
  172:Core/Src/touch.c ****     else if ((y > 150) && (y < 180))
- 285              		.loc 1 172 13
- 286 0060 BB79     		ldrb	r3, [r7, #6]	@ zero_extendqisi2
- 287 0062 962B     		cmp	r3, #150
- 288 0064 06D9     		bls	.L13
- 289              		.loc 1 172 24 discriminator 1
- 290 0066 BB79     		ldrb	r3, [r7, #6]	@ zero_extendqisi2
- 291 0068 B32B     		cmp	r3, #179
- 292 006a 03D8     		bhi	.L13
+ 283              		.loc 1 172 13
+ 284 0060 BB88     		ldrh	r3, [r7, #4]
+ 285 0062 962B     		cmp	r3, #150
+ 286 0064 06D9     		bls	.L13
+ 287              		.loc 1 172 24 discriminator 1
+ 288 0066 BB88     		ldrh	r3, [r7, #4]
+ 289 0068 B32B     		cmp	r3, #179
+ 290 006a 03D8     		bhi	.L13
  173:Core/Src/touch.c ****     {
  174:Core/Src/touch.c ****         *status = 5;
- 293              		.loc 1 174 17
- 294 006c 3B68     		ldr	r3, [r7]
- 295 006e 0522     		movs	r2, #5
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccXf3B6W.s 			page 9
+ 291              		.loc 1 174 17
+ 292 006c 3B68     		ldr	r3, [r7]
+ 293 006e 0522     		movs	r2, #5
+ 294 0070 1A70     		strb	r2, [r3]
+ 295 0072 33E0     		b	.L9
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccqjonQ9.s 			page 9
 
 
- 296 0070 1A70     		strb	r2, [r3]
- 297 0072 1FE0     		b	.L9
- 298              	.L13:
+ 296              	.L13:
  175:Core/Src/touch.c ****     }
  176:Core/Src/touch.c ****     else if ((y > 180) && (y < 210))
- 299              		.loc 1 176 13
- 300 0074 BB79     		ldrb	r3, [r7, #6]	@ zero_extendqisi2
- 301 0076 B42B     		cmp	r3, #180
- 302 0078 06D9     		bls	.L14
- 303              		.loc 1 176 24 discriminator 1
- 304 007a BB79     		ldrb	r3, [r7, #6]	@ zero_extendqisi2
- 305 007c D12B     		cmp	r3, #209
- 306 007e 03D8     		bhi	.L14
+ 297              		.loc 1 176 13
+ 298 0074 BB88     		ldrh	r3, [r7, #4]
+ 299 0076 B42B     		cmp	r3, #180
+ 300 0078 06D9     		bls	.L14
+ 301              		.loc 1 176 24 discriminator 1
+ 302 007a BB88     		ldrh	r3, [r7, #4]
+ 303 007c D12B     		cmp	r3, #209
+ 304 007e 03D8     		bhi	.L14
  177:Core/Src/touch.c ****     {
  178:Core/Src/touch.c ****         *status = 6;
- 307              		.loc 1 178 17
- 308 0080 3B68     		ldr	r3, [r7]
- 309 0082 0622     		movs	r2, #6
- 310 0084 1A70     		strb	r2, [r3]
- 311 0086 15E0     		b	.L9
- 312              	.L14:
+ 305              		.loc 1 178 17
+ 306 0080 3B68     		ldr	r3, [r7]
+ 307 0082 0622     		movs	r2, #6
+ 308 0084 1A70     		strb	r2, [r3]
+ 309 0086 29E0     		b	.L9
+ 310              	.L14:
  179:Core/Src/touch.c ****     }
  180:Core/Src/touch.c ****     else if ((y > 210) && (x > 0) && (x < 160))
- 313              		.loc 1 180 13
- 314 0088 BB79     		ldrb	r3, [r7, #6]	@ zero_extendqisi2
- 315 008a D22B     		cmp	r3, #210
- 316 008c 09D9     		bls	.L15
- 317              		.loc 1 180 24 discriminator 1
- 318 008e FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
- 319 0090 002B     		cmp	r3, #0
- 320 0092 06D0     		beq	.L15
- 321              		.loc 1 180 35 discriminator 2
- 322 0094 FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
- 323 0096 9F2B     		cmp	r3, #159
- 324 0098 03D8     		bhi	.L15
+ 311              		.loc 1 180 13
+ 312 0088 BB88     		ldrh	r3, [r7, #4]
+ 313 008a D22B     		cmp	r3, #210
+ 314 008c 09D9     		bls	.L15
+ 315              		.loc 1 180 24 discriminator 1
+ 316 008e FB88     		ldrh	r3, [r7, #6]
+ 317 0090 002B     		cmp	r3, #0
+ 318 0092 06D0     		beq	.L15
+ 319              		.loc 1 180 35 discriminator 2
+ 320 0094 FB88     		ldrh	r3, [r7, #6]
+ 321 0096 9F2B     		cmp	r3, #159
+ 322 0098 03D8     		bhi	.L15
  181:Core/Src/touch.c ****     {
  182:Core/Src/touch.c ****         *status = 7;
- 325              		.loc 1 182 17
- 326 009a 3B68     		ldr	r3, [r7]
- 327 009c 0722     		movs	r2, #7
- 328 009e 1A70     		strb	r2, [r3]
- 329 00a0 08E0     		b	.L9
- 330              	.L15:
+ 323              		.loc 1 182 17
+ 324 009a 3B68     		ldr	r3, [r7]
+ 325 009c 0722     		movs	r2, #7
+ 326 009e 1A70     		strb	r2, [r3]
+ 327 00a0 1CE0     		b	.L9
+ 328              	.L15:
  183:Core/Src/touch.c ****     }
  184:Core/Src/touch.c ****     else if ((y > 210) && (x > 160) && (x < 320))
- 331              		.loc 1 184 13
- 332 00a2 BB79     		ldrb	r3, [r7, #6]	@ zero_extendqisi2
- 333 00a4 D22B     		cmp	r3, #210
- 334 00a6 05D9     		bls	.L16
- 335              		.loc 1 184 37 discriminator 1
- 336 00a8 FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
- 337 00aa A02B     		cmp	r3, #160
- 338 00ac 02D9     		bls	.L16
+ 329              		.loc 1 184 13
+ 330 00a2 BB88     		ldrh	r3, [r7, #4]
+ 331 00a4 D22B     		cmp	r3, #210
+ 332 00a6 0AD9     		bls	.L16
+ 333              		.loc 1 184 24 discriminator 1
+ 334 00a8 FB88     		ldrh	r3, [r7, #6]
+ 335 00aa A02B     		cmp	r3, #160
+ 336 00ac 07D9     		bls	.L16
+ 337              		.loc 1 184 37 discriminator 2
+ 338 00ae FB88     		ldrh	r3, [r7, #6]
+ 339 00b0 B3F5A07F 		cmp	r3, #320
+ 340 00b4 03D2     		bcs	.L16
  185:Core/Src/touch.c ****     {
  186:Core/Src/touch.c ****         *status = 8;
- 339              		.loc 1 186 17
- 340 00ae 3B68     		ldr	r3, [r7]
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccXf3B6W.s 			page 10
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccqjonQ9.s 			page 10
 
 
- 341 00b0 0822     		movs	r2, #8
- 342 00b2 1A70     		strb	r2, [r3]
- 343              	.L9:
- 344              	.L16:
+ 341              		.loc 1 186 17
+ 342 00b6 3B68     		ldr	r3, [r7]
+ 343 00b8 0822     		movs	r2, #8
+ 344 00ba 1A70     		strb	r2, [r3]
+ 345 00bc 0EE0     		b	.L9
+ 346              	.L16:
  187:Core/Src/touch.c ****     }
  188:Core/Src/touch.c ****     else if ((y > 210) && (x > 320) && (x < 480))
+ 347              		.loc 1 188 13
+ 348 00be BB88     		ldrh	r3, [r7, #4]
+ 349 00c0 D22B     		cmp	r3, #210
+ 350 00c2 0BD9     		bls	.L17
+ 351              		.loc 1 188 24 discriminator 1
+ 352 00c4 FB88     		ldrh	r3, [r7, #6]
+ 353 00c6 B3F5A07F 		cmp	r3, #320
+ 354 00ca 07D9     		bls	.L17
+ 355              		.loc 1 188 37 discriminator 2
+ 356 00cc FB88     		ldrh	r3, [r7, #6]
+ 357 00ce B3F5F07F 		cmp	r3, #480
+ 358 00d2 03D2     		bcs	.L17
  189:Core/Src/touch.c ****     {
  190:Core/Src/touch.c ****         *status = 9;
+ 359              		.loc 1 190 17
+ 360 00d4 3B68     		ldr	r3, [r7]
+ 361 00d6 0922     		movs	r2, #9
+ 362 00d8 1A70     		strb	r2, [r3]
  191:Core/Src/touch.c ****     }
  192:Core/Src/touch.c **** }
- 345              		.loc 1 192 1
- 346 00b4 00BF     		nop
- 347 00b6 0C37     		adds	r7, r7, #12
- 348              	.LCFI8:
- 349              		.cfi_def_cfa_offset 4
- 350 00b8 BD46     		mov	sp, r7
- 351              	.LCFI9:
- 352              		.cfi_def_cfa_register 13
- 353              		@ sp needed
- 354 00ba 5DF8047B 		ldr	r7, [sp], #4
- 355              	.LCFI10:
- 356              		.cfi_restore 7
- 357              		.cfi_def_cfa_offset 0
- 358 00be 7047     		bx	lr
- 359              		.cfi_endproc
- 360              	.LFE145:
- 362              		.section	.text.Touch_Display_Zone,"ax",%progbits
- 363              		.align	1
- 364              		.syntax unified
- 365              		.thumb
- 366              		.thumb_func
- 368              	Touch_Display_Zone:
- 369              	.LFB146:
+ 363              		.loc 1 192 1
+ 364 00da FFE7     		b	.L17
+ 365              	.L9:
+ 366              	.L17:
+ 367 00dc 00BF     		nop
+ 368 00de 0C37     		adds	r7, r7, #12
+ 369              	.LCFI8:
+ 370              		.cfi_def_cfa_offset 4
+ 371 00e0 BD46     		mov	sp, r7
+ 372              	.LCFI9:
+ 373              		.cfi_def_cfa_register 13
+ 374              		@ sp needed
+ 375 00e2 5DF8047B 		ldr	r7, [sp], #4
+ 376              	.LCFI10:
+ 377              		.cfi_restore 7
+ 378              		.cfi_def_cfa_offset 0
+ 379 00e6 7047     		bx	lr
+ 380              		.cfi_endproc
+ 381              	.LFE145:
+ 383              		.section	.text.Touch_Display_Zone,"ax",%progbits
+ 384              		.align	1
+ 385              		.syntax unified
+ 386              		.thumb
+ 387              		.thumb_func
+ 389              	Touch_Display_Zone:
+ 390              	.LFB146:
  193:Core/Src/touch.c **** 
  194:Core/Src/touch.c **** static void Touch_Display_Zone(uint8_t *status,uint32_t color)
  195:Core/Src/touch.c **** {
- 370              		.loc 1 195 1
- 371              		.cfi_startproc
- 372              		@ args = 0, pretend = 0, frame = 8
- 373              		@ frame_needed = 1, uses_anonymous_args = 0
- 374 0000 80B5     		push	{r7, lr}
- 375              	.LCFI11:
- 376              		.cfi_def_cfa_offset 8
- 377              		.cfi_offset 7, -8
- 378              		.cfi_offset 14, -4
- 379 0002 82B0     		sub	sp, sp, #8
- 380              	.LCFI12:
- 381              		.cfi_def_cfa_offset 16
- 382 0004 00AF     		add	r7, sp, #0
- 383              	.LCFI13:
- 384              		.cfi_def_cfa_register 7
- 385 0006 7860     		str	r0, [r7, #4]
- 386 0008 3960     		str	r1, [r7]
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccqjonQ9.s 			page 11
+
+
+ 391              		.loc 1 195 1
+ 392              		.cfi_startproc
+ 393              		@ args = 0, pretend = 0, frame = 8
+ 394              		@ frame_needed = 1, uses_anonymous_args = 0
+ 395 0000 80B5     		push	{r7, lr}
+ 396              	.LCFI11:
+ 397              		.cfi_def_cfa_offset 8
+ 398              		.cfi_offset 7, -8
+ 399              		.cfi_offset 14, -4
+ 400 0002 82B0     		sub	sp, sp, #8
+ 401              	.LCFI12:
+ 402              		.cfi_def_cfa_offset 16
+ 403 0004 00AF     		add	r7, sp, #0
+ 404              	.LCFI13:
+ 405              		.cfi_def_cfa_register 7
+ 406 0006 7860     		str	r0, [r7, #4]
+ 407 0008 3960     		str	r1, [r7]
  196:Core/Src/touch.c ****     BSP_LCD_SetTextColor(color);
- 387              		.loc 1 196 5
- 388 000a 3868     		ldr	r0, [r7]
- 389 000c FFF7FEFF 		bl	BSP_LCD_SetTextColor
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccXf3B6W.s 			page 11
-
-
+ 408              		.loc 1 196 5
+ 409 000a 3868     		ldr	r0, [r7]
+ 410 000c FFF7FEFF 		bl	BSP_LCD_SetTextColor
  197:Core/Src/touch.c ****     if (*status == 1)
- 390              		.loc 1 197 9
- 391 0010 7B68     		ldr	r3, [r7, #4]
- 392 0012 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
- 393              		.loc 1 197 8
- 394 0014 012B     		cmp	r3, #1
- 395 0016 22D1     		bne	.L18
+ 411              		.loc 1 197 9
+ 412 0010 7B68     		ldr	r3, [r7, #4]
+ 413 0012 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 414              		.loc 1 197 8
+ 415 0014 012B     		cmp	r3, #1
+ 416 0016 22D1     		bne	.L19
  198:Core/Src/touch.c ****     {
  199:Core/Src/touch.c ****         BSP_LCD_DrawHLine(0,30,BSP_LCD_GetXSize());
- 396              		.loc 1 199 32
- 397 0018 FFF7FEFF 		bl	BSP_LCD_GetXSize
- 398 001c 0346     		mov	r3, r0
- 399              		.loc 1 199 9
- 400 001e 9BB2     		uxth	r3, r3
- 401 0020 1A46     		mov	r2, r3
- 402 0022 1E21     		movs	r1, #30
- 403 0024 0020     		movs	r0, #0
- 404 0026 FFF7FEFF 		bl	BSP_LCD_DrawHLine
+ 417              		.loc 1 199 32
+ 418 0018 FFF7FEFF 		bl	BSP_LCD_GetXSize
+ 419 001c 0346     		mov	r3, r0
+ 420              		.loc 1 199 9
+ 421 001e 9BB2     		uxth	r3, r3
+ 422 0020 1A46     		mov	r2, r3
+ 423 0022 1E21     		movs	r1, #30
+ 424 0024 0020     		movs	r0, #0
+ 425 0026 FFF7FEFF 		bl	BSP_LCD_DrawHLine
  200:Core/Src/touch.c ****         BSP_LCD_DrawHLine(0,60,BSP_LCD_GetXSize());
- 405              		.loc 1 200 32
- 406 002a FFF7FEFF 		bl	BSP_LCD_GetXSize
- 407 002e 0346     		mov	r3, r0
- 408              		.loc 1 200 9
- 409 0030 9BB2     		uxth	r3, r3
- 410 0032 1A46     		mov	r2, r3
- 411 0034 3C21     		movs	r1, #60
- 412 0036 0020     		movs	r0, #0
- 413 0038 FFF7FEFF 		bl	BSP_LCD_DrawHLine
+ 426              		.loc 1 200 32
+ 427 002a FFF7FEFF 		bl	BSP_LCD_GetXSize
+ 428 002e 0346     		mov	r3, r0
+ 429              		.loc 1 200 9
+ 430 0030 9BB2     		uxth	r3, r3
+ 431 0032 1A46     		mov	r2, r3
+ 432 0034 3C21     		movs	r1, #60
+ 433 0036 0020     		movs	r0, #0
+ 434 0038 FFF7FEFF 		bl	BSP_LCD_DrawHLine
  201:Core/Src/touch.c ****         BSP_LCD_DrawVLine(0,30,30);
- 414              		.loc 1 201 9
- 415 003c 1E22     		movs	r2, #30
- 416 003e 1E21     		movs	r1, #30
- 417 0040 0020     		movs	r0, #0
- 418 0042 FFF7FEFF 		bl	BSP_LCD_DrawVLine
+ 435              		.loc 1 201 9
+ 436 003c 1E22     		movs	r2, #30
+ 437 003e 1E21     		movs	r1, #30
+ 438 0040 0020     		movs	r0, #0
+ 439 0042 FFF7FEFF 		bl	BSP_LCD_DrawVLine
  202:Core/Src/touch.c ****         BSP_LCD_DrawVLine(30,30,30);
- 419              		.loc 1 202 9
- 420 0046 1E22     		movs	r2, #30
- 421 0048 1E21     		movs	r1, #30
- 422 004a 1E20     		movs	r0, #30
- 423 004c FFF7FEFF 		bl	BSP_LCD_DrawVLine
+ 440              		.loc 1 202 9
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccqjonQ9.s 			page 12
+
+
+ 441 0046 1E22     		movs	r2, #30
+ 442 0048 1E21     		movs	r1, #30
+ 443 004a 1E20     		movs	r0, #30
+ 444 004c FFF7FEFF 		bl	BSP_LCD_DrawVLine
  203:Core/Src/touch.c ****         BSP_LCD_DrawVLine(480,30,30);
- 424              		.loc 1 203 9
- 425 0050 1E22     		movs	r2, #30
- 426 0052 1E21     		movs	r1, #30
- 427 0054 4FF4F070 		mov	r0, #480
- 428 0058 FFF7FEFF 		bl	BSP_LCD_DrawVLine
+ 445              		.loc 1 203 9
+ 446 0050 1E22     		movs	r2, #30
+ 447 0052 1E21     		movs	r1, #30
+ 448 0054 4FF4F070 		mov	r0, #480
+ 449 0058 FFF7FEFF 		bl	BSP_LCD_DrawVLine
  204:Core/Src/touch.c ****     }
  205:Core/Src/touch.c ****     else if (*status == 2)
  206:Core/Src/touch.c ****     {
@@ -658,9 +682,6 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccXf3B6W.s 			page 1
  212:Core/Src/touch.c ****     }
  213:Core/Src/touch.c ****     else if (*status == 3)
  214:Core/Src/touch.c ****     {
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccXf3B6W.s 			page 12
-
-
  215:Core/Src/touch.c ****         BSP_LCD_DrawHLine(0,90,BSP_LCD_GetXSize());
  216:Core/Src/touch.c ****         BSP_LCD_DrawHLine(0,120,BSP_LCD_GetXSize());
  217:Core/Src/touch.c ****         BSP_LCD_DrawVLine(0,90,30);
@@ -692,297 +713,297 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccXf3B6W.s 			page 1
  243:Core/Src/touch.c ****         BSP_LCD_DrawVLine(480,180,30);                
  244:Core/Src/touch.c ****     }
  245:Core/Src/touch.c **** }
- 429              		.loc 1 245 1
- 430 005c C1E0     		b	.L24
- 431              	.L18:
+ 450              		.loc 1 245 1
+ 451 005c C1E0     		b	.L25
+ 452              	.L19:
  205:Core/Src/touch.c ****     {
- 432              		.loc 1 205 14
- 433 005e 7B68     		ldr	r3, [r7, #4]
- 434 0060 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
- 205:Core/Src/touch.c ****     {
- 435              		.loc 1 205 13
- 436 0062 022B     		cmp	r3, #2
- 437 0064 22D1     		bne	.L20
- 207:Core/Src/touch.c ****         BSP_LCD_DrawHLine(0,90,BSP_LCD_GetXSize());
- 438              		.loc 1 207 32
- 439 0066 FFF7FEFF 		bl	BSP_LCD_GetXSize
- 440 006a 0346     		mov	r3, r0
- 207:Core/Src/touch.c ****         BSP_LCD_DrawHLine(0,90,BSP_LCD_GetXSize());
- 441              		.loc 1 207 9
- 442 006c 9BB2     		uxth	r3, r3
- 443 006e 1A46     		mov	r2, r3
- 444 0070 3C21     		movs	r1, #60
- 445 0072 0020     		movs	r0, #0
- 446 0074 FFF7FEFF 		bl	BSP_LCD_DrawHLine
- 208:Core/Src/touch.c ****         BSP_LCD_DrawVLine(0,60,30);
- 447              		.loc 1 208 32
- 448 0078 FFF7FEFF 		bl	BSP_LCD_GetXSize
- 449 007c 0346     		mov	r3, r0
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccXf3B6W.s 			page 13
+ 453              		.loc 1 205 14
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccqjonQ9.s 			page 13
 
 
+ 454 005e 7B68     		ldr	r3, [r7, #4]
+ 455 0060 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 205:Core/Src/touch.c ****     {
+ 456              		.loc 1 205 13
+ 457 0062 022B     		cmp	r3, #2
+ 458 0064 22D1     		bne	.L21
+ 207:Core/Src/touch.c ****         BSP_LCD_DrawHLine(0,90,BSP_LCD_GetXSize());
+ 459              		.loc 1 207 32
+ 460 0066 FFF7FEFF 		bl	BSP_LCD_GetXSize
+ 461 006a 0346     		mov	r3, r0
+ 207:Core/Src/touch.c ****         BSP_LCD_DrawHLine(0,90,BSP_LCD_GetXSize());
+ 462              		.loc 1 207 9
+ 463 006c 9BB2     		uxth	r3, r3
+ 464 006e 1A46     		mov	r2, r3
+ 465 0070 3C21     		movs	r1, #60
+ 466 0072 0020     		movs	r0, #0
+ 467 0074 FFF7FEFF 		bl	BSP_LCD_DrawHLine
  208:Core/Src/touch.c ****         BSP_LCD_DrawVLine(0,60,30);
- 450              		.loc 1 208 9
- 451 007e 9BB2     		uxth	r3, r3
- 452 0080 1A46     		mov	r2, r3
- 453 0082 5A21     		movs	r1, #90
- 454 0084 0020     		movs	r0, #0
- 455 0086 FFF7FEFF 		bl	BSP_LCD_DrawHLine
+ 468              		.loc 1 208 32
+ 469 0078 FFF7FEFF 		bl	BSP_LCD_GetXSize
+ 470 007c 0346     		mov	r3, r0
+ 208:Core/Src/touch.c ****         BSP_LCD_DrawVLine(0,60,30);
+ 471              		.loc 1 208 9
+ 472 007e 9BB2     		uxth	r3, r3
+ 473 0080 1A46     		mov	r2, r3
+ 474 0082 5A21     		movs	r1, #90
+ 475 0084 0020     		movs	r0, #0
+ 476 0086 FFF7FEFF 		bl	BSP_LCD_DrawHLine
  209:Core/Src/touch.c ****         BSP_LCD_DrawVLine(30,60,30);
- 456              		.loc 1 209 9
- 457 008a 1E22     		movs	r2, #30
- 458 008c 3C21     		movs	r1, #60
- 459 008e 0020     		movs	r0, #0
- 460 0090 FFF7FEFF 		bl	BSP_LCD_DrawVLine
+ 477              		.loc 1 209 9
+ 478 008a 1E22     		movs	r2, #30
+ 479 008c 3C21     		movs	r1, #60
+ 480 008e 0020     		movs	r0, #0
+ 481 0090 FFF7FEFF 		bl	BSP_LCD_DrawVLine
  210:Core/Src/touch.c ****         BSP_LCD_DrawVLine(480,60,30);        
- 461              		.loc 1 210 9
- 462 0094 1E22     		movs	r2, #30
- 463 0096 3C21     		movs	r1, #60
- 464 0098 1E20     		movs	r0, #30
- 465 009a FFF7FEFF 		bl	BSP_LCD_DrawVLine
+ 482              		.loc 1 210 9
+ 483 0094 1E22     		movs	r2, #30
+ 484 0096 3C21     		movs	r1, #60
+ 485 0098 1E20     		movs	r0, #30
+ 486 009a FFF7FEFF 		bl	BSP_LCD_DrawVLine
  211:Core/Src/touch.c ****     }
- 466              		.loc 1 211 9
- 467 009e 1E22     		movs	r2, #30
- 468 00a0 3C21     		movs	r1, #60
- 469 00a2 4FF4F070 		mov	r0, #480
- 470 00a6 FFF7FEFF 		bl	BSP_LCD_DrawVLine
- 471              		.loc 1 245 1
- 472 00aa 9AE0     		b	.L24
- 473              	.L20:
+ 487              		.loc 1 211 9
+ 488 009e 1E22     		movs	r2, #30
+ 489 00a0 3C21     		movs	r1, #60
+ 490 00a2 4FF4F070 		mov	r0, #480
+ 491 00a6 FFF7FEFF 		bl	BSP_LCD_DrawVLine
+ 492              		.loc 1 245 1
+ 493 00aa 9AE0     		b	.L25
+ 494              	.L21:
  213:Core/Src/touch.c ****     {
- 474              		.loc 1 213 14
- 475 00ac 7B68     		ldr	r3, [r7, #4]
- 476 00ae 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 495              		.loc 1 213 14
+ 496 00ac 7B68     		ldr	r3, [r7, #4]
+ 497 00ae 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
  213:Core/Src/touch.c ****     {
- 477              		.loc 1 213 13
- 478 00b0 032B     		cmp	r3, #3
- 479 00b2 22D1     		bne	.L21
- 215:Core/Src/touch.c ****         BSP_LCD_DrawHLine(0,120,BSP_LCD_GetXSize());
- 480              		.loc 1 215 32
- 481 00b4 FFF7FEFF 		bl	BSP_LCD_GetXSize
- 482 00b8 0346     		mov	r3, r0
- 215:Core/Src/touch.c ****         BSP_LCD_DrawHLine(0,120,BSP_LCD_GetXSize());
- 483              		.loc 1 215 9
- 484 00ba 9BB2     		uxth	r3, r3
- 485 00bc 1A46     		mov	r2, r3
- 486 00be 5A21     		movs	r1, #90
- 487 00c0 0020     		movs	r0, #0
- 488 00c2 FFF7FEFF 		bl	BSP_LCD_DrawHLine
- 216:Core/Src/touch.c ****         BSP_LCD_DrawVLine(0,90,30);
- 489              		.loc 1 216 33
- 490 00c6 FFF7FEFF 		bl	BSP_LCD_GetXSize
- 491 00ca 0346     		mov	r3, r0
- 216:Core/Src/touch.c ****         BSP_LCD_DrawVLine(0,90,30);
- 492              		.loc 1 216 9
- 493 00cc 9BB2     		uxth	r3, r3
- 494 00ce 1A46     		mov	r2, r3
- 495 00d0 7821     		movs	r1, #120
- 496 00d2 0020     		movs	r0, #0
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccXf3B6W.s 			page 14
+ 498              		.loc 1 213 13
+ 499 00b0 032B     		cmp	r3, #3
+ 500 00b2 22D1     		bne	.L22
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccqjonQ9.s 			page 14
 
 
- 497 00d4 FFF7FEFF 		bl	BSP_LCD_DrawHLine
+ 215:Core/Src/touch.c ****         BSP_LCD_DrawHLine(0,120,BSP_LCD_GetXSize());
+ 501              		.loc 1 215 32
+ 502 00b4 FFF7FEFF 		bl	BSP_LCD_GetXSize
+ 503 00b8 0346     		mov	r3, r0
+ 215:Core/Src/touch.c ****         BSP_LCD_DrawHLine(0,120,BSP_LCD_GetXSize());
+ 504              		.loc 1 215 9
+ 505 00ba 9BB2     		uxth	r3, r3
+ 506 00bc 1A46     		mov	r2, r3
+ 507 00be 5A21     		movs	r1, #90
+ 508 00c0 0020     		movs	r0, #0
+ 509 00c2 FFF7FEFF 		bl	BSP_LCD_DrawHLine
+ 216:Core/Src/touch.c ****         BSP_LCD_DrawVLine(0,90,30);
+ 510              		.loc 1 216 33
+ 511 00c6 FFF7FEFF 		bl	BSP_LCD_GetXSize
+ 512 00ca 0346     		mov	r3, r0
+ 216:Core/Src/touch.c ****         BSP_LCD_DrawVLine(0,90,30);
+ 513              		.loc 1 216 9
+ 514 00cc 9BB2     		uxth	r3, r3
+ 515 00ce 1A46     		mov	r2, r3
+ 516 00d0 7821     		movs	r1, #120
+ 517 00d2 0020     		movs	r0, #0
+ 518 00d4 FFF7FEFF 		bl	BSP_LCD_DrawHLine
  217:Core/Src/touch.c ****         BSP_LCD_DrawVLine(30,90,30);
- 498              		.loc 1 217 9
- 499 00d8 1E22     		movs	r2, #30
- 500 00da 5A21     		movs	r1, #90
- 501 00dc 0020     		movs	r0, #0
- 502 00de FFF7FEFF 		bl	BSP_LCD_DrawVLine
+ 519              		.loc 1 217 9
+ 520 00d8 1E22     		movs	r2, #30
+ 521 00da 5A21     		movs	r1, #90
+ 522 00dc 0020     		movs	r0, #0
+ 523 00de FFF7FEFF 		bl	BSP_LCD_DrawVLine
  218:Core/Src/touch.c ****         BSP_LCD_DrawVLine(480,90,30);                
- 503              		.loc 1 218 9
- 504 00e2 1E22     		movs	r2, #30
- 505 00e4 5A21     		movs	r1, #90
- 506 00e6 1E20     		movs	r0, #30
- 507 00e8 FFF7FEFF 		bl	BSP_LCD_DrawVLine
+ 524              		.loc 1 218 9
+ 525 00e2 1E22     		movs	r2, #30
+ 526 00e4 5A21     		movs	r1, #90
+ 527 00e6 1E20     		movs	r0, #30
+ 528 00e8 FFF7FEFF 		bl	BSP_LCD_DrawVLine
  219:Core/Src/touch.c ****     }
- 508              		.loc 1 219 9
- 509 00ec 1E22     		movs	r2, #30
- 510 00ee 5A21     		movs	r1, #90
- 511 00f0 4FF4F070 		mov	r0, #480
- 512 00f4 FFF7FEFF 		bl	BSP_LCD_DrawVLine
- 513              		.loc 1 245 1
- 514 00f8 73E0     		b	.L24
- 515              	.L21:
+ 529              		.loc 1 219 9
+ 530 00ec 1E22     		movs	r2, #30
+ 531 00ee 5A21     		movs	r1, #90
+ 532 00f0 4FF4F070 		mov	r0, #480
+ 533 00f4 FFF7FEFF 		bl	BSP_LCD_DrawVLine
+ 534              		.loc 1 245 1
+ 535 00f8 73E0     		b	.L25
+ 536              	.L22:
  221:Core/Src/touch.c ****     {
- 516              		.loc 1 221 14
- 517 00fa 7B68     		ldr	r3, [r7, #4]
- 518 00fc 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 537              		.loc 1 221 14
+ 538 00fa 7B68     		ldr	r3, [r7, #4]
+ 539 00fc 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
  221:Core/Src/touch.c ****     {
- 519              		.loc 1 221 13
- 520 00fe 042B     		cmp	r3, #4
- 521 0100 22D1     		bne	.L22
+ 540              		.loc 1 221 13
+ 541 00fe 042B     		cmp	r3, #4
+ 542 0100 22D1     		bne	.L23
  223:Core/Src/touch.c ****         BSP_LCD_DrawHLine(0,150,BSP_LCD_GetXSize());
- 522              		.loc 1 223 33
- 523 0102 FFF7FEFF 		bl	BSP_LCD_GetXSize
- 524 0106 0346     		mov	r3, r0
+ 543              		.loc 1 223 33
+ 544 0102 FFF7FEFF 		bl	BSP_LCD_GetXSize
+ 545 0106 0346     		mov	r3, r0
  223:Core/Src/touch.c ****         BSP_LCD_DrawHLine(0,150,BSP_LCD_GetXSize());
- 525              		.loc 1 223 9
- 526 0108 9BB2     		uxth	r3, r3
- 527 010a 1A46     		mov	r2, r3
- 528 010c 7821     		movs	r1, #120
- 529 010e 0020     		movs	r0, #0
- 530 0110 FFF7FEFF 		bl	BSP_LCD_DrawHLine
+ 546              		.loc 1 223 9
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccqjonQ9.s 			page 15
+
+
+ 547 0108 9BB2     		uxth	r3, r3
+ 548 010a 1A46     		mov	r2, r3
+ 549 010c 7821     		movs	r1, #120
+ 550 010e 0020     		movs	r0, #0
+ 551 0110 FFF7FEFF 		bl	BSP_LCD_DrawHLine
  224:Core/Src/touch.c ****         BSP_LCD_DrawVLine(0,120,30);
- 531              		.loc 1 224 33
- 532 0114 FFF7FEFF 		bl	BSP_LCD_GetXSize
- 533 0118 0346     		mov	r3, r0
+ 552              		.loc 1 224 33
+ 553 0114 FFF7FEFF 		bl	BSP_LCD_GetXSize
+ 554 0118 0346     		mov	r3, r0
  224:Core/Src/touch.c ****         BSP_LCD_DrawVLine(0,120,30);
- 534              		.loc 1 224 9
- 535 011a 9BB2     		uxth	r3, r3
- 536 011c 1A46     		mov	r2, r3
- 537 011e 9621     		movs	r1, #150
- 538 0120 0020     		movs	r0, #0
- 539 0122 FFF7FEFF 		bl	BSP_LCD_DrawHLine
+ 555              		.loc 1 224 9
+ 556 011a 9BB2     		uxth	r3, r3
+ 557 011c 1A46     		mov	r2, r3
+ 558 011e 9621     		movs	r1, #150
+ 559 0120 0020     		movs	r0, #0
+ 560 0122 FFF7FEFF 		bl	BSP_LCD_DrawHLine
  225:Core/Src/touch.c ****         BSP_LCD_DrawVLine(30,120,30);
- 540              		.loc 1 225 9
- 541 0126 1E22     		movs	r2, #30
- 542 0128 7821     		movs	r1, #120
- 543 012a 0020     		movs	r0, #0
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccXf3B6W.s 			page 15
-
-
- 544 012c FFF7FEFF 		bl	BSP_LCD_DrawVLine
+ 561              		.loc 1 225 9
+ 562 0126 1E22     		movs	r2, #30
+ 563 0128 7821     		movs	r1, #120
+ 564 012a 0020     		movs	r0, #0
+ 565 012c FFF7FEFF 		bl	BSP_LCD_DrawVLine
  226:Core/Src/touch.c ****         BSP_LCD_DrawVLine(480,120,30);                
- 545              		.loc 1 226 9
- 546 0130 1E22     		movs	r2, #30
- 547 0132 7821     		movs	r1, #120
- 548 0134 1E20     		movs	r0, #30
- 549 0136 FFF7FEFF 		bl	BSP_LCD_DrawVLine
+ 566              		.loc 1 226 9
+ 567 0130 1E22     		movs	r2, #30
+ 568 0132 7821     		movs	r1, #120
+ 569 0134 1E20     		movs	r0, #30
+ 570 0136 FFF7FEFF 		bl	BSP_LCD_DrawVLine
  227:Core/Src/touch.c ****     }
- 550              		.loc 1 227 9
- 551 013a 1E22     		movs	r2, #30
- 552 013c 7821     		movs	r1, #120
- 553 013e 4FF4F070 		mov	r0, #480
- 554 0142 FFF7FEFF 		bl	BSP_LCD_DrawVLine
- 555              		.loc 1 245 1
- 556 0146 4CE0     		b	.L24
- 557              	.L22:
+ 571              		.loc 1 227 9
+ 572 013a 1E22     		movs	r2, #30
+ 573 013c 7821     		movs	r1, #120
+ 574 013e 4FF4F070 		mov	r0, #480
+ 575 0142 FFF7FEFF 		bl	BSP_LCD_DrawVLine
+ 576              		.loc 1 245 1
+ 577 0146 4CE0     		b	.L25
+ 578              	.L23:
  229:Core/Src/touch.c ****     {
- 558              		.loc 1 229 14
- 559 0148 7B68     		ldr	r3, [r7, #4]
- 560 014a 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 579              		.loc 1 229 14
+ 580 0148 7B68     		ldr	r3, [r7, #4]
+ 581 014a 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
  229:Core/Src/touch.c ****     {
- 561              		.loc 1 229 13
- 562 014c 052B     		cmp	r3, #5
- 563 014e 22D1     		bne	.L23
+ 582              		.loc 1 229 13
+ 583 014c 052B     		cmp	r3, #5
+ 584 014e 22D1     		bne	.L24
  231:Core/Src/touch.c ****         BSP_LCD_DrawHLine(0,180,BSP_LCD_GetXSize());
- 564              		.loc 1 231 33
- 565 0150 FFF7FEFF 		bl	BSP_LCD_GetXSize
- 566 0154 0346     		mov	r3, r0
+ 585              		.loc 1 231 33
+ 586 0150 FFF7FEFF 		bl	BSP_LCD_GetXSize
+ 587 0154 0346     		mov	r3, r0
  231:Core/Src/touch.c ****         BSP_LCD_DrawHLine(0,180,BSP_LCD_GetXSize());
- 567              		.loc 1 231 9
- 568 0156 9BB2     		uxth	r3, r3
- 569 0158 1A46     		mov	r2, r3
- 570 015a 9621     		movs	r1, #150
- 571 015c 0020     		movs	r0, #0
- 572 015e FFF7FEFF 		bl	BSP_LCD_DrawHLine
+ 588              		.loc 1 231 9
+ 589 0156 9BB2     		uxth	r3, r3
+ 590 0158 1A46     		mov	r2, r3
+ 591 015a 9621     		movs	r1, #150
+ 592 015c 0020     		movs	r0, #0
+ 593 015e FFF7FEFF 		bl	BSP_LCD_DrawHLine
  232:Core/Src/touch.c ****         BSP_LCD_DrawVLine(0,150,30);
- 573              		.loc 1 232 33
- 574 0162 FFF7FEFF 		bl	BSP_LCD_GetXSize
- 575 0166 0346     		mov	r3, r0
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccqjonQ9.s 			page 16
+
+
+ 594              		.loc 1 232 33
+ 595 0162 FFF7FEFF 		bl	BSP_LCD_GetXSize
+ 596 0166 0346     		mov	r3, r0
  232:Core/Src/touch.c ****         BSP_LCD_DrawVLine(0,150,30);
- 576              		.loc 1 232 9
- 577 0168 9BB2     		uxth	r3, r3
- 578 016a 1A46     		mov	r2, r3
- 579 016c B421     		movs	r1, #180
- 580 016e 0020     		movs	r0, #0
- 581 0170 FFF7FEFF 		bl	BSP_LCD_DrawHLine
+ 597              		.loc 1 232 9
+ 598 0168 9BB2     		uxth	r3, r3
+ 599 016a 1A46     		mov	r2, r3
+ 600 016c B421     		movs	r1, #180
+ 601 016e 0020     		movs	r0, #0
+ 602 0170 FFF7FEFF 		bl	BSP_LCD_DrawHLine
  233:Core/Src/touch.c ****         BSP_LCD_DrawVLine(30,150,30);
- 582              		.loc 1 233 9
- 583 0174 1E22     		movs	r2, #30
- 584 0176 9621     		movs	r1, #150
- 585 0178 0020     		movs	r0, #0
- 586 017a FFF7FEFF 		bl	BSP_LCD_DrawVLine
+ 603              		.loc 1 233 9
+ 604 0174 1E22     		movs	r2, #30
+ 605 0176 9621     		movs	r1, #150
+ 606 0178 0020     		movs	r0, #0
+ 607 017a FFF7FEFF 		bl	BSP_LCD_DrawVLine
  234:Core/Src/touch.c ****         BSP_LCD_DrawVLine(480,150,30);                
- 587              		.loc 1 234 9
- 588 017e 1E22     		movs	r2, #30
- 589 0180 9621     		movs	r1, #150
- 590 0182 1E20     		movs	r0, #30
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccXf3B6W.s 			page 16
-
-
- 591 0184 FFF7FEFF 		bl	BSP_LCD_DrawVLine
+ 608              		.loc 1 234 9
+ 609 017e 1E22     		movs	r2, #30
+ 610 0180 9621     		movs	r1, #150
+ 611 0182 1E20     		movs	r0, #30
+ 612 0184 FFF7FEFF 		bl	BSP_LCD_DrawVLine
  235:Core/Src/touch.c ****     }
- 592              		.loc 1 235 9
- 593 0188 1E22     		movs	r2, #30
- 594 018a 9621     		movs	r1, #150
- 595 018c 4FF4F070 		mov	r0, #480
- 596 0190 FFF7FEFF 		bl	BSP_LCD_DrawVLine
- 597              		.loc 1 245 1
- 598 0194 25E0     		b	.L24
- 599              	.L23:
+ 613              		.loc 1 235 9
+ 614 0188 1E22     		movs	r2, #30
+ 615 018a 9621     		movs	r1, #150
+ 616 018c 4FF4F070 		mov	r0, #480
+ 617 0190 FFF7FEFF 		bl	BSP_LCD_DrawVLine
+ 618              		.loc 1 245 1
+ 619 0194 25E0     		b	.L25
+ 620              	.L24:
  237:Core/Src/touch.c ****     {
- 600              		.loc 1 237 14
- 601 0196 7B68     		ldr	r3, [r7, #4]
- 602 0198 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 621              		.loc 1 237 14
+ 622 0196 7B68     		ldr	r3, [r7, #4]
+ 623 0198 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
  237:Core/Src/touch.c ****     {
- 603              		.loc 1 237 13
- 604 019a 062B     		cmp	r3, #6
- 605 019c 21D1     		bne	.L24
+ 624              		.loc 1 237 13
+ 625 019a 062B     		cmp	r3, #6
+ 626 019c 21D1     		bne	.L25
  239:Core/Src/touch.c ****         BSP_LCD_DrawHLine(0,210,BSP_LCD_GetXSize());
- 606              		.loc 1 239 33
- 607 019e FFF7FEFF 		bl	BSP_LCD_GetXSize
- 608 01a2 0346     		mov	r3, r0
+ 627              		.loc 1 239 33
+ 628 019e FFF7FEFF 		bl	BSP_LCD_GetXSize
+ 629 01a2 0346     		mov	r3, r0
  239:Core/Src/touch.c ****         BSP_LCD_DrawHLine(0,210,BSP_LCD_GetXSize());
- 609              		.loc 1 239 9
- 610 01a4 9BB2     		uxth	r3, r3
- 611 01a6 1A46     		mov	r2, r3
- 612 01a8 B421     		movs	r1, #180
- 613 01aa 0020     		movs	r0, #0
- 614 01ac FFF7FEFF 		bl	BSP_LCD_DrawHLine
+ 630              		.loc 1 239 9
+ 631 01a4 9BB2     		uxth	r3, r3
+ 632 01a6 1A46     		mov	r2, r3
+ 633 01a8 B421     		movs	r1, #180
+ 634 01aa 0020     		movs	r0, #0
+ 635 01ac FFF7FEFF 		bl	BSP_LCD_DrawHLine
  240:Core/Src/touch.c ****         BSP_LCD_DrawVLine(0,180,30);
- 615              		.loc 1 240 33
- 616 01b0 FFF7FEFF 		bl	BSP_LCD_GetXSize
- 617 01b4 0346     		mov	r3, r0
+ 636              		.loc 1 240 33
+ 637 01b0 FFF7FEFF 		bl	BSP_LCD_GetXSize
+ 638 01b4 0346     		mov	r3, r0
  240:Core/Src/touch.c ****         BSP_LCD_DrawVLine(0,180,30);
- 618              		.loc 1 240 9
- 619 01b6 9BB2     		uxth	r3, r3
- 620 01b8 1A46     		mov	r2, r3
- 621 01ba D221     		movs	r1, #210
- 622 01bc 0020     		movs	r0, #0
- 623 01be FFF7FEFF 		bl	BSP_LCD_DrawHLine
+ 639              		.loc 1 240 9
+ 640 01b6 9BB2     		uxth	r3, r3
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccqjonQ9.s 			page 17
+
+
+ 641 01b8 1A46     		mov	r2, r3
+ 642 01ba D221     		movs	r1, #210
+ 643 01bc 0020     		movs	r0, #0
+ 644 01be FFF7FEFF 		bl	BSP_LCD_DrawHLine
  241:Core/Src/touch.c ****         BSP_LCD_DrawVLine(30,180,30);
- 624              		.loc 1 241 9
- 625 01c2 1E22     		movs	r2, #30
- 626 01c4 B421     		movs	r1, #180
- 627 01c6 0020     		movs	r0, #0
- 628 01c8 FFF7FEFF 		bl	BSP_LCD_DrawVLine
+ 645              		.loc 1 241 9
+ 646 01c2 1E22     		movs	r2, #30
+ 647 01c4 B421     		movs	r1, #180
+ 648 01c6 0020     		movs	r0, #0
+ 649 01c8 FFF7FEFF 		bl	BSP_LCD_DrawVLine
  242:Core/Src/touch.c ****         BSP_LCD_DrawVLine(480,180,30);                
- 629              		.loc 1 242 9
- 630 01cc 1E22     		movs	r2, #30
- 631 01ce B421     		movs	r1, #180
- 632 01d0 1E20     		movs	r0, #30
- 633 01d2 FFF7FEFF 		bl	BSP_LCD_DrawVLine
+ 650              		.loc 1 242 9
+ 651 01cc 1E22     		movs	r2, #30
+ 652 01ce B421     		movs	r1, #180
+ 653 01d0 1E20     		movs	r0, #30
+ 654 01d2 FFF7FEFF 		bl	BSP_LCD_DrawVLine
  243:Core/Src/touch.c ****     }
- 634              		.loc 1 243 9
- 635 01d6 1E22     		movs	r2, #30
- 636 01d8 B421     		movs	r1, #180
- 637 01da 4FF4F070 		mov	r0, #480
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccXf3B6W.s 			page 17
-
-
- 638 01de FFF7FEFF 		bl	BSP_LCD_DrawVLine
- 639              	.L24:
- 640              		.loc 1 245 1
- 641 01e2 00BF     		nop
- 642 01e4 0837     		adds	r7, r7, #8
- 643              	.LCFI14:
- 644              		.cfi_def_cfa_offset 8
- 645 01e6 BD46     		mov	sp, r7
- 646              	.LCFI15:
- 647              		.cfi_def_cfa_register 13
- 648              		@ sp needed
- 649 01e8 80BD     		pop	{r7, pc}
- 650              		.cfi_endproc
- 651              	.LFE146:
- 653              		.section	.text.BSP_TS_Init,"ax",%progbits
- 654              		.align	1
- 655              		.global	BSP_TS_Init
- 656              		.syntax unified
- 657              		.thumb
- 658              		.thumb_func
- 660              	BSP_TS_Init:
- 661              	.LFB147:
+ 655              		.loc 1 243 9
+ 656 01d6 1E22     		movs	r2, #30
+ 657 01d8 B421     		movs	r1, #180
+ 658 01da 4FF4F070 		mov	r0, #480
+ 659 01de FFF7FEFF 		bl	BSP_LCD_DrawVLine
+ 660              	.L25:
+ 661              		.loc 1 245 1
+ 662 01e2 00BF     		nop
+ 663 01e4 0837     		adds	r7, r7, #8
+ 664              	.LCFI14:
+ 665              		.cfi_def_cfa_offset 8
+ 666 01e6 BD46     		mov	sp, r7
+ 667              	.LCFI15:
+ 668              		.cfi_def_cfa_register 13
+ 669              		@ sp needed
+ 670 01e8 80BD     		pop	{r7, pc}
+ 671              		.cfi_endproc
+ 672              	.LFE146:
+ 674              		.section	.text.BSP_TS_Init,"ax",%progbits
+ 675              		.align	1
+ 676              		.global	BSP_TS_Init
+ 677              		.syntax unified
+ 678              		.thumb
+ 679              		.thumb_func
+ 681              	BSP_TS_Init:
+ 682              	.LFB147:
  246:Core/Src/touch.c **** /**
  247:Core/Src/touch.c ****   * @brief  Initializes and configures the touch screen functionalities and 
  248:Core/Src/touch.c ****   *         configures all necessary hardware resources (GPIOs, I2C, clocks..).
@@ -992,144 +1013,147 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccXf3B6W.s 			page 1
  252:Core/Src/touch.c ****   */
  253:Core/Src/touch.c **** uint8_t BSP_TS_Init(uint16_t ts_SizeX, uint16_t ts_SizeY)
  254:Core/Src/touch.c **** {
- 662              		.loc 1 254 1
- 663              		.cfi_startproc
- 664              		@ args = 0, pretend = 0, frame = 16
- 665              		@ frame_needed = 1, uses_anonymous_args = 0
- 666 0000 80B5     		push	{r7, lr}
- 667              	.LCFI16:
- 668              		.cfi_def_cfa_offset 8
- 669              		.cfi_offset 7, -8
- 670              		.cfi_offset 14, -4
- 671 0002 84B0     		sub	sp, sp, #16
- 672              	.LCFI17:
- 673              		.cfi_def_cfa_offset 24
- 674 0004 00AF     		add	r7, sp, #0
- 675              	.LCFI18:
- 676              		.cfi_def_cfa_register 7
- 677 0006 0346     		mov	r3, r0
- 678 0008 0A46     		mov	r2, r1
- 679 000a FB80     		strh	r3, [r7, #6]	@ movhi
- 680 000c 1346     		mov	r3, r2	@ movhi
- 681 000e BB80     		strh	r3, [r7, #4]	@ movhi
+ 683              		.loc 1 254 1
+ 684              		.cfi_startproc
+ 685              		@ args = 0, pretend = 0, frame = 16
+ 686              		@ frame_needed = 1, uses_anonymous_args = 0
+ 687 0000 80B5     		push	{r7, lr}
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccqjonQ9.s 			page 18
+
+
+ 688              	.LCFI16:
+ 689              		.cfi_def_cfa_offset 8
+ 690              		.cfi_offset 7, -8
+ 691              		.cfi_offset 14, -4
+ 692 0002 84B0     		sub	sp, sp, #16
+ 693              	.LCFI17:
+ 694              		.cfi_def_cfa_offset 24
+ 695 0004 00AF     		add	r7, sp, #0
+ 696              	.LCFI18:
+ 697              		.cfi_def_cfa_register 7
+ 698 0006 0346     		mov	r3, r0
+ 699 0008 0A46     		mov	r2, r1
+ 700 000a FB80     		strh	r3, [r7, #6]	@ movhi
+ 701 000c 1346     		mov	r3, r2	@ movhi
+ 702 000e BB80     		strh	r3, [r7, #4]	@ movhi
  255:Core/Src/touch.c ****   uint8_t status = TS_OK;
- 682              		.loc 1 255 11
- 683 0010 0023     		movs	r3, #0
- 684 0012 FB73     		strb	r3, [r7, #15]
+ 703              		.loc 1 255 11
+ 704 0010 0023     		movs	r3, #0
+ 705 0012 FB73     		strb	r3, [r7, #15]
  256:Core/Src/touch.c ****   tsXBoundary = ts_SizeX;
- 685              		.loc 1 256 15
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccXf3B6W.s 			page 18
-
-
- 686 0014 144A     		ldr	r2, .L29
- 687 0016 FB88     		ldrh	r3, [r7, #6]	@ movhi
- 688 0018 1380     		strh	r3, [r2]	@ movhi
+ 706              		.loc 1 256 15
+ 707 0014 144A     		ldr	r2, .L30
+ 708 0016 FB88     		ldrh	r3, [r7, #6]	@ movhi
+ 709 0018 1380     		strh	r3, [r2]	@ movhi
  257:Core/Src/touch.c ****   tsYBoundary = ts_SizeY;
- 689              		.loc 1 257 15
- 690 001a 144A     		ldr	r2, .L29+4
- 691 001c BB88     		ldrh	r3, [r7, #4]	@ movhi
- 692 001e 1380     		strh	r3, [r2]	@ movhi
+ 710              		.loc 1 257 15
+ 711 001a 144A     		ldr	r2, .L30+4
+ 712 001c BB88     		ldrh	r3, [r7, #4]	@ movhi
+ 713 001e 1380     		strh	r3, [r2]	@ movhi
  258:Core/Src/touch.c ****   
  259:Core/Src/touch.c ****   /* Read ID and verify if the touch screen driver is ready */
  260:Core/Src/touch.c ****   ft5336_ts_drv.Init(TS_I2C_ADDRESS);
- 693              		.loc 1 260 16
- 694 0020 134B     		ldr	r3, .L29+8
- 695 0022 1B68     		ldr	r3, [r3]
- 696              		.loc 1 260 3
- 697 0024 7020     		movs	r0, #112
- 698 0026 9847     		blx	r3
- 699              	.LVL0:
+ 714              		.loc 1 260 16
+ 715 0020 134B     		ldr	r3, .L30+8
+ 716 0022 1B68     		ldr	r3, [r3]
+ 717              		.loc 1 260 3
+ 718 0024 7020     		movs	r0, #112
+ 719 0026 9847     		blx	r3
+ 720              	.LVL0:
  261:Core/Src/touch.c ****   if(ft5336_ts_drv.ReadID(TS_I2C_ADDRESS) == FT5336_ID_VALUE)
- 700              		.loc 1 261 19
- 701 0028 114B     		ldr	r3, .L29+8
- 702 002a 5B68     		ldr	r3, [r3, #4]
- 703              		.loc 1 261 6
- 704 002c 7020     		movs	r0, #112
- 705 002e 9847     		blx	r3
- 706              	.LVL1:
- 707 0030 0346     		mov	r3, r0
- 708              		.loc 1 261 5
- 709 0032 512B     		cmp	r3, #81
- 710 0034 11D1     		bne	.L26
+ 721              		.loc 1 261 19
+ 722 0028 114B     		ldr	r3, .L30+8
+ 723 002a 5B68     		ldr	r3, [r3, #4]
+ 724              		.loc 1 261 6
+ 725 002c 7020     		movs	r0, #112
+ 726 002e 9847     		blx	r3
+ 727              	.LVL1:
+ 728 0030 0346     		mov	r3, r0
+ 729              		.loc 1 261 5
+ 730 0032 512B     		cmp	r3, #81
+ 731 0034 11D1     		bne	.L27
  262:Core/Src/touch.c ****   { 
  263:Core/Src/touch.c ****     /* Initialize the TS driver structure */
  264:Core/Src/touch.c ****     tsDriver = &ft5336_ts_drv;
- 711              		.loc 1 264 14
- 712 0036 0F4B     		ldr	r3, .L29+12
- 713 0038 0D4A     		ldr	r2, .L29+8
- 714 003a 1A60     		str	r2, [r3]
+ 732              		.loc 1 264 14
+ 733 0036 0F4B     		ldr	r3, .L30+12
+ 734 0038 0D4A     		ldr	r2, .L30+8
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccqjonQ9.s 			page 19
+
+
+ 735 003a 1A60     		str	r2, [r3]
  265:Core/Src/touch.c ****     I2cAddress = TS_I2C_ADDRESS;
- 715              		.loc 1 265 16
- 716 003c 0E4B     		ldr	r3, .L29+16
- 717 003e 7022     		movs	r2, #112
- 718 0040 1A70     		strb	r2, [r3]
+ 736              		.loc 1 265 16
+ 737 003c 0E4B     		ldr	r3, .L30+16
+ 738 003e 7022     		movs	r2, #112
+ 739 0040 1A70     		strb	r2, [r3]
  266:Core/Src/touch.c ****     tsOrientation = TS_SWAP_XY;
- 719              		.loc 1 266 19
- 720 0042 0E4B     		ldr	r3, .L29+20
- 721 0044 0822     		movs	r2, #8
- 722 0046 1A70     		strb	r2, [r3]
+ 740              		.loc 1 266 19
+ 741 0042 0E4B     		ldr	r3, .L30+20
+ 742 0044 0822     		movs	r2, #8
+ 743 0046 1A70     		strb	r2, [r3]
  267:Core/Src/touch.c **** 
  268:Core/Src/touch.c ****     /* Initialize the TS driver */
  269:Core/Src/touch.c ****     tsDriver->Start(I2cAddress);
- 723              		.loc 1 269 13
- 724 0048 0A4B     		ldr	r3, .L29+12
- 725 004a 1B68     		ldr	r3, [r3]
- 726 004c DB68     		ldr	r3, [r3, #12]
- 727              		.loc 1 269 5
- 728 004e 0A4A     		ldr	r2, .L29+16
- 729 0050 1278     		ldrb	r2, [r2]	@ zero_extendqisi2
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccXf3B6W.s 			page 19
-
-
- 730 0052 92B2     		uxth	r2, r2
- 731 0054 1046     		mov	r0, r2
- 732 0056 9847     		blx	r3
- 733              	.LVL2:
- 734 0058 01E0     		b	.L27
- 735              	.L26:
+ 744              		.loc 1 269 13
+ 745 0048 0A4B     		ldr	r3, .L30+12
+ 746 004a 1B68     		ldr	r3, [r3]
+ 747 004c DB68     		ldr	r3, [r3, #12]
+ 748              		.loc 1 269 5
+ 749 004e 0A4A     		ldr	r2, .L30+16
+ 750 0050 1278     		ldrb	r2, [r2]	@ zero_extendqisi2
+ 751 0052 92B2     		uxth	r2, r2
+ 752 0054 1046     		mov	r0, r2
+ 753 0056 9847     		blx	r3
+ 754              	.LVL2:
+ 755 0058 01E0     		b	.L28
+ 756              	.L27:
  270:Core/Src/touch.c ****   }
  271:Core/Src/touch.c ****   else
  272:Core/Src/touch.c ****   {
  273:Core/Src/touch.c ****     status = TS_DEVICE_NOT_FOUND;
- 736              		.loc 1 273 12
- 737 005a 0323     		movs	r3, #3
- 738 005c FB73     		strb	r3, [r7, #15]
- 739              	.L27:
+ 757              		.loc 1 273 12
+ 758 005a 0323     		movs	r3, #3
+ 759 005c FB73     		strb	r3, [r7, #15]
+ 760              	.L28:
  274:Core/Src/touch.c ****   }
  275:Core/Src/touch.c **** 
  276:Core/Src/touch.c ****   return status;
- 740              		.loc 1 276 10
- 741 005e FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
+ 761              		.loc 1 276 10
+ 762 005e FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
  277:Core/Src/touch.c **** }
- 742              		.loc 1 277 1
- 743 0060 1846     		mov	r0, r3
- 744 0062 1037     		adds	r7, r7, #16
- 745              	.LCFI19:
- 746              		.cfi_def_cfa_offset 8
- 747 0064 BD46     		mov	sp, r7
- 748              	.LCFI20:
- 749              		.cfi_def_cfa_register 13
- 750              		@ sp needed
- 751 0066 80BD     		pop	{r7, pc}
- 752              	.L30:
- 753              		.align	2
- 754              	.L29:
- 755 0068 00000000 		.word	tsXBoundary
- 756 006c 00000000 		.word	tsYBoundary
- 757 0070 00000000 		.word	ft5336_ts_drv
- 758 0074 00000000 		.word	tsDriver
- 759 0078 00000000 		.word	I2cAddress
- 760 007c 00000000 		.word	tsOrientation
- 761              		.cfi_endproc
- 762              	.LFE147:
- 764              		.section	.text.BSP_TS_DeInit,"ax",%progbits
- 765              		.align	1
- 766              		.global	BSP_TS_DeInit
- 767              		.syntax unified
- 768              		.thumb
- 769              		.thumb_func
- 771              	BSP_TS_DeInit:
- 772              	.LFB148:
+ 763              		.loc 1 277 1
+ 764 0060 1846     		mov	r0, r3
+ 765 0062 1037     		adds	r7, r7, #16
+ 766              	.LCFI19:
+ 767              		.cfi_def_cfa_offset 8
+ 768 0064 BD46     		mov	sp, r7
+ 769              	.LCFI20:
+ 770              		.cfi_def_cfa_register 13
+ 771              		@ sp needed
+ 772 0066 80BD     		pop	{r7, pc}
+ 773              	.L31:
+ 774              		.align	2
+ 775              	.L30:
+ 776 0068 00000000 		.word	tsXBoundary
+ 777 006c 00000000 		.word	tsYBoundary
+ 778 0070 00000000 		.word	ft5336_ts_drv
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccqjonQ9.s 			page 20
+
+
+ 779 0074 00000000 		.word	tsDriver
+ 780 0078 00000000 		.word	I2cAddress
+ 781 007c 00000000 		.word	tsOrientation
+ 782              		.cfi_endproc
+ 783              	.LFE147:
+ 785              		.section	.text.BSP_TS_DeInit,"ax",%progbits
+ 786              		.align	1
+ 787              		.global	BSP_TS_DeInit
+ 788              		.syntax unified
+ 789              		.thumb
+ 790              		.thumb_func
+ 792              	BSP_TS_DeInit:
+ 793              	.LFB148:
  278:Core/Src/touch.c **** 
  279:Core/Src/touch.c **** /**
  280:Core/Src/touch.c ****   * @brief  DeInitializes the TouchScreen.
@@ -1137,47 +1161,47 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccXf3B6W.s 			page 1
  282:Core/Src/touch.c ****   */
  283:Core/Src/touch.c **** uint8_t BSP_TS_DeInit(void)
  284:Core/Src/touch.c **** { 
- 773              		.loc 1 284 1
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccXf3B6W.s 			page 20
-
-
- 774              		.cfi_startproc
- 775              		@ args = 0, pretend = 0, frame = 0
- 776              		@ frame_needed = 1, uses_anonymous_args = 0
- 777              		@ link register save eliminated.
- 778 0000 80B4     		push	{r7}
- 779              	.LCFI21:
- 780              		.cfi_def_cfa_offset 4
- 781              		.cfi_offset 7, -4
- 782 0002 00AF     		add	r7, sp, #0
- 783              	.LCFI22:
- 784              		.cfi_def_cfa_register 7
+ 794              		.loc 1 284 1
+ 795              		.cfi_startproc
+ 796              		@ args = 0, pretend = 0, frame = 0
+ 797              		@ frame_needed = 1, uses_anonymous_args = 0
+ 798              		@ link register save eliminated.
+ 799 0000 80B4     		push	{r7}
+ 800              	.LCFI21:
+ 801              		.cfi_def_cfa_offset 4
+ 802              		.cfi_offset 7, -4
+ 803 0002 00AF     		add	r7, sp, #0
+ 804              	.LCFI22:
+ 805              		.cfi_def_cfa_register 7
  285:Core/Src/touch.c ****   /* Actually ts_driver does not provide a DeInit function */
  286:Core/Src/touch.c ****   return TS_OK;
- 785              		.loc 1 286 10
- 786 0004 0023     		movs	r3, #0
+ 806              		.loc 1 286 10
+ 807 0004 0023     		movs	r3, #0
  287:Core/Src/touch.c **** }
- 787              		.loc 1 287 1
- 788 0006 1846     		mov	r0, r3
- 789 0008 BD46     		mov	sp, r7
- 790              	.LCFI23:
- 791              		.cfi_def_cfa_register 13
- 792              		@ sp needed
- 793 000a 5DF8047B 		ldr	r7, [sp], #4
- 794              	.LCFI24:
- 795              		.cfi_restore 7
- 796              		.cfi_def_cfa_offset 0
- 797 000e 7047     		bx	lr
- 798              		.cfi_endproc
- 799              	.LFE148:
- 801              		.section	.text.BSP_TS_ITConfig,"ax",%progbits
- 802              		.align	1
- 803              		.global	BSP_TS_ITConfig
- 804              		.syntax unified
- 805              		.thumb
- 806              		.thumb_func
- 808              	BSP_TS_ITConfig:
- 809              	.LFB149:
+ 808              		.loc 1 287 1
+ 809 0006 1846     		mov	r0, r3
+ 810 0008 BD46     		mov	sp, r7
+ 811              	.LCFI23:
+ 812              		.cfi_def_cfa_register 13
+ 813              		@ sp needed
+ 814 000a 5DF8047B 		ldr	r7, [sp], #4
+ 815              	.LCFI24:
+ 816              		.cfi_restore 7
+ 817              		.cfi_def_cfa_offset 0
+ 818 000e 7047     		bx	lr
+ 819              		.cfi_endproc
+ 820              	.LFE148:
+ 822              		.section	.text.BSP_TS_ITConfig,"ax",%progbits
+ 823              		.align	1
+ 824              		.global	BSP_TS_ITConfig
+ 825              		.syntax unified
+ 826              		.thumb
+ 827              		.thumb_func
+ 829              	BSP_TS_ITConfig:
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccqjonQ9.s 			page 21
+
+
+ 830              	.LFB149:
  288:Core/Src/touch.c **** 
  289:Core/Src/touch.c **** /**
  290:Core/Src/touch.c ****   * @brief  Configures and enables the touch screen interrupts.
@@ -1185,109 +1209,106 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccXf3B6W.s 			page 1
  292:Core/Src/touch.c ****   */
  293:Core/Src/touch.c **** uint8_t BSP_TS_ITConfig(void)
  294:Core/Src/touch.c **** {
- 810              		.loc 1 294 1
- 811              		.cfi_startproc
- 812              		@ args = 0, pretend = 0, frame = 24
- 813              		@ frame_needed = 1, uses_anonymous_args = 0
- 814 0000 80B5     		push	{r7, lr}
- 815              	.LCFI25:
- 816              		.cfi_def_cfa_offset 8
- 817              		.cfi_offset 7, -8
- 818              		.cfi_offset 14, -4
- 819 0002 86B0     		sub	sp, sp, #24
- 820              	.LCFI26:
- 821              		.cfi_def_cfa_offset 32
- 822 0004 00AF     		add	r7, sp, #0
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccXf3B6W.s 			page 21
-
-
- 823              	.LCFI27:
- 824              		.cfi_def_cfa_register 7
+ 831              		.loc 1 294 1
+ 832              		.cfi_startproc
+ 833              		@ args = 0, pretend = 0, frame = 24
+ 834              		@ frame_needed = 1, uses_anonymous_args = 0
+ 835 0000 80B5     		push	{r7, lr}
+ 836              	.LCFI25:
+ 837              		.cfi_def_cfa_offset 8
+ 838              		.cfi_offset 7, -8
+ 839              		.cfi_offset 14, -4
+ 840 0002 86B0     		sub	sp, sp, #24
+ 841              	.LCFI26:
+ 842              		.cfi_def_cfa_offset 32
+ 843 0004 00AF     		add	r7, sp, #0
+ 844              	.LCFI27:
+ 845              		.cfi_def_cfa_register 7
  295:Core/Src/touch.c ****   GPIO_InitTypeDef gpio_init_structure;
  296:Core/Src/touch.c **** 
  297:Core/Src/touch.c ****   /* Configure Interrupt mode for SD detection pin */
  298:Core/Src/touch.c ****   gpio_init_structure.Pin = TS_INT_PIN;
- 825              		.loc 1 298 27
- 826 0006 4FF40053 		mov	r3, #8192
- 827 000a 7B60     		str	r3, [r7, #4]
+ 846              		.loc 1 298 27
+ 847 0006 4FF40053 		mov	r3, #8192
+ 848 000a 7B60     		str	r3, [r7, #4]
  299:Core/Src/touch.c ****   gpio_init_structure.Pull = GPIO_NOPULL;
- 828              		.loc 1 299 28
- 829 000c 0023     		movs	r3, #0
- 830 000e FB60     		str	r3, [r7, #12]
+ 849              		.loc 1 299 28
+ 850 000c 0023     		movs	r3, #0
+ 851 000e FB60     		str	r3, [r7, #12]
  300:Core/Src/touch.c ****   gpio_init_structure.Speed = GPIO_SPEED_FAST;
- 831              		.loc 1 300 29
- 832 0010 0223     		movs	r3, #2
- 833 0012 3B61     		str	r3, [r7, #16]
+ 852              		.loc 1 300 29
+ 853 0010 0223     		movs	r3, #2
+ 854 0012 3B61     		str	r3, [r7, #16]
  301:Core/Src/touch.c ****   gpio_init_structure.Mode = GPIO_MODE_IT_RISING;
- 834              		.loc 1 301 28
- 835 0014 4FF48813 		mov	r3, #1114112
- 836 0018 BB60     		str	r3, [r7, #8]
+ 855              		.loc 1 301 28
+ 856 0014 4FF48813 		mov	r3, #1114112
+ 857 0018 BB60     		str	r3, [r7, #8]
  302:Core/Src/touch.c ****   HAL_GPIO_Init(TS_INT_GPIO_PORT, &gpio_init_structure);
- 837              		.loc 1 302 3
- 838 001a 3B1D     		adds	r3, r7, #4
- 839 001c 1946     		mov	r1, r3
- 840 001e 0C48     		ldr	r0, .L35
- 841 0020 FFF7FEFF 		bl	HAL_GPIO_Init
+ 858              		.loc 1 302 3
+ 859 001a 3B1D     		adds	r3, r7, #4
+ 860 001c 1946     		mov	r1, r3
+ 861 001e 0C48     		ldr	r0, .L36
+ 862 0020 FFF7FEFF 		bl	HAL_GPIO_Init
  303:Core/Src/touch.c **** 
  304:Core/Src/touch.c ****   /* Enable and set Touch screen EXTI Interrupt to the lowest priority */
  305:Core/Src/touch.c ****   HAL_NVIC_SetPriority((IRQn_Type)(TS_INT_EXTI_IRQn), 0x0F, 0x00);
- 842              		.loc 1 305 3
- 843 0024 0022     		movs	r2, #0
- 844 0026 0F21     		movs	r1, #15
- 845 0028 2820     		movs	r0, #40
- 846 002a FFF7FEFF 		bl	HAL_NVIC_SetPriority
+ 863              		.loc 1 305 3
+ 864 0024 0022     		movs	r2, #0
+ 865 0026 0F21     		movs	r1, #15
+ 866 0028 2820     		movs	r0, #40
+ 867 002a FFF7FEFF 		bl	HAL_NVIC_SetPriority
  306:Core/Src/touch.c ****   HAL_NVIC_EnableIRQ((IRQn_Type)(TS_INT_EXTI_IRQn));
- 847              		.loc 1 306 3
- 848 002e 2820     		movs	r0, #40
- 849 0030 FFF7FEFF 		bl	HAL_NVIC_EnableIRQ
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccqjonQ9.s 			page 22
+
+
+ 868              		.loc 1 306 3
+ 869 002e 2820     		movs	r0, #40
+ 870 0030 FFF7FEFF 		bl	HAL_NVIC_EnableIRQ
  307:Core/Src/touch.c **** 
  308:Core/Src/touch.c ****   /* Enable the TS ITs */
  309:Core/Src/touch.c ****   tsDriver->EnableIT(I2cAddress);
- 850              		.loc 1 309 11
- 851 0034 074B     		ldr	r3, .L35+4
- 852 0036 1B68     		ldr	r3, [r3]
- 853 0038 9B69     		ldr	r3, [r3, #24]
- 854              		.loc 1 309 3
- 855 003a 074A     		ldr	r2, .L35+8
- 856 003c 1278     		ldrb	r2, [r2]	@ zero_extendqisi2
- 857 003e 92B2     		uxth	r2, r2
- 858 0040 1046     		mov	r0, r2
- 859 0042 9847     		blx	r3
- 860              	.LVL3:
+ 871              		.loc 1 309 11
+ 872 0034 074B     		ldr	r3, .L36+4
+ 873 0036 1B68     		ldr	r3, [r3]
+ 874 0038 9B69     		ldr	r3, [r3, #24]
+ 875              		.loc 1 309 3
+ 876 003a 074A     		ldr	r2, .L36+8
+ 877 003c 1278     		ldrb	r2, [r2]	@ zero_extendqisi2
+ 878 003e 92B2     		uxth	r2, r2
+ 879 0040 1046     		mov	r0, r2
+ 880 0042 9847     		blx	r3
+ 881              	.LVL3:
  310:Core/Src/touch.c **** 
  311:Core/Src/touch.c ****   return TS_OK;  
- 861              		.loc 1 311 10
- 862 0044 0023     		movs	r3, #0
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccXf3B6W.s 			page 22
-
-
+ 882              		.loc 1 311 10
+ 883 0044 0023     		movs	r3, #0
  312:Core/Src/touch.c **** }
- 863              		.loc 1 312 1
- 864 0046 1846     		mov	r0, r3
- 865 0048 1837     		adds	r7, r7, #24
- 866              	.LCFI28:
- 867              		.cfi_def_cfa_offset 8
- 868 004a BD46     		mov	sp, r7
- 869              	.LCFI29:
- 870              		.cfi_def_cfa_register 13
- 871              		@ sp needed
- 872 004c 80BD     		pop	{r7, pc}
- 873              	.L36:
- 874 004e 00BF     		.align	2
- 875              	.L35:
- 876 0050 00200240 		.word	1073881088
- 877 0054 00000000 		.word	tsDriver
- 878 0058 00000000 		.word	I2cAddress
- 879              		.cfi_endproc
- 880              	.LFE149:
- 882              		.section	.text.BSP_TS_ITGetStatus,"ax",%progbits
- 883              		.align	1
- 884              		.global	BSP_TS_ITGetStatus
- 885              		.syntax unified
- 886              		.thumb
- 887              		.thumb_func
- 889              	BSP_TS_ITGetStatus:
- 890              	.LFB150:
+ 884              		.loc 1 312 1
+ 885 0046 1846     		mov	r0, r3
+ 886 0048 1837     		adds	r7, r7, #24
+ 887              	.LCFI28:
+ 888              		.cfi_def_cfa_offset 8
+ 889 004a BD46     		mov	sp, r7
+ 890              	.LCFI29:
+ 891              		.cfi_def_cfa_register 13
+ 892              		@ sp needed
+ 893 004c 80BD     		pop	{r7, pc}
+ 894              	.L37:
+ 895 004e 00BF     		.align	2
+ 896              	.L36:
+ 897 0050 00200240 		.word	1073881088
+ 898 0054 00000000 		.word	tsDriver
+ 899 0058 00000000 		.word	I2cAddress
+ 900              		.cfi_endproc
+ 901              	.LFE149:
+ 903              		.section	.text.BSP_TS_ITGetStatus,"ax",%progbits
+ 904              		.align	1
+ 905              		.global	BSP_TS_ITGetStatus
+ 906              		.syntax unified
+ 907              		.thumb
+ 908              		.thumb_func
+ 910              	BSP_TS_ITGetStatus:
+ 911              	.LFB150:
  313:Core/Src/touch.c **** 
  314:Core/Src/touch.c **** /**
  315:Core/Src/touch.c ****   * @brief  Gets the touch screen interrupt status.
@@ -1295,54 +1316,54 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccXf3B6W.s 			page 1
  317:Core/Src/touch.c ****   */
  318:Core/Src/touch.c **** uint8_t BSP_TS_ITGetStatus(void)
  319:Core/Src/touch.c **** {
- 891              		.loc 1 319 1
- 892              		.cfi_startproc
- 893              		@ args = 0, pretend = 0, frame = 0
- 894              		@ frame_needed = 1, uses_anonymous_args = 0
- 895 0000 80B5     		push	{r7, lr}
- 896              	.LCFI30:
- 897              		.cfi_def_cfa_offset 8
- 898              		.cfi_offset 7, -8
- 899              		.cfi_offset 14, -4
- 900 0002 00AF     		add	r7, sp, #0
- 901              	.LCFI31:
- 902              		.cfi_def_cfa_register 7
+ 912              		.loc 1 319 1
+ 913              		.cfi_startproc
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccqjonQ9.s 			page 23
+
+
+ 914              		@ args = 0, pretend = 0, frame = 0
+ 915              		@ frame_needed = 1, uses_anonymous_args = 0
+ 916 0000 80B5     		push	{r7, lr}
+ 917              	.LCFI30:
+ 918              		.cfi_def_cfa_offset 8
+ 919              		.cfi_offset 7, -8
+ 920              		.cfi_offset 14, -4
+ 921 0002 00AF     		add	r7, sp, #0
+ 922              	.LCFI31:
+ 923              		.cfi_def_cfa_register 7
  320:Core/Src/touch.c ****   /* Return the TS IT status */
  321:Core/Src/touch.c ****   return (tsDriver->GetITStatus(I2cAddress));
- 903              		.loc 1 321 19
- 904 0004 054B     		ldr	r3, .L39
- 905 0006 1B68     		ldr	r3, [r3]
- 906 0008 1B6A     		ldr	r3, [r3, #32]
- 907              		.loc 1 321 11
- 908 000a 054A     		ldr	r2, .L39+4
- 909 000c 1278     		ldrb	r2, [r2]	@ zero_extendqisi2
- 910 000e 92B2     		uxth	r2, r2
- 911 0010 1046     		mov	r0, r2
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccXf3B6W.s 			page 23
-
-
- 912 0012 9847     		blx	r3
- 913              	.LVL4:
- 914 0014 0346     		mov	r3, r0
+ 924              		.loc 1 321 19
+ 925 0004 054B     		ldr	r3, .L40
+ 926 0006 1B68     		ldr	r3, [r3]
+ 927 0008 1B6A     		ldr	r3, [r3, #32]
+ 928              		.loc 1 321 11
+ 929 000a 054A     		ldr	r2, .L40+4
+ 930 000c 1278     		ldrb	r2, [r2]	@ zero_extendqisi2
+ 931 000e 92B2     		uxth	r2, r2
+ 932 0010 1046     		mov	r0, r2
+ 933 0012 9847     		blx	r3
+ 934              	.LVL4:
+ 935 0014 0346     		mov	r3, r0
  322:Core/Src/touch.c **** }
- 915              		.loc 1 322 1
- 916 0016 1846     		mov	r0, r3
- 917 0018 80BD     		pop	{r7, pc}
- 918              	.L40:
- 919 001a 00BF     		.align	2
- 920              	.L39:
- 921 001c 00000000 		.word	tsDriver
- 922 0020 00000000 		.word	I2cAddress
- 923              		.cfi_endproc
- 924              	.LFE150:
- 926              		.section	.text.BSP_TS_GetState,"ax",%progbits
- 927              		.align	1
- 928              		.global	BSP_TS_GetState
- 929              		.syntax unified
- 930              		.thumb
- 931              		.thumb_func
- 933              	BSP_TS_GetState:
- 934              	.LFB151:
+ 936              		.loc 1 322 1
+ 937 0016 1846     		mov	r0, r3
+ 938 0018 80BD     		pop	{r7, pc}
+ 939              	.L41:
+ 940 001a 00BF     		.align	2
+ 941              	.L40:
+ 942 001c 00000000 		.word	tsDriver
+ 943 0020 00000000 		.word	I2cAddress
+ 944              		.cfi_endproc
+ 945              	.LFE150:
+ 947              		.section	.text.BSP_TS_GetState,"ax",%progbits
+ 948              		.align	1
+ 949              		.global	BSP_TS_GetState
+ 950              		.syntax unified
+ 951              		.thumb
+ 952              		.thumb_func
+ 954              	BSP_TS_GetState:
+ 955              	.LFB151:
  323:Core/Src/touch.c **** 
  324:Core/Src/touch.c **** /**
  325:Core/Src/touch.c ****   * @brief  Returns status and positions of the touch screen.
@@ -1351,640 +1372,640 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccXf3B6W.s 			page 1
  328:Core/Src/touch.c ****   */
  329:Core/Src/touch.c **** uint8_t BSP_TS_GetState(TS_StateTypeDef *TS_State)
  330:Core/Src/touch.c **** {
- 935              		.loc 1 330 1
- 936              		.cfi_startproc
- 937              		@ args = 0, pretend = 0, frame = 80
- 938              		@ frame_needed = 1, uses_anonymous_args = 0
- 939 0000 90B5     		push	{r4, r7, lr}
- 940              	.LCFI32:
- 941              		.cfi_def_cfa_offset 12
- 942              		.cfi_offset 4, -12
- 943              		.cfi_offset 7, -8
- 944              		.cfi_offset 14, -4
- 945 0002 97B0     		sub	sp, sp, #92
- 946              	.LCFI33:
- 947              		.cfi_def_cfa_offset 104
- 948 0004 02AF     		add	r7, sp, #8
- 949              	.LCFI34:
- 950              		.cfi_def_cfa 7, 96
- 951 0006 7860     		str	r0, [r7, #4]
+ 956              		.loc 1 330 1
+ 957              		.cfi_startproc
+ 958              		@ args = 0, pretend = 0, frame = 80
+ 959              		@ frame_needed = 1, uses_anonymous_args = 0
+ 960 0000 90B5     		push	{r4, r7, lr}
+ 961              	.LCFI32:
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccqjonQ9.s 			page 24
+
+
+ 962              		.cfi_def_cfa_offset 12
+ 963              		.cfi_offset 4, -12
+ 964              		.cfi_offset 7, -8
+ 965              		.cfi_offset 14, -4
+ 966 0002 97B0     		sub	sp, sp, #92
+ 967              	.LCFI33:
+ 968              		.cfi_def_cfa_offset 104
+ 969 0004 02AF     		add	r7, sp, #8
+ 970              	.LCFI34:
+ 971              		.cfi_def_cfa 7, 96
+ 972 0006 7860     		str	r0, [r7, #4]
  331:Core/Src/touch.c ****   static uint32_t _x[TS_MAX_NB_TOUCH] = {0, 0};
  332:Core/Src/touch.c ****   static uint32_t _y[TS_MAX_NB_TOUCH] = {0, 0};
  333:Core/Src/touch.c ****   uint8_t ts_status = TS_OK;
- 952              		.loc 1 333 11
- 953 0008 0023     		movs	r3, #0
- 954 000a 87F84F30 		strb	r3, [r7, #79]
+ 973              		.loc 1 333 11
+ 974 0008 0023     		movs	r3, #0
+ 975 000a 87F84F30 		strb	r3, [r7, #79]
  334:Core/Src/touch.c ****   uint16_t x[TS_MAX_NB_TOUCH];
  335:Core/Src/touch.c ****   uint16_t y[TS_MAX_NB_TOUCH];
  336:Core/Src/touch.c ****   uint16_t brute_x[TS_MAX_NB_TOUCH];
  337:Core/Src/touch.c ****   uint16_t brute_y[TS_MAX_NB_TOUCH];
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccXf3B6W.s 			page 24
-
-
  338:Core/Src/touch.c ****   uint16_t x_diff;
  339:Core/Src/touch.c ****   uint16_t y_diff;
  340:Core/Src/touch.c ****   uint32_t index;
  341:Core/Src/touch.c **** #if (TS_MULTI_TOUCH_SUPPORTED == 1)
  342:Core/Src/touch.c ****   uint32_t weight = 0;
- 955              		.loc 1 342 12
- 956 000e 0023     		movs	r3, #0
- 957 0010 3B61     		str	r3, [r7, #16]
+ 976              		.loc 1 342 12
+ 977 000e 0023     		movs	r3, #0
+ 978 0010 3B61     		str	r3, [r7, #16]
  343:Core/Src/touch.c ****   uint32_t area = 0;
- 958              		.loc 1 343 12
- 959 0012 0023     		movs	r3, #0
- 960 0014 FB60     		str	r3, [r7, #12]
+ 979              		.loc 1 343 12
+ 980 0012 0023     		movs	r3, #0
+ 981 0014 FB60     		str	r3, [r7, #12]
  344:Core/Src/touch.c ****   uint32_t event = 0;
- 961              		.loc 1 344 12
- 962 0016 0023     		movs	r3, #0
- 963 0018 BB60     		str	r3, [r7, #8]
+ 982              		.loc 1 344 12
+ 983 0016 0023     		movs	r3, #0
+ 984 0018 BB60     		str	r3, [r7, #8]
  345:Core/Src/touch.c **** #endif /* TS_MULTI_TOUCH_SUPPORTED == 1 */
  346:Core/Src/touch.c **** 
  347:Core/Src/touch.c ****   /* Check and update the number of touches active detected */
  348:Core/Src/touch.c ****   TS_State->touchDetected = tsDriver->DetectTouch(I2cAddress);
- 964              		.loc 1 348 37
- 965 001a B44B     		ldr	r3, .L64
- 966 001c 1B68     		ldr	r3, [r3]
- 967 001e 1B69     		ldr	r3, [r3, #16]
- 968              		.loc 1 348 29
- 969 0020 B34A     		ldr	r2, .L64+4
- 970 0022 1278     		ldrb	r2, [r2]	@ zero_extendqisi2
- 971 0024 92B2     		uxth	r2, r2
- 972 0026 1046     		mov	r0, r2
- 973 0028 9847     		blx	r3
- 974              	.LVL5:
- 975 002a 0346     		mov	r3, r0
- 976 002c 1A46     		mov	r2, r3
- 977              		.loc 1 348 27
- 978 002e 7B68     		ldr	r3, [r7, #4]
- 979 0030 1A70     		strb	r2, [r3]
+ 985              		.loc 1 348 37
+ 986 001a B44B     		ldr	r3, .L65
+ 987 001c 1B68     		ldr	r3, [r3]
+ 988 001e 1B69     		ldr	r3, [r3, #16]
+ 989              		.loc 1 348 29
+ 990 0020 B34A     		ldr	r2, .L65+4
+ 991 0022 1278     		ldrb	r2, [r2]	@ zero_extendqisi2
+ 992 0024 92B2     		uxth	r2, r2
+ 993 0026 1046     		mov	r0, r2
+ 994 0028 9847     		blx	r3
+ 995              	.LVL5:
+ 996 002a 0346     		mov	r3, r0
+ 997 002c 1A46     		mov	r2, r3
+ 998              		.loc 1 348 27
+ 999 002e 7B68     		ldr	r3, [r7, #4]
+ 1000 0030 1A70     		strb	r2, [r3]
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccqjonQ9.s 			page 25
+
+
  349:Core/Src/touch.c ****   
  350:Core/Src/touch.c ****   if(TS_State->touchDetected)
- 980              		.loc 1 350 14
- 981 0032 7B68     		ldr	r3, [r7, #4]
- 982 0034 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
- 983              		.loc 1 350 5
- 984 0036 002B     		cmp	r3, #0
- 985 0038 00F09681 		beq	.L42
+ 1001              		.loc 1 350 14
+ 1002 0032 7B68     		ldr	r3, [r7, #4]
+ 1003 0034 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 1004              		.loc 1 350 5
+ 1005 0036 002B     		cmp	r3, #0
+ 1006 0038 00F09681 		beq	.L43
  351:Core/Src/touch.c ****   {
  352:Core/Src/touch.c ****     for(index=0; index < TS_State->touchDetected; index++)
- 986              		.loc 1 352 14
- 987 003c 0023     		movs	r3, #0
- 988 003e BB64     		str	r3, [r7, #72]
- 989              		.loc 1 352 5
- 990 0040 85E1     		b	.L43
- 991              	.L62:
+ 1007              		.loc 1 352 14
+ 1008 003c 0023     		movs	r3, #0
+ 1009 003e BB64     		str	r3, [r7, #72]
+ 1010              		.loc 1 352 5
+ 1011 0040 85E1     		b	.L44
+ 1012              	.L63:
  353:Core/Src/touch.c ****     {
  354:Core/Src/touch.c ****       /* Get each touch coordinates */
  355:Core/Src/touch.c ****       tsDriver->GetXY(I2cAddress, &(brute_x[index]), &(brute_y[index]));
- 992              		.loc 1 355 15
- 993 0042 AA4B     		ldr	r3, .L64
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccXf3B6W.s 			page 25
-
-
- 994 0044 1B68     		ldr	r3, [r3]
- 995 0046 5B69     		ldr	r3, [r3, #20]
- 996              		.loc 1 355 7
- 997 0048 A94A     		ldr	r2, .L64+4
- 998 004a 1278     		ldrb	r2, [r2]	@ zero_extendqisi2
- 999 004c 90B2     		uxth	r0, r2
- 1000 004e 07F12001 		add	r1, r7, #32
- 1001 0052 BA6C     		ldr	r2, [r7, #72]
- 1002 0054 5200     		lsls	r2, r2, #1
- 1003 0056 8C18     		adds	r4, r1, r2
- 1004 0058 07F11401 		add	r1, r7, #20
- 1005 005c BA6C     		ldr	r2, [r7, #72]
- 1006 005e 5200     		lsls	r2, r2, #1
- 1007 0060 0A44     		add	r2, r2, r1
- 1008 0062 2146     		mov	r1, r4
- 1009 0064 9847     		blx	r3
- 1010              	.LVL6:
+ 1013              		.loc 1 355 15
+ 1014 0042 AA4B     		ldr	r3, .L65
+ 1015 0044 1B68     		ldr	r3, [r3]
+ 1016 0046 5B69     		ldr	r3, [r3, #20]
+ 1017              		.loc 1 355 7
+ 1018 0048 A94A     		ldr	r2, .L65+4
+ 1019 004a 1278     		ldrb	r2, [r2]	@ zero_extendqisi2
+ 1020 004c 90B2     		uxth	r0, r2
+ 1021 004e 07F12001 		add	r1, r7, #32
+ 1022 0052 BA6C     		ldr	r2, [r7, #72]
+ 1023 0054 5200     		lsls	r2, r2, #1
+ 1024 0056 8C18     		adds	r4, r1, r2
+ 1025 0058 07F11401 		add	r1, r7, #20
+ 1026 005c BA6C     		ldr	r2, [r7, #72]
+ 1027 005e 5200     		lsls	r2, r2, #1
+ 1028 0060 0A44     		add	r2, r2, r1
+ 1029 0062 2146     		mov	r1, r4
+ 1030 0064 9847     		blx	r3
+ 1031              	.LVL6:
  356:Core/Src/touch.c **** 
  357:Core/Src/touch.c ****       if(tsOrientation == TS_SWAP_NONE)
- 1011              		.loc 1 357 24
- 1012 0066 A34B     		ldr	r3, .L64+8
- 1013 0068 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
- 1014              		.loc 1 357 9
- 1015 006a 012B     		cmp	r3, #1
- 1016 006c 17D1     		bne	.L44
+ 1032              		.loc 1 357 24
+ 1033 0066 A34B     		ldr	r3, .L65+8
+ 1034 0068 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 1035              		.loc 1 357 9
+ 1036 006a 012B     		cmp	r3, #1
+ 1037 006c 17D1     		bne	.L45
  358:Core/Src/touch.c ****       {
  359:Core/Src/touch.c ****         x[index] = brute_x[index];
- 1017              		.loc 1 359 27
- 1018 006e BB6C     		ldr	r3, [r7, #72]
- 1019 0070 5B00     		lsls	r3, r3, #1
- 1020 0072 5033     		adds	r3, r3, #80
- 1021 0074 3B44     		add	r3, r3, r7
- 1022 0076 33F8302C 		ldrh	r2, [r3, #-48]
- 1023              		.loc 1 359 18
- 1024 007a BB6C     		ldr	r3, [r7, #72]
- 1025 007c 5B00     		lsls	r3, r3, #1
- 1026 007e 5033     		adds	r3, r3, #80
- 1027 0080 3B44     		add	r3, r3, r7
- 1028 0082 23F8182C 		strh	r2, [r3, #-24]	@ movhi
+ 1038              		.loc 1 359 27
+ 1039 006e BB6C     		ldr	r3, [r7, #72]
+ 1040 0070 5B00     		lsls	r3, r3, #1
+ 1041 0072 5033     		adds	r3, r3, #80
+ 1042 0074 3B44     		add	r3, r3, r7
+ 1043 0076 33F8302C 		ldrh	r2, [r3, #-48]
+ 1044              		.loc 1 359 18
+ 1045 007a BB6C     		ldr	r3, [r7, #72]
+ 1046 007c 5B00     		lsls	r3, r3, #1
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccqjonQ9.s 			page 26
+
+
+ 1047 007e 5033     		adds	r3, r3, #80
+ 1048 0080 3B44     		add	r3, r3, r7
+ 1049 0082 23F8182C 		strh	r2, [r3, #-24]	@ movhi
  360:Core/Src/touch.c ****         y[index] = brute_y[index];
- 1029              		.loc 1 360 27
- 1030 0086 BB6C     		ldr	r3, [r7, #72]
- 1031 0088 5B00     		lsls	r3, r3, #1
- 1032 008a 5033     		adds	r3, r3, #80
- 1033 008c 3B44     		add	r3, r3, r7
- 1034 008e 33F83C2C 		ldrh	r2, [r3, #-60]
- 1035              		.loc 1 360 18
- 1036 0092 BB6C     		ldr	r3, [r7, #72]
- 1037 0094 5B00     		lsls	r3, r3, #1
- 1038 0096 5033     		adds	r3, r3, #80
- 1039 0098 3B44     		add	r3, r3, r7
- 1040 009a 23F8242C 		strh	r2, [r3, #-36]	@ movhi
- 1041              	.L44:
+ 1050              		.loc 1 360 27
+ 1051 0086 BB6C     		ldr	r3, [r7, #72]
+ 1052 0088 5B00     		lsls	r3, r3, #1
+ 1053 008a 5033     		adds	r3, r3, #80
+ 1054 008c 3B44     		add	r3, r3, r7
+ 1055 008e 33F83C2C 		ldrh	r2, [r3, #-60]
+ 1056              		.loc 1 360 18
+ 1057 0092 BB6C     		ldr	r3, [r7, #72]
+ 1058 0094 5B00     		lsls	r3, r3, #1
+ 1059 0096 5033     		adds	r3, r3, #80
+ 1060 0098 3B44     		add	r3, r3, r7
+ 1061 009a 23F8242C 		strh	r2, [r3, #-36]	@ movhi
+ 1062              	.L45:
  361:Core/Src/touch.c ****       }
  362:Core/Src/touch.c **** 
  363:Core/Src/touch.c ****       if(tsOrientation & TS_SWAP_X)
- 1042              		.loc 1 363 24
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccXf3B6W.s 			page 26
-
-
- 1043 009e 954B     		ldr	r3, .L64+8
- 1044 00a0 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
- 1045 00a2 03F00203 		and	r3, r3, #2
- 1046              		.loc 1 363 9
- 1047 00a6 002B     		cmp	r3, #0
- 1048 00a8 0ED0     		beq	.L45
+ 1063              		.loc 1 363 24
+ 1064 009e 954B     		ldr	r3, .L65+8
+ 1065 00a0 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 1066 00a2 03F00203 		and	r3, r3, #2
+ 1067              		.loc 1 363 9
+ 1068 00a6 002B     		cmp	r3, #0
+ 1069 00a8 0ED0     		beq	.L46
  364:Core/Src/touch.c ****       {
  365:Core/Src/touch.c ****         x[index] = 4096 - brute_x[index];
- 1049              		.loc 1 365 34
- 1050 00aa BB6C     		ldr	r3, [r7, #72]
- 1051 00ac 5B00     		lsls	r3, r3, #1
- 1052 00ae 5033     		adds	r3, r3, #80
- 1053 00b0 3B44     		add	r3, r3, r7
- 1054 00b2 33F8303C 		ldrh	r3, [r3, #-48]
- 1055              		.loc 1 365 25
- 1056 00b6 C3F58053 		rsb	r3, r3, #4096
- 1057 00ba 9AB2     		uxth	r2, r3
- 1058              		.loc 1 365 18
- 1059 00bc BB6C     		ldr	r3, [r7, #72]
- 1060 00be 5B00     		lsls	r3, r3, #1
- 1061 00c0 5033     		adds	r3, r3, #80
- 1062 00c2 3B44     		add	r3, r3, r7
- 1063 00c4 23F8182C 		strh	r2, [r3, #-24]	@ movhi
- 1064              	.L45:
+ 1070              		.loc 1 365 34
+ 1071 00aa BB6C     		ldr	r3, [r7, #72]
+ 1072 00ac 5B00     		lsls	r3, r3, #1
+ 1073 00ae 5033     		adds	r3, r3, #80
+ 1074 00b0 3B44     		add	r3, r3, r7
+ 1075 00b2 33F8303C 		ldrh	r3, [r3, #-48]
+ 1076              		.loc 1 365 25
+ 1077 00b6 C3F58053 		rsb	r3, r3, #4096
+ 1078 00ba 9AB2     		uxth	r2, r3
+ 1079              		.loc 1 365 18
+ 1080 00bc BB6C     		ldr	r3, [r7, #72]
+ 1081 00be 5B00     		lsls	r3, r3, #1
+ 1082 00c0 5033     		adds	r3, r3, #80
+ 1083 00c2 3B44     		add	r3, r3, r7
+ 1084 00c4 23F8182C 		strh	r2, [r3, #-24]	@ movhi
+ 1085              	.L46:
  366:Core/Src/touch.c ****       }
  367:Core/Src/touch.c **** 
  368:Core/Src/touch.c ****       if(tsOrientation & TS_SWAP_Y)
- 1065              		.loc 1 368 24
- 1066 00c8 8A4B     		ldr	r3, .L64+8
- 1067 00ca 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
- 1068 00cc 03F00403 		and	r3, r3, #4
- 1069              		.loc 1 368 9
- 1070 00d0 002B     		cmp	r3, #0
- 1071 00d2 0ED0     		beq	.L46
+ 1086              		.loc 1 368 24
+ 1087 00c8 8A4B     		ldr	r3, .L65+8
+ 1088 00ca 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 1089 00cc 03F00403 		and	r3, r3, #4
+ 1090              		.loc 1 368 9
+ 1091 00d0 002B     		cmp	r3, #0
+ 1092 00d2 0ED0     		beq	.L47
  369:Core/Src/touch.c ****       {
  370:Core/Src/touch.c ****         y[index] = 4096 - brute_y[index];
- 1072              		.loc 1 370 34
- 1073 00d4 BB6C     		ldr	r3, [r7, #72]
- 1074 00d6 5B00     		lsls	r3, r3, #1
- 1075 00d8 5033     		adds	r3, r3, #80
- 1076 00da 3B44     		add	r3, r3, r7
- 1077 00dc 33F83C3C 		ldrh	r3, [r3, #-60]
- 1078              		.loc 1 370 25
- 1079 00e0 C3F58053 		rsb	r3, r3, #4096
- 1080 00e4 9AB2     		uxth	r2, r3
- 1081              		.loc 1 370 18
- 1082 00e6 BB6C     		ldr	r3, [r7, #72]
- 1083 00e8 5B00     		lsls	r3, r3, #1
- 1084 00ea 5033     		adds	r3, r3, #80
- 1085 00ec 3B44     		add	r3, r3, r7
- 1086 00ee 23F8242C 		strh	r2, [r3, #-36]	@ movhi
- 1087              	.L46:
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccqjonQ9.s 			page 27
+
+
+ 1093              		.loc 1 370 34
+ 1094 00d4 BB6C     		ldr	r3, [r7, #72]
+ 1095 00d6 5B00     		lsls	r3, r3, #1
+ 1096 00d8 5033     		adds	r3, r3, #80
+ 1097 00da 3B44     		add	r3, r3, r7
+ 1098 00dc 33F83C3C 		ldrh	r3, [r3, #-60]
+ 1099              		.loc 1 370 25
+ 1100 00e0 C3F58053 		rsb	r3, r3, #4096
+ 1101 00e4 9AB2     		uxth	r2, r3
+ 1102              		.loc 1 370 18
+ 1103 00e6 BB6C     		ldr	r3, [r7, #72]
+ 1104 00e8 5B00     		lsls	r3, r3, #1
+ 1105 00ea 5033     		adds	r3, r3, #80
+ 1106 00ec 3B44     		add	r3, r3, r7
+ 1107 00ee 23F8242C 		strh	r2, [r3, #-36]	@ movhi
+ 1108              	.L47:
  371:Core/Src/touch.c ****       }
  372:Core/Src/touch.c **** 
  373:Core/Src/touch.c ****       if(tsOrientation & TS_SWAP_XY)
- 1088              		.loc 1 373 24
- 1089 00f2 804B     		ldr	r3, .L64+8
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccXf3B6W.s 			page 27
-
-
- 1090 00f4 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
- 1091 00f6 03F00803 		and	r3, r3, #8
- 1092              		.loc 1 373 9
- 1093 00fa 002B     		cmp	r3, #0
- 1094 00fc 17D0     		beq	.L47
+ 1109              		.loc 1 373 24
+ 1110 00f2 804B     		ldr	r3, .L65+8
+ 1111 00f4 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 1112 00f6 03F00803 		and	r3, r3, #8
+ 1113              		.loc 1 373 9
+ 1114 00fa 002B     		cmp	r3, #0
+ 1115 00fc 17D0     		beq	.L48
  374:Core/Src/touch.c ****       {
  375:Core/Src/touch.c ****         y[index] = brute_x[index];
- 1095              		.loc 1 375 27
- 1096 00fe BB6C     		ldr	r3, [r7, #72]
- 1097 0100 5B00     		lsls	r3, r3, #1
- 1098 0102 5033     		adds	r3, r3, #80
- 1099 0104 3B44     		add	r3, r3, r7
- 1100 0106 33F8302C 		ldrh	r2, [r3, #-48]
- 1101              		.loc 1 375 18
- 1102 010a BB6C     		ldr	r3, [r7, #72]
- 1103 010c 5B00     		lsls	r3, r3, #1
- 1104 010e 5033     		adds	r3, r3, #80
- 1105 0110 3B44     		add	r3, r3, r7
- 1106 0112 23F8242C 		strh	r2, [r3, #-36]	@ movhi
+ 1116              		.loc 1 375 27
+ 1117 00fe BB6C     		ldr	r3, [r7, #72]
+ 1118 0100 5B00     		lsls	r3, r3, #1
+ 1119 0102 5033     		adds	r3, r3, #80
+ 1120 0104 3B44     		add	r3, r3, r7
+ 1121 0106 33F8302C 		ldrh	r2, [r3, #-48]
+ 1122              		.loc 1 375 18
+ 1123 010a BB6C     		ldr	r3, [r7, #72]
+ 1124 010c 5B00     		lsls	r3, r3, #1
+ 1125 010e 5033     		adds	r3, r3, #80
+ 1126 0110 3B44     		add	r3, r3, r7
+ 1127 0112 23F8242C 		strh	r2, [r3, #-36]	@ movhi
  376:Core/Src/touch.c ****         x[index] = brute_y[index];
- 1107              		.loc 1 376 27
- 1108 0116 BB6C     		ldr	r3, [r7, #72]
- 1109 0118 5B00     		lsls	r3, r3, #1
- 1110 011a 5033     		adds	r3, r3, #80
- 1111 011c 3B44     		add	r3, r3, r7
- 1112 011e 33F83C2C 		ldrh	r2, [r3, #-60]
- 1113              		.loc 1 376 18
- 1114 0122 BB6C     		ldr	r3, [r7, #72]
- 1115 0124 5B00     		lsls	r3, r3, #1
- 1116 0126 5033     		adds	r3, r3, #80
- 1117 0128 3B44     		add	r3, r3, r7
- 1118 012a 23F8182C 		strh	r2, [r3, #-24]	@ movhi
- 1119              	.L47:
+ 1128              		.loc 1 376 27
+ 1129 0116 BB6C     		ldr	r3, [r7, #72]
+ 1130 0118 5B00     		lsls	r3, r3, #1
+ 1131 011a 5033     		adds	r3, r3, #80
+ 1132 011c 3B44     		add	r3, r3, r7
+ 1133 011e 33F83C2C 		ldrh	r2, [r3, #-60]
+ 1134              		.loc 1 376 18
+ 1135 0122 BB6C     		ldr	r3, [r7, #72]
+ 1136 0124 5B00     		lsls	r3, r3, #1
+ 1137 0126 5033     		adds	r3, r3, #80
+ 1138 0128 3B44     		add	r3, r3, r7
+ 1139 012a 23F8182C 		strh	r2, [r3, #-24]	@ movhi
+ 1140              	.L48:
  377:Core/Src/touch.c ****       }
  378:Core/Src/touch.c **** 
  379:Core/Src/touch.c ****       x_diff = x[index] > _x[index]? (x[index] - _x[index]): (_x[index] - x[index]);
- 1120              		.loc 1 379 17
- 1121 012e BB6C     		ldr	r3, [r7, #72]
- 1122 0130 5B00     		lsls	r3, r3, #1
- 1123 0132 5033     		adds	r3, r3, #80
- 1124 0134 3B44     		add	r3, r3, r7
- 1125 0136 33F8183C 		ldrh	r3, [r3, #-24]
- 1126 013a 1946     		mov	r1, r3
- 1127              		.loc 1 379 29
- 1128 013c 6E4A     		ldr	r2, .L64+12
- 1129 013e BB6C     		ldr	r3, [r7, #72]
- 1130 0140 52F82330 		ldr	r3, [r2, r3, lsl #2]
- 1131              		.loc 1 379 14
- 1132 0144 9942     		cmp	r1, r3
- 1133 0146 0DD9     		bls	.L48
- 1134              		.loc 1 379 40 discriminator 1
- 1135 0148 BB6C     		ldr	r3, [r7, #72]
- 1136 014a 5B00     		lsls	r3, r3, #1
- 1137 014c 5033     		adds	r3, r3, #80
- 1138 014e 3B44     		add	r3, r3, r7
- 1139 0150 33F8182C 		ldrh	r2, [r3, #-24]
- 1140              		.loc 1 379 52 discriminator 1
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccXf3B6W.s 			page 28
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccqjonQ9.s 			page 28
 
 
- 1141 0154 6849     		ldr	r1, .L64+12
- 1142 0156 BB6C     		ldr	r3, [r7, #72]
- 1143 0158 51F82330 		ldr	r3, [r1, r3, lsl #2]
- 1144              		.loc 1 379 48 discriminator 1
- 1145 015c 9BB2     		uxth	r3, r3
- 1146              		.loc 1 379 14 discriminator 1
- 1147 015e D31A     		subs	r3, r2, r3
- 1148 0160 9BB2     		uxth	r3, r3
- 1149 0162 0CE0     		b	.L49
- 1150              	.L48:
- 1151              		.loc 1 379 65 discriminator 2
- 1152 0164 644A     		ldr	r2, .L64+12
- 1153 0166 BB6C     		ldr	r3, [r7, #72]
- 1154 0168 52F82330 		ldr	r3, [r2, r3, lsl #2]
- 1155              		.loc 1 379 73 discriminator 2
- 1156 016c 9AB2     		uxth	r2, r3
- 1157              		.loc 1 379 76 discriminator 2
- 1158 016e BB6C     		ldr	r3, [r7, #72]
- 1159 0170 5B00     		lsls	r3, r3, #1
- 1160 0172 5033     		adds	r3, r3, #80
- 1161 0174 3B44     		add	r3, r3, r7
- 1162 0176 33F8183C 		ldrh	r3, [r3, #-24]
- 1163              		.loc 1 379 14 discriminator 2
- 1164 017a D31A     		subs	r3, r2, r3
- 1165 017c 9BB2     		uxth	r3, r3
- 1166              	.L49:
- 1167              		.loc 1 379 14 is_stmt 0 discriminator 4
- 1168 017e A7F84630 		strh	r3, [r7, #70]	@ movhi
+ 1141              		.loc 1 379 17
+ 1142 012e BB6C     		ldr	r3, [r7, #72]
+ 1143 0130 5B00     		lsls	r3, r3, #1
+ 1144 0132 5033     		adds	r3, r3, #80
+ 1145 0134 3B44     		add	r3, r3, r7
+ 1146 0136 33F8183C 		ldrh	r3, [r3, #-24]
+ 1147 013a 1946     		mov	r1, r3
+ 1148              		.loc 1 379 29
+ 1149 013c 6E4A     		ldr	r2, .L65+12
+ 1150 013e BB6C     		ldr	r3, [r7, #72]
+ 1151 0140 52F82330 		ldr	r3, [r2, r3, lsl #2]
+ 1152              		.loc 1 379 14
+ 1153 0144 9942     		cmp	r1, r3
+ 1154 0146 0DD9     		bls	.L49
+ 1155              		.loc 1 379 40 discriminator 1
+ 1156 0148 BB6C     		ldr	r3, [r7, #72]
+ 1157 014a 5B00     		lsls	r3, r3, #1
+ 1158 014c 5033     		adds	r3, r3, #80
+ 1159 014e 3B44     		add	r3, r3, r7
+ 1160 0150 33F8182C 		ldrh	r2, [r3, #-24]
+ 1161              		.loc 1 379 52 discriminator 1
+ 1162 0154 6849     		ldr	r1, .L65+12
+ 1163 0156 BB6C     		ldr	r3, [r7, #72]
+ 1164 0158 51F82330 		ldr	r3, [r1, r3, lsl #2]
+ 1165              		.loc 1 379 48 discriminator 1
+ 1166 015c 9BB2     		uxth	r3, r3
+ 1167              		.loc 1 379 14 discriminator 1
+ 1168 015e D31A     		subs	r3, r2, r3
+ 1169 0160 9BB2     		uxth	r3, r3
+ 1170 0162 0CE0     		b	.L50
+ 1171              	.L49:
+ 1172              		.loc 1 379 65 discriminator 2
+ 1173 0164 644A     		ldr	r2, .L65+12
+ 1174 0166 BB6C     		ldr	r3, [r7, #72]
+ 1175 0168 52F82330 		ldr	r3, [r2, r3, lsl #2]
+ 1176              		.loc 1 379 73 discriminator 2
+ 1177 016c 9AB2     		uxth	r2, r3
+ 1178              		.loc 1 379 76 discriminator 2
+ 1179 016e BB6C     		ldr	r3, [r7, #72]
+ 1180 0170 5B00     		lsls	r3, r3, #1
+ 1181 0172 5033     		adds	r3, r3, #80
+ 1182 0174 3B44     		add	r3, r3, r7
+ 1183 0176 33F8183C 		ldrh	r3, [r3, #-24]
+ 1184              		.loc 1 379 14 discriminator 2
+ 1185 017a D31A     		subs	r3, r2, r3
+ 1186 017c 9BB2     		uxth	r3, r3
+ 1187              	.L50:
+ 1188              		.loc 1 379 14 is_stmt 0 discriminator 4
+ 1189 017e A7F84630 		strh	r3, [r7, #70]	@ movhi
  380:Core/Src/touch.c ****       y_diff = y[index] > _y[index]? (y[index] - _y[index]): (_y[index] - y[index]);
- 1169              		.loc 1 380 17 is_stmt 1 discriminator 4
- 1170 0182 BB6C     		ldr	r3, [r7, #72]
- 1171 0184 5B00     		lsls	r3, r3, #1
- 1172 0186 5033     		adds	r3, r3, #80
- 1173 0188 3B44     		add	r3, r3, r7
- 1174 018a 33F8243C 		ldrh	r3, [r3, #-36]
- 1175 018e 1946     		mov	r1, r3
- 1176              		.loc 1 380 29 discriminator 4
- 1177 0190 5A4A     		ldr	r2, .L64+16
- 1178 0192 BB6C     		ldr	r3, [r7, #72]
- 1179 0194 52F82330 		ldr	r3, [r2, r3, lsl #2]
- 1180              		.loc 1 380 14 discriminator 4
- 1181 0198 9942     		cmp	r1, r3
- 1182 019a 0DD9     		bls	.L50
- 1183              		.loc 1 380 40 discriminator 1
- 1184 019c BB6C     		ldr	r3, [r7, #72]
- 1185 019e 5B00     		lsls	r3, r3, #1
- 1186 01a0 5033     		adds	r3, r3, #80
- 1187 01a2 3B44     		add	r3, r3, r7
- 1188 01a4 33F8242C 		ldrh	r2, [r3, #-36]
- 1189              		.loc 1 380 52 discriminator 1
- 1190 01a8 5449     		ldr	r1, .L64+16
- 1191 01aa BB6C     		ldr	r3, [r7, #72]
- 1192 01ac 51F82330 		ldr	r3, [r1, r3, lsl #2]
- 1193              		.loc 1 380 48 discriminator 1
- 1194 01b0 9BB2     		uxth	r3, r3
- 1195              		.loc 1 380 14 discriminator 1
- 1196 01b2 D31A     		subs	r3, r2, r3
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccXf3B6W.s 			page 29
+ 1190              		.loc 1 380 17 is_stmt 1 discriminator 4
+ 1191 0182 BB6C     		ldr	r3, [r7, #72]
+ 1192 0184 5B00     		lsls	r3, r3, #1
+ 1193 0186 5033     		adds	r3, r3, #80
+ 1194 0188 3B44     		add	r3, r3, r7
+ 1195 018a 33F8243C 		ldrh	r3, [r3, #-36]
+ 1196 018e 1946     		mov	r1, r3
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccqjonQ9.s 			page 29
 
 
- 1197 01b4 9BB2     		uxth	r3, r3
- 1198 01b6 0CE0     		b	.L51
- 1199              	.L50:
- 1200              		.loc 1 380 65 discriminator 2
- 1201 01b8 504A     		ldr	r2, .L64+16
- 1202 01ba BB6C     		ldr	r3, [r7, #72]
- 1203 01bc 52F82330 		ldr	r3, [r2, r3, lsl #2]
- 1204              		.loc 1 380 73 discriminator 2
- 1205 01c0 9AB2     		uxth	r2, r3
- 1206              		.loc 1 380 76 discriminator 2
- 1207 01c2 BB6C     		ldr	r3, [r7, #72]
- 1208 01c4 5B00     		lsls	r3, r3, #1
- 1209 01c6 5033     		adds	r3, r3, #80
- 1210 01c8 3B44     		add	r3, r3, r7
- 1211 01ca 33F8243C 		ldrh	r3, [r3, #-36]
- 1212              		.loc 1 380 14 discriminator 2
- 1213 01ce D31A     		subs	r3, r2, r3
- 1214 01d0 9BB2     		uxth	r3, r3
- 1215              	.L51:
- 1216              		.loc 1 380 14 is_stmt 0 discriminator 4
- 1217 01d2 A7F84430 		strh	r3, [r7, #68]	@ movhi
+ 1197              		.loc 1 380 29 discriminator 4
+ 1198 0190 5A4A     		ldr	r2, .L65+16
+ 1199 0192 BB6C     		ldr	r3, [r7, #72]
+ 1200 0194 52F82330 		ldr	r3, [r2, r3, lsl #2]
+ 1201              		.loc 1 380 14 discriminator 4
+ 1202 0198 9942     		cmp	r1, r3
+ 1203 019a 0DD9     		bls	.L51
+ 1204              		.loc 1 380 40 discriminator 1
+ 1205 019c BB6C     		ldr	r3, [r7, #72]
+ 1206 019e 5B00     		lsls	r3, r3, #1
+ 1207 01a0 5033     		adds	r3, r3, #80
+ 1208 01a2 3B44     		add	r3, r3, r7
+ 1209 01a4 33F8242C 		ldrh	r2, [r3, #-36]
+ 1210              		.loc 1 380 52 discriminator 1
+ 1211 01a8 5449     		ldr	r1, .L65+16
+ 1212 01aa BB6C     		ldr	r3, [r7, #72]
+ 1213 01ac 51F82330 		ldr	r3, [r1, r3, lsl #2]
+ 1214              		.loc 1 380 48 discriminator 1
+ 1215 01b0 9BB2     		uxth	r3, r3
+ 1216              		.loc 1 380 14 discriminator 1
+ 1217 01b2 D31A     		subs	r3, r2, r3
+ 1218 01b4 9BB2     		uxth	r3, r3
+ 1219 01b6 0CE0     		b	.L52
+ 1220              	.L51:
+ 1221              		.loc 1 380 65 discriminator 2
+ 1222 01b8 504A     		ldr	r2, .L65+16
+ 1223 01ba BB6C     		ldr	r3, [r7, #72]
+ 1224 01bc 52F82330 		ldr	r3, [r2, r3, lsl #2]
+ 1225              		.loc 1 380 73 discriminator 2
+ 1226 01c0 9AB2     		uxth	r2, r3
+ 1227              		.loc 1 380 76 discriminator 2
+ 1228 01c2 BB6C     		ldr	r3, [r7, #72]
+ 1229 01c4 5B00     		lsls	r3, r3, #1
+ 1230 01c6 5033     		adds	r3, r3, #80
+ 1231 01c8 3B44     		add	r3, r3, r7
+ 1232 01ca 33F8243C 		ldrh	r3, [r3, #-36]
+ 1233              		.loc 1 380 14 discriminator 2
+ 1234 01ce D31A     		subs	r3, r2, r3
+ 1235 01d0 9BB2     		uxth	r3, r3
+ 1236              	.L52:
+ 1237              		.loc 1 380 14 is_stmt 0 discriminator 4
+ 1238 01d2 A7F84430 		strh	r3, [r7, #68]	@ movhi
  381:Core/Src/touch.c **** 
  382:Core/Src/touch.c ****       if ((x_diff + y_diff) > 5)
- 1218              		.loc 1 382 19 is_stmt 1 discriminator 4
- 1219 01d6 B7F84620 		ldrh	r2, [r7, #70]
- 1220 01da B7F84430 		ldrh	r3, [r7, #68]
- 1221 01de 1344     		add	r3, r3, r2
- 1222              		.loc 1 382 10 discriminator 4
- 1223 01e0 052B     		cmp	r3, #5
- 1224 01e2 15DD     		ble	.L52
+ 1239              		.loc 1 382 19 is_stmt 1 discriminator 4
+ 1240 01d6 B7F84620 		ldrh	r2, [r7, #70]
+ 1241 01da B7F84430 		ldrh	r3, [r7, #68]
+ 1242 01de 1344     		add	r3, r3, r2
+ 1243              		.loc 1 382 10 discriminator 4
+ 1244 01e0 052B     		cmp	r3, #5
+ 1245 01e2 15DD     		ble	.L53
  383:Core/Src/touch.c ****       {
  384:Core/Src/touch.c ****         _x[index] = x[index];
- 1225              		.loc 1 384 22
- 1226 01e4 BB6C     		ldr	r3, [r7, #72]
- 1227 01e6 5B00     		lsls	r3, r3, #1
- 1228 01e8 5033     		adds	r3, r3, #80
- 1229 01ea 3B44     		add	r3, r3, r7
- 1230 01ec 33F8183C 		ldrh	r3, [r3, #-24]
- 1231 01f0 1946     		mov	r1, r3
- 1232              		.loc 1 384 19
- 1233 01f2 414A     		ldr	r2, .L64+12
- 1234 01f4 BB6C     		ldr	r3, [r7, #72]
- 1235 01f6 42F82310 		str	r1, [r2, r3, lsl #2]
+ 1246              		.loc 1 384 22
+ 1247 01e4 BB6C     		ldr	r3, [r7, #72]
+ 1248 01e6 5B00     		lsls	r3, r3, #1
+ 1249 01e8 5033     		adds	r3, r3, #80
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccqjonQ9.s 			page 30
+
+
+ 1250 01ea 3B44     		add	r3, r3, r7
+ 1251 01ec 33F8183C 		ldrh	r3, [r3, #-24]
+ 1252 01f0 1946     		mov	r1, r3
+ 1253              		.loc 1 384 19
+ 1254 01f2 414A     		ldr	r2, .L65+12
+ 1255 01f4 BB6C     		ldr	r3, [r7, #72]
+ 1256 01f6 42F82310 		str	r1, [r2, r3, lsl #2]
  385:Core/Src/touch.c ****         _y[index] = y[index];
- 1236              		.loc 1 385 22
- 1237 01fa BB6C     		ldr	r3, [r7, #72]
- 1238 01fc 5B00     		lsls	r3, r3, #1
- 1239 01fe 5033     		adds	r3, r3, #80
- 1240 0200 3B44     		add	r3, r3, r7
- 1241 0202 33F8243C 		ldrh	r3, [r3, #-36]
- 1242 0206 1946     		mov	r1, r3
- 1243              		.loc 1 385 19
- 1244 0208 3C4A     		ldr	r2, .L64+16
- 1245 020a BB6C     		ldr	r3, [r7, #72]
- 1246 020c 42F82310 		str	r1, [r2, r3, lsl #2]
- 1247              	.L52:
+ 1257              		.loc 1 385 22
+ 1258 01fa BB6C     		ldr	r3, [r7, #72]
+ 1259 01fc 5B00     		lsls	r3, r3, #1
+ 1260 01fe 5033     		adds	r3, r3, #80
+ 1261 0200 3B44     		add	r3, r3, r7
+ 1262 0202 33F8243C 		ldrh	r3, [r3, #-36]
+ 1263 0206 1946     		mov	r1, r3
+ 1264              		.loc 1 385 19
+ 1265 0208 3C4A     		ldr	r2, .L65+16
+ 1266 020a BB6C     		ldr	r3, [r7, #72]
+ 1267 020c 42F82310 		str	r1, [r2, r3, lsl #2]
+ 1268              	.L53:
  386:Core/Src/touch.c ****       }
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccXf3B6W.s 			page 30
-
-
  387:Core/Src/touch.c **** 
  388:Core/Src/touch.c ****       if(I2cAddress == FT5336_I2C_SLAVE_ADDRESS)
- 1248              		.loc 1 388 21
- 1249 0210 374B     		ldr	r3, .L64+4
- 1250 0212 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
- 1251              		.loc 1 388 9
- 1252 0214 702B     		cmp	r3, #112
- 1253 0216 19D1     		bne	.L53
+ 1269              		.loc 1 388 21
+ 1270 0210 374B     		ldr	r3, .L65+4
+ 1271 0212 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 1272              		.loc 1 388 9
+ 1273 0214 702B     		cmp	r3, #112
+ 1274 0216 19D1     		bne	.L54
  389:Core/Src/touch.c ****       {
  390:Core/Src/touch.c ****         TS_State->touchX[index] = x[index];
- 1254              		.loc 1 390 36
- 1255 0218 BB6C     		ldr	r3, [r7, #72]
- 1256 021a 5B00     		lsls	r3, r3, #1
- 1257 021c 5033     		adds	r3, r3, #80
- 1258 021e 3B44     		add	r3, r3, r7
- 1259 0220 33F8181C 		ldrh	r1, [r3, #-24]
- 1260              		.loc 1 390 33
- 1261 0224 7A68     		ldr	r2, [r7, #4]
- 1262 0226 BB6C     		ldr	r3, [r7, #72]
- 1263 0228 5B00     		lsls	r3, r3, #1
- 1264 022a 1344     		add	r3, r3, r2
- 1265 022c 0A46     		mov	r2, r1	@ movhi
- 1266 022e 5A80     		strh	r2, [r3, #2]	@ movhi
+ 1275              		.loc 1 390 36
+ 1276 0218 BB6C     		ldr	r3, [r7, #72]
+ 1277 021a 5B00     		lsls	r3, r3, #1
+ 1278 021c 5033     		adds	r3, r3, #80
+ 1279 021e 3B44     		add	r3, r3, r7
+ 1280 0220 33F8181C 		ldrh	r1, [r3, #-24]
+ 1281              		.loc 1 390 33
+ 1282 0224 7A68     		ldr	r2, [r7, #4]
+ 1283 0226 BB6C     		ldr	r3, [r7, #72]
+ 1284 0228 5B00     		lsls	r3, r3, #1
+ 1285 022a 1344     		add	r3, r3, r2
+ 1286 022c 0A46     		mov	r2, r1	@ movhi
+ 1287 022e 5A80     		strh	r2, [r3, #2]	@ movhi
  391:Core/Src/touch.c ****         TS_State->touchY[index] = y[index];
- 1267              		.loc 1 391 36
- 1268 0230 BB6C     		ldr	r3, [r7, #72]
- 1269 0232 5B00     		lsls	r3, r3, #1
- 1270 0234 5033     		adds	r3, r3, #80
- 1271 0236 3B44     		add	r3, r3, r7
- 1272 0238 33F8241C 		ldrh	r1, [r3, #-36]
- 1273              		.loc 1 391 33
- 1274 023c 7A68     		ldr	r2, [r7, #4]
- 1275 023e BB6C     		ldr	r3, [r7, #72]
- 1276 0240 0433     		adds	r3, r3, #4
- 1277 0242 5B00     		lsls	r3, r3, #1
- 1278 0244 1344     		add	r3, r3, r2
- 1279 0246 0A46     		mov	r2, r1	@ movhi
- 1280 0248 9A80     		strh	r2, [r3, #4]	@ movhi
- 1281 024a 22E0     		b	.L54
- 1282              	.L53:
+ 1288              		.loc 1 391 36
+ 1289 0230 BB6C     		ldr	r3, [r7, #72]
+ 1290 0232 5B00     		lsls	r3, r3, #1
+ 1291 0234 5033     		adds	r3, r3, #80
+ 1292 0236 3B44     		add	r3, r3, r7
+ 1293 0238 33F8241C 		ldrh	r1, [r3, #-36]
+ 1294              		.loc 1 391 33
+ 1295 023c 7A68     		ldr	r2, [r7, #4]
+ 1296 023e BB6C     		ldr	r3, [r7, #72]
+ 1297 0240 0433     		adds	r3, r3, #4
+ 1298 0242 5B00     		lsls	r3, r3, #1
+ 1299 0244 1344     		add	r3, r3, r2
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccqjonQ9.s 			page 31
+
+
+ 1300 0246 0A46     		mov	r2, r1	@ movhi
+ 1301 0248 9A80     		strh	r2, [r3, #4]	@ movhi
+ 1302 024a 22E0     		b	.L55
+ 1303              	.L54:
  392:Core/Src/touch.c ****       }
  393:Core/Src/touch.c ****       else
  394:Core/Src/touch.c ****       {
  395:Core/Src/touch.c ****         /* 2^12 = 4096 : indexes are expressed on a dynamic of 4096 */
  396:Core/Src/touch.c ****         TS_State->touchX[index] = (tsXBoundary * _x[index]) >> 12;
- 1283              		.loc 1 396 48
- 1284 024c 2C4B     		ldr	r3, .L64+20
- 1285 024e 1B88     		ldrh	r3, [r3]
- 1286 0250 1946     		mov	r1, r3
- 1287              		.loc 1 396 52
- 1288 0252 294A     		ldr	r2, .L64+12
- 1289 0254 BB6C     		ldr	r3, [r7, #72]
- 1290 0256 52F82330 		ldr	r3, [r2, r3, lsl #2]
- 1291              		.loc 1 396 48
- 1292 025a 01FB03F3 		mul	r3, r1, r3
- 1293              		.loc 1 396 61
- 1294 025e 1B0B     		lsrs	r3, r3, #12
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccXf3B6W.s 			page 31
-
-
- 1295              		.loc 1 396 33
- 1296 0260 99B2     		uxth	r1, r3
- 1297 0262 7A68     		ldr	r2, [r7, #4]
- 1298 0264 BB6C     		ldr	r3, [r7, #72]
- 1299 0266 5B00     		lsls	r3, r3, #1
- 1300 0268 1344     		add	r3, r3, r2
- 1301 026a 0A46     		mov	r2, r1	@ movhi
- 1302 026c 5A80     		strh	r2, [r3, #2]	@ movhi
+ 1304              		.loc 1 396 48
+ 1305 024c 2C4B     		ldr	r3, .L65+20
+ 1306 024e 1B88     		ldrh	r3, [r3]
+ 1307 0250 1946     		mov	r1, r3
+ 1308              		.loc 1 396 52
+ 1309 0252 294A     		ldr	r2, .L65+12
+ 1310 0254 BB6C     		ldr	r3, [r7, #72]
+ 1311 0256 52F82330 		ldr	r3, [r2, r3, lsl #2]
+ 1312              		.loc 1 396 48
+ 1313 025a 01FB03F3 		mul	r3, r1, r3
+ 1314              		.loc 1 396 61
+ 1315 025e 1B0B     		lsrs	r3, r3, #12
+ 1316              		.loc 1 396 33
+ 1317 0260 99B2     		uxth	r1, r3
+ 1318 0262 7A68     		ldr	r2, [r7, #4]
+ 1319 0264 BB6C     		ldr	r3, [r7, #72]
+ 1320 0266 5B00     		lsls	r3, r3, #1
+ 1321 0268 1344     		add	r3, r3, r2
+ 1322 026a 0A46     		mov	r2, r1	@ movhi
+ 1323 026c 5A80     		strh	r2, [r3, #2]	@ movhi
  397:Core/Src/touch.c ****         TS_State->touchY[index] = (tsYBoundary * _y[index]) >> 12;
- 1303              		.loc 1 397 48
- 1304 026e 254B     		ldr	r3, .L64+24
- 1305 0270 1B88     		ldrh	r3, [r3]
- 1306 0272 1946     		mov	r1, r3
- 1307              		.loc 1 397 52
- 1308 0274 214A     		ldr	r2, .L64+16
- 1309 0276 BB6C     		ldr	r3, [r7, #72]
- 1310 0278 52F82330 		ldr	r3, [r2, r3, lsl #2]
- 1311              		.loc 1 397 48
- 1312 027c 01FB03F3 		mul	r3, r1, r3
- 1313              		.loc 1 397 61
- 1314 0280 1B0B     		lsrs	r3, r3, #12
- 1315              		.loc 1 397 33
- 1316 0282 99B2     		uxth	r1, r3
- 1317 0284 7A68     		ldr	r2, [r7, #4]
- 1318 0286 BB6C     		ldr	r3, [r7, #72]
- 1319 0288 0433     		adds	r3, r3, #4
- 1320 028a 5B00     		lsls	r3, r3, #1
- 1321 028c 1344     		add	r3, r3, r2
- 1322 028e 0A46     		mov	r2, r1	@ movhi
- 1323 0290 9A80     		strh	r2, [r3, #4]	@ movhi
- 1324              	.L54:
+ 1324              		.loc 1 397 48
+ 1325 026e 254B     		ldr	r3, .L65+24
+ 1326 0270 1B88     		ldrh	r3, [r3]
+ 1327 0272 1946     		mov	r1, r3
+ 1328              		.loc 1 397 52
+ 1329 0274 214A     		ldr	r2, .L65+16
+ 1330 0276 BB6C     		ldr	r3, [r7, #72]
+ 1331 0278 52F82330 		ldr	r3, [r2, r3, lsl #2]
+ 1332              		.loc 1 397 48
+ 1333 027c 01FB03F3 		mul	r3, r1, r3
+ 1334              		.loc 1 397 61
+ 1335 0280 1B0B     		lsrs	r3, r3, #12
+ 1336              		.loc 1 397 33
+ 1337 0282 99B2     		uxth	r1, r3
+ 1338 0284 7A68     		ldr	r2, [r7, #4]
+ 1339 0286 BB6C     		ldr	r3, [r7, #72]
+ 1340 0288 0433     		adds	r3, r3, #4
+ 1341 028a 5B00     		lsls	r3, r3, #1
+ 1342 028c 1344     		add	r3, r3, r2
+ 1343 028e 0A46     		mov	r2, r1	@ movhi
+ 1344 0290 9A80     		strh	r2, [r3, #4]	@ movhi
+ 1345              	.L55:
  398:Core/Src/touch.c ****       }
  399:Core/Src/touch.c **** 
  400:Core/Src/touch.c **** #if (TS_MULTI_TOUCH_SUPPORTED == 1)
  401:Core/Src/touch.c **** 
  402:Core/Src/touch.c ****       /* Get touch info related to the current touch */
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccqjonQ9.s 			page 32
+
+
  403:Core/Src/touch.c ****       ft5336_TS_GetTouchInfo(I2cAddress, index, &weight, &area, &event);
- 1325              		.loc 1 403 7
- 1326 0292 174B     		ldr	r3, .L64+4
- 1327 0294 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
- 1328 0296 98B2     		uxth	r0, r3
- 1329 0298 07F10C01 		add	r1, r7, #12
- 1330 029c 07F11002 		add	r2, r7, #16
- 1331 02a0 07F10803 		add	r3, r7, #8
- 1332 02a4 0093     		str	r3, [sp]
- 1333 02a6 0B46     		mov	r3, r1
- 1334 02a8 B96C     		ldr	r1, [r7, #72]
- 1335 02aa FFF7FEFF 		bl	ft5336_TS_GetTouchInfo
+ 1346              		.loc 1 403 7
+ 1347 0292 174B     		ldr	r3, .L65+4
+ 1348 0294 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 1349 0296 98B2     		uxth	r0, r3
+ 1350 0298 07F10C01 		add	r1, r7, #12
+ 1351 029c 07F11002 		add	r2, r7, #16
+ 1352 02a0 07F10803 		add	r3, r7, #8
+ 1353 02a4 0093     		str	r3, [sp]
+ 1354 02a6 0B46     		mov	r3, r1
+ 1355 02a8 B96C     		ldr	r1, [r7, #72]
+ 1356 02aa FFF7FEFF 		bl	ft5336_TS_GetTouchInfo
  404:Core/Src/touch.c **** 
  405:Core/Src/touch.c ****       /* Update TS_State structure */
  406:Core/Src/touch.c ****       TS_State->touchWeight[index] = weight;
- 1336              		.loc 1 406 36
- 1337 02ae 3B69     		ldr	r3, [r7, #16]
- 1338 02b0 D9B2     		uxtb	r1, r3
- 1339 02b2 7A68     		ldr	r2, [r7, #4]
- 1340 02b4 BB6C     		ldr	r3, [r7, #72]
- 1341 02b6 1344     		add	r3, r3, r2
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccXf3B6W.s 			page 32
-
-
- 1342 02b8 1633     		adds	r3, r3, #22
- 1343 02ba 0A46     		mov	r2, r1
- 1344 02bc 1A70     		strb	r2, [r3]
+ 1357              		.loc 1 406 36
+ 1358 02ae 3B69     		ldr	r3, [r7, #16]
+ 1359 02b0 D9B2     		uxtb	r1, r3
+ 1360 02b2 7A68     		ldr	r2, [r7, #4]
+ 1361 02b4 BB6C     		ldr	r3, [r7, #72]
+ 1362 02b6 1344     		add	r3, r3, r2
+ 1363 02b8 1633     		adds	r3, r3, #22
+ 1364 02ba 0A46     		mov	r2, r1
+ 1365 02bc 1A70     		strb	r2, [r3]
  407:Core/Src/touch.c ****       TS_State->touchArea[index]   = area;
- 1345              		.loc 1 407 36
- 1346 02be FB68     		ldr	r3, [r7, #12]
- 1347 02c0 D9B2     		uxtb	r1, r3
- 1348 02c2 7A68     		ldr	r2, [r7, #4]
- 1349 02c4 BB6C     		ldr	r3, [r7, #72]
- 1350 02c6 1344     		add	r3, r3, r2
- 1351 02c8 2033     		adds	r3, r3, #32
- 1352 02ca 0A46     		mov	r2, r1
- 1353 02cc 1A70     		strb	r2, [r3]
+ 1366              		.loc 1 407 36
+ 1367 02be FB68     		ldr	r3, [r7, #12]
+ 1368 02c0 D9B2     		uxtb	r1, r3
+ 1369 02c2 7A68     		ldr	r2, [r7, #4]
+ 1370 02c4 BB6C     		ldr	r3, [r7, #72]
+ 1371 02c6 1344     		add	r3, r3, r2
+ 1372 02c8 2033     		adds	r3, r3, #32
+ 1373 02ca 0A46     		mov	r2, r1
+ 1374 02cc 1A70     		strb	r2, [r3]
  408:Core/Src/touch.c **** 
  409:Core/Src/touch.c ****       /* Remap touch event */
  410:Core/Src/touch.c ****       switch(event)
- 1354              		.loc 1 410 7
- 1355 02ce BB68     		ldr	r3, [r7, #8]
- 1356 02d0 032B     		cmp	r3, #3
- 1357 02d2 35D8     		bhi	.L55
- 1358 02d4 01A2     		adr	r2, .L57
- 1359 02d6 52F823F0 		ldr	pc, [r2, r3, lsl #2]
- 1360 02da 00BF     		.p2align 2
- 1361              	.L57:
- 1362 02dc 09030000 		.word	.L60+1
- 1363 02e0 17030000 		.word	.L59+1
- 1364 02e4 25030000 		.word	.L58+1
- 1365 02e8 33030000 		.word	.L56+1
- 1366              		.p2align 1
- 1367              	.L65:
- 1368              		.align	2
- 1369              	.L64:
- 1370 02ec 00000000 		.word	tsDriver
- 1371 02f0 00000000 		.word	I2cAddress
- 1372 02f4 00000000 		.word	tsOrientation
- 1373 02f8 00000000 		.word	_x.1
- 1374 02fc 00000000 		.word	_y.0
- 1375 0300 00000000 		.word	tsXBoundary
- 1376 0304 00000000 		.word	tsYBoundary
- 1377              	.L60:
+ 1375              		.loc 1 410 7
+ 1376 02ce BB68     		ldr	r3, [r7, #8]
+ 1377 02d0 032B     		cmp	r3, #3
+ 1378 02d2 35D8     		bhi	.L56
+ 1379 02d4 01A2     		adr	r2, .L58
+ 1380 02d6 52F823F0 		ldr	pc, [r2, r3, lsl #2]
+ 1381 02da 00BF     		.p2align 2
+ 1382              	.L58:
+ 1383 02dc 09030000 		.word	.L61+1
+ 1384 02e0 17030000 		.word	.L60+1
+ 1385 02e4 25030000 		.word	.L59+1
+ 1386 02e8 33030000 		.word	.L57+1
+ 1387              		.p2align 1
+ 1388              	.L66:
+ 1389              		.align	2
+ 1390              	.L65:
+ 1391 02ec 00000000 		.word	tsDriver
+ 1392 02f0 00000000 		.word	I2cAddress
+ 1393 02f4 00000000 		.word	tsOrientation
+ 1394 02f8 00000000 		.word	_x.1
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccqjonQ9.s 			page 33
+
+
+ 1395 02fc 00000000 		.word	_y.0
+ 1396 0300 00000000 		.word	tsXBoundary
+ 1397 0304 00000000 		.word	tsYBoundary
+ 1398              	.L61:
  411:Core/Src/touch.c ****       {
  412:Core/Src/touch.c ****         case FT5336_TOUCH_EVT_FLAG_PRESS_DOWN	:
  413:Core/Src/touch.c ****           TS_State->touchEventId[index] = TOUCH_EVENT_PRESS_DOWN;
- 1378              		.loc 1 413 41
- 1379 0308 7A68     		ldr	r2, [r7, #4]
- 1380 030a BB6C     		ldr	r3, [r7, #72]
- 1381 030c 1344     		add	r3, r3, r2
- 1382 030e 1B33     		adds	r3, r3, #27
- 1383 0310 0122     		movs	r2, #1
- 1384 0312 1A70     		strb	r2, [r3]
+ 1399              		.loc 1 413 41
+ 1400 0308 7A68     		ldr	r2, [r7, #4]
+ 1401 030a BB6C     		ldr	r3, [r7, #72]
+ 1402 030c 1344     		add	r3, r3, r2
+ 1403 030e 1B33     		adds	r3, r3, #27
+ 1404 0310 0122     		movs	r2, #1
+ 1405 0312 1A70     		strb	r2, [r3]
  414:Core/Src/touch.c ****           break;
- 1385              		.loc 1 414 11
- 1386 0314 18E0     		b	.L61
- 1387              	.L59:
+ 1406              		.loc 1 414 11
+ 1407 0314 18E0     		b	.L62
+ 1408              	.L60:
  415:Core/Src/touch.c ****         case FT5336_TOUCH_EVT_FLAG_LIFT_UP :
  416:Core/Src/touch.c ****           TS_State->touchEventId[index] = TOUCH_EVENT_LIFT_UP;
- 1388              		.loc 1 416 41
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccXf3B6W.s 			page 33
-
-
- 1389 0316 7A68     		ldr	r2, [r7, #4]
- 1390 0318 BB6C     		ldr	r3, [r7, #72]
- 1391 031a 1344     		add	r3, r3, r2
- 1392 031c 1B33     		adds	r3, r3, #27
- 1393 031e 0222     		movs	r2, #2
- 1394 0320 1A70     		strb	r2, [r3]
+ 1409              		.loc 1 416 41
+ 1410 0316 7A68     		ldr	r2, [r7, #4]
+ 1411 0318 BB6C     		ldr	r3, [r7, #72]
+ 1412 031a 1344     		add	r3, r3, r2
+ 1413 031c 1B33     		adds	r3, r3, #27
+ 1414 031e 0222     		movs	r2, #2
+ 1415 0320 1A70     		strb	r2, [r3]
  417:Core/Src/touch.c ****           break;
- 1395              		.loc 1 417 11
- 1396 0322 11E0     		b	.L61
- 1397              	.L58:
+ 1416              		.loc 1 417 11
+ 1417 0322 11E0     		b	.L62
+ 1418              	.L59:
  418:Core/Src/touch.c ****         case FT5336_TOUCH_EVT_FLAG_CONTACT :
  419:Core/Src/touch.c ****           TS_State->touchEventId[index] = TOUCH_EVENT_CONTACT;
- 1398              		.loc 1 419 41
- 1399 0324 7A68     		ldr	r2, [r7, #4]
- 1400 0326 BB6C     		ldr	r3, [r7, #72]
- 1401 0328 1344     		add	r3, r3, r2
- 1402 032a 1B33     		adds	r3, r3, #27
- 1403 032c 0322     		movs	r2, #3
- 1404 032e 1A70     		strb	r2, [r3]
+ 1419              		.loc 1 419 41
+ 1420 0324 7A68     		ldr	r2, [r7, #4]
+ 1421 0326 BB6C     		ldr	r3, [r7, #72]
+ 1422 0328 1344     		add	r3, r3, r2
+ 1423 032a 1B33     		adds	r3, r3, #27
+ 1424 032c 0322     		movs	r2, #3
+ 1425 032e 1A70     		strb	r2, [r3]
  420:Core/Src/touch.c ****           break;
- 1405              		.loc 1 420 11
- 1406 0330 0AE0     		b	.L61
- 1407              	.L56:
+ 1426              		.loc 1 420 11
+ 1427 0330 0AE0     		b	.L62
+ 1428              	.L57:
  421:Core/Src/touch.c ****         case FT5336_TOUCH_EVT_FLAG_NO_EVENT :
  422:Core/Src/touch.c ****           TS_State->touchEventId[index] = TOUCH_EVENT_NO_EVT;
- 1408              		.loc 1 422 41
- 1409 0332 7A68     		ldr	r2, [r7, #4]
- 1410 0334 BB6C     		ldr	r3, [r7, #72]
- 1411 0336 1344     		add	r3, r3, r2
- 1412 0338 1B33     		adds	r3, r3, #27
- 1413 033a 0022     		movs	r2, #0
- 1414 033c 1A70     		strb	r2, [r3]
+ 1429              		.loc 1 422 41
+ 1430 0332 7A68     		ldr	r2, [r7, #4]
+ 1431 0334 BB6C     		ldr	r3, [r7, #72]
+ 1432 0336 1344     		add	r3, r3, r2
+ 1433 0338 1B33     		adds	r3, r3, #27
+ 1434 033a 0022     		movs	r2, #0
+ 1435 033c 1A70     		strb	r2, [r3]
  423:Core/Src/touch.c ****           break;
- 1415              		.loc 1 423 11
- 1416 033e 03E0     		b	.L61
- 1417              	.L55:
+ 1436              		.loc 1 423 11
+ 1437 033e 03E0     		b	.L62
+ 1438              	.L56:
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccqjonQ9.s 			page 34
+
+
  424:Core/Src/touch.c ****         default :
  425:Core/Src/touch.c ****           ts_status = TS_ERROR;
- 1418              		.loc 1 425 21
- 1419 0340 0123     		movs	r3, #1
- 1420 0342 87F84F30 		strb	r3, [r7, #79]
+ 1439              		.loc 1 425 21
+ 1440 0340 0123     		movs	r3, #1
+ 1441 0342 87F84F30 		strb	r3, [r7, #79]
  426:Core/Src/touch.c ****           break;
- 1421              		.loc 1 426 11
- 1422 0346 00BF     		nop
- 1423              	.L61:
+ 1442              		.loc 1 426 11
+ 1443 0346 00BF     		nop
+ 1444              	.L62:
  352:Core/Src/touch.c ****     {
- 1424              		.loc 1 352 56 discriminator 2
- 1425 0348 BB6C     		ldr	r3, [r7, #72]
- 1426 034a 0133     		adds	r3, r3, #1
- 1427 034c BB64     		str	r3, [r7, #72]
- 1428              	.L43:
+ 1445              		.loc 1 352 56 discriminator 2
+ 1446 0348 BB6C     		ldr	r3, [r7, #72]
+ 1447 034a 0133     		adds	r3, r3, #1
+ 1448 034c BB64     		str	r3, [r7, #72]
+ 1449              	.L44:
  352:Core/Src/touch.c ****     {
- 1429              		.loc 1 352 34 discriminator 1
- 1430 034e 7B68     		ldr	r3, [r7, #4]
- 1431 0350 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
- 1432 0352 1A46     		mov	r2, r3
+ 1450              		.loc 1 352 34 discriminator 1
+ 1451 034e 7B68     		ldr	r3, [r7, #4]
+ 1452 0350 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 1453 0352 1A46     		mov	r2, r3
  352:Core/Src/touch.c ****     {
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccXf3B6W.s 			page 34
-
-
- 1433              		.loc 1 352 5 discriminator 1
- 1434 0354 BB6C     		ldr	r3, [r7, #72]
- 1435 0356 9342     		cmp	r3, r2
- 1436 0358 FFF473AE 		bcc	.L62
+ 1454              		.loc 1 352 5 discriminator 1
+ 1455 0354 BB6C     		ldr	r3, [r7, #72]
+ 1456 0356 9342     		cmp	r3, r2
+ 1457 0358 FFF473AE 		bcc	.L63
  427:Core/Src/touch.c ****       } /* of switch(event) */
  428:Core/Src/touch.c **** 
  429:Core/Src/touch.c **** #endif /* TS_MULTI_TOUCH_SUPPORTED == 1 */
@@ -1994,40 +2015,43 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccXf3B6W.s 			page 1
  433:Core/Src/touch.c **** #if (TS_MULTI_TOUCH_SUPPORTED == 1)
  434:Core/Src/touch.c ****     /* Get gesture Id */
  435:Core/Src/touch.c ****     ts_status = BSP_TS_Get_GestureId(TS_State);
- 1437              		.loc 1 435 17
- 1438 035c 7868     		ldr	r0, [r7, #4]
- 1439 035e FFF7FEFF 		bl	BSP_TS_Get_GestureId
- 1440 0362 0346     		mov	r3, r0
- 1441 0364 87F84F30 		strb	r3, [r7, #79]
- 1442              	.L42:
+ 1458              		.loc 1 435 17
+ 1459 035c 7868     		ldr	r0, [r7, #4]
+ 1460 035e FFF7FEFF 		bl	BSP_TS_Get_GestureId
+ 1461 0362 0346     		mov	r3, r0
+ 1462 0364 87F84F30 		strb	r3, [r7, #79]
+ 1463              	.L43:
  436:Core/Src/touch.c **** #endif /* TS_MULTI_TOUCH_SUPPORTED == 1 */
  437:Core/Src/touch.c **** 
  438:Core/Src/touch.c ****   } /* end of if(TS_State->touchDetected != 0) */
  439:Core/Src/touch.c **** 
  440:Core/Src/touch.c ****   return (ts_status);
- 1443              		.loc 1 440 10
- 1444 0368 97F84F30 		ldrb	r3, [r7, #79]	@ zero_extendqisi2
+ 1464              		.loc 1 440 10
+ 1465 0368 97F84F30 		ldrb	r3, [r7, #79]	@ zero_extendqisi2
  441:Core/Src/touch.c **** }
- 1445              		.loc 1 441 1
- 1446 036c 1846     		mov	r0, r3
- 1447 036e 5437     		adds	r7, r7, #84
- 1448              	.LCFI35:
- 1449              		.cfi_def_cfa_offset 12
- 1450 0370 BD46     		mov	sp, r7
- 1451              	.LCFI36:
- 1452              		.cfi_def_cfa_register 13
- 1453              		@ sp needed
- 1454 0372 90BD     		pop	{r4, r7, pc}
- 1455              		.cfi_endproc
- 1456              	.LFE151:
- 1458              		.section	.text.BSP_TS_Get_GestureId,"ax",%progbits
- 1459              		.align	1
- 1460              		.global	BSP_TS_Get_GestureId
- 1461              		.syntax unified
- 1462              		.thumb
- 1463              		.thumb_func
- 1465              	BSP_TS_Get_GestureId:
- 1466              	.LFB152:
+ 1466              		.loc 1 441 1
+ 1467 036c 1846     		mov	r0, r3
+ 1468 036e 5437     		adds	r7, r7, #84
+ 1469              	.LCFI35:
+ 1470              		.cfi_def_cfa_offset 12
+ 1471 0370 BD46     		mov	sp, r7
+ 1472              	.LCFI36:
+ 1473              		.cfi_def_cfa_register 13
+ 1474              		@ sp needed
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccqjonQ9.s 			page 35
+
+
+ 1475 0372 90BD     		pop	{r4, r7, pc}
+ 1476              		.cfi_endproc
+ 1477              	.LFE151:
+ 1479              		.section	.text.BSP_TS_Get_GestureId,"ax",%progbits
+ 1480              		.align	1
+ 1481              		.global	BSP_TS_Get_GestureId
+ 1482              		.syntax unified
+ 1483              		.thumb
+ 1484              		.thumb_func
+ 1486              	BSP_TS_Get_GestureId:
+ 1487              	.LFB152:
  442:Core/Src/touch.c **** 
  443:Core/Src/touch.c **** #if (TS_MULTI_TOUCH_SUPPORTED == 1)
  444:Core/Src/touch.c **** /**
@@ -2037,215 +2061,212 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccXf3B6W.s 			page 1
  448:Core/Src/touch.c ****   */
  449:Core/Src/touch.c **** uint8_t BSP_TS_Get_GestureId(TS_StateTypeDef *TS_State)
  450:Core/Src/touch.c **** {
- 1467              		.loc 1 450 1
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccXf3B6W.s 			page 35
-
-
- 1468              		.cfi_startproc
- 1469              		@ args = 0, pretend = 0, frame = 16
- 1470              		@ frame_needed = 1, uses_anonymous_args = 0
- 1471 0000 80B5     		push	{r7, lr}
- 1472              	.LCFI37:
- 1473              		.cfi_def_cfa_offset 8
- 1474              		.cfi_offset 7, -8
- 1475              		.cfi_offset 14, -4
- 1476 0002 84B0     		sub	sp, sp, #16
- 1477              	.LCFI38:
- 1478              		.cfi_def_cfa_offset 24
- 1479 0004 00AF     		add	r7, sp, #0
- 1480              	.LCFI39:
- 1481              		.cfi_def_cfa_register 7
- 1482 0006 7860     		str	r0, [r7, #4]
+ 1488              		.loc 1 450 1
+ 1489              		.cfi_startproc
+ 1490              		@ args = 0, pretend = 0, frame = 16
+ 1491              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1492 0000 80B5     		push	{r7, lr}
+ 1493              	.LCFI37:
+ 1494              		.cfi_def_cfa_offset 8
+ 1495              		.cfi_offset 7, -8
+ 1496              		.cfi_offset 14, -4
+ 1497 0002 84B0     		sub	sp, sp, #16
+ 1498              	.LCFI38:
+ 1499              		.cfi_def_cfa_offset 24
+ 1500 0004 00AF     		add	r7, sp, #0
+ 1501              	.LCFI39:
+ 1502              		.cfi_def_cfa_register 7
+ 1503 0006 7860     		str	r0, [r7, #4]
  451:Core/Src/touch.c ****   uint32_t gestureId = 0;
- 1483              		.loc 1 451 12
- 1484 0008 0023     		movs	r3, #0
- 1485 000a BB60     		str	r3, [r7, #8]
+ 1504              		.loc 1 451 12
+ 1505 0008 0023     		movs	r3, #0
+ 1506 000a BB60     		str	r3, [r7, #8]
  452:Core/Src/touch.c ****   uint8_t  ts_status = TS_OK;
- 1486              		.loc 1 452 12
- 1487 000c 0023     		movs	r3, #0
- 1488 000e FB73     		strb	r3, [r7, #15]
+ 1507              		.loc 1 452 12
+ 1508 000c 0023     		movs	r3, #0
+ 1509 000e FB73     		strb	r3, [r7, #15]
  453:Core/Src/touch.c **** 
  454:Core/Src/touch.c ****   /* Get gesture Id */
  455:Core/Src/touch.c ****   ft5336_TS_GetGestureID(I2cAddress, &gestureId);
- 1489              		.loc 1 455 3
- 1490 0010 3B4B     		ldr	r3, .L79
- 1491 0012 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
- 1492 0014 9BB2     		uxth	r3, r3
- 1493 0016 07F10802 		add	r2, r7, #8
- 1494 001a 1146     		mov	r1, r2
- 1495 001c 1846     		mov	r0, r3
- 1496 001e FFF7FEFF 		bl	ft5336_TS_GetGestureID
+ 1510              		.loc 1 455 3
+ 1511 0010 3B4B     		ldr	r3, .L80
+ 1512 0012 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 1513 0014 9BB2     		uxth	r3, r3
+ 1514 0016 07F10802 		add	r2, r7, #8
+ 1515 001a 1146     		mov	r1, r2
+ 1516 001c 1846     		mov	r0, r3
+ 1517 001e FFF7FEFF 		bl	ft5336_TS_GetGestureID
  456:Core/Src/touch.c **** 
  457:Core/Src/touch.c ****   /* Remap gesture Id to a TS_GestureIdTypeDef value */
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccqjonQ9.s 			page 36
+
+
  458:Core/Src/touch.c ****   switch(gestureId)
- 1497              		.loc 1 458 3
- 1498 0022 BB68     		ldr	r3, [r7, #8]
- 1499 0024 492B     		cmp	r3, #73
- 1500 0026 5ED0     		beq	.L67
- 1501 0028 492B     		cmp	r3, #73
- 1502 002a 60D8     		bhi	.L68
- 1503 002c 1C2B     		cmp	r3, #28
- 1504 002e 3FD8     		bhi	.L69
- 1505 0030 1C2B     		cmp	r3, #28
- 1506 0032 5CD8     		bhi	.L68
- 1507 0034 01A2     		adr	r2, .L71
- 1508 0036 52F823F0 		ldr	pc, [r2, r3, lsl #2]
- 1509 003a 00BF     		.p2align 2
- 1510              	.L71:
- 1511 003c B7000000 		.word	.L75+1
- 1512 0040 EF000000 		.word	.L68+1
- 1513 0044 EF000000 		.word	.L68+1
- 1514 0048 EF000000 		.word	.L68+1
- 1515 004c EF000000 		.word	.L68+1
- 1516 0050 EF000000 		.word	.L68+1
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccXf3B6W.s 			page 36
-
-
- 1517 0054 EF000000 		.word	.L68+1
- 1518 0058 EF000000 		.word	.L68+1
- 1519 005c EF000000 		.word	.L68+1
- 1520 0060 EF000000 		.word	.L68+1
- 1521 0064 EF000000 		.word	.L68+1
- 1522 0068 EF000000 		.word	.L68+1
- 1523 006c EF000000 		.word	.L68+1
- 1524 0070 EF000000 		.word	.L68+1
- 1525 0074 EF000000 		.word	.L68+1
- 1526 0078 EF000000 		.word	.L68+1
- 1527 007c BF000000 		.word	.L74+1
- 1528 0080 EF000000 		.word	.L68+1
- 1529 0084 EF000000 		.word	.L68+1
- 1530 0088 EF000000 		.word	.L68+1
- 1531 008c C7000000 		.word	.L73+1
- 1532 0090 EF000000 		.word	.L68+1
- 1533 0094 EF000000 		.word	.L68+1
- 1534 0098 EF000000 		.word	.L68+1
- 1535 009c CF000000 		.word	.L72+1
- 1536 00a0 EF000000 		.word	.L68+1
- 1537 00a4 EF000000 		.word	.L68+1
- 1538 00a8 EF000000 		.word	.L68+1
- 1539 00ac D7000000 		.word	.L70+1
- 1540              		.p2align 1
- 1541              	.L69:
- 1542 00b0 402B     		cmp	r3, #64
- 1543 00b2 14D0     		beq	.L76
- 1544 00b4 1BE0     		b	.L68
- 1545              	.L75:
+ 1518              		.loc 1 458 3
+ 1519 0022 BB68     		ldr	r3, [r7, #8]
+ 1520 0024 492B     		cmp	r3, #73
+ 1521 0026 5ED0     		beq	.L68
+ 1522 0028 492B     		cmp	r3, #73
+ 1523 002a 60D8     		bhi	.L69
+ 1524 002c 1C2B     		cmp	r3, #28
+ 1525 002e 3FD8     		bhi	.L70
+ 1526 0030 1C2B     		cmp	r3, #28
+ 1527 0032 5CD8     		bhi	.L69
+ 1528 0034 01A2     		adr	r2, .L72
+ 1529 0036 52F823F0 		ldr	pc, [r2, r3, lsl #2]
+ 1530 003a 00BF     		.p2align 2
+ 1531              	.L72:
+ 1532 003c B7000000 		.word	.L76+1
+ 1533 0040 EF000000 		.word	.L69+1
+ 1534 0044 EF000000 		.word	.L69+1
+ 1535 0048 EF000000 		.word	.L69+1
+ 1536 004c EF000000 		.word	.L69+1
+ 1537 0050 EF000000 		.word	.L69+1
+ 1538 0054 EF000000 		.word	.L69+1
+ 1539 0058 EF000000 		.word	.L69+1
+ 1540 005c EF000000 		.word	.L69+1
+ 1541 0060 EF000000 		.word	.L69+1
+ 1542 0064 EF000000 		.word	.L69+1
+ 1543 0068 EF000000 		.word	.L69+1
+ 1544 006c EF000000 		.word	.L69+1
+ 1545 0070 EF000000 		.word	.L69+1
+ 1546 0074 EF000000 		.word	.L69+1
+ 1547 0078 EF000000 		.word	.L69+1
+ 1548 007c BF000000 		.word	.L75+1
+ 1549 0080 EF000000 		.word	.L69+1
+ 1550 0084 EF000000 		.word	.L69+1
+ 1551 0088 EF000000 		.word	.L69+1
+ 1552 008c C7000000 		.word	.L74+1
+ 1553 0090 EF000000 		.word	.L69+1
+ 1554 0094 EF000000 		.word	.L69+1
+ 1555 0098 EF000000 		.word	.L69+1
+ 1556 009c CF000000 		.word	.L73+1
+ 1557 00a0 EF000000 		.word	.L69+1
+ 1558 00a4 EF000000 		.word	.L69+1
+ 1559 00a8 EF000000 		.word	.L69+1
+ 1560 00ac D7000000 		.word	.L71+1
+ 1561              		.p2align 1
+ 1562              	.L70:
+ 1563 00b0 402B     		cmp	r3, #64
+ 1564 00b2 14D0     		beq	.L77
+ 1565 00b4 1BE0     		b	.L69
+ 1566              	.L76:
  459:Core/Src/touch.c ****   {
  460:Core/Src/touch.c ****     case FT5336_GEST_ID_NO_GESTURE :
  461:Core/Src/touch.c ****       TS_State->gestureId = GEST_ID_NO_GESTURE;
- 1546              		.loc 1 461 27
- 1547 00b6 7B68     		ldr	r3, [r7, #4]
- 1548 00b8 0022     		movs	r2, #0
- 1549 00ba 9A62     		str	r2, [r3, #40]
+ 1567              		.loc 1 461 27
+ 1568 00b6 7B68     		ldr	r3, [r7, #4]
+ 1569 00b8 0022     		movs	r2, #0
+ 1570 00ba 9A62     		str	r2, [r3, #40]
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccqjonQ9.s 			page 37
+
+
  462:Core/Src/touch.c ****       break;
- 1550              		.loc 1 462 7
- 1551 00bc 1AE0     		b	.L77
- 1552              	.L74:
+ 1571              		.loc 1 462 7
+ 1572 00bc 1AE0     		b	.L78
+ 1573              	.L75:
  463:Core/Src/touch.c ****     case FT5336_GEST_ID_MOVE_UP :
  464:Core/Src/touch.c ****       TS_State->gestureId = GEST_ID_MOVE_UP;
- 1553              		.loc 1 464 27
- 1554 00be 7B68     		ldr	r3, [r7, #4]
- 1555 00c0 0122     		movs	r2, #1
- 1556 00c2 9A62     		str	r2, [r3, #40]
+ 1574              		.loc 1 464 27
+ 1575 00be 7B68     		ldr	r3, [r7, #4]
+ 1576 00c0 0122     		movs	r2, #1
+ 1577 00c2 9A62     		str	r2, [r3, #40]
  465:Core/Src/touch.c ****       break;
- 1557              		.loc 1 465 7
- 1558 00c4 16E0     		b	.L77
- 1559              	.L73:
+ 1578              		.loc 1 465 7
+ 1579 00c4 16E0     		b	.L78
+ 1580              	.L74:
  466:Core/Src/touch.c ****     case FT5336_GEST_ID_MOVE_RIGHT :
  467:Core/Src/touch.c ****       TS_State->gestureId = GEST_ID_MOVE_RIGHT;
- 1560              		.loc 1 467 27
- 1561 00c6 7B68     		ldr	r3, [r7, #4]
- 1562 00c8 0222     		movs	r2, #2
- 1563 00ca 9A62     		str	r2, [r3, #40]
+ 1581              		.loc 1 467 27
+ 1582 00c6 7B68     		ldr	r3, [r7, #4]
+ 1583 00c8 0222     		movs	r2, #2
+ 1584 00ca 9A62     		str	r2, [r3, #40]
  468:Core/Src/touch.c ****       break;
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccXf3B6W.s 			page 37
-
-
- 1564              		.loc 1 468 7
- 1565 00cc 12E0     		b	.L77
- 1566              	.L72:
+ 1585              		.loc 1 468 7
+ 1586 00cc 12E0     		b	.L78
+ 1587              	.L73:
  469:Core/Src/touch.c ****     case FT5336_GEST_ID_MOVE_DOWN :
  470:Core/Src/touch.c ****       TS_State->gestureId = GEST_ID_MOVE_DOWN;
- 1567              		.loc 1 470 27
- 1568 00ce 7B68     		ldr	r3, [r7, #4]
- 1569 00d0 0322     		movs	r2, #3
- 1570 00d2 9A62     		str	r2, [r3, #40]
+ 1588              		.loc 1 470 27
+ 1589 00ce 7B68     		ldr	r3, [r7, #4]
+ 1590 00d0 0322     		movs	r2, #3
+ 1591 00d2 9A62     		str	r2, [r3, #40]
  471:Core/Src/touch.c ****       break;
- 1571              		.loc 1 471 7
- 1572 00d4 0EE0     		b	.L77
- 1573              	.L70:
+ 1592              		.loc 1 471 7
+ 1593 00d4 0EE0     		b	.L78
+ 1594              	.L71:
  472:Core/Src/touch.c ****     case FT5336_GEST_ID_MOVE_LEFT :
  473:Core/Src/touch.c ****       TS_State->gestureId = GEST_ID_MOVE_LEFT;
- 1574              		.loc 1 473 27
- 1575 00d6 7B68     		ldr	r3, [r7, #4]
- 1576 00d8 0422     		movs	r2, #4
- 1577 00da 9A62     		str	r2, [r3, #40]
+ 1595              		.loc 1 473 27
+ 1596 00d6 7B68     		ldr	r3, [r7, #4]
+ 1597 00d8 0422     		movs	r2, #4
+ 1598 00da 9A62     		str	r2, [r3, #40]
  474:Core/Src/touch.c ****       break;
- 1578              		.loc 1 474 7
- 1579 00dc 0AE0     		b	.L77
- 1580              	.L76:
+ 1599              		.loc 1 474 7
+ 1600 00dc 0AE0     		b	.L78
+ 1601              	.L77:
  475:Core/Src/touch.c ****     case FT5336_GEST_ID_ZOOM_IN :
  476:Core/Src/touch.c ****       TS_State->gestureId = GEST_ID_ZOOM_IN;
- 1581              		.loc 1 476 27
- 1582 00de 7B68     		ldr	r3, [r7, #4]
- 1583 00e0 0522     		movs	r2, #5
- 1584 00e2 9A62     		str	r2, [r3, #40]
+ 1602              		.loc 1 476 27
+ 1603 00de 7B68     		ldr	r3, [r7, #4]
+ 1604 00e0 0522     		movs	r2, #5
+ 1605 00e2 9A62     		str	r2, [r3, #40]
  477:Core/Src/touch.c ****       break;
- 1585              		.loc 1 477 7
- 1586 00e4 06E0     		b	.L77
- 1587              	.L67:
+ 1606              		.loc 1 477 7
+ 1607 00e4 06E0     		b	.L78
+ 1608              	.L68:
  478:Core/Src/touch.c ****     case FT5336_GEST_ID_ZOOM_OUT :
  479:Core/Src/touch.c ****       TS_State->gestureId = GEST_ID_ZOOM_OUT;
- 1588              		.loc 1 479 27
- 1589 00e6 7B68     		ldr	r3, [r7, #4]
- 1590 00e8 0622     		movs	r2, #6
- 1591 00ea 9A62     		str	r2, [r3, #40]
+ 1609              		.loc 1 479 27
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccqjonQ9.s 			page 38
+
+
+ 1610 00e6 7B68     		ldr	r3, [r7, #4]
+ 1611 00e8 0622     		movs	r2, #6
+ 1612 00ea 9A62     		str	r2, [r3, #40]
  480:Core/Src/touch.c ****       break;
- 1592              		.loc 1 480 7
- 1593 00ec 02E0     		b	.L77
- 1594              	.L68:
+ 1613              		.loc 1 480 7
+ 1614 00ec 02E0     		b	.L78
+ 1615              	.L69:
  481:Core/Src/touch.c ****     default :
  482:Core/Src/touch.c ****       ts_status = TS_ERROR;
- 1595              		.loc 1 482 17
- 1596 00ee 0123     		movs	r3, #1
- 1597 00f0 FB73     		strb	r3, [r7, #15]
+ 1616              		.loc 1 482 17
+ 1617 00ee 0123     		movs	r3, #1
+ 1618 00f0 FB73     		strb	r3, [r7, #15]
  483:Core/Src/touch.c ****       break;
- 1598              		.loc 1 483 7
- 1599 00f2 00BF     		nop
- 1600              	.L77:
+ 1619              		.loc 1 483 7
+ 1620 00f2 00BF     		nop
+ 1621              	.L78:
  484:Core/Src/touch.c ****   } /* of switch(gestureId) */
  485:Core/Src/touch.c **** 
  486:Core/Src/touch.c ****   return(ts_status);
- 1601              		.loc 1 486 9
- 1602 00f4 FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccXf3B6W.s 			page 38
-
-
+ 1622              		.loc 1 486 9
+ 1623 00f4 FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
  487:Core/Src/touch.c **** }
- 1603              		.loc 1 487 1
- 1604 00f6 1846     		mov	r0, r3
- 1605 00f8 1037     		adds	r7, r7, #16
- 1606              	.LCFI40:
- 1607              		.cfi_def_cfa_offset 8
- 1608 00fa BD46     		mov	sp, r7
- 1609              	.LCFI41:
- 1610              		.cfi_def_cfa_register 13
- 1611              		@ sp needed
- 1612 00fc 80BD     		pop	{r7, pc}
- 1613              	.L80:
- 1614 00fe 00BF     		.align	2
- 1615              	.L79:
- 1616 0100 00000000 		.word	I2cAddress
- 1617              		.cfi_endproc
- 1618              	.LFE152:
- 1620              		.section	.text.BSP_TS_ITClear,"ax",%progbits
- 1621              		.align	1
- 1622              		.global	BSP_TS_ITClear
- 1623              		.syntax unified
- 1624              		.thumb
- 1625              		.thumb_func
- 1627              	BSP_TS_ITClear:
- 1628              	.LFB153:
+ 1624              		.loc 1 487 1
+ 1625 00f6 1846     		mov	r0, r3
+ 1626 00f8 1037     		adds	r7, r7, #16
+ 1627              	.LCFI40:
+ 1628              		.cfi_def_cfa_offset 8
+ 1629 00fa BD46     		mov	sp, r7
+ 1630              	.LCFI41:
+ 1631              		.cfi_def_cfa_register 13
+ 1632              		@ sp needed
+ 1633 00fc 80BD     		pop	{r7, pc}
+ 1634              	.L81:
+ 1635 00fe 00BF     		.align	2
+ 1636              	.L80:
+ 1637 0100 00000000 		.word	I2cAddress
+ 1638              		.cfi_endproc
+ 1639              	.LFE152:
+ 1641              		.section	.text.BSP_TS_ITClear,"ax",%progbits
+ 1642              		.align	1
+ 1643              		.global	BSP_TS_ITClear
+ 1644              		.syntax unified
+ 1645              		.thumb
+ 1646              		.thumb_func
+ 1648              	BSP_TS_ITClear:
+ 1649              	.LFB153:
  488:Core/Src/touch.c **** #endif /* TS_MULTI_TOUCH_SUPPORTED == 1 */
  489:Core/Src/touch.c **** 
  490:Core/Src/touch.c **** /**
@@ -2253,53 +2274,53 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccXf3B6W.s 			page 1
  492:Core/Src/touch.c ****   */
  493:Core/Src/touch.c **** void BSP_TS_ITClear(void)
  494:Core/Src/touch.c **** {
- 1629              		.loc 1 494 1
- 1630              		.cfi_startproc
- 1631              		@ args = 0, pretend = 0, frame = 0
- 1632              		@ frame_needed = 1, uses_anonymous_args = 0
- 1633 0000 80B5     		push	{r7, lr}
- 1634              	.LCFI42:
- 1635              		.cfi_def_cfa_offset 8
- 1636              		.cfi_offset 7, -8
- 1637              		.cfi_offset 14, -4
- 1638 0002 00AF     		add	r7, sp, #0
- 1639              	.LCFI43:
- 1640              		.cfi_def_cfa_register 7
+ 1650              		.loc 1 494 1
+ 1651              		.cfi_startproc
+ 1652              		@ args = 0, pretend = 0, frame = 0
+ 1653              		@ frame_needed = 1, uses_anonymous_args = 0
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccqjonQ9.s 			page 39
+
+
+ 1654 0000 80B5     		push	{r7, lr}
+ 1655              	.LCFI42:
+ 1656              		.cfi_def_cfa_offset 8
+ 1657              		.cfi_offset 7, -8
+ 1658              		.cfi_offset 14, -4
+ 1659 0002 00AF     		add	r7, sp, #0
+ 1660              	.LCFI43:
+ 1661              		.cfi_def_cfa_register 7
  495:Core/Src/touch.c ****   /* Clear TS IT pending bits */
  496:Core/Src/touch.c ****   tsDriver->ClearIT(I2cAddress); 
- 1641              		.loc 1 496 11
- 1642 0004 044B     		ldr	r3, .L82
- 1643 0006 1B68     		ldr	r3, [r3]
- 1644 0008 DB69     		ldr	r3, [r3, #28]
- 1645              		.loc 1 496 3
- 1646 000a 044A     		ldr	r2, .L82+4
- 1647 000c 1278     		ldrb	r2, [r2]	@ zero_extendqisi2
- 1648 000e 92B2     		uxth	r2, r2
- 1649 0010 1046     		mov	r0, r2
- 1650 0012 9847     		blx	r3
- 1651              	.LVL7:
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccXf3B6W.s 			page 39
-
-
+ 1662              		.loc 1 496 11
+ 1663 0004 044B     		ldr	r3, .L83
+ 1664 0006 1B68     		ldr	r3, [r3]
+ 1665 0008 DB69     		ldr	r3, [r3, #28]
+ 1666              		.loc 1 496 3
+ 1667 000a 044A     		ldr	r2, .L83+4
+ 1668 000c 1278     		ldrb	r2, [r2]	@ zero_extendqisi2
+ 1669 000e 92B2     		uxth	r2, r2
+ 1670 0010 1046     		mov	r0, r2
+ 1671 0012 9847     		blx	r3
+ 1672              	.LVL7:
  497:Core/Src/touch.c **** }
- 1652              		.loc 1 497 1
- 1653 0014 00BF     		nop
- 1654 0016 80BD     		pop	{r7, pc}
- 1655              	.L83:
- 1656              		.align	2
- 1657              	.L82:
- 1658 0018 00000000 		.word	tsDriver
- 1659 001c 00000000 		.word	I2cAddress
- 1660              		.cfi_endproc
- 1661              	.LFE153:
- 1663              		.section	.text.BSP_TS_ResetTouchData,"ax",%progbits
- 1664              		.align	1
- 1665              		.global	BSP_TS_ResetTouchData
- 1666              		.syntax unified
- 1667              		.thumb
- 1668              		.thumb_func
- 1670              	BSP_TS_ResetTouchData:
- 1671              	.LFB154:
+ 1673              		.loc 1 497 1
+ 1674 0014 00BF     		nop
+ 1675 0016 80BD     		pop	{r7, pc}
+ 1676              	.L84:
+ 1677              		.align	2
+ 1678              	.L83:
+ 1679 0018 00000000 		.word	tsDriver
+ 1680 001c 00000000 		.word	I2cAddress
+ 1681              		.cfi_endproc
+ 1682              	.LFE153:
+ 1684              		.section	.text.BSP_TS_ResetTouchData,"ax",%progbits
+ 1685              		.align	1
+ 1686              		.global	BSP_TS_ResetTouchData
+ 1687              		.syntax unified
+ 1688              		.thumb
+ 1689              		.thumb_func
+ 1691              	BSP_TS_ResetTouchData:
+ 1692              	.LFB154:
  498:Core/Src/touch.c **** 
  499:Core/Src/touch.c **** 
  500:Core/Src/touch.c **** /** @defgroup STM32756G_DISCOVERY_TS_Private_Functions TS Private Functions
@@ -2315,234 +2336,234 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccXf3B6W.s 			page 1
  510:Core/Src/touch.c ****   */
  511:Core/Src/touch.c **** uint8_t BSP_TS_ResetTouchData(TS_StateTypeDef *TS_State)
  512:Core/Src/touch.c **** {
- 1672              		.loc 1 512 1
- 1673              		.cfi_startproc
- 1674              		@ args = 0, pretend = 0, frame = 16
- 1675              		@ frame_needed = 1, uses_anonymous_args = 0
- 1676              		@ link register save eliminated.
- 1677 0000 80B4     		push	{r7}
- 1678              	.LCFI44:
- 1679              		.cfi_def_cfa_offset 4
- 1680              		.cfi_offset 7, -4
- 1681 0002 85B0     		sub	sp, sp, #20
- 1682              	.LCFI45:
- 1683              		.cfi_def_cfa_offset 24
- 1684 0004 00AF     		add	r7, sp, #0
- 1685              	.LCFI46:
- 1686              		.cfi_def_cfa_register 7
- 1687 0006 7860     		str	r0, [r7, #4]
+ 1693              		.loc 1 512 1
+ 1694              		.cfi_startproc
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccqjonQ9.s 			page 40
+
+
+ 1695              		@ args = 0, pretend = 0, frame = 16
+ 1696              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1697              		@ link register save eliminated.
+ 1698 0000 80B4     		push	{r7}
+ 1699              	.LCFI44:
+ 1700              		.cfi_def_cfa_offset 4
+ 1701              		.cfi_offset 7, -4
+ 1702 0002 85B0     		sub	sp, sp, #20
+ 1703              	.LCFI45:
+ 1704              		.cfi_def_cfa_offset 24
+ 1705 0004 00AF     		add	r7, sp, #0
+ 1706              	.LCFI46:
+ 1707              		.cfi_def_cfa_register 7
+ 1708 0006 7860     		str	r0, [r7, #4]
  513:Core/Src/touch.c ****   uint8_t ts_status = TS_ERROR;
- 1688              		.loc 1 513 11
- 1689 0008 0123     		movs	r3, #1
- 1690 000a FB73     		strb	r3, [r7, #15]
+ 1709              		.loc 1 513 11
+ 1710 0008 0123     		movs	r3, #1
+ 1711 000a FB73     		strb	r3, [r7, #15]
  514:Core/Src/touch.c ****   uint32_t index;
  515:Core/Src/touch.c **** 
  516:Core/Src/touch.c ****   if (TS_State != (TS_StateTypeDef *)NULL)
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccXf3B6W.s 			page 40
-
-
- 1691              		.loc 1 516 6
- 1692 000c 7B68     		ldr	r3, [r7, #4]
- 1693 000e 002B     		cmp	r3, #0
- 1694 0010 2FD0     		beq	.L85
+ 1712              		.loc 1 516 6
+ 1713 000c 7B68     		ldr	r3, [r7, #4]
+ 1714 000e 002B     		cmp	r3, #0
+ 1715 0010 2FD0     		beq	.L86
  517:Core/Src/touch.c ****   {
  518:Core/Src/touch.c ****     TS_State->gestureId = GEST_ID_NO_GESTURE;
- 1695              		.loc 1 518 25
- 1696 0012 7B68     		ldr	r3, [r7, #4]
- 1697 0014 0022     		movs	r2, #0
- 1698 0016 9A62     		str	r2, [r3, #40]
+ 1716              		.loc 1 518 25
+ 1717 0012 7B68     		ldr	r3, [r7, #4]
+ 1718 0014 0022     		movs	r2, #0
+ 1719 0016 9A62     		str	r2, [r3, #40]
  519:Core/Src/touch.c ****     TS_State->touchDetected = 0;
- 1699              		.loc 1 519 29
- 1700 0018 7B68     		ldr	r3, [r7, #4]
- 1701 001a 0022     		movs	r2, #0
- 1702 001c 1A70     		strb	r2, [r3]
+ 1720              		.loc 1 519 29
+ 1721 0018 7B68     		ldr	r3, [r7, #4]
+ 1722 001a 0022     		movs	r2, #0
+ 1723 001c 1A70     		strb	r2, [r3]
  520:Core/Src/touch.c **** 
  521:Core/Src/touch.c ****     for(index = 0; index < TS_MAX_NB_TOUCH; index++)
- 1703              		.loc 1 521 15
- 1704 001e 0023     		movs	r3, #0
- 1705 0020 BB60     		str	r3, [r7, #8]
- 1706              		.loc 1 521 5
- 1707 0022 21E0     		b	.L86
- 1708              	.L87:
+ 1724              		.loc 1 521 15
+ 1725 001e 0023     		movs	r3, #0
+ 1726 0020 BB60     		str	r3, [r7, #8]
+ 1727              		.loc 1 521 5
+ 1728 0022 21E0     		b	.L87
+ 1729              	.L88:
  522:Core/Src/touch.c ****     {
  523:Core/Src/touch.c ****       TS_State->touchX[index]       = 0;
- 1709              		.loc 1 523 37 discriminator 3
- 1710 0024 7A68     		ldr	r2, [r7, #4]
- 1711 0026 BB68     		ldr	r3, [r7, #8]
- 1712 0028 5B00     		lsls	r3, r3, #1
- 1713 002a 1344     		add	r3, r3, r2
- 1714 002c 0022     		movs	r2, #0
- 1715 002e 5A80     		strh	r2, [r3, #2]	@ movhi
+ 1730              		.loc 1 523 37 discriminator 3
+ 1731 0024 7A68     		ldr	r2, [r7, #4]
+ 1732 0026 BB68     		ldr	r3, [r7, #8]
+ 1733 0028 5B00     		lsls	r3, r3, #1
+ 1734 002a 1344     		add	r3, r3, r2
+ 1735 002c 0022     		movs	r2, #0
+ 1736 002e 5A80     		strh	r2, [r3, #2]	@ movhi
  524:Core/Src/touch.c ****       TS_State->touchY[index]       = 0;
- 1716              		.loc 1 524 37 discriminator 3
- 1717 0030 7A68     		ldr	r2, [r7, #4]
- 1718 0032 BB68     		ldr	r3, [r7, #8]
- 1719 0034 0433     		adds	r3, r3, #4
- 1720 0036 5B00     		lsls	r3, r3, #1
- 1721 0038 1344     		add	r3, r3, r2
- 1722 003a 0022     		movs	r2, #0
- 1723 003c 9A80     		strh	r2, [r3, #4]	@ movhi
+ 1737              		.loc 1 524 37 discriminator 3
+ 1738 0030 7A68     		ldr	r2, [r7, #4]
+ 1739 0032 BB68     		ldr	r3, [r7, #8]
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccqjonQ9.s 			page 41
+
+
+ 1740 0034 0433     		adds	r3, r3, #4
+ 1741 0036 5B00     		lsls	r3, r3, #1
+ 1742 0038 1344     		add	r3, r3, r2
+ 1743 003a 0022     		movs	r2, #0
+ 1744 003c 9A80     		strh	r2, [r3, #4]	@ movhi
  525:Core/Src/touch.c ****       TS_State->touchArea[index]    = 0;
- 1724              		.loc 1 525 37 discriminator 3
- 1725 003e 7A68     		ldr	r2, [r7, #4]
- 1726 0040 BB68     		ldr	r3, [r7, #8]
- 1727 0042 1344     		add	r3, r3, r2
- 1728 0044 2033     		adds	r3, r3, #32
- 1729 0046 0022     		movs	r2, #0
- 1730 0048 1A70     		strb	r2, [r3]
+ 1745              		.loc 1 525 37 discriminator 3
+ 1746 003e 7A68     		ldr	r2, [r7, #4]
+ 1747 0040 BB68     		ldr	r3, [r7, #8]
+ 1748 0042 1344     		add	r3, r3, r2
+ 1749 0044 2033     		adds	r3, r3, #32
+ 1750 0046 0022     		movs	r2, #0
+ 1751 0048 1A70     		strb	r2, [r3]
  526:Core/Src/touch.c ****       TS_State->touchEventId[index] = TOUCH_EVENT_NO_EVT;
- 1731              		.loc 1 526 37 discriminator 3
- 1732 004a 7A68     		ldr	r2, [r7, #4]
- 1733 004c BB68     		ldr	r3, [r7, #8]
- 1734 004e 1344     		add	r3, r3, r2
- 1735 0050 1B33     		adds	r3, r3, #27
- 1736 0052 0022     		movs	r2, #0
- 1737 0054 1A70     		strb	r2, [r3]
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccXf3B6W.s 			page 41
-
-
+ 1752              		.loc 1 526 37 discriminator 3
+ 1753 004a 7A68     		ldr	r2, [r7, #4]
+ 1754 004c BB68     		ldr	r3, [r7, #8]
+ 1755 004e 1344     		add	r3, r3, r2
+ 1756 0050 1B33     		adds	r3, r3, #27
+ 1757 0052 0022     		movs	r2, #0
+ 1758 0054 1A70     		strb	r2, [r3]
  527:Core/Src/touch.c ****       TS_State->touchWeight[index]  = 0;
- 1738              		.loc 1 527 37 discriminator 3
- 1739 0056 7A68     		ldr	r2, [r7, #4]
- 1740 0058 BB68     		ldr	r3, [r7, #8]
- 1741 005a 1344     		add	r3, r3, r2
- 1742 005c 1633     		adds	r3, r3, #22
- 1743 005e 0022     		movs	r2, #0
- 1744 0060 1A70     		strb	r2, [r3]
+ 1759              		.loc 1 527 37 discriminator 3
+ 1760 0056 7A68     		ldr	r2, [r7, #4]
+ 1761 0058 BB68     		ldr	r3, [r7, #8]
+ 1762 005a 1344     		add	r3, r3, r2
+ 1763 005c 1633     		adds	r3, r3, #22
+ 1764 005e 0022     		movs	r2, #0
+ 1765 0060 1A70     		strb	r2, [r3]
  521:Core/Src/touch.c ****     {
- 1745              		.loc 1 521 50 discriminator 3
- 1746 0062 BB68     		ldr	r3, [r7, #8]
- 1747 0064 0133     		adds	r3, r3, #1
- 1748 0066 BB60     		str	r3, [r7, #8]
- 1749              	.L86:
+ 1766              		.loc 1 521 50 discriminator 3
+ 1767 0062 BB68     		ldr	r3, [r7, #8]
+ 1768 0064 0133     		adds	r3, r3, #1
+ 1769 0066 BB60     		str	r3, [r7, #8]
+ 1770              	.L87:
  521:Core/Src/touch.c ****     {
- 1750              		.loc 1 521 5 discriminator 1
- 1751 0068 BB68     		ldr	r3, [r7, #8]
- 1752 006a 042B     		cmp	r3, #4
- 1753 006c DAD9     		bls	.L87
+ 1771              		.loc 1 521 5 discriminator 1
+ 1772 0068 BB68     		ldr	r3, [r7, #8]
+ 1773 006a 042B     		cmp	r3, #4
+ 1774 006c DAD9     		bls	.L88
  528:Core/Src/touch.c ****     }
  529:Core/Src/touch.c **** 
  530:Core/Src/touch.c ****     ts_status = TS_OK;
- 1754              		.loc 1 530 15
- 1755 006e 0023     		movs	r3, #0
- 1756 0070 FB73     		strb	r3, [r7, #15]
- 1757              	.L85:
+ 1775              		.loc 1 530 15
+ 1776 006e 0023     		movs	r3, #0
+ 1777 0070 FB73     		strb	r3, [r7, #15]
+ 1778              	.L86:
  531:Core/Src/touch.c **** 
  532:Core/Src/touch.c ****   } /* of if (TS_State != (TS_StateTypeDef *)NULL) */
  533:Core/Src/touch.c **** 
  534:Core/Src/touch.c ****   return (ts_status);
- 1758              		.loc 1 534 10
- 1759 0072 FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
+ 1779              		.loc 1 534 10
+ 1780 0072 FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
  535:Core/Src/touch.c **** }
- 1760              		.loc 1 535 1
- 1761 0074 1846     		mov	r0, r3
- 1762 0076 1437     		adds	r7, r7, #20
- 1763              	.LCFI47:
- 1764              		.cfi_def_cfa_offset 4
- 1765 0078 BD46     		mov	sp, r7
- 1766              	.LCFI48:
- 1767              		.cfi_def_cfa_register 13
- 1768              		@ sp needed
- 1769 007a 5DF8047B 		ldr	r7, [sp], #4
- 1770              	.LCFI49:
- 1771              		.cfi_restore 7
- 1772              		.cfi_def_cfa_offset 0
- 1773 007e 7047     		bx	lr
- 1774              		.cfi_endproc
- 1775              	.LFE154:
- 1777              		.section	.bss.status_old.2,"aw",%nobits
- 1780              	status_old.2:
- 1781 0000 00       		.space	1
- 1782              		.section	.bss._x.1,"aw",%nobits
- 1783              		.align	2
- 1786              	_x.1:
- 1787 0000 00000000 		.space	20
- 1787      00000000 
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccXf3B6W.s 			page 42
+ 1781              		.loc 1 535 1
+ 1782 0074 1846     		mov	r0, r3
+ 1783 0076 1437     		adds	r7, r7, #20
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccqjonQ9.s 			page 42
 
 
- 1787      00000000 
- 1787      00000000 
- 1787      00000000 
- 1788              		.section	.bss._y.0,"aw",%nobits
- 1789              		.align	2
- 1792              	_y.0:
- 1793 0000 00000000 		.space	20
- 1793      00000000 
- 1793      00000000 
- 1793      00000000 
- 1793      00000000 
- 1794              		.text
- 1795              	.Letext0:
- 1796              		.file 2 "Drivers/CMSIS/Device/ST/STM32F7xx/Include/stm32f746xx.h"
- 1797              		.file 3 "d:\\3.tools\\arm_gcc_toolchain\\arm-none-eabi\\include\\machine\\_default_types.h"
- 1798              		.file 4 "d:\\3.tools\\arm_gcc_toolchain\\arm-none-eabi\\include\\sys\\_stdint.h"
- 1799              		.file 5 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_gpio.h"
- 1800              		.file 6 "Components/../Components/ft5336/../Common/ts.h"
- 1801              		.file 7 "Core/Inc/touch.h"
- 1802              		.file 8 "Components/../Components/ft5336/ft5336.h"
- 1803              		.file 9 "Core/Inc/lcd.h"
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccXf3B6W.s 			page 43
+ 1784              	.LCFI47:
+ 1785              		.cfi_def_cfa_offset 4
+ 1786 0078 BD46     		mov	sp, r7
+ 1787              	.LCFI48:
+ 1788              		.cfi_def_cfa_register 13
+ 1789              		@ sp needed
+ 1790 007a 5DF8047B 		ldr	r7, [sp], #4
+ 1791              	.LCFI49:
+ 1792              		.cfi_restore 7
+ 1793              		.cfi_def_cfa_offset 0
+ 1794 007e 7047     		bx	lr
+ 1795              		.cfi_endproc
+ 1796              	.LFE154:
+ 1798              		.section	.bss.status_old.2,"aw",%nobits
+ 1801              	status_old.2:
+ 1802 0000 00       		.space	1
+ 1803              		.section	.bss._x.1,"aw",%nobits
+ 1804              		.align	2
+ 1807              	_x.1:
+ 1808 0000 00000000 		.space	20
+ 1808      00000000 
+ 1808      00000000 
+ 1808      00000000 
+ 1808      00000000 
+ 1809              		.section	.bss._y.0,"aw",%nobits
+ 1810              		.align	2
+ 1813              	_y.0:
+ 1814 0000 00000000 		.space	20
+ 1814      00000000 
+ 1814      00000000 
+ 1814      00000000 
+ 1814      00000000 
+ 1815              		.text
+ 1816              	.Letext0:
+ 1817              		.file 2 "Drivers/CMSIS/Device/ST/STM32F7xx/Include/stm32f746xx.h"
+ 1818              		.file 3 "d:\\3.tools\\arm_gcc_toolchain\\arm-none-eabi\\include\\machine\\_default_types.h"
+ 1819              		.file 4 "d:\\3.tools\\arm_gcc_toolchain\\arm-none-eabi\\include\\sys\\_stdint.h"
+ 1820              		.file 5 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_gpio.h"
+ 1821              		.file 6 "Components/../Components/ft5336/../Common/ts.h"
+ 1822              		.file 7 "Core/Inc/touch.h"
+ 1823              		.file 8 "Components/../Components/ft5336/ft5336.h"
+ 1824              		.file 9 "Core/Inc/lcd.h"
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccqjonQ9.s 			page 43
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 touch.c
-C:\Users\jisu8\AppData\Local\Temp\ccXf3B6W.s:20     .bss.tsDriver:00000000 $d
-C:\Users\jisu8\AppData\Local\Temp\ccXf3B6W.s:23     .bss.tsDriver:00000000 tsDriver
-C:\Users\jisu8\AppData\Local\Temp\ccXf3B6W.s:26     .bss.tsXBoundary:00000000 $d
-C:\Users\jisu8\AppData\Local\Temp\ccXf3B6W.s:29     .bss.tsXBoundary:00000000 tsXBoundary
-C:\Users\jisu8\AppData\Local\Temp\ccXf3B6W.s:32     .bss.tsYBoundary:00000000 $d
-C:\Users\jisu8\AppData\Local\Temp\ccXf3B6W.s:35     .bss.tsYBoundary:00000000 tsYBoundary
-C:\Users\jisu8\AppData\Local\Temp\ccXf3B6W.s:40     .bss.tsOrientation:00000000 tsOrientation
-C:\Users\jisu8\AppData\Local\Temp\ccXf3B6W.s:41     .bss.tsOrientation:00000000 $d
-C:\Users\jisu8\AppData\Local\Temp\ccXf3B6W.s:45     .bss.I2cAddress:00000000 I2cAddress
-C:\Users\jisu8\AppData\Local\Temp\ccXf3B6W.s:46     .bss.I2cAddress:00000000 $d
-C:\Users\jisu8\AppData\Local\Temp\ccXf3B6W.s:48     .bss.TS_State:00000000 $d
-C:\Users\jisu8\AppData\Local\Temp\ccXf3B6W.s:51     .bss.TS_State:00000000 TS_State
-C:\Users\jisu8\AppData\Local\Temp\ccXf3B6W.s:57     .data.Toutch_Status:00000000 Toutch_Status
-C:\Users\jisu8\AppData\Local\Temp\ccXf3B6W.s:60     .rodata:00000000 $d
-C:\Users\jisu8\AppData\Local\Temp\ccXf3B6W.s:64     .text.Touch_Operation:00000000 $t
-C:\Users\jisu8\AppData\Local\Temp\ccXf3B6W.s:70     .text.Touch_Operation:00000000 Touch_Operation
-C:\Users\jisu8\AppData\Local\Temp\ccXf3B6W.s:933    .text.BSP_TS_GetState:00000000 BSP_TS_GetState
-C:\Users\jisu8\AppData\Local\Temp\ccXf3B6W.s:207    .text.Touch_Select_Zone:00000000 Touch_Select_Zone
-C:\Users\jisu8\AppData\Local\Temp\ccXf3B6W.s:368    .text.Touch_Display_Zone:00000000 Touch_Display_Zone
-C:\Users\jisu8\AppData\Local\Temp\ccXf3B6W.s:194    .text.Touch_Operation:000000b8 $d
-C:\Users\jisu8\AppData\Local\Temp\ccXf3B6W.s:1780   .bss.status_old.2:00000000 status_old.2
-C:\Users\jisu8\AppData\Local\Temp\ccXf3B6W.s:202    .text.Touch_Select_Zone:00000000 $t
-C:\Users\jisu8\AppData\Local\Temp\ccXf3B6W.s:363    .text.Touch_Display_Zone:00000000 $t
-C:\Users\jisu8\AppData\Local\Temp\ccXf3B6W.s:654    .text.BSP_TS_Init:00000000 $t
-C:\Users\jisu8\AppData\Local\Temp\ccXf3B6W.s:660    .text.BSP_TS_Init:00000000 BSP_TS_Init
-C:\Users\jisu8\AppData\Local\Temp\ccXf3B6W.s:755    .text.BSP_TS_Init:00000068 $d
-C:\Users\jisu8\AppData\Local\Temp\ccXf3B6W.s:765    .text.BSP_TS_DeInit:00000000 $t
-C:\Users\jisu8\AppData\Local\Temp\ccXf3B6W.s:771    .text.BSP_TS_DeInit:00000000 BSP_TS_DeInit
-C:\Users\jisu8\AppData\Local\Temp\ccXf3B6W.s:802    .text.BSP_TS_ITConfig:00000000 $t
-C:\Users\jisu8\AppData\Local\Temp\ccXf3B6W.s:808    .text.BSP_TS_ITConfig:00000000 BSP_TS_ITConfig
-C:\Users\jisu8\AppData\Local\Temp\ccXf3B6W.s:876    .text.BSP_TS_ITConfig:00000050 $d
-C:\Users\jisu8\AppData\Local\Temp\ccXf3B6W.s:883    .text.BSP_TS_ITGetStatus:00000000 $t
-C:\Users\jisu8\AppData\Local\Temp\ccXf3B6W.s:889    .text.BSP_TS_ITGetStatus:00000000 BSP_TS_ITGetStatus
-C:\Users\jisu8\AppData\Local\Temp\ccXf3B6W.s:921    .text.BSP_TS_ITGetStatus:0000001c $d
-C:\Users\jisu8\AppData\Local\Temp\ccXf3B6W.s:927    .text.BSP_TS_GetState:00000000 $t
-C:\Users\jisu8\AppData\Local\Temp\ccXf3B6W.s:1362   .text.BSP_TS_GetState:000002dc $d
-C:\Users\jisu8\AppData\Local\Temp\ccXf3B6W.s:1370   .text.BSP_TS_GetState:000002ec $d
-C:\Users\jisu8\AppData\Local\Temp\ccXf3B6W.s:1786   .bss._x.1:00000000 _x.1
-C:\Users\jisu8\AppData\Local\Temp\ccXf3B6W.s:1792   .bss._y.0:00000000 _y.0
-C:\Users\jisu8\AppData\Local\Temp\ccXf3B6W.s:1379   .text.BSP_TS_GetState:00000308 $t
-C:\Users\jisu8\AppData\Local\Temp\ccXf3B6W.s:1465   .text.BSP_TS_Get_GestureId:00000000 BSP_TS_Get_GestureId
-C:\Users\jisu8\AppData\Local\Temp\ccXf3B6W.s:1459   .text.BSP_TS_Get_GestureId:00000000 $t
-C:\Users\jisu8\AppData\Local\Temp\ccXf3B6W.s:1511   .text.BSP_TS_Get_GestureId:0000003c $d
-C:\Users\jisu8\AppData\Local\Temp\ccXf3B6W.s:1540   .text.BSP_TS_Get_GestureId:000000b0 $t
-C:\Users\jisu8\AppData\Local\Temp\ccXf3B6W.s:1616   .text.BSP_TS_Get_GestureId:00000100 $d
-C:\Users\jisu8\AppData\Local\Temp\ccXf3B6W.s:1621   .text.BSP_TS_ITClear:00000000 $t
-C:\Users\jisu8\AppData\Local\Temp\ccXf3B6W.s:1627   .text.BSP_TS_ITClear:00000000 BSP_TS_ITClear
-C:\Users\jisu8\AppData\Local\Temp\ccXf3B6W.s:1658   .text.BSP_TS_ITClear:00000018 $d
-C:\Users\jisu8\AppData\Local\Temp\ccXf3B6W.s:1664   .text.BSP_TS_ResetTouchData:00000000 $t
-C:\Users\jisu8\AppData\Local\Temp\ccXf3B6W.s:1670   .text.BSP_TS_ResetTouchData:00000000 BSP_TS_ResetTouchData
-C:\Users\jisu8\AppData\Local\Temp\ccXf3B6W.s:1781   .bss.status_old.2:00000000 $d
-C:\Users\jisu8\AppData\Local\Temp\ccXf3B6W.s:1783   .bss._x.1:00000000 $d
-C:\Users\jisu8\AppData\Local\Temp\ccXf3B6W.s:1789   .bss._y.0:00000000 $d
+C:\Users\jisu8\AppData\Local\Temp\ccqjonQ9.s:20     .bss.tsDriver:00000000 $d
+C:\Users\jisu8\AppData\Local\Temp\ccqjonQ9.s:23     .bss.tsDriver:00000000 tsDriver
+C:\Users\jisu8\AppData\Local\Temp\ccqjonQ9.s:26     .bss.tsXBoundary:00000000 $d
+C:\Users\jisu8\AppData\Local\Temp\ccqjonQ9.s:29     .bss.tsXBoundary:00000000 tsXBoundary
+C:\Users\jisu8\AppData\Local\Temp\ccqjonQ9.s:32     .bss.tsYBoundary:00000000 $d
+C:\Users\jisu8\AppData\Local\Temp\ccqjonQ9.s:35     .bss.tsYBoundary:00000000 tsYBoundary
+C:\Users\jisu8\AppData\Local\Temp\ccqjonQ9.s:40     .bss.tsOrientation:00000000 tsOrientation
+C:\Users\jisu8\AppData\Local\Temp\ccqjonQ9.s:41     .bss.tsOrientation:00000000 $d
+C:\Users\jisu8\AppData\Local\Temp\ccqjonQ9.s:45     .bss.I2cAddress:00000000 I2cAddress
+C:\Users\jisu8\AppData\Local\Temp\ccqjonQ9.s:46     .bss.I2cAddress:00000000 $d
+C:\Users\jisu8\AppData\Local\Temp\ccqjonQ9.s:48     .bss.TS_State:00000000 $d
+C:\Users\jisu8\AppData\Local\Temp\ccqjonQ9.s:51     .bss.TS_State:00000000 TS_State
+C:\Users\jisu8\AppData\Local\Temp\ccqjonQ9.s:57     .data.Toutch_Status:00000000 Toutch_Status
+C:\Users\jisu8\AppData\Local\Temp\ccqjonQ9.s:60     .rodata:00000000 $d
+C:\Users\jisu8\AppData\Local\Temp\ccqjonQ9.s:64     .text.Touch_Operation:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\ccqjonQ9.s:70     .text.Touch_Operation:00000000 Touch_Operation
+C:\Users\jisu8\AppData\Local\Temp\ccqjonQ9.s:954    .text.BSP_TS_GetState:00000000 BSP_TS_GetState
+C:\Users\jisu8\AppData\Local\Temp\ccqjonQ9.s:205    .text.Touch_Select_Zone:00000000 Touch_Select_Zone
+C:\Users\jisu8\AppData\Local\Temp\ccqjonQ9.s:389    .text.Touch_Display_Zone:00000000 Touch_Display_Zone
+C:\Users\jisu8\AppData\Local\Temp\ccqjonQ9.s:192    .text.Touch_Operation:000000b4 $d
+C:\Users\jisu8\AppData\Local\Temp\ccqjonQ9.s:1801   .bss.status_old.2:00000000 status_old.2
+C:\Users\jisu8\AppData\Local\Temp\ccqjonQ9.s:200    .text.Touch_Select_Zone:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\ccqjonQ9.s:384    .text.Touch_Display_Zone:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\ccqjonQ9.s:675    .text.BSP_TS_Init:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\ccqjonQ9.s:681    .text.BSP_TS_Init:00000000 BSP_TS_Init
+C:\Users\jisu8\AppData\Local\Temp\ccqjonQ9.s:776    .text.BSP_TS_Init:00000068 $d
+C:\Users\jisu8\AppData\Local\Temp\ccqjonQ9.s:786    .text.BSP_TS_DeInit:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\ccqjonQ9.s:792    .text.BSP_TS_DeInit:00000000 BSP_TS_DeInit
+C:\Users\jisu8\AppData\Local\Temp\ccqjonQ9.s:823    .text.BSP_TS_ITConfig:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\ccqjonQ9.s:829    .text.BSP_TS_ITConfig:00000000 BSP_TS_ITConfig
+C:\Users\jisu8\AppData\Local\Temp\ccqjonQ9.s:897    .text.BSP_TS_ITConfig:00000050 $d
+C:\Users\jisu8\AppData\Local\Temp\ccqjonQ9.s:904    .text.BSP_TS_ITGetStatus:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\ccqjonQ9.s:910    .text.BSP_TS_ITGetStatus:00000000 BSP_TS_ITGetStatus
+C:\Users\jisu8\AppData\Local\Temp\ccqjonQ9.s:942    .text.BSP_TS_ITGetStatus:0000001c $d
+C:\Users\jisu8\AppData\Local\Temp\ccqjonQ9.s:948    .text.BSP_TS_GetState:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\ccqjonQ9.s:1383   .text.BSP_TS_GetState:000002dc $d
+C:\Users\jisu8\AppData\Local\Temp\ccqjonQ9.s:1391   .text.BSP_TS_GetState:000002ec $d
+C:\Users\jisu8\AppData\Local\Temp\ccqjonQ9.s:1807   .bss._x.1:00000000 _x.1
+C:\Users\jisu8\AppData\Local\Temp\ccqjonQ9.s:1813   .bss._y.0:00000000 _y.0
+C:\Users\jisu8\AppData\Local\Temp\ccqjonQ9.s:1400   .text.BSP_TS_GetState:00000308 $t
+C:\Users\jisu8\AppData\Local\Temp\ccqjonQ9.s:1486   .text.BSP_TS_Get_GestureId:00000000 BSP_TS_Get_GestureId
+C:\Users\jisu8\AppData\Local\Temp\ccqjonQ9.s:1480   .text.BSP_TS_Get_GestureId:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\ccqjonQ9.s:1532   .text.BSP_TS_Get_GestureId:0000003c $d
+C:\Users\jisu8\AppData\Local\Temp\ccqjonQ9.s:1561   .text.BSP_TS_Get_GestureId:000000b0 $t
+C:\Users\jisu8\AppData\Local\Temp\ccqjonQ9.s:1637   .text.BSP_TS_Get_GestureId:00000100 $d
+C:\Users\jisu8\AppData\Local\Temp\ccqjonQ9.s:1642   .text.BSP_TS_ITClear:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\ccqjonQ9.s:1648   .text.BSP_TS_ITClear:00000000 BSP_TS_ITClear
+C:\Users\jisu8\AppData\Local\Temp\ccqjonQ9.s:1679   .text.BSP_TS_ITClear:00000018 $d
+C:\Users\jisu8\AppData\Local\Temp\ccqjonQ9.s:1685   .text.BSP_TS_ResetTouchData:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\ccqjonQ9.s:1691   .text.BSP_TS_ResetTouchData:00000000 BSP_TS_ResetTouchData
+C:\Users\jisu8\AppData\Local\Temp\ccqjonQ9.s:1802   .bss.status_old.2:00000000 $d
+C:\Users\jisu8\AppData\Local\Temp\ccqjonQ9.s:1804   .bss._x.1:00000000 $d
+C:\Users\jisu8\AppData\Local\Temp\ccqjonQ9.s:1810   .bss._y.0:00000000 $d
 
 UNDEFINED SYMBOLS
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccXf3B6W.s 			page 44
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccqjonQ9.s 			page 44
 
 
 BSP_LCD_SetTextColor

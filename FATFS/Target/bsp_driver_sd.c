@@ -37,7 +37,7 @@
 /* Extern variables ---------------------------------------------------------*/
 
 extern SD_HandleTypeDef hsd1;
-
+volatile uint32_t writestatus, readstatus = 0;
 /* USER CODE BEGIN BeforeInitSection */
 /* can be used to modify / undefine following code or add code */
 /* USER CODE END BeforeInitSection */
@@ -277,7 +277,7 @@ __weak void BSP_SD_AbortCallback(void)
   */
 __weak void BSP_SD_WriteCpltCallback(void)
 {
-
+    writestatus = 1;
 }
 
 /**
@@ -287,7 +287,7 @@ __weak void BSP_SD_WriteCpltCallback(void)
   */
 __weak void BSP_SD_ReadCpltCallback(void)
 {
-
+      readstatus = 1;
 }
 /* USER CODE END CallBacksSection_C */
 #endif

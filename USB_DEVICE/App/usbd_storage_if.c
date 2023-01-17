@@ -125,7 +125,7 @@ const int8_t STORAGE_Inquirydata_HS[] = {/* 36 */
   */
 
 extern USBD_HandleTypeDef hUsbDeviceHS;
-
+extern volatile uint32_t writestatus, readstatus;
 /* USER CODE BEGIN EXPORTED_VARIABLES */
 
 /* USER CODE END EXPORTED_VARIABLES */
@@ -176,9 +176,8 @@ USBD_StorageTypeDef USBD_Storage_Interface_fops_HS =
   */
 int8_t STORAGE_Init_HS(uint8_t lun)
 {
-    int8_t ret = USBD_FAIL;
-	ret = BSP_SD_Init();
-    return ret;
+  BSP_SD_Init();
+  return 0;
 }
 
 /**
@@ -191,17 +190,17 @@ int8_t STORAGE_Init_HS(uint8_t lun)
 int8_t STORAGE_GetCapacity_HS(uint8_t lun, uint32_t *block_num, uint16_t *block_size)
 {
     BSP_SD_CardInfo info;
-    int8_t ret = -1;
+  int8_t ret = -1;
 
-    if (BSP_SD_IsDetected() != SD_NOT_PRESENT)
-    {
-        BSP_SD_GetCardInfo(&info);
+  if(BSP_SD_IsDetected() != SD_NOT_PRESENT)
+  {
+    BSP_SD_GetCardInfo(&info);
 
-        *block_num = info.LogBlockNbr - 1;
-        *block_size = info.LogBlockSize;
-        ret = USBD_OK;
-    }
-    return ret;
+    *block_num = info.LogBlockNbr;
+    *block_size = info.LogBlockSize;
+    ret = 0;
+  }
+  return ret;
 }
 
 /**
@@ -211,26 +210,27 @@ int8_t STORAGE_GetCapacity_HS(uint8_t lun, uint32_t *block_num, uint16_t *block_
   */
 int8_t STORAGE_IsReady_HS(uint8_t lun)
 {
-    static int8_t prev_status = 0;
-    int8_t ret = USBD_FAIL;
+  static int8_t prev_status = 0;
+  int8_t ret = -1;
 
-    if (BSP_SD_IsDetected() != SD_NOT_PRESENT)
+  if(BSP_SD_IsDetected() != SD_NOT_PRESENT)
+  {
+    if(prev_status < 0)
     {
-        if (prev_status < 0)
-        {
-            BSP_SD_Init();
-            prev_status = 0;
-        }
-        if (BSP_SD_GetCardState() == SD_TRANSFER_OK)
-        {
-            ret = USBD_OK;
-        }
+      BSP_SD_Init();
+      prev_status = 0;
+
     }
-    else if (prev_status == 0)
+    if(BSP_SD_GetCardState() == SD_TRANSFER_OK)
     {
-        prev_status = -1;
+      ret = 0;
     }
-    return ret;
+  }
+  else if(prev_status == 0)
+  {
+    prev_status = -1;
+  }
+  return ret;
 }
 
 /**
@@ -240,7 +240,7 @@ int8_t STORAGE_IsReady_HS(uint8_t lun)
   */
 int8_t STORAGE_IsWriteProtected_HS(uint8_t lun)
 {
-    return (USBD_OK);
+  return 0;
 }
 
 /**
@@ -253,17 +253,19 @@ int8_t STORAGE_IsWriteProtected_HS(uint8_t lun)
   */
 int8_t STORAGE_Read_HS(uint8_t lun, uint8_t *buf, uint32_t blk_addr, uint16_t blk_len)
 {
-	int8_t ret = USBD_FAIL;
+  int8_t ret = -1;
 
-	if (BSP_SD_IsDetected() != SD_NOT_PRESENT)
-	{
-	    BSP_SD_ReadBlocks_DMA((uint32_t *) buf, blk_addr, blk_len);
+  if(BSP_SD_IsDetected() != SD_NOT_PRESENT)
+  {
+    BSP_SD_ReadBlocks_DMA((uint32_t *) buf, blk_addr, blk_len);
 
-	    /* Wait until SD card is ready to use for  new operation */
-	    while (BSP_SD_GetCardState() != SD_TRANSFER_OK)
+    /* Wait until SD card is ready to use for new operation */
+    while(BSP_SD_GetCardState() != SD_TRANSFER_OK)
+    {
+    }
 
-	    ret = USBD_OK;
-	}
+    ret = 0;
+  }
 	return ret;
 }
 
@@ -277,17 +279,19 @@ int8_t STORAGE_Read_HS(uint8_t lun, uint8_t *buf, uint32_t blk_addr, uint16_t bl
   */
 int8_t STORAGE_Write_HS(uint8_t lun, uint8_t *buf, uint32_t blk_addr, uint16_t blk_len)
 {
-	int8_t ret = USBD_FAIL;
+  int8_t ret = -1;
 
-	if (BSP_SD_IsDetected() != SD_NOT_PRESENT)
-	{
-	    BSP_SD_WriteBlocks_DMA((uint32_t *) buf, blk_addr, blk_len);
+  if(BSP_SD_IsDetected() != SD_NOT_PRESENT)
+  {
+    BSP_SD_WriteBlocks_DMA((uint32_t *) buf, blk_addr, blk_len);
 
-	    /* Wait until SD card is ready to use for new operation */
-	    while (BSP_SD_GetCardState() != SD_TRANSFER_OK)
+    /* Wait until SD card is ready to use for new operation */
+    while(BSP_SD_GetCardState() != SD_TRANSFER_OK)
+    {
+    }
 
-	    ret = USBD_OK;
-	}
+    ret = 0;
+  }
 	return ret;
 }
 

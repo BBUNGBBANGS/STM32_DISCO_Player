@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccNgFcWW.s 			page 1
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccICxoYV.s 			page 1
 
 
    1              		.cpu cortex-m7
@@ -19,15 +19,25 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccNgFcWW.s 			page 1
   16              		.text
   17              	.Ltext0:
   18              		.cfi_sections	.debug_frame
-  19              		.section	.text.BSP_SD_Init,"ax",%progbits
-  20              		.align	1
-  21              		.weak	BSP_SD_Init
-  22              		.syntax unified
-  23              		.thumb
-  24              		.thumb_func
-  26              	BSP_SD_Init:
-  27              	.LFB141:
-  28              		.file 1 "FATFS/Target/bsp_driver_sd.c"
+  19              		.global	writestatus
+  20              		.section	.bss.writestatus,"aw",%nobits
+  21              		.align	2
+  24              	writestatus:
+  25 0000 00000000 		.space	4
+  26              		.global	readstatus
+  27              		.section	.bss.readstatus,"aw",%nobits
+  28              		.align	2
+  31              	readstatus:
+  32 0000 00000000 		.space	4
+  33              		.section	.text.BSP_SD_Init,"ax",%progbits
+  34              		.align	1
+  35              		.weak	BSP_SD_Init
+  36              		.syntax unified
+  37              		.thumb
+  38              		.thumb_func
+  40              	BSP_SD_Init:
+  41              	.LFB141:
+  42              		.file 1 "FATFS/Target/bsp_driver_sd.c"
    1:FATFS/Target/bsp_driver_sd.c **** /* USER CODE BEGIN Header */
    2:FATFS/Target/bsp_driver_sd.c **** /**
    3:FATFS/Target/bsp_driver_sd.c ****  ******************************************************************************
@@ -48,6 +58,9 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccNgFcWW.s 			page 1
   18:FATFS/Target/bsp_driver_sd.c ****   * in the root directory of this software component.
   19:FATFS/Target/bsp_driver_sd.c ****   * If no LICENSE file comes with this software, it is provided AS-IS.
   20:FATFS/Target/bsp_driver_sd.c ****   *
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccICxoYV.s 			page 2
+
+
   21:FATFS/Target/bsp_driver_sd.c ****  ******************************************************************************
   22:FATFS/Target/bsp_driver_sd.c ****  */
   23:FATFS/Target/bsp_driver_sd.c **** /* USER CODE END Header */
@@ -58,9 +71,6 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccNgFcWW.s 			page 1
   28:FATFS/Target/bsp_driver_sd.c **** 
   29:FATFS/Target/bsp_driver_sd.c **** /* USER CODE END 0 */
   30:FATFS/Target/bsp_driver_sd.c **** #else
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccNgFcWW.s 			page 2
-
-
   31:FATFS/Target/bsp_driver_sd.c **** /* USER CODE BEGIN FirstSection */
   32:FATFS/Target/bsp_driver_sd.c **** /* can be used to modify / undefine following code or add new definitions */
   33:FATFS/Target/bsp_driver_sd.c **** /* USER CODE END FirstSection */
@@ -70,7 +80,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccNgFcWW.s 			page 1
   37:FATFS/Target/bsp_driver_sd.c **** /* Extern variables ---------------------------------------------------------*/
   38:FATFS/Target/bsp_driver_sd.c **** 
   39:FATFS/Target/bsp_driver_sd.c **** extern SD_HandleTypeDef hsd1;
-  40:FATFS/Target/bsp_driver_sd.c **** 
+  40:FATFS/Target/bsp_driver_sd.c **** volatile uint32_t writestatus, readstatus = 0;
   41:FATFS/Target/bsp_driver_sd.c **** /* USER CODE BEGIN BeforeInitSection */
   42:FATFS/Target/bsp_driver_sd.c **** /* can be used to modify / undefine following code or add code */
   43:FATFS/Target/bsp_driver_sd.c **** /* USER CODE END BeforeInitSection */
@@ -80,108 +90,108 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccNgFcWW.s 			page 1
   47:FATFS/Target/bsp_driver_sd.c ****   */
   48:FATFS/Target/bsp_driver_sd.c **** __weak uint8_t BSP_SD_Init(void)
   49:FATFS/Target/bsp_driver_sd.c **** {
-  29              		.loc 1 49 1
-  30              		.cfi_startproc
-  31              		@ args = 0, pretend = 0, frame = 8
-  32              		@ frame_needed = 1, uses_anonymous_args = 0
-  33 0000 80B5     		push	{r7, lr}
-  34              	.LCFI0:
-  35              		.cfi_def_cfa_offset 8
-  36              		.cfi_offset 7, -8
-  37              		.cfi_offset 14, -4
-  38 0002 82B0     		sub	sp, sp, #8
-  39              	.LCFI1:
-  40              		.cfi_def_cfa_offset 16
-  41 0004 00AF     		add	r7, sp, #0
-  42              	.LCFI2:
-  43              		.cfi_def_cfa_register 7
+  43              		.loc 1 49 1
+  44              		.cfi_startproc
+  45              		@ args = 0, pretend = 0, frame = 8
+  46              		@ frame_needed = 1, uses_anonymous_args = 0
+  47 0000 80B5     		push	{r7, lr}
+  48              	.LCFI0:
+  49              		.cfi_def_cfa_offset 8
+  50              		.cfi_offset 7, -8
+  51              		.cfi_offset 14, -4
+  52 0002 82B0     		sub	sp, sp, #8
+  53              	.LCFI1:
+  54              		.cfi_def_cfa_offset 16
+  55 0004 00AF     		add	r7, sp, #0
+  56              	.LCFI2:
+  57              		.cfi_def_cfa_register 7
   50:FATFS/Target/bsp_driver_sd.c ****   uint8_t sd_state = MSD_OK;
-  44              		.loc 1 50 11
-  45 0006 0023     		movs	r3, #0
-  46 0008 FB71     		strb	r3, [r7, #7]
+  58              		.loc 1 50 11
+  59 0006 0023     		movs	r3, #0
+  60 0008 FB71     		strb	r3, [r7, #7]
   51:FATFS/Target/bsp_driver_sd.c ****   /* Check if the SD card is plugged in the slot */
   52:FATFS/Target/bsp_driver_sd.c ****   if (BSP_SD_IsDetected() != SD_PRESENT)
-  47              		.loc 1 52 7
-  48 000a FFF7FEFF 		bl	BSP_SD_IsDetected
-  49 000e 0346     		mov	r3, r0
-  50              		.loc 1 52 6
-  51 0010 012B     		cmp	r3, #1
-  52 0012 01D0     		beq	.L2
+  61              		.loc 1 52 7
+  62 000a FFF7FEFF 		bl	BSP_SD_IsDetected
+  63 000e 0346     		mov	r3, r0
+  64              		.loc 1 52 6
+  65 0010 012B     		cmp	r3, #1
+  66 0012 01D0     		beq	.L2
   53:FATFS/Target/bsp_driver_sd.c ****   {
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccICxoYV.s 			page 3
+
+
   54:FATFS/Target/bsp_driver_sd.c ****     return MSD_ERROR_SD_NOT_PRESENT;
-  53              		.loc 1 54 12
-  54 0014 0223     		movs	r3, #2
-  55 0016 12E0     		b	.L3
-  56              	.L2:
+  67              		.loc 1 54 12
+  68 0014 0223     		movs	r3, #2
+  69 0016 12E0     		b	.L3
+  70              	.L2:
   55:FATFS/Target/bsp_driver_sd.c ****   }
   56:FATFS/Target/bsp_driver_sd.c ****   /* HAL SD initialization */
   57:FATFS/Target/bsp_driver_sd.c ****   sd_state = HAL_SD_Init(&hsd1);
-  57              		.loc 1 57 14
-  58 0018 0B48     		ldr	r0, .L5
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccNgFcWW.s 			page 3
-
-
-  59 001a FFF7FEFF 		bl	HAL_SD_Init
-  60 001e 0346     		mov	r3, r0
-  61 0020 FB71     		strb	r3, [r7, #7]
+  71              		.loc 1 57 14
+  72 0018 0B48     		ldr	r0, .L5
+  73 001a FFF7FEFF 		bl	HAL_SD_Init
+  74 001e 0346     		mov	r3, r0
+  75 0020 FB71     		strb	r3, [r7, #7]
   58:FATFS/Target/bsp_driver_sd.c ****   /* Configure SD Bus width (4 bits mode selected) */
   59:FATFS/Target/bsp_driver_sd.c ****   if (sd_state == MSD_OK)
-  62              		.loc 1 59 6
-  63 0022 FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
-  64 0024 002B     		cmp	r3, #0
-  65 0026 09D1     		bne	.L4
+  76              		.loc 1 59 6
+  77 0022 FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+  78 0024 002B     		cmp	r3, #0
+  79 0026 09D1     		bne	.L4
   60:FATFS/Target/bsp_driver_sd.c ****   {
   61:FATFS/Target/bsp_driver_sd.c ****     /* Enable wide operation */
   62:FATFS/Target/bsp_driver_sd.c ****     if (HAL_SD_ConfigWideBusOperation(&hsd1, SDMMC_BUS_WIDE_4B) != HAL_OK)
-  66              		.loc 1 62 9
-  67 0028 4FF40061 		mov	r1, #2048
-  68 002c 0648     		ldr	r0, .L5
-  69 002e FFF7FEFF 		bl	HAL_SD_ConfigWideBusOperation
-  70 0032 0346     		mov	r3, r0
-  71              		.loc 1 62 8
-  72 0034 002B     		cmp	r3, #0
-  73 0036 01D0     		beq	.L4
+  80              		.loc 1 62 9
+  81 0028 4FF40061 		mov	r1, #2048
+  82 002c 0648     		ldr	r0, .L5
+  83 002e FFF7FEFF 		bl	HAL_SD_ConfigWideBusOperation
+  84 0032 0346     		mov	r3, r0
+  85              		.loc 1 62 8
+  86 0034 002B     		cmp	r3, #0
+  87 0036 01D0     		beq	.L4
   63:FATFS/Target/bsp_driver_sd.c ****     {
   64:FATFS/Target/bsp_driver_sd.c ****       sd_state = MSD_ERROR;
-  74              		.loc 1 64 16
-  75 0038 0123     		movs	r3, #1
-  76 003a FB71     		strb	r3, [r7, #7]
-  77              	.L4:
+  88              		.loc 1 64 16
+  89 0038 0123     		movs	r3, #1
+  90 003a FB71     		strb	r3, [r7, #7]
+  91              	.L4:
   65:FATFS/Target/bsp_driver_sd.c ****     }
   66:FATFS/Target/bsp_driver_sd.c ****   }
   67:FATFS/Target/bsp_driver_sd.c **** 
   68:FATFS/Target/bsp_driver_sd.c ****   return sd_state;
-  78              		.loc 1 68 10
-  79 003c FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
-  80              	.L3:
+  92              		.loc 1 68 10
+  93 003c FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+  94              	.L3:
   69:FATFS/Target/bsp_driver_sd.c **** }
-  81              		.loc 1 69 1
-  82 003e 1846     		mov	r0, r3
-  83 0040 0837     		adds	r7, r7, #8
-  84              	.LCFI3:
-  85              		.cfi_def_cfa_offset 8
-  86 0042 BD46     		mov	sp, r7
-  87              	.LCFI4:
-  88              		.cfi_def_cfa_register 13
-  89              		@ sp needed
-  90 0044 80BD     		pop	{r7, pc}
-  91              	.L6:
-  92 0046 00BF     		.align	2
-  93              	.L5:
-  94 0048 00000000 		.word	hsd1
-  95              		.cfi_endproc
-  96              	.LFE141:
-  98              		.section	.text.BSP_SD_ITConfig,"ax",%progbits
-  99              		.align	1
- 100              		.weak	BSP_SD_ITConfig
- 101              		.syntax unified
- 102              		.thumb
- 103              		.thumb_func
- 105              	BSP_SD_ITConfig:
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccNgFcWW.s 			page 4
+  95              		.loc 1 69 1
+  96 003e 1846     		mov	r0, r3
+  97 0040 0837     		adds	r7, r7, #8
+  98              	.LCFI3:
+  99              		.cfi_def_cfa_offset 8
+ 100 0042 BD46     		mov	sp, r7
+ 101              	.LCFI4:
+ 102              		.cfi_def_cfa_register 13
+ 103              		@ sp needed
+ 104 0044 80BD     		pop	{r7, pc}
+ 105              	.L6:
+ 106 0046 00BF     		.align	2
+ 107              	.L5:
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccICxoYV.s 			page 4
 
 
- 106              	.LFB142:
+ 108 0048 00000000 		.word	hsd1
+ 109              		.cfi_endproc
+ 110              	.LFE141:
+ 112              		.section	.text.BSP_SD_ITConfig,"ax",%progbits
+ 113              		.align	1
+ 114              		.weak	BSP_SD_ITConfig
+ 115              		.syntax unified
+ 116              		.thumb
+ 117              		.thumb_func
+ 119              	BSP_SD_ITConfig:
+ 120              	.LFB142:
   70:FATFS/Target/bsp_driver_sd.c **** /* USER CODE BEGIN AfterInitSection */
   71:FATFS/Target/bsp_driver_sd.c **** /* can be used to modify previous code / undefine following code / add code */
   72:FATFS/Target/bsp_driver_sd.c **** /* USER CODE END AfterInitSection */
@@ -193,54 +203,54 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccNgFcWW.s 			page 1
   78:FATFS/Target/bsp_driver_sd.c ****   */
   79:FATFS/Target/bsp_driver_sd.c **** __weak uint8_t BSP_SD_ITConfig(void)
   80:FATFS/Target/bsp_driver_sd.c **** {
- 107              		.loc 1 80 1
- 108              		.cfi_startproc
- 109              		@ args = 0, pretend = 0, frame = 0
- 110              		@ frame_needed = 1, uses_anonymous_args = 0
- 111              		@ link register save eliminated.
- 112 0000 80B4     		push	{r7}
- 113              	.LCFI5:
- 114              		.cfi_def_cfa_offset 4
- 115              		.cfi_offset 7, -4
- 116 0002 00AF     		add	r7, sp, #0
- 117              	.LCFI6:
- 118              		.cfi_def_cfa_register 7
+ 121              		.loc 1 80 1
+ 122              		.cfi_startproc
+ 123              		@ args = 0, pretend = 0, frame = 0
+ 124              		@ frame_needed = 1, uses_anonymous_args = 0
+ 125              		@ link register save eliminated.
+ 126 0000 80B4     		push	{r7}
+ 127              	.LCFI5:
+ 128              		.cfi_def_cfa_offset 4
+ 129              		.cfi_offset 7, -4
+ 130 0002 00AF     		add	r7, sp, #0
+ 131              	.LCFI6:
+ 132              		.cfi_def_cfa_register 7
   81:FATFS/Target/bsp_driver_sd.c ****   /* Code to be updated by the user or replaced by one from the FW pack (in a stmxxxx_sd.c file) */
   82:FATFS/Target/bsp_driver_sd.c **** 
   83:FATFS/Target/bsp_driver_sd.c ****   return (uint8_t)0;
- 119              		.loc 1 83 10
- 120 0004 0023     		movs	r3, #0
+ 133              		.loc 1 83 10
+ 134 0004 0023     		movs	r3, #0
   84:FATFS/Target/bsp_driver_sd.c **** }
- 121              		.loc 1 84 1
- 122 0006 1846     		mov	r0, r3
- 123 0008 BD46     		mov	sp, r7
- 124              	.LCFI7:
- 125              		.cfi_def_cfa_register 13
- 126              		@ sp needed
- 127 000a 5DF8047B 		ldr	r7, [sp], #4
- 128              	.LCFI8:
- 129              		.cfi_restore 7
- 130              		.cfi_def_cfa_offset 0
- 131 000e 7047     		bx	lr
- 132              		.cfi_endproc
- 133              	.LFE142:
- 135              		.section	.text.BSP_SD_ReadBlocks,"ax",%progbits
- 136              		.align	1
- 137              		.weak	BSP_SD_ReadBlocks
- 138              		.syntax unified
- 139              		.thumb
- 140              		.thumb_func
- 142              	BSP_SD_ReadBlocks:
- 143              	.LFB143:
+ 135              		.loc 1 84 1
+ 136 0006 1846     		mov	r0, r3
+ 137 0008 BD46     		mov	sp, r7
+ 138              	.LCFI7:
+ 139              		.cfi_def_cfa_register 13
+ 140              		@ sp needed
+ 141 000a 5DF8047B 		ldr	r7, [sp], #4
+ 142              	.LCFI8:
+ 143              		.cfi_restore 7
+ 144              		.cfi_def_cfa_offset 0
+ 145 000e 7047     		bx	lr
+ 146              		.cfi_endproc
+ 147              	.LFE142:
+ 149              		.section	.text.BSP_SD_ReadBlocks,"ax",%progbits
+ 150              		.align	1
+ 151              		.weak	BSP_SD_ReadBlocks
+ 152              		.syntax unified
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccICxoYV.s 			page 5
+
+
+ 153              		.thumb
+ 154              		.thumb_func
+ 156              	BSP_SD_ReadBlocks:
+ 157              	.LFB143:
   85:FATFS/Target/bsp_driver_sd.c **** 
   86:FATFS/Target/bsp_driver_sd.c **** /* USER CODE END InterruptMode */
   87:FATFS/Target/bsp_driver_sd.c **** 
   88:FATFS/Target/bsp_driver_sd.c **** /* USER CODE BEGIN BeforeReadBlocksSection */
   89:FATFS/Target/bsp_driver_sd.c **** /* can be used to modify previous code / undefine following code / add code */
   90:FATFS/Target/bsp_driver_sd.c **** /* USER CODE END BeforeReadBlocksSection */
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccNgFcWW.s 			page 5
-
-
   91:FATFS/Target/bsp_driver_sd.c **** /**
   92:FATFS/Target/bsp_driver_sd.c ****   * @brief  Reads block(s) from a specified address in an SD card, in polling mode.
   93:FATFS/Target/bsp_driver_sd.c ****   * @param  pData: Pointer to the buffer that will contain the data to transmit
@@ -251,82 +261,82 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccNgFcWW.s 			page 1
   98:FATFS/Target/bsp_driver_sd.c ****   */
   99:FATFS/Target/bsp_driver_sd.c **** __weak uint8_t BSP_SD_ReadBlocks(uint32_t *pData, uint32_t ReadAddr, uint32_t NumOfBlocks, uint32_t
  100:FATFS/Target/bsp_driver_sd.c **** {
- 144              		.loc 1 100 1
- 145              		.cfi_startproc
- 146              		@ args = 0, pretend = 0, frame = 24
- 147              		@ frame_needed = 1, uses_anonymous_args = 0
- 148 0000 80B5     		push	{r7, lr}
- 149              	.LCFI9:
- 150              		.cfi_def_cfa_offset 8
- 151              		.cfi_offset 7, -8
- 152              		.cfi_offset 14, -4
- 153 0002 88B0     		sub	sp, sp, #32
- 154              	.LCFI10:
- 155              		.cfi_def_cfa_offset 40
- 156 0004 02AF     		add	r7, sp, #8
- 157              	.LCFI11:
- 158              		.cfi_def_cfa 7, 32
- 159 0006 F860     		str	r0, [r7, #12]
- 160 0008 B960     		str	r1, [r7, #8]
- 161 000a 7A60     		str	r2, [r7, #4]
- 162 000c 3B60     		str	r3, [r7]
+ 158              		.loc 1 100 1
+ 159              		.cfi_startproc
+ 160              		@ args = 0, pretend = 0, frame = 24
+ 161              		@ frame_needed = 1, uses_anonymous_args = 0
+ 162 0000 80B5     		push	{r7, lr}
+ 163              	.LCFI9:
+ 164              		.cfi_def_cfa_offset 8
+ 165              		.cfi_offset 7, -8
+ 166              		.cfi_offset 14, -4
+ 167 0002 88B0     		sub	sp, sp, #32
+ 168              	.LCFI10:
+ 169              		.cfi_def_cfa_offset 40
+ 170 0004 02AF     		add	r7, sp, #8
+ 171              	.LCFI11:
+ 172              		.cfi_def_cfa 7, 32
+ 173 0006 F860     		str	r0, [r7, #12]
+ 174 0008 B960     		str	r1, [r7, #8]
+ 175 000a 7A60     		str	r2, [r7, #4]
+ 176 000c 3B60     		str	r3, [r7]
  101:FATFS/Target/bsp_driver_sd.c ****   uint8_t sd_state = MSD_OK;
- 163              		.loc 1 101 11
- 164 000e 0023     		movs	r3, #0
- 165 0010 FB75     		strb	r3, [r7, #23]
+ 177              		.loc 1 101 11
+ 178 000e 0023     		movs	r3, #0
+ 179 0010 FB75     		strb	r3, [r7, #23]
  102:FATFS/Target/bsp_driver_sd.c **** 
  103:FATFS/Target/bsp_driver_sd.c ****   if (HAL_SD_ReadBlocks(&hsd1, (uint8_t *)pData, ReadAddr, NumOfBlocks, Timeout) != HAL_OK)
- 166              		.loc 1 103 7
- 167 0012 3B68     		ldr	r3, [r7]
- 168 0014 0093     		str	r3, [sp]
- 169 0016 7B68     		ldr	r3, [r7, #4]
- 170 0018 BA68     		ldr	r2, [r7, #8]
- 171 001a F968     		ldr	r1, [r7, #12]
- 172 001c 0648     		ldr	r0, .L12
- 173 001e FFF7FEFF 		bl	HAL_SD_ReadBlocks
- 174 0022 0346     		mov	r3, r0
- 175              		.loc 1 103 6
- 176 0024 002B     		cmp	r3, #0
- 177 0026 01D0     		beq	.L10
+ 180              		.loc 1 103 7
+ 181 0012 3B68     		ldr	r3, [r7]
+ 182 0014 0093     		str	r3, [sp]
+ 183 0016 7B68     		ldr	r3, [r7, #4]
+ 184 0018 BA68     		ldr	r2, [r7, #8]
+ 185 001a F968     		ldr	r1, [r7, #12]
+ 186 001c 0648     		ldr	r0, .L12
+ 187 001e FFF7FEFF 		bl	HAL_SD_ReadBlocks
+ 188 0022 0346     		mov	r3, r0
+ 189              		.loc 1 103 6
+ 190 0024 002B     		cmp	r3, #0
+ 191 0026 01D0     		beq	.L10
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccICxoYV.s 			page 6
+
+
  104:FATFS/Target/bsp_driver_sd.c ****   {
  105:FATFS/Target/bsp_driver_sd.c ****     sd_state = MSD_ERROR;
- 178              		.loc 1 105 14
- 179 0028 0123     		movs	r3, #1
- 180 002a FB75     		strb	r3, [r7, #23]
- 181              	.L10:
+ 192              		.loc 1 105 14
+ 193 0028 0123     		movs	r3, #1
+ 194 002a FB75     		strb	r3, [r7, #23]
+ 195              	.L10:
  106:FATFS/Target/bsp_driver_sd.c ****   }
  107:FATFS/Target/bsp_driver_sd.c **** 
  108:FATFS/Target/bsp_driver_sd.c ****   return sd_state;
- 182              		.loc 1 108 10
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccNgFcWW.s 			page 6
-
-
- 183 002c FB7D     		ldrb	r3, [r7, #23]	@ zero_extendqisi2
+ 196              		.loc 1 108 10
+ 197 002c FB7D     		ldrb	r3, [r7, #23]	@ zero_extendqisi2
  109:FATFS/Target/bsp_driver_sd.c **** }
- 184              		.loc 1 109 1
- 185 002e 1846     		mov	r0, r3
- 186 0030 1837     		adds	r7, r7, #24
- 187              	.LCFI12:
- 188              		.cfi_def_cfa_offset 8
- 189 0032 BD46     		mov	sp, r7
- 190              	.LCFI13:
- 191              		.cfi_def_cfa_register 13
- 192              		@ sp needed
- 193 0034 80BD     		pop	{r7, pc}
- 194              	.L13:
- 195 0036 00BF     		.align	2
- 196              	.L12:
- 197 0038 00000000 		.word	hsd1
- 198              		.cfi_endproc
- 199              	.LFE143:
- 201              		.section	.text.BSP_SD_WriteBlocks,"ax",%progbits
- 202              		.align	1
- 203              		.weak	BSP_SD_WriteBlocks
- 204              		.syntax unified
- 205              		.thumb
- 206              		.thumb_func
- 208              	BSP_SD_WriteBlocks:
- 209              	.LFB144:
+ 198              		.loc 1 109 1
+ 199 002e 1846     		mov	r0, r3
+ 200 0030 1837     		adds	r7, r7, #24
+ 201              	.LCFI12:
+ 202              		.cfi_def_cfa_offset 8
+ 203 0032 BD46     		mov	sp, r7
+ 204              	.LCFI13:
+ 205              		.cfi_def_cfa_register 13
+ 206              		@ sp needed
+ 207 0034 80BD     		pop	{r7, pc}
+ 208              	.L13:
+ 209 0036 00BF     		.align	2
+ 210              	.L12:
+ 211 0038 00000000 		.word	hsd1
+ 212              		.cfi_endproc
+ 213              	.LFE143:
+ 215              		.section	.text.BSP_SD_WriteBlocks,"ax",%progbits
+ 216              		.align	1
+ 217              		.weak	BSP_SD_WriteBlocks
+ 218              		.syntax unified
+ 219              		.thumb
+ 220              		.thumb_func
+ 222              	BSP_SD_WriteBlocks:
+ 223              	.LFB144:
  110:FATFS/Target/bsp_driver_sd.c **** 
  111:FATFS/Target/bsp_driver_sd.c **** /* USER CODE BEGIN BeforeWriteBlocksSection */
  112:FATFS/Target/bsp_driver_sd.c **** /* can be used to modify previous code / undefine following code / add code */
@@ -341,86 +351,86 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccNgFcWW.s 			page 1
  121:FATFS/Target/bsp_driver_sd.c ****   */
  122:FATFS/Target/bsp_driver_sd.c **** __weak uint8_t BSP_SD_WriteBlocks(uint32_t *pData, uint32_t WriteAddr, uint32_t NumOfBlocks, uint32
  123:FATFS/Target/bsp_driver_sd.c **** {
- 210              		.loc 1 123 1
- 211              		.cfi_startproc
- 212              		@ args = 0, pretend = 0, frame = 24
- 213              		@ frame_needed = 1, uses_anonymous_args = 0
- 214 0000 80B5     		push	{r7, lr}
- 215              	.LCFI14:
- 216              		.cfi_def_cfa_offset 8
- 217              		.cfi_offset 7, -8
- 218              		.cfi_offset 14, -4
- 219 0002 88B0     		sub	sp, sp, #32
- 220              	.LCFI15:
- 221              		.cfi_def_cfa_offset 40
- 222 0004 02AF     		add	r7, sp, #8
- 223              	.LCFI16:
- 224              		.cfi_def_cfa 7, 32
- 225 0006 F860     		str	r0, [r7, #12]
- 226 0008 B960     		str	r1, [r7, #8]
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccNgFcWW.s 			page 7
+ 224              		.loc 1 123 1
+ 225              		.cfi_startproc
+ 226              		@ args = 0, pretend = 0, frame = 24
+ 227              		@ frame_needed = 1, uses_anonymous_args = 0
+ 228 0000 80B5     		push	{r7, lr}
+ 229              	.LCFI14:
+ 230              		.cfi_def_cfa_offset 8
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccICxoYV.s 			page 7
 
 
- 227 000a 7A60     		str	r2, [r7, #4]
- 228 000c 3B60     		str	r3, [r7]
+ 231              		.cfi_offset 7, -8
+ 232              		.cfi_offset 14, -4
+ 233 0002 88B0     		sub	sp, sp, #32
+ 234              	.LCFI15:
+ 235              		.cfi_def_cfa_offset 40
+ 236 0004 02AF     		add	r7, sp, #8
+ 237              	.LCFI16:
+ 238              		.cfi_def_cfa 7, 32
+ 239 0006 F860     		str	r0, [r7, #12]
+ 240 0008 B960     		str	r1, [r7, #8]
+ 241 000a 7A60     		str	r2, [r7, #4]
+ 242 000c 3B60     		str	r3, [r7]
  124:FATFS/Target/bsp_driver_sd.c ****   uint8_t sd_state = MSD_OK;
- 229              		.loc 1 124 11
- 230 000e 0023     		movs	r3, #0
- 231 0010 FB75     		strb	r3, [r7, #23]
+ 243              		.loc 1 124 11
+ 244 000e 0023     		movs	r3, #0
+ 245 0010 FB75     		strb	r3, [r7, #23]
  125:FATFS/Target/bsp_driver_sd.c **** 
  126:FATFS/Target/bsp_driver_sd.c ****   if (HAL_SD_WriteBlocks(&hsd1, (uint8_t *)pData, WriteAddr, NumOfBlocks, Timeout) != HAL_OK)
- 232              		.loc 1 126 7
- 233 0012 3B68     		ldr	r3, [r7]
- 234 0014 0093     		str	r3, [sp]
- 235 0016 7B68     		ldr	r3, [r7, #4]
- 236 0018 BA68     		ldr	r2, [r7, #8]
- 237 001a F968     		ldr	r1, [r7, #12]
- 238 001c 0648     		ldr	r0, .L17
- 239 001e FFF7FEFF 		bl	HAL_SD_WriteBlocks
- 240 0022 0346     		mov	r3, r0
- 241              		.loc 1 126 6
- 242 0024 002B     		cmp	r3, #0
- 243 0026 01D0     		beq	.L15
+ 246              		.loc 1 126 7
+ 247 0012 3B68     		ldr	r3, [r7]
+ 248 0014 0093     		str	r3, [sp]
+ 249 0016 7B68     		ldr	r3, [r7, #4]
+ 250 0018 BA68     		ldr	r2, [r7, #8]
+ 251 001a F968     		ldr	r1, [r7, #12]
+ 252 001c 0648     		ldr	r0, .L17
+ 253 001e FFF7FEFF 		bl	HAL_SD_WriteBlocks
+ 254 0022 0346     		mov	r3, r0
+ 255              		.loc 1 126 6
+ 256 0024 002B     		cmp	r3, #0
+ 257 0026 01D0     		beq	.L15
  127:FATFS/Target/bsp_driver_sd.c ****   {
  128:FATFS/Target/bsp_driver_sd.c ****     sd_state = MSD_ERROR;
- 244              		.loc 1 128 14
- 245 0028 0123     		movs	r3, #1
- 246 002a FB75     		strb	r3, [r7, #23]
- 247              	.L15:
+ 258              		.loc 1 128 14
+ 259 0028 0123     		movs	r3, #1
+ 260 002a FB75     		strb	r3, [r7, #23]
+ 261              	.L15:
  129:FATFS/Target/bsp_driver_sd.c ****   }
  130:FATFS/Target/bsp_driver_sd.c **** 
  131:FATFS/Target/bsp_driver_sd.c ****   return sd_state;
- 248              		.loc 1 131 10
- 249 002c FB7D     		ldrb	r3, [r7, #23]	@ zero_extendqisi2
+ 262              		.loc 1 131 10
+ 263 002c FB7D     		ldrb	r3, [r7, #23]	@ zero_extendqisi2
  132:FATFS/Target/bsp_driver_sd.c **** }
- 250              		.loc 1 132 1
- 251 002e 1846     		mov	r0, r3
- 252 0030 1837     		adds	r7, r7, #24
- 253              	.LCFI17:
- 254              		.cfi_def_cfa_offset 8
- 255 0032 BD46     		mov	sp, r7
- 256              	.LCFI18:
- 257              		.cfi_def_cfa_register 13
- 258              		@ sp needed
- 259 0034 80BD     		pop	{r7, pc}
- 260              	.L18:
- 261 0036 00BF     		.align	2
- 262              	.L17:
- 263 0038 00000000 		.word	hsd1
- 264              		.cfi_endproc
- 265              	.LFE144:
- 267              		.section	.text.BSP_SD_ReadBlocks_DMA,"ax",%progbits
- 268              		.align	1
- 269              		.weak	BSP_SD_ReadBlocks_DMA
- 270              		.syntax unified
- 271              		.thumb
- 272              		.thumb_func
- 274              	BSP_SD_ReadBlocks_DMA:
- 275              	.LFB145:
+ 264              		.loc 1 132 1
+ 265 002e 1846     		mov	r0, r3
+ 266 0030 1837     		adds	r7, r7, #24
+ 267              	.LCFI17:
+ 268              		.cfi_def_cfa_offset 8
+ 269 0032 BD46     		mov	sp, r7
+ 270              	.LCFI18:
+ 271              		.cfi_def_cfa_register 13
+ 272              		@ sp needed
+ 273 0034 80BD     		pop	{r7, pc}
+ 274              	.L18:
+ 275 0036 00BF     		.align	2
+ 276              	.L17:
+ 277 0038 00000000 		.word	hsd1
+ 278              		.cfi_endproc
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccICxoYV.s 			page 8
+
+
+ 279              	.LFE144:
+ 281              		.section	.text.BSP_SD_ReadBlocks_DMA,"ax",%progbits
+ 282              		.align	1
+ 283              		.weak	BSP_SD_ReadBlocks_DMA
+ 284              		.syntax unified
+ 285              		.thumb
+ 286              		.thumb_func
+ 288              	BSP_SD_ReadBlocks_DMA:
+ 289              	.LFB145:
  133:FATFS/Target/bsp_driver_sd.c **** 
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccNgFcWW.s 			page 8
-
-
  134:FATFS/Target/bsp_driver_sd.c **** /* USER CODE BEGIN BeforeReadDMABlocksSection */
  135:FATFS/Target/bsp_driver_sd.c **** /* can be used to modify previous code / undefine following code / add code */
  136:FATFS/Target/bsp_driver_sd.c **** /* USER CODE END BeforeReadDMABlocksSection */
@@ -433,80 +443,80 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccNgFcWW.s 			page 1
  143:FATFS/Target/bsp_driver_sd.c ****   */
  144:FATFS/Target/bsp_driver_sd.c **** __weak uint8_t BSP_SD_ReadBlocks_DMA(uint32_t *pData, uint32_t ReadAddr, uint32_t NumOfBlocks)
  145:FATFS/Target/bsp_driver_sd.c **** {
- 276              		.loc 1 145 1
- 277              		.cfi_startproc
- 278              		@ args = 0, pretend = 0, frame = 24
- 279              		@ frame_needed = 1, uses_anonymous_args = 0
- 280 0000 80B5     		push	{r7, lr}
- 281              	.LCFI19:
- 282              		.cfi_def_cfa_offset 8
- 283              		.cfi_offset 7, -8
- 284              		.cfi_offset 14, -4
- 285 0002 86B0     		sub	sp, sp, #24
- 286              	.LCFI20:
- 287              		.cfi_def_cfa_offset 32
- 288 0004 00AF     		add	r7, sp, #0
- 289              	.LCFI21:
- 290              		.cfi_def_cfa_register 7
- 291 0006 F860     		str	r0, [r7, #12]
- 292 0008 B960     		str	r1, [r7, #8]
- 293 000a 7A60     		str	r2, [r7, #4]
+ 290              		.loc 1 145 1
+ 291              		.cfi_startproc
+ 292              		@ args = 0, pretend = 0, frame = 24
+ 293              		@ frame_needed = 1, uses_anonymous_args = 0
+ 294 0000 80B5     		push	{r7, lr}
+ 295              	.LCFI19:
+ 296              		.cfi_def_cfa_offset 8
+ 297              		.cfi_offset 7, -8
+ 298              		.cfi_offset 14, -4
+ 299 0002 86B0     		sub	sp, sp, #24
+ 300              	.LCFI20:
+ 301              		.cfi_def_cfa_offset 32
+ 302 0004 00AF     		add	r7, sp, #0
+ 303              	.LCFI21:
+ 304              		.cfi_def_cfa_register 7
+ 305 0006 F860     		str	r0, [r7, #12]
+ 306 0008 B960     		str	r1, [r7, #8]
+ 307 000a 7A60     		str	r2, [r7, #4]
  146:FATFS/Target/bsp_driver_sd.c ****   uint8_t sd_state = MSD_OK;
- 294              		.loc 1 146 11
- 295 000c 0023     		movs	r3, #0
- 296 000e FB75     		strb	r3, [r7, #23]
+ 308              		.loc 1 146 11
+ 309 000c 0023     		movs	r3, #0
+ 310 000e FB75     		strb	r3, [r7, #23]
  147:FATFS/Target/bsp_driver_sd.c **** 
  148:FATFS/Target/bsp_driver_sd.c ****   /* Read block(s) in DMA transfer mode */
  149:FATFS/Target/bsp_driver_sd.c ****   if (HAL_SD_ReadBlocks_DMA(&hsd1, (uint8_t *)pData, ReadAddr, NumOfBlocks) != HAL_OK)
- 297              		.loc 1 149 7
- 298 0010 7B68     		ldr	r3, [r7, #4]
- 299 0012 BA68     		ldr	r2, [r7, #8]
- 300 0014 F968     		ldr	r1, [r7, #12]
- 301 0016 0648     		ldr	r0, .L22
- 302 0018 FFF7FEFF 		bl	HAL_SD_ReadBlocks_DMA
- 303 001c 0346     		mov	r3, r0
- 304              		.loc 1 149 6
- 305 001e 002B     		cmp	r3, #0
- 306 0020 01D0     		beq	.L20
+ 311              		.loc 1 149 7
+ 312 0010 7B68     		ldr	r3, [r7, #4]
+ 313 0012 BA68     		ldr	r2, [r7, #8]
+ 314 0014 F968     		ldr	r1, [r7, #12]
+ 315 0016 0648     		ldr	r0, .L22
+ 316 0018 FFF7FEFF 		bl	HAL_SD_ReadBlocks_DMA
+ 317 001c 0346     		mov	r3, r0
+ 318              		.loc 1 149 6
+ 319 001e 002B     		cmp	r3, #0
+ 320 0020 01D0     		beq	.L20
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccICxoYV.s 			page 9
+
+
  150:FATFS/Target/bsp_driver_sd.c ****   {
  151:FATFS/Target/bsp_driver_sd.c ****     sd_state = MSD_ERROR;
- 307              		.loc 1 151 14
- 308 0022 0123     		movs	r3, #1
- 309 0024 FB75     		strb	r3, [r7, #23]
- 310              	.L20:
+ 321              		.loc 1 151 14
+ 322 0022 0123     		movs	r3, #1
+ 323 0024 FB75     		strb	r3, [r7, #23]
+ 324              	.L20:
  152:FATFS/Target/bsp_driver_sd.c ****   }
  153:FATFS/Target/bsp_driver_sd.c **** 
  154:FATFS/Target/bsp_driver_sd.c ****   return sd_state;
- 311              		.loc 1 154 10
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccNgFcWW.s 			page 9
-
-
- 312 0026 FB7D     		ldrb	r3, [r7, #23]	@ zero_extendqisi2
+ 325              		.loc 1 154 10
+ 326 0026 FB7D     		ldrb	r3, [r7, #23]	@ zero_extendqisi2
  155:FATFS/Target/bsp_driver_sd.c **** }
- 313              		.loc 1 155 1
- 314 0028 1846     		mov	r0, r3
- 315 002a 1837     		adds	r7, r7, #24
- 316              	.LCFI22:
- 317              		.cfi_def_cfa_offset 8
- 318 002c BD46     		mov	sp, r7
- 319              	.LCFI23:
- 320              		.cfi_def_cfa_register 13
- 321              		@ sp needed
- 322 002e 80BD     		pop	{r7, pc}
- 323              	.L23:
- 324              		.align	2
- 325              	.L22:
- 326 0030 00000000 		.word	hsd1
- 327              		.cfi_endproc
- 328              	.LFE145:
- 330              		.section	.text.BSP_SD_WriteBlocks_DMA,"ax",%progbits
- 331              		.align	1
- 332              		.weak	BSP_SD_WriteBlocks_DMA
- 333              		.syntax unified
- 334              		.thumb
- 335              		.thumb_func
- 337              	BSP_SD_WriteBlocks_DMA:
- 338              	.LFB146:
+ 327              		.loc 1 155 1
+ 328 0028 1846     		mov	r0, r3
+ 329 002a 1837     		adds	r7, r7, #24
+ 330              	.LCFI22:
+ 331              		.cfi_def_cfa_offset 8
+ 332 002c BD46     		mov	sp, r7
+ 333              	.LCFI23:
+ 334              		.cfi_def_cfa_register 13
+ 335              		@ sp needed
+ 336 002e 80BD     		pop	{r7, pc}
+ 337              	.L23:
+ 338              		.align	2
+ 339              	.L22:
+ 340 0030 00000000 		.word	hsd1
+ 341              		.cfi_endproc
+ 342              	.LFE145:
+ 344              		.section	.text.BSP_SD_WriteBlocks_DMA,"ax",%progbits
+ 345              		.align	1
+ 346              		.weak	BSP_SD_WriteBlocks_DMA
+ 347              		.syntax unified
+ 348              		.thumb
+ 349              		.thumb_func
+ 351              	BSP_SD_WriteBlocks_DMA:
+ 352              	.LFB146:
  156:FATFS/Target/bsp_driver_sd.c **** 
  157:FATFS/Target/bsp_driver_sd.c **** /* USER CODE BEGIN BeforeWriteDMABlocksSection */
  158:FATFS/Target/bsp_driver_sd.c **** /* can be used to modify previous code / undefine following code / add code */
@@ -520,87 +530,87 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccNgFcWW.s 			page 1
  166:FATFS/Target/bsp_driver_sd.c ****   */
  167:FATFS/Target/bsp_driver_sd.c **** __weak uint8_t BSP_SD_WriteBlocks_DMA(uint32_t *pData, uint32_t WriteAddr, uint32_t NumOfBlocks)
  168:FATFS/Target/bsp_driver_sd.c **** {
- 339              		.loc 1 168 1
- 340              		.cfi_startproc
- 341              		@ args = 0, pretend = 0, frame = 24
- 342              		@ frame_needed = 1, uses_anonymous_args = 0
- 343 0000 80B5     		push	{r7, lr}
- 344              	.LCFI24:
- 345              		.cfi_def_cfa_offset 8
- 346              		.cfi_offset 7, -8
- 347              		.cfi_offset 14, -4
- 348 0002 86B0     		sub	sp, sp, #24
- 349              	.LCFI25:
- 350              		.cfi_def_cfa_offset 32
- 351 0004 00AF     		add	r7, sp, #0
- 352              	.LCFI26:
- 353              		.cfi_def_cfa_register 7
- 354 0006 F860     		str	r0, [r7, #12]
- 355 0008 B960     		str	r1, [r7, #8]
- 356 000a 7A60     		str	r2, [r7, #4]
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccNgFcWW.s 			page 10
+ 353              		.loc 1 168 1
+ 354              		.cfi_startproc
+ 355              		@ args = 0, pretend = 0, frame = 24
+ 356              		@ frame_needed = 1, uses_anonymous_args = 0
+ 357 0000 80B5     		push	{r7, lr}
+ 358              	.LCFI24:
+ 359              		.cfi_def_cfa_offset 8
+ 360              		.cfi_offset 7, -8
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccICxoYV.s 			page 10
 
 
+ 361              		.cfi_offset 14, -4
+ 362 0002 86B0     		sub	sp, sp, #24
+ 363              	.LCFI25:
+ 364              		.cfi_def_cfa_offset 32
+ 365 0004 00AF     		add	r7, sp, #0
+ 366              	.LCFI26:
+ 367              		.cfi_def_cfa_register 7
+ 368 0006 F860     		str	r0, [r7, #12]
+ 369 0008 B960     		str	r1, [r7, #8]
+ 370 000a 7A60     		str	r2, [r7, #4]
  169:FATFS/Target/bsp_driver_sd.c ****   uint8_t sd_state = MSD_OK;
- 357              		.loc 1 169 11
- 358 000c 0023     		movs	r3, #0
- 359 000e FB75     		strb	r3, [r7, #23]
+ 371              		.loc 1 169 11
+ 372 000c 0023     		movs	r3, #0
+ 373 000e FB75     		strb	r3, [r7, #23]
  170:FATFS/Target/bsp_driver_sd.c **** 
  171:FATFS/Target/bsp_driver_sd.c ****   /* Write block(s) in DMA transfer mode */
  172:FATFS/Target/bsp_driver_sd.c ****   if (HAL_SD_WriteBlocks_DMA(&hsd1, (uint8_t *)pData, WriteAddr, NumOfBlocks) != HAL_OK)
- 360              		.loc 1 172 7
- 361 0010 7B68     		ldr	r3, [r7, #4]
- 362 0012 BA68     		ldr	r2, [r7, #8]
- 363 0014 F968     		ldr	r1, [r7, #12]
- 364 0016 0648     		ldr	r0, .L27
- 365 0018 FFF7FEFF 		bl	HAL_SD_WriteBlocks_DMA
- 366 001c 0346     		mov	r3, r0
- 367              		.loc 1 172 6
- 368 001e 002B     		cmp	r3, #0
- 369 0020 01D0     		beq	.L25
+ 374              		.loc 1 172 7
+ 375 0010 7B68     		ldr	r3, [r7, #4]
+ 376 0012 BA68     		ldr	r2, [r7, #8]
+ 377 0014 F968     		ldr	r1, [r7, #12]
+ 378 0016 0648     		ldr	r0, .L27
+ 379 0018 FFF7FEFF 		bl	HAL_SD_WriteBlocks_DMA
+ 380 001c 0346     		mov	r3, r0
+ 381              		.loc 1 172 6
+ 382 001e 002B     		cmp	r3, #0
+ 383 0020 01D0     		beq	.L25
  173:FATFS/Target/bsp_driver_sd.c ****   {
  174:FATFS/Target/bsp_driver_sd.c ****     sd_state = MSD_ERROR;
- 370              		.loc 1 174 14
- 371 0022 0123     		movs	r3, #1
- 372 0024 FB75     		strb	r3, [r7, #23]
- 373              	.L25:
+ 384              		.loc 1 174 14
+ 385 0022 0123     		movs	r3, #1
+ 386 0024 FB75     		strb	r3, [r7, #23]
+ 387              	.L25:
  175:FATFS/Target/bsp_driver_sd.c ****   }
  176:FATFS/Target/bsp_driver_sd.c **** 
  177:FATFS/Target/bsp_driver_sd.c ****   return sd_state;
- 374              		.loc 1 177 10
- 375 0026 FB7D     		ldrb	r3, [r7, #23]	@ zero_extendqisi2
+ 388              		.loc 1 177 10
+ 389 0026 FB7D     		ldrb	r3, [r7, #23]	@ zero_extendqisi2
  178:FATFS/Target/bsp_driver_sd.c **** }
- 376              		.loc 1 178 1
- 377 0028 1846     		mov	r0, r3
- 378 002a 1837     		adds	r7, r7, #24
- 379              	.LCFI27:
- 380              		.cfi_def_cfa_offset 8
- 381 002c BD46     		mov	sp, r7
- 382              	.LCFI28:
- 383              		.cfi_def_cfa_register 13
- 384              		@ sp needed
- 385 002e 80BD     		pop	{r7, pc}
- 386              	.L28:
- 387              		.align	2
- 388              	.L27:
- 389 0030 00000000 		.word	hsd1
- 390              		.cfi_endproc
- 391              	.LFE146:
- 393              		.section	.text.BSP_SD_Erase,"ax",%progbits
- 394              		.align	1
- 395              		.weak	BSP_SD_Erase
- 396              		.syntax unified
- 397              		.thumb
- 398              		.thumb_func
- 400              	BSP_SD_Erase:
- 401              	.LFB147:
+ 390              		.loc 1 178 1
+ 391 0028 1846     		mov	r0, r3
+ 392 002a 1837     		adds	r7, r7, #24
+ 393              	.LCFI27:
+ 394              		.cfi_def_cfa_offset 8
+ 395 002c BD46     		mov	sp, r7
+ 396              	.LCFI28:
+ 397              		.cfi_def_cfa_register 13
+ 398              		@ sp needed
+ 399 002e 80BD     		pop	{r7, pc}
+ 400              	.L28:
+ 401              		.align	2
+ 402              	.L27:
+ 403 0030 00000000 		.word	hsd1
+ 404              		.cfi_endproc
+ 405              	.LFE146:
+ 407              		.section	.text.BSP_SD_Erase,"ax",%progbits
+ 408              		.align	1
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccICxoYV.s 			page 11
+
+
+ 409              		.weak	BSP_SD_Erase
+ 410              		.syntax unified
+ 411              		.thumb
+ 412              		.thumb_func
+ 414              	BSP_SD_Erase:
+ 415              	.LFB147:
  179:FATFS/Target/bsp_driver_sd.c **** 
  180:FATFS/Target/bsp_driver_sd.c **** /* USER CODE BEGIN BeforeEraseSection */
  181:FATFS/Target/bsp_driver_sd.c **** /* can be used to modify previous code / undefine following code / add code */
  182:FATFS/Target/bsp_driver_sd.c **** /* USER CODE END BeforeEraseSection */
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccNgFcWW.s 			page 11
-
-
  183:FATFS/Target/bsp_driver_sd.c **** /**
  184:FATFS/Target/bsp_driver_sd.c ****   * @brief  Erases the specified memory area of the given SD card.
  185:FATFS/Target/bsp_driver_sd.c ****   * @param  StartAddr: Start byte address
@@ -609,77 +619,77 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccNgFcWW.s 			page 1
  188:FATFS/Target/bsp_driver_sd.c ****   */
  189:FATFS/Target/bsp_driver_sd.c **** __weak uint8_t BSP_SD_Erase(uint32_t StartAddr, uint32_t EndAddr)
  190:FATFS/Target/bsp_driver_sd.c **** {
- 402              		.loc 1 190 1
- 403              		.cfi_startproc
- 404              		@ args = 0, pretend = 0, frame = 16
- 405              		@ frame_needed = 1, uses_anonymous_args = 0
- 406 0000 80B5     		push	{r7, lr}
- 407              	.LCFI29:
- 408              		.cfi_def_cfa_offset 8
- 409              		.cfi_offset 7, -8
- 410              		.cfi_offset 14, -4
- 411 0002 84B0     		sub	sp, sp, #16
- 412              	.LCFI30:
- 413              		.cfi_def_cfa_offset 24
- 414 0004 00AF     		add	r7, sp, #0
- 415              	.LCFI31:
- 416              		.cfi_def_cfa_register 7
- 417 0006 7860     		str	r0, [r7, #4]
- 418 0008 3960     		str	r1, [r7]
+ 416              		.loc 1 190 1
+ 417              		.cfi_startproc
+ 418              		@ args = 0, pretend = 0, frame = 16
+ 419              		@ frame_needed = 1, uses_anonymous_args = 0
+ 420 0000 80B5     		push	{r7, lr}
+ 421              	.LCFI29:
+ 422              		.cfi_def_cfa_offset 8
+ 423              		.cfi_offset 7, -8
+ 424              		.cfi_offset 14, -4
+ 425 0002 84B0     		sub	sp, sp, #16
+ 426              	.LCFI30:
+ 427              		.cfi_def_cfa_offset 24
+ 428 0004 00AF     		add	r7, sp, #0
+ 429              	.LCFI31:
+ 430              		.cfi_def_cfa_register 7
+ 431 0006 7860     		str	r0, [r7, #4]
+ 432 0008 3960     		str	r1, [r7]
  191:FATFS/Target/bsp_driver_sd.c ****   uint8_t sd_state = MSD_OK;
- 419              		.loc 1 191 11
- 420 000a 0023     		movs	r3, #0
- 421 000c FB73     		strb	r3, [r7, #15]
+ 433              		.loc 1 191 11
+ 434 000a 0023     		movs	r3, #0
+ 435 000c FB73     		strb	r3, [r7, #15]
  192:FATFS/Target/bsp_driver_sd.c **** 
  193:FATFS/Target/bsp_driver_sd.c ****   if (HAL_SD_Erase(&hsd1, StartAddr, EndAddr) != HAL_OK)
- 422              		.loc 1 193 7
- 423 000e 3A68     		ldr	r2, [r7]
- 424 0010 7968     		ldr	r1, [r7, #4]
- 425 0012 0648     		ldr	r0, .L32
- 426 0014 FFF7FEFF 		bl	HAL_SD_Erase
- 427 0018 0346     		mov	r3, r0
- 428              		.loc 1 193 6
- 429 001a 002B     		cmp	r3, #0
- 430 001c 01D0     		beq	.L30
+ 436              		.loc 1 193 7
+ 437 000e 3A68     		ldr	r2, [r7]
+ 438 0010 7968     		ldr	r1, [r7, #4]
+ 439 0012 0648     		ldr	r0, .L32
+ 440 0014 FFF7FEFF 		bl	HAL_SD_Erase
+ 441 0018 0346     		mov	r3, r0
+ 442              		.loc 1 193 6
+ 443 001a 002B     		cmp	r3, #0
+ 444 001c 01D0     		beq	.L30
  194:FATFS/Target/bsp_driver_sd.c ****   {
  195:FATFS/Target/bsp_driver_sd.c ****     sd_state = MSD_ERROR;
- 431              		.loc 1 195 14
- 432 001e 0123     		movs	r3, #1
- 433 0020 FB73     		strb	r3, [r7, #15]
- 434              	.L30:
+ 445              		.loc 1 195 14
+ 446 001e 0123     		movs	r3, #1
+ 447 0020 FB73     		strb	r3, [r7, #15]
+ 448              	.L30:
  196:FATFS/Target/bsp_driver_sd.c ****   }
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccICxoYV.s 			page 12
+
+
  197:FATFS/Target/bsp_driver_sd.c **** 
  198:FATFS/Target/bsp_driver_sd.c ****   return sd_state;
- 435              		.loc 1 198 10
- 436 0022 FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
+ 449              		.loc 1 198 10
+ 450 0022 FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
  199:FATFS/Target/bsp_driver_sd.c **** }
- 437              		.loc 1 199 1
- 438 0024 1846     		mov	r0, r3
- 439 0026 1037     		adds	r7, r7, #16
- 440              	.LCFI32:
- 441              		.cfi_def_cfa_offset 8
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccNgFcWW.s 			page 12
-
-
- 442 0028 BD46     		mov	sp, r7
- 443              	.LCFI33:
- 444              		.cfi_def_cfa_register 13
- 445              		@ sp needed
- 446 002a 80BD     		pop	{r7, pc}
- 447              	.L33:
- 448              		.align	2
- 449              	.L32:
- 450 002c 00000000 		.word	hsd1
- 451              		.cfi_endproc
- 452              	.LFE147:
- 454              		.section	.text.BSP_SD_GetCardState,"ax",%progbits
- 455              		.align	1
- 456              		.weak	BSP_SD_GetCardState
- 457              		.syntax unified
- 458              		.thumb
- 459              		.thumb_func
- 461              	BSP_SD_GetCardState:
- 462              	.LFB148:
+ 451              		.loc 1 199 1
+ 452 0024 1846     		mov	r0, r3
+ 453 0026 1037     		adds	r7, r7, #16
+ 454              	.LCFI32:
+ 455              		.cfi_def_cfa_offset 8
+ 456 0028 BD46     		mov	sp, r7
+ 457              	.LCFI33:
+ 458              		.cfi_def_cfa_register 13
+ 459              		@ sp needed
+ 460 002a 80BD     		pop	{r7, pc}
+ 461              	.L33:
+ 462              		.align	2
+ 463              	.L32:
+ 464 002c 00000000 		.word	hsd1
+ 465              		.cfi_endproc
+ 466              	.LFE147:
+ 468              		.section	.text.BSP_SD_GetCardState,"ax",%progbits
+ 469              		.align	1
+ 470              		.weak	BSP_SD_GetCardState
+ 471              		.syntax unified
+ 472              		.thumb
+ 473              		.thumb_func
+ 475              	BSP_SD_GetCardState:
+ 476              	.LFB148:
  200:FATFS/Target/bsp_driver_sd.c **** 
  201:FATFS/Target/bsp_driver_sd.c **** /* USER CODE BEGIN BeforeGetCardStateSection */
  202:FATFS/Target/bsp_driver_sd.c **** /* can be used to modify previous code / undefine following code / add code */
@@ -695,50 +705,50 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccNgFcWW.s 			page 1
  212:FATFS/Target/bsp_driver_sd.c ****   */
  213:FATFS/Target/bsp_driver_sd.c **** __weak uint8_t BSP_SD_GetCardState(void)
  214:FATFS/Target/bsp_driver_sd.c **** {
- 463              		.loc 1 214 1
- 464              		.cfi_startproc
- 465              		@ args = 0, pretend = 0, frame = 0
- 466              		@ frame_needed = 1, uses_anonymous_args = 0
- 467 0000 80B5     		push	{r7, lr}
- 468              	.LCFI34:
- 469              		.cfi_def_cfa_offset 8
- 470              		.cfi_offset 7, -8
- 471              		.cfi_offset 14, -4
- 472 0002 00AF     		add	r7, sp, #0
- 473              	.LCFI35:
- 474              		.cfi_def_cfa_register 7
+ 477              		.loc 1 214 1
+ 478              		.cfi_startproc
+ 479              		@ args = 0, pretend = 0, frame = 0
+ 480              		@ frame_needed = 1, uses_anonymous_args = 0
+ 481 0000 80B5     		push	{r7, lr}
+ 482              	.LCFI34:
+ 483              		.cfi_def_cfa_offset 8
+ 484              		.cfi_offset 7, -8
+ 485              		.cfi_offset 14, -4
+ 486 0002 00AF     		add	r7, sp, #0
+ 487              	.LCFI35:
+ 488              		.cfi_def_cfa_register 7
  215:FATFS/Target/bsp_driver_sd.c ****   return ((HAL_SD_GetCardState(&hsd1) == HAL_SD_CARD_TRANSFER ) ? SD_TRANSFER_OK : SD_TRANSFER_BUSY
- 475              		.loc 1 215 12
- 476 0004 0548     		ldr	r0, .L36
- 477 0006 FFF7FEFF 		bl	HAL_SD_GetCardState
- 478 000a 0346     		mov	r3, r0
- 479              		.loc 1 215 82
- 480 000c 042B     		cmp	r3, #4
- 481 000e 14BF     		ite	ne
- 482 0010 0123     		movne	r3, #1
- 483 0012 0023     		moveq	r3, #0
- 484 0014 DBB2     		uxtb	r3, r3
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccNgFcWW.s 			page 13
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccICxoYV.s 			page 13
 
 
+ 489              		.loc 1 215 12
+ 490 0004 0548     		ldr	r0, .L36
+ 491 0006 FFF7FEFF 		bl	HAL_SD_GetCardState
+ 492 000a 0346     		mov	r3, r0
+ 493              		.loc 1 215 82
+ 494 000c 042B     		cmp	r3, #4
+ 495 000e 14BF     		ite	ne
+ 496 0010 0123     		movne	r3, #1
+ 497 0012 0023     		moveq	r3, #0
+ 498 0014 DBB2     		uxtb	r3, r3
  216:FATFS/Target/bsp_driver_sd.c **** }
- 485              		.loc 1 216 1
- 486 0016 1846     		mov	r0, r3
- 487 0018 80BD     		pop	{r7, pc}
- 488              	.L37:
- 489 001a 00BF     		.align	2
- 490              	.L36:
- 491 001c 00000000 		.word	hsd1
- 492              		.cfi_endproc
- 493              	.LFE148:
- 495              		.section	.text.BSP_SD_GetCardInfo,"ax",%progbits
- 496              		.align	1
- 497              		.weak	BSP_SD_GetCardInfo
- 498              		.syntax unified
- 499              		.thumb
- 500              		.thumb_func
- 502              	BSP_SD_GetCardInfo:
- 503              	.LFB149:
+ 499              		.loc 1 216 1
+ 500 0016 1846     		mov	r0, r3
+ 501 0018 80BD     		pop	{r7, pc}
+ 502              	.L37:
+ 503 001a 00BF     		.align	2
+ 504              	.L36:
+ 505 001c 00000000 		.word	hsd1
+ 506              		.cfi_endproc
+ 507              	.LFE148:
+ 509              		.section	.text.BSP_SD_GetCardInfo,"ax",%progbits
+ 510              		.align	1
+ 511              		.weak	BSP_SD_GetCardInfo
+ 512              		.syntax unified
+ 513              		.thumb
+ 514              		.thumb_func
+ 516              	BSP_SD_GetCardInfo:
+ 517              	.LFB149:
  217:FATFS/Target/bsp_driver_sd.c **** 
  218:FATFS/Target/bsp_driver_sd.c **** /**
  219:FATFS/Target/bsp_driver_sd.c ****   * @brief  Get SD information about specific SD card.
@@ -747,56 +757,56 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccNgFcWW.s 			page 1
  222:FATFS/Target/bsp_driver_sd.c ****   */
  223:FATFS/Target/bsp_driver_sd.c **** __weak void BSP_SD_GetCardInfo(HAL_SD_CardInfoTypeDef *CardInfo)
  224:FATFS/Target/bsp_driver_sd.c **** {
- 504              		.loc 1 224 1
- 505              		.cfi_startproc
- 506              		@ args = 0, pretend = 0, frame = 8
- 507              		@ frame_needed = 1, uses_anonymous_args = 0
- 508 0000 80B5     		push	{r7, lr}
- 509              	.LCFI36:
- 510              		.cfi_def_cfa_offset 8
- 511              		.cfi_offset 7, -8
- 512              		.cfi_offset 14, -4
- 513 0002 82B0     		sub	sp, sp, #8
- 514              	.LCFI37:
- 515              		.cfi_def_cfa_offset 16
- 516 0004 00AF     		add	r7, sp, #0
- 517              	.LCFI38:
- 518              		.cfi_def_cfa_register 7
- 519 0006 7860     		str	r0, [r7, #4]
+ 518              		.loc 1 224 1
+ 519              		.cfi_startproc
+ 520              		@ args = 0, pretend = 0, frame = 8
+ 521              		@ frame_needed = 1, uses_anonymous_args = 0
+ 522 0000 80B5     		push	{r7, lr}
+ 523              	.LCFI36:
+ 524              		.cfi_def_cfa_offset 8
+ 525              		.cfi_offset 7, -8
+ 526              		.cfi_offset 14, -4
+ 527 0002 82B0     		sub	sp, sp, #8
+ 528              	.LCFI37:
+ 529              		.cfi_def_cfa_offset 16
+ 530 0004 00AF     		add	r7, sp, #0
+ 531              	.LCFI38:
+ 532              		.cfi_def_cfa_register 7
+ 533 0006 7860     		str	r0, [r7, #4]
  225:FATFS/Target/bsp_driver_sd.c ****   /* Get SD card Information */
  226:FATFS/Target/bsp_driver_sd.c ****   HAL_SD_GetCardInfo(&hsd1, CardInfo);
- 520              		.loc 1 226 3
- 521 0008 7968     		ldr	r1, [r7, #4]
- 522 000a 0348     		ldr	r0, .L39
- 523 000c FFF7FEFF 		bl	HAL_SD_GetCardInfo
+ 534              		.loc 1 226 3
+ 535 0008 7968     		ldr	r1, [r7, #4]
+ 536 000a 0348     		ldr	r0, .L39
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccICxoYV.s 			page 14
+
+
+ 537 000c FFF7FEFF 		bl	HAL_SD_GetCardInfo
  227:FATFS/Target/bsp_driver_sd.c **** }
- 524              		.loc 1 227 1
- 525 0010 00BF     		nop
- 526 0012 0837     		adds	r7, r7, #8
- 527              	.LCFI39:
- 528              		.cfi_def_cfa_offset 8
- 529 0014 BD46     		mov	sp, r7
- 530              	.LCFI40:
- 531              		.cfi_def_cfa_register 13
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccNgFcWW.s 			page 14
-
-
- 532              		@ sp needed
- 533 0016 80BD     		pop	{r7, pc}
- 534              	.L40:
- 535              		.align	2
- 536              	.L39:
- 537 0018 00000000 		.word	hsd1
- 538              		.cfi_endproc
- 539              	.LFE149:
- 541              		.section	.text.HAL_SD_AbortCallback,"ax",%progbits
- 542              		.align	1
- 543              		.global	HAL_SD_AbortCallback
- 544              		.syntax unified
- 545              		.thumb
- 546              		.thumb_func
- 548              	HAL_SD_AbortCallback:
- 549              	.LFB150:
+ 538              		.loc 1 227 1
+ 539 0010 00BF     		nop
+ 540 0012 0837     		adds	r7, r7, #8
+ 541              	.LCFI39:
+ 542              		.cfi_def_cfa_offset 8
+ 543 0014 BD46     		mov	sp, r7
+ 544              	.LCFI40:
+ 545              		.cfi_def_cfa_register 13
+ 546              		@ sp needed
+ 547 0016 80BD     		pop	{r7, pc}
+ 548              	.L40:
+ 549              		.align	2
+ 550              	.L39:
+ 551 0018 00000000 		.word	hsd1
+ 552              		.cfi_endproc
+ 553              	.LFE149:
+ 555              		.section	.text.HAL_SD_AbortCallback,"ax",%progbits
+ 556              		.align	1
+ 557              		.global	HAL_SD_AbortCallback
+ 558              		.syntax unified
+ 559              		.thumb
+ 560              		.thumb_func
+ 562              	HAL_SD_AbortCallback:
+ 563              	.LFB150:
  228:FATFS/Target/bsp_driver_sd.c **** 
  229:FATFS/Target/bsp_driver_sd.c **** /* USER CODE BEGIN BeforeCallBacksSection */
  230:FATFS/Target/bsp_driver_sd.c **** /* can be used to modify previous code / undefine following code / add code */
@@ -808,49 +818,49 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccNgFcWW.s 			page 1
  236:FATFS/Target/bsp_driver_sd.c ****   */
  237:FATFS/Target/bsp_driver_sd.c **** void HAL_SD_AbortCallback(SD_HandleTypeDef *hsd)
  238:FATFS/Target/bsp_driver_sd.c **** {
- 550              		.loc 1 238 1
- 551              		.cfi_startproc
- 552              		@ args = 0, pretend = 0, frame = 8
- 553              		@ frame_needed = 1, uses_anonymous_args = 0
- 554 0000 80B5     		push	{r7, lr}
- 555              	.LCFI41:
- 556              		.cfi_def_cfa_offset 8
- 557              		.cfi_offset 7, -8
- 558              		.cfi_offset 14, -4
- 559 0002 82B0     		sub	sp, sp, #8
- 560              	.LCFI42:
- 561              		.cfi_def_cfa_offset 16
- 562 0004 00AF     		add	r7, sp, #0
- 563              	.LCFI43:
- 564              		.cfi_def_cfa_register 7
- 565 0006 7860     		str	r0, [r7, #4]
+ 564              		.loc 1 238 1
+ 565              		.cfi_startproc
+ 566              		@ args = 0, pretend = 0, frame = 8
+ 567              		@ frame_needed = 1, uses_anonymous_args = 0
+ 568 0000 80B5     		push	{r7, lr}
+ 569              	.LCFI41:
+ 570              		.cfi_def_cfa_offset 8
+ 571              		.cfi_offset 7, -8
+ 572              		.cfi_offset 14, -4
+ 573 0002 82B0     		sub	sp, sp, #8
+ 574              	.LCFI42:
+ 575              		.cfi_def_cfa_offset 16
+ 576 0004 00AF     		add	r7, sp, #0
+ 577              	.LCFI43:
+ 578              		.cfi_def_cfa_register 7
+ 579 0006 7860     		str	r0, [r7, #4]
  239:FATFS/Target/bsp_driver_sd.c ****   BSP_SD_AbortCallback();
- 566              		.loc 1 239 3
- 567 0008 FFF7FEFF 		bl	BSP_SD_AbortCallback
+ 580              		.loc 1 239 3
+ 581 0008 FFF7FEFF 		bl	BSP_SD_AbortCallback
  240:FATFS/Target/bsp_driver_sd.c **** }
- 568              		.loc 1 240 1
- 569 000c 00BF     		nop
- 570 000e 0837     		adds	r7, r7, #8
- 571              	.LCFI44:
- 572              		.cfi_def_cfa_offset 8
- 573 0010 BD46     		mov	sp, r7
- 574              	.LCFI45:
- 575              		.cfi_def_cfa_register 13
- 576              		@ sp needed
- 577 0012 80BD     		pop	{r7, pc}
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccNgFcWW.s 			page 15
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccICxoYV.s 			page 15
 
 
- 578              		.cfi_endproc
- 579              	.LFE150:
- 581              		.section	.text.HAL_SD_TxCpltCallback,"ax",%progbits
- 582              		.align	1
- 583              		.global	HAL_SD_TxCpltCallback
- 584              		.syntax unified
- 585              		.thumb
- 586              		.thumb_func
- 588              	HAL_SD_TxCpltCallback:
- 589              	.LFB151:
+ 582              		.loc 1 240 1
+ 583 000c 00BF     		nop
+ 584 000e 0837     		adds	r7, r7, #8
+ 585              	.LCFI44:
+ 586              		.cfi_def_cfa_offset 8
+ 587 0010 BD46     		mov	sp, r7
+ 588              	.LCFI45:
+ 589              		.cfi_def_cfa_register 13
+ 590              		@ sp needed
+ 591 0012 80BD     		pop	{r7, pc}
+ 592              		.cfi_endproc
+ 593              	.LFE150:
+ 595              		.section	.text.HAL_SD_TxCpltCallback,"ax",%progbits
+ 596              		.align	1
+ 597              		.global	HAL_SD_TxCpltCallback
+ 598              		.syntax unified
+ 599              		.thumb
+ 600              		.thumb_func
+ 602              	HAL_SD_TxCpltCallback:
+ 603              	.LFB151:
  241:FATFS/Target/bsp_driver_sd.c **** 
  242:FATFS/Target/bsp_driver_sd.c **** /**
  243:FATFS/Target/bsp_driver_sd.c ****   * @brief Tx Transfer completed callback
@@ -859,49 +869,49 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccNgFcWW.s 			page 1
  246:FATFS/Target/bsp_driver_sd.c ****   */
  247:FATFS/Target/bsp_driver_sd.c **** void HAL_SD_TxCpltCallback(SD_HandleTypeDef *hsd)
  248:FATFS/Target/bsp_driver_sd.c **** {
- 590              		.loc 1 248 1
- 591              		.cfi_startproc
- 592              		@ args = 0, pretend = 0, frame = 8
- 593              		@ frame_needed = 1, uses_anonymous_args = 0
- 594 0000 80B5     		push	{r7, lr}
- 595              	.LCFI46:
- 596              		.cfi_def_cfa_offset 8
- 597              		.cfi_offset 7, -8
- 598              		.cfi_offset 14, -4
- 599 0002 82B0     		sub	sp, sp, #8
- 600              	.LCFI47:
- 601              		.cfi_def_cfa_offset 16
- 602 0004 00AF     		add	r7, sp, #0
- 603              	.LCFI48:
- 604              		.cfi_def_cfa_register 7
- 605 0006 7860     		str	r0, [r7, #4]
+ 604              		.loc 1 248 1
+ 605              		.cfi_startproc
+ 606              		@ args = 0, pretend = 0, frame = 8
+ 607              		@ frame_needed = 1, uses_anonymous_args = 0
+ 608 0000 80B5     		push	{r7, lr}
+ 609              	.LCFI46:
+ 610              		.cfi_def_cfa_offset 8
+ 611              		.cfi_offset 7, -8
+ 612              		.cfi_offset 14, -4
+ 613 0002 82B0     		sub	sp, sp, #8
+ 614              	.LCFI47:
+ 615              		.cfi_def_cfa_offset 16
+ 616 0004 00AF     		add	r7, sp, #0
+ 617              	.LCFI48:
+ 618              		.cfi_def_cfa_register 7
+ 619 0006 7860     		str	r0, [r7, #4]
  249:FATFS/Target/bsp_driver_sd.c ****   BSP_SD_WriteCpltCallback();
- 606              		.loc 1 249 3
- 607 0008 FFF7FEFF 		bl	BSP_SD_WriteCpltCallback
+ 620              		.loc 1 249 3
+ 621 0008 FFF7FEFF 		bl	BSP_SD_WriteCpltCallback
  250:FATFS/Target/bsp_driver_sd.c **** }
- 608              		.loc 1 250 1
- 609 000c 00BF     		nop
- 610 000e 0837     		adds	r7, r7, #8
- 611              	.LCFI49:
- 612              		.cfi_def_cfa_offset 8
- 613 0010 BD46     		mov	sp, r7
- 614              	.LCFI50:
- 615              		.cfi_def_cfa_register 13
- 616              		@ sp needed
- 617 0012 80BD     		pop	{r7, pc}
- 618              		.cfi_endproc
- 619              	.LFE151:
- 621              		.section	.text.HAL_SD_RxCpltCallback,"ax",%progbits
- 622              		.align	1
- 623              		.global	HAL_SD_RxCpltCallback
- 624              		.syntax unified
- 625              		.thumb
- 626              		.thumb_func
- 628              	HAL_SD_RxCpltCallback:
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccNgFcWW.s 			page 16
+ 622              		.loc 1 250 1
+ 623 000c 00BF     		nop
+ 624 000e 0837     		adds	r7, r7, #8
+ 625              	.LCFI49:
+ 626              		.cfi_def_cfa_offset 8
+ 627 0010 BD46     		mov	sp, r7
+ 628              	.LCFI50:
+ 629              		.cfi_def_cfa_register 13
+ 630              		@ sp needed
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccICxoYV.s 			page 16
 
 
- 629              	.LFB152:
+ 631 0012 80BD     		pop	{r7, pc}
+ 632              		.cfi_endproc
+ 633              	.LFE151:
+ 635              		.section	.text.HAL_SD_RxCpltCallback,"ax",%progbits
+ 636              		.align	1
+ 637              		.global	HAL_SD_RxCpltCallback
+ 638              		.syntax unified
+ 639              		.thumb
+ 640              		.thumb_func
+ 642              	HAL_SD_RxCpltCallback:
+ 643              	.LFB152:
  251:FATFS/Target/bsp_driver_sd.c **** 
  252:FATFS/Target/bsp_driver_sd.c **** /**
  253:FATFS/Target/bsp_driver_sd.c ****   * @brief Rx Transfer completed callback
@@ -910,46 +920,49 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccNgFcWW.s 			page 1
  256:FATFS/Target/bsp_driver_sd.c ****   */
  257:FATFS/Target/bsp_driver_sd.c **** void HAL_SD_RxCpltCallback(SD_HandleTypeDef *hsd)
  258:FATFS/Target/bsp_driver_sd.c **** {
- 630              		.loc 1 258 1
- 631              		.cfi_startproc
- 632              		@ args = 0, pretend = 0, frame = 8
- 633              		@ frame_needed = 1, uses_anonymous_args = 0
- 634 0000 80B5     		push	{r7, lr}
- 635              	.LCFI51:
- 636              		.cfi_def_cfa_offset 8
- 637              		.cfi_offset 7, -8
- 638              		.cfi_offset 14, -4
- 639 0002 82B0     		sub	sp, sp, #8
- 640              	.LCFI52:
- 641              		.cfi_def_cfa_offset 16
- 642 0004 00AF     		add	r7, sp, #0
- 643              	.LCFI53:
- 644              		.cfi_def_cfa_register 7
- 645 0006 7860     		str	r0, [r7, #4]
+ 644              		.loc 1 258 1
+ 645              		.cfi_startproc
+ 646              		@ args = 0, pretend = 0, frame = 8
+ 647              		@ frame_needed = 1, uses_anonymous_args = 0
+ 648 0000 80B5     		push	{r7, lr}
+ 649              	.LCFI51:
+ 650              		.cfi_def_cfa_offset 8
+ 651              		.cfi_offset 7, -8
+ 652              		.cfi_offset 14, -4
+ 653 0002 82B0     		sub	sp, sp, #8
+ 654              	.LCFI52:
+ 655              		.cfi_def_cfa_offset 16
+ 656 0004 00AF     		add	r7, sp, #0
+ 657              	.LCFI53:
+ 658              		.cfi_def_cfa_register 7
+ 659 0006 7860     		str	r0, [r7, #4]
  259:FATFS/Target/bsp_driver_sd.c ****   BSP_SD_ReadCpltCallback();
- 646              		.loc 1 259 3
- 647 0008 FFF7FEFF 		bl	BSP_SD_ReadCpltCallback
+ 660              		.loc 1 259 3
+ 661 0008 FFF7FEFF 		bl	BSP_SD_ReadCpltCallback
  260:FATFS/Target/bsp_driver_sd.c **** }
- 648              		.loc 1 260 1
- 649 000c 00BF     		nop
- 650 000e 0837     		adds	r7, r7, #8
- 651              	.LCFI54:
- 652              		.cfi_def_cfa_offset 8
- 653 0010 BD46     		mov	sp, r7
- 654              	.LCFI55:
- 655              		.cfi_def_cfa_register 13
- 656              		@ sp needed
- 657 0012 80BD     		pop	{r7, pc}
- 658              		.cfi_endproc
- 659              	.LFE152:
- 661              		.section	.text.BSP_SD_AbortCallback,"ax",%progbits
- 662              		.align	1
- 663              		.weak	BSP_SD_AbortCallback
- 664              		.syntax unified
- 665              		.thumb
- 666              		.thumb_func
- 668              	BSP_SD_AbortCallback:
- 669              	.LFB153:
+ 662              		.loc 1 260 1
+ 663 000c 00BF     		nop
+ 664 000e 0837     		adds	r7, r7, #8
+ 665              	.LCFI54:
+ 666              		.cfi_def_cfa_offset 8
+ 667 0010 BD46     		mov	sp, r7
+ 668              	.LCFI55:
+ 669              		.cfi_def_cfa_register 13
+ 670              		@ sp needed
+ 671 0012 80BD     		pop	{r7, pc}
+ 672              		.cfi_endproc
+ 673              	.LFE152:
+ 675              		.section	.text.BSP_SD_AbortCallback,"ax",%progbits
+ 676              		.align	1
+ 677              		.weak	BSP_SD_AbortCallback
+ 678              		.syntax unified
+ 679              		.thumb
+ 680              		.thumb_func
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccICxoYV.s 			page 17
+
+
+ 682              	BSP_SD_AbortCallback:
+ 683              	.LFB153:
  261:FATFS/Target/bsp_driver_sd.c **** 
  262:FATFS/Target/bsp_driver_sd.c **** /* USER CODE BEGIN CallBacksSection_C */
  263:FATFS/Target/bsp_driver_sd.c **** /**
@@ -958,45 +971,42 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccNgFcWW.s 			page 1
  266:FATFS/Target/bsp_driver_sd.c ****   * @note empty (up to the user to fill it in or to remove it if useless)
  267:FATFS/Target/bsp_driver_sd.c ****   */
  268:FATFS/Target/bsp_driver_sd.c **** __weak void BSP_SD_AbortCallback(void)
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccNgFcWW.s 			page 17
-
-
  269:FATFS/Target/bsp_driver_sd.c **** {
- 670              		.loc 1 269 1
- 671              		.cfi_startproc
- 672              		@ args = 0, pretend = 0, frame = 0
- 673              		@ frame_needed = 1, uses_anonymous_args = 0
- 674              		@ link register save eliminated.
- 675 0000 80B4     		push	{r7}
- 676              	.LCFI56:
- 677              		.cfi_def_cfa_offset 4
- 678              		.cfi_offset 7, -4
- 679 0002 00AF     		add	r7, sp, #0
- 680              	.LCFI57:
- 681              		.cfi_def_cfa_register 7
+ 684              		.loc 1 269 1
+ 685              		.cfi_startproc
+ 686              		@ args = 0, pretend = 0, frame = 0
+ 687              		@ frame_needed = 1, uses_anonymous_args = 0
+ 688              		@ link register save eliminated.
+ 689 0000 80B4     		push	{r7}
+ 690              	.LCFI56:
+ 691              		.cfi_def_cfa_offset 4
+ 692              		.cfi_offset 7, -4
+ 693 0002 00AF     		add	r7, sp, #0
+ 694              	.LCFI57:
+ 695              		.cfi_def_cfa_register 7
  270:FATFS/Target/bsp_driver_sd.c **** 
  271:FATFS/Target/bsp_driver_sd.c **** }
- 682              		.loc 1 271 1
- 683 0004 00BF     		nop
- 684 0006 BD46     		mov	sp, r7
- 685              	.LCFI58:
- 686              		.cfi_def_cfa_register 13
- 687              		@ sp needed
- 688 0008 5DF8047B 		ldr	r7, [sp], #4
- 689              	.LCFI59:
- 690              		.cfi_restore 7
- 691              		.cfi_def_cfa_offset 0
- 692 000c 7047     		bx	lr
- 693              		.cfi_endproc
- 694              	.LFE153:
- 696              		.section	.text.BSP_SD_WriteCpltCallback,"ax",%progbits
- 697              		.align	1
- 698              		.weak	BSP_SD_WriteCpltCallback
- 699              		.syntax unified
- 700              		.thumb
- 701              		.thumb_func
- 703              	BSP_SD_WriteCpltCallback:
- 704              	.LFB154:
+ 696              		.loc 1 271 1
+ 697 0004 00BF     		nop
+ 698 0006 BD46     		mov	sp, r7
+ 699              	.LCFI58:
+ 700              		.cfi_def_cfa_register 13
+ 701              		@ sp needed
+ 702 0008 5DF8047B 		ldr	r7, [sp], #4
+ 703              	.LCFI59:
+ 704              		.cfi_restore 7
+ 705              		.cfi_def_cfa_offset 0
+ 706 000c 7047     		bx	lr
+ 707              		.cfi_endproc
+ 708              	.LFE153:
+ 710              		.section	.text.BSP_SD_WriteCpltCallback,"ax",%progbits
+ 711              		.align	1
+ 712              		.weak	BSP_SD_WriteCpltCallback
+ 713              		.syntax unified
+ 714              		.thumb
+ 715              		.thumb_func
+ 717              	BSP_SD_WriteCpltCallback:
+ 718              	.LFB154:
  272:FATFS/Target/bsp_driver_sd.c **** 
  273:FATFS/Target/bsp_driver_sd.c **** /**
  274:FATFS/Target/bsp_driver_sd.c ****   * @brief BSP Tx Transfer completed callback
@@ -1005,44 +1015,52 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccNgFcWW.s 			page 1
  277:FATFS/Target/bsp_driver_sd.c ****   */
  278:FATFS/Target/bsp_driver_sd.c **** __weak void BSP_SD_WriteCpltCallback(void)
  279:FATFS/Target/bsp_driver_sd.c **** {
- 705              		.loc 1 279 1
- 706              		.cfi_startproc
- 707              		@ args = 0, pretend = 0, frame = 0
- 708              		@ frame_needed = 1, uses_anonymous_args = 0
- 709              		@ link register save eliminated.
- 710 0000 80B4     		push	{r7}
- 711              	.LCFI60:
- 712              		.cfi_def_cfa_offset 4
- 713              		.cfi_offset 7, -4
- 714 0002 00AF     		add	r7, sp, #0
- 715              	.LCFI61:
- 716              		.cfi_def_cfa_register 7
- 280:FATFS/Target/bsp_driver_sd.c **** 
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccNgFcWW.s 			page 18
+ 719              		.loc 1 279 1
+ 720              		.cfi_startproc
+ 721              		@ args = 0, pretend = 0, frame = 0
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccICxoYV.s 			page 18
 
 
+ 722              		@ frame_needed = 1, uses_anonymous_args = 0
+ 723              		@ link register save eliminated.
+ 724 0000 80B4     		push	{r7}
+ 725              	.LCFI60:
+ 726              		.cfi_def_cfa_offset 4
+ 727              		.cfi_offset 7, -4
+ 728 0002 00AF     		add	r7, sp, #0
+ 729              	.LCFI61:
+ 730              		.cfi_def_cfa_register 7
+ 280:FATFS/Target/bsp_driver_sd.c ****     writestatus = 1;
+ 731              		.loc 1 280 17
+ 732 0004 034B     		ldr	r3, .L46
+ 733 0006 0122     		movs	r2, #1
+ 734 0008 1A60     		str	r2, [r3]
  281:FATFS/Target/bsp_driver_sd.c **** }
- 717              		.loc 1 281 1
- 718 0004 00BF     		nop
- 719 0006 BD46     		mov	sp, r7
- 720              	.LCFI62:
- 721              		.cfi_def_cfa_register 13
- 722              		@ sp needed
- 723 0008 5DF8047B 		ldr	r7, [sp], #4
- 724              	.LCFI63:
- 725              		.cfi_restore 7
- 726              		.cfi_def_cfa_offset 0
- 727 000c 7047     		bx	lr
- 728              		.cfi_endproc
- 729              	.LFE154:
- 731              		.section	.text.BSP_SD_ReadCpltCallback,"ax",%progbits
- 732              		.align	1
- 733              		.weak	BSP_SD_ReadCpltCallback
- 734              		.syntax unified
- 735              		.thumb
- 736              		.thumb_func
- 738              	BSP_SD_ReadCpltCallback:
- 739              	.LFB155:
+ 735              		.loc 1 281 1
+ 736 000a 00BF     		nop
+ 737 000c BD46     		mov	sp, r7
+ 738              	.LCFI62:
+ 739              		.cfi_def_cfa_register 13
+ 740              		@ sp needed
+ 741 000e 5DF8047B 		ldr	r7, [sp], #4
+ 742              	.LCFI63:
+ 743              		.cfi_restore 7
+ 744              		.cfi_def_cfa_offset 0
+ 745 0012 7047     		bx	lr
+ 746              	.L47:
+ 747              		.align	2
+ 748              	.L46:
+ 749 0014 00000000 		.word	writestatus
+ 750              		.cfi_endproc
+ 751              	.LFE154:
+ 753              		.section	.text.BSP_SD_ReadCpltCallback,"ax",%progbits
+ 754              		.align	1
+ 755              		.weak	BSP_SD_ReadCpltCallback
+ 756              		.syntax unified
+ 757              		.thumb
+ 758              		.thumb_func
+ 760              	BSP_SD_ReadCpltCallback:
+ 761              	.LFB155:
  282:FATFS/Target/bsp_driver_sd.c **** 
  283:FATFS/Target/bsp_driver_sd.c **** /**
  284:FATFS/Target/bsp_driver_sd.c ****   * @brief BSP Rx Transfer completed callback
@@ -1051,44 +1069,52 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccNgFcWW.s 			page 1
  287:FATFS/Target/bsp_driver_sd.c ****   */
  288:FATFS/Target/bsp_driver_sd.c **** __weak void BSP_SD_ReadCpltCallback(void)
  289:FATFS/Target/bsp_driver_sd.c **** {
- 740              		.loc 1 289 1
- 741              		.cfi_startproc
- 742              		@ args = 0, pretend = 0, frame = 0
- 743              		@ frame_needed = 1, uses_anonymous_args = 0
- 744              		@ link register save eliminated.
- 745 0000 80B4     		push	{r7}
- 746              	.LCFI64:
- 747              		.cfi_def_cfa_offset 4
- 748              		.cfi_offset 7, -4
- 749 0002 00AF     		add	r7, sp, #0
- 750              	.LCFI65:
- 751              		.cfi_def_cfa_register 7
- 290:FATFS/Target/bsp_driver_sd.c **** 
+ 762              		.loc 1 289 1
+ 763              		.cfi_startproc
+ 764              		@ args = 0, pretend = 0, frame = 0
+ 765              		@ frame_needed = 1, uses_anonymous_args = 0
+ 766              		@ link register save eliminated.
+ 767 0000 80B4     		push	{r7}
+ 768              	.LCFI64:
+ 769              		.cfi_def_cfa_offset 4
+ 770              		.cfi_offset 7, -4
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccICxoYV.s 			page 19
+
+
+ 771 0002 00AF     		add	r7, sp, #0
+ 772              	.LCFI65:
+ 773              		.cfi_def_cfa_register 7
+ 290:FATFS/Target/bsp_driver_sd.c ****       readstatus = 1;
+ 774              		.loc 1 290 18
+ 775 0004 034B     		ldr	r3, .L49
+ 776 0006 0122     		movs	r2, #1
+ 777 0008 1A60     		str	r2, [r3]
  291:FATFS/Target/bsp_driver_sd.c **** }
- 752              		.loc 1 291 1
- 753 0004 00BF     		nop
- 754 0006 BD46     		mov	sp, r7
- 755              	.LCFI66:
- 756              		.cfi_def_cfa_register 13
- 757              		@ sp needed
- 758 0008 5DF8047B 		ldr	r7, [sp], #4
- 759              	.LCFI67:
- 760              		.cfi_restore 7
- 761              		.cfi_def_cfa_offset 0
- 762 000c 7047     		bx	lr
- 763              		.cfi_endproc
- 764              	.LFE155:
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccNgFcWW.s 			page 19
-
-
- 766              		.section	.text.BSP_SD_IsDetected,"ax",%progbits
- 767              		.align	1
- 768              		.weak	BSP_SD_IsDetected
- 769              		.syntax unified
- 770              		.thumb
- 771              		.thumb_func
- 773              	BSP_SD_IsDetected:
- 774              	.LFB156:
+ 778              		.loc 1 291 1
+ 779 000a 00BF     		nop
+ 780 000c BD46     		mov	sp, r7
+ 781              	.LCFI66:
+ 782              		.cfi_def_cfa_register 13
+ 783              		@ sp needed
+ 784 000e 5DF8047B 		ldr	r7, [sp], #4
+ 785              	.LCFI67:
+ 786              		.cfi_restore 7
+ 787              		.cfi_def_cfa_offset 0
+ 788 0012 7047     		bx	lr
+ 789              	.L50:
+ 790              		.align	2
+ 791              	.L49:
+ 792 0014 00000000 		.word	readstatus
+ 793              		.cfi_endproc
+ 794              	.LFE155:
+ 796              		.section	.text.BSP_SD_IsDetected,"ax",%progbits
+ 797              		.align	1
+ 798              		.weak	BSP_SD_IsDetected
+ 799              		.syntax unified
+ 800              		.thumb
+ 801              		.thumb_func
+ 803              	BSP_SD_IsDetected:
+ 804              	.LFB156:
  292:FATFS/Target/bsp_driver_sd.c **** /* USER CODE END CallBacksSection_C */
  293:FATFS/Target/bsp_driver_sd.c **** #endif
  294:FATFS/Target/bsp_driver_sd.c **** 
@@ -1099,115 +1125,121 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccNgFcWW.s 			page 1
  299:FATFS/Target/bsp_driver_sd.c ****  */
  300:FATFS/Target/bsp_driver_sd.c **** __weak uint8_t BSP_SD_IsDetected(void)
  301:FATFS/Target/bsp_driver_sd.c **** {
- 775              		.loc 1 301 1
- 776              		.cfi_startproc
- 777              		@ args = 0, pretend = 0, frame = 8
- 778              		@ frame_needed = 1, uses_anonymous_args = 0
- 779 0000 80B5     		push	{r7, lr}
- 780              	.LCFI68:
- 781              		.cfi_def_cfa_offset 8
- 782              		.cfi_offset 7, -8
- 783              		.cfi_offset 14, -4
- 784 0002 82B0     		sub	sp, sp, #8
- 785              	.LCFI69:
- 786              		.cfi_def_cfa_offset 16
- 787 0004 00AF     		add	r7, sp, #0
- 788              	.LCFI70:
- 789              		.cfi_def_cfa_register 7
+ 805              		.loc 1 301 1
+ 806              		.cfi_startproc
+ 807              		@ args = 0, pretend = 0, frame = 8
+ 808              		@ frame_needed = 1, uses_anonymous_args = 0
+ 809 0000 80B5     		push	{r7, lr}
+ 810              	.LCFI68:
+ 811              		.cfi_def_cfa_offset 8
+ 812              		.cfi_offset 7, -8
+ 813              		.cfi_offset 14, -4
+ 814 0002 82B0     		sub	sp, sp, #8
+ 815              	.LCFI69:
+ 816              		.cfi_def_cfa_offset 16
+ 817 0004 00AF     		add	r7, sp, #0
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccICxoYV.s 			page 20
+
+
+ 818              	.LCFI70:
+ 819              		.cfi_def_cfa_register 7
  302:FATFS/Target/bsp_driver_sd.c ****   __IO uint8_t status = SD_PRESENT;
- 790              		.loc 1 302 16
- 791 0006 0123     		movs	r3, #1
- 792 0008 FB71     		strb	r3, [r7, #7]
+ 820              		.loc 1 302 16
+ 821 0006 0123     		movs	r3, #1
+ 822 0008 FB71     		strb	r3, [r7, #7]
  303:FATFS/Target/bsp_driver_sd.c **** 
  304:FATFS/Target/bsp_driver_sd.c ****   if (BSP_PlatformIsDetected() == 0x0)
- 793              		.loc 1 304 7
- 794 000a FFF7FEFF 		bl	BSP_PlatformIsDetected
- 795 000e 0346     		mov	r3, r0
- 796              		.loc 1 304 6
- 797 0010 002B     		cmp	r3, #0
- 798 0012 01D1     		bne	.L48
+ 823              		.loc 1 304 7
+ 824 000a FFF7FEFF 		bl	BSP_PlatformIsDetected
+ 825 000e 0346     		mov	r3, r0
+ 826              		.loc 1 304 6
+ 827 0010 002B     		cmp	r3, #0
+ 828 0012 01D1     		bne	.L52
  305:FATFS/Target/bsp_driver_sd.c ****   {
  306:FATFS/Target/bsp_driver_sd.c ****     status = SD_NOT_PRESENT;
- 799              		.loc 1 306 12
- 800 0014 0023     		movs	r3, #0
- 801 0016 FB71     		strb	r3, [r7, #7]
- 802              	.L48:
+ 829              		.loc 1 306 12
+ 830 0014 0023     		movs	r3, #0
+ 831 0016 FB71     		strb	r3, [r7, #7]
+ 832              	.L52:
  307:FATFS/Target/bsp_driver_sd.c ****   }
  308:FATFS/Target/bsp_driver_sd.c **** 
  309:FATFS/Target/bsp_driver_sd.c ****   return status;
- 803              		.loc 1 309 10
- 804 0018 FB79     		ldrb	r3, [r7, #7]
- 805 001a DBB2     		uxtb	r3, r3
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccNgFcWW.s 			page 20
-
-
+ 833              		.loc 1 309 10
+ 834 0018 FB79     		ldrb	r3, [r7, #7]
+ 835 001a DBB2     		uxtb	r3, r3
  310:FATFS/Target/bsp_driver_sd.c **** }
- 806              		.loc 1 310 1
- 807 001c 1846     		mov	r0, r3
- 808 001e 0837     		adds	r7, r7, #8
- 809              	.LCFI71:
- 810              		.cfi_def_cfa_offset 8
- 811 0020 BD46     		mov	sp, r7
- 812              	.LCFI72:
- 813              		.cfi_def_cfa_register 13
- 814              		@ sp needed
- 815 0022 80BD     		pop	{r7, pc}
- 816              		.cfi_endproc
- 817              	.LFE156:
- 819              		.text
- 820              	.Letext0:
- 821              		.file 2 "d:\\3.tools\\arm_gcc_toolchain\\arm-none-eabi\\include\\machine\\_default_types.h"
- 822              		.file 3 "d:\\3.tools\\arm_gcc_toolchain\\arm-none-eabi\\include\\sys\\_stdint.h"
- 823              		.file 4 "Drivers/CMSIS/Device/ST/STM32F7xx/Include/stm32f746xx.h"
- 824              		.file 5 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_def.h"
- 825              		.file 6 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_dma.h"
- 826              		.file 7 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_ll_sdmmc.h"
- 827              		.file 8 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_sd.h"
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccNgFcWW.s 			page 21
+ 836              		.loc 1 310 1
+ 837 001c 1846     		mov	r0, r3
+ 838 001e 0837     		adds	r7, r7, #8
+ 839              	.LCFI71:
+ 840              		.cfi_def_cfa_offset 8
+ 841 0020 BD46     		mov	sp, r7
+ 842              	.LCFI72:
+ 843              		.cfi_def_cfa_register 13
+ 844              		@ sp needed
+ 845 0022 80BD     		pop	{r7, pc}
+ 846              		.cfi_endproc
+ 847              	.LFE156:
+ 849              		.text
+ 850              	.Letext0:
+ 851              		.file 2 "d:\\3.tools\\arm_gcc_toolchain\\arm-none-eabi\\include\\machine\\_default_types.h"
+ 852              		.file 3 "d:\\3.tools\\arm_gcc_toolchain\\arm-none-eabi\\include\\sys\\_stdint.h"
+ 853              		.file 4 "Drivers/CMSIS/Device/ST/STM32F7xx/Include/stm32f746xx.h"
+ 854              		.file 5 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_def.h"
+ 855              		.file 6 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_dma.h"
+ 856              		.file 7 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_ll_sdmmc.h"
+ 857              		.file 8 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_sd.h"
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccICxoYV.s 			page 21
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 bsp_driver_sd.c
-C:\Users\jisu8\AppData\Local\Temp\ccNgFcWW.s:20     .text.BSP_SD_Init:00000000 $t
-C:\Users\jisu8\AppData\Local\Temp\ccNgFcWW.s:26     .text.BSP_SD_Init:00000000 BSP_SD_Init
-C:\Users\jisu8\AppData\Local\Temp\ccNgFcWW.s:773    .text.BSP_SD_IsDetected:00000000 BSP_SD_IsDetected
-C:\Users\jisu8\AppData\Local\Temp\ccNgFcWW.s:94     .text.BSP_SD_Init:00000048 $d
-C:\Users\jisu8\AppData\Local\Temp\ccNgFcWW.s:99     .text.BSP_SD_ITConfig:00000000 $t
-C:\Users\jisu8\AppData\Local\Temp\ccNgFcWW.s:105    .text.BSP_SD_ITConfig:00000000 BSP_SD_ITConfig
-C:\Users\jisu8\AppData\Local\Temp\ccNgFcWW.s:136    .text.BSP_SD_ReadBlocks:00000000 $t
-C:\Users\jisu8\AppData\Local\Temp\ccNgFcWW.s:142    .text.BSP_SD_ReadBlocks:00000000 BSP_SD_ReadBlocks
-C:\Users\jisu8\AppData\Local\Temp\ccNgFcWW.s:197    .text.BSP_SD_ReadBlocks:00000038 $d
-C:\Users\jisu8\AppData\Local\Temp\ccNgFcWW.s:202    .text.BSP_SD_WriteBlocks:00000000 $t
-C:\Users\jisu8\AppData\Local\Temp\ccNgFcWW.s:208    .text.BSP_SD_WriteBlocks:00000000 BSP_SD_WriteBlocks
-C:\Users\jisu8\AppData\Local\Temp\ccNgFcWW.s:263    .text.BSP_SD_WriteBlocks:00000038 $d
-C:\Users\jisu8\AppData\Local\Temp\ccNgFcWW.s:268    .text.BSP_SD_ReadBlocks_DMA:00000000 $t
-C:\Users\jisu8\AppData\Local\Temp\ccNgFcWW.s:274    .text.BSP_SD_ReadBlocks_DMA:00000000 BSP_SD_ReadBlocks_DMA
-C:\Users\jisu8\AppData\Local\Temp\ccNgFcWW.s:326    .text.BSP_SD_ReadBlocks_DMA:00000030 $d
-C:\Users\jisu8\AppData\Local\Temp\ccNgFcWW.s:331    .text.BSP_SD_WriteBlocks_DMA:00000000 $t
-C:\Users\jisu8\AppData\Local\Temp\ccNgFcWW.s:337    .text.BSP_SD_WriteBlocks_DMA:00000000 BSP_SD_WriteBlocks_DMA
-C:\Users\jisu8\AppData\Local\Temp\ccNgFcWW.s:389    .text.BSP_SD_WriteBlocks_DMA:00000030 $d
-C:\Users\jisu8\AppData\Local\Temp\ccNgFcWW.s:394    .text.BSP_SD_Erase:00000000 $t
-C:\Users\jisu8\AppData\Local\Temp\ccNgFcWW.s:400    .text.BSP_SD_Erase:00000000 BSP_SD_Erase
-C:\Users\jisu8\AppData\Local\Temp\ccNgFcWW.s:450    .text.BSP_SD_Erase:0000002c $d
-C:\Users\jisu8\AppData\Local\Temp\ccNgFcWW.s:455    .text.BSP_SD_GetCardState:00000000 $t
-C:\Users\jisu8\AppData\Local\Temp\ccNgFcWW.s:461    .text.BSP_SD_GetCardState:00000000 BSP_SD_GetCardState
-C:\Users\jisu8\AppData\Local\Temp\ccNgFcWW.s:491    .text.BSP_SD_GetCardState:0000001c $d
-C:\Users\jisu8\AppData\Local\Temp\ccNgFcWW.s:496    .text.BSP_SD_GetCardInfo:00000000 $t
-C:\Users\jisu8\AppData\Local\Temp\ccNgFcWW.s:502    .text.BSP_SD_GetCardInfo:00000000 BSP_SD_GetCardInfo
-C:\Users\jisu8\AppData\Local\Temp\ccNgFcWW.s:537    .text.BSP_SD_GetCardInfo:00000018 $d
-C:\Users\jisu8\AppData\Local\Temp\ccNgFcWW.s:542    .text.HAL_SD_AbortCallback:00000000 $t
-C:\Users\jisu8\AppData\Local\Temp\ccNgFcWW.s:548    .text.HAL_SD_AbortCallback:00000000 HAL_SD_AbortCallback
-C:\Users\jisu8\AppData\Local\Temp\ccNgFcWW.s:668    .text.BSP_SD_AbortCallback:00000000 BSP_SD_AbortCallback
-C:\Users\jisu8\AppData\Local\Temp\ccNgFcWW.s:582    .text.HAL_SD_TxCpltCallback:00000000 $t
-C:\Users\jisu8\AppData\Local\Temp\ccNgFcWW.s:588    .text.HAL_SD_TxCpltCallback:00000000 HAL_SD_TxCpltCallback
-C:\Users\jisu8\AppData\Local\Temp\ccNgFcWW.s:703    .text.BSP_SD_WriteCpltCallback:00000000 BSP_SD_WriteCpltCallback
-C:\Users\jisu8\AppData\Local\Temp\ccNgFcWW.s:622    .text.HAL_SD_RxCpltCallback:00000000 $t
-C:\Users\jisu8\AppData\Local\Temp\ccNgFcWW.s:628    .text.HAL_SD_RxCpltCallback:00000000 HAL_SD_RxCpltCallback
-C:\Users\jisu8\AppData\Local\Temp\ccNgFcWW.s:738    .text.BSP_SD_ReadCpltCallback:00000000 BSP_SD_ReadCpltCallback
-C:\Users\jisu8\AppData\Local\Temp\ccNgFcWW.s:662    .text.BSP_SD_AbortCallback:00000000 $t
-C:\Users\jisu8\AppData\Local\Temp\ccNgFcWW.s:697    .text.BSP_SD_WriteCpltCallback:00000000 $t
-C:\Users\jisu8\AppData\Local\Temp\ccNgFcWW.s:732    .text.BSP_SD_ReadCpltCallback:00000000 $t
-C:\Users\jisu8\AppData\Local\Temp\ccNgFcWW.s:767    .text.BSP_SD_IsDetected:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\ccICxoYV.s:24     .bss.writestatus:00000000 writestatus
+C:\Users\jisu8\AppData\Local\Temp\ccICxoYV.s:21     .bss.writestatus:00000000 $d
+C:\Users\jisu8\AppData\Local\Temp\ccICxoYV.s:31     .bss.readstatus:00000000 readstatus
+C:\Users\jisu8\AppData\Local\Temp\ccICxoYV.s:28     .bss.readstatus:00000000 $d
+C:\Users\jisu8\AppData\Local\Temp\ccICxoYV.s:34     .text.BSP_SD_Init:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\ccICxoYV.s:40     .text.BSP_SD_Init:00000000 BSP_SD_Init
+C:\Users\jisu8\AppData\Local\Temp\ccICxoYV.s:803    .text.BSP_SD_IsDetected:00000000 BSP_SD_IsDetected
+C:\Users\jisu8\AppData\Local\Temp\ccICxoYV.s:108    .text.BSP_SD_Init:00000048 $d
+C:\Users\jisu8\AppData\Local\Temp\ccICxoYV.s:113    .text.BSP_SD_ITConfig:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\ccICxoYV.s:119    .text.BSP_SD_ITConfig:00000000 BSP_SD_ITConfig
+C:\Users\jisu8\AppData\Local\Temp\ccICxoYV.s:150    .text.BSP_SD_ReadBlocks:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\ccICxoYV.s:156    .text.BSP_SD_ReadBlocks:00000000 BSP_SD_ReadBlocks
+C:\Users\jisu8\AppData\Local\Temp\ccICxoYV.s:211    .text.BSP_SD_ReadBlocks:00000038 $d
+C:\Users\jisu8\AppData\Local\Temp\ccICxoYV.s:216    .text.BSP_SD_WriteBlocks:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\ccICxoYV.s:222    .text.BSP_SD_WriteBlocks:00000000 BSP_SD_WriteBlocks
+C:\Users\jisu8\AppData\Local\Temp\ccICxoYV.s:277    .text.BSP_SD_WriteBlocks:00000038 $d
+C:\Users\jisu8\AppData\Local\Temp\ccICxoYV.s:282    .text.BSP_SD_ReadBlocks_DMA:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\ccICxoYV.s:288    .text.BSP_SD_ReadBlocks_DMA:00000000 BSP_SD_ReadBlocks_DMA
+C:\Users\jisu8\AppData\Local\Temp\ccICxoYV.s:340    .text.BSP_SD_ReadBlocks_DMA:00000030 $d
+C:\Users\jisu8\AppData\Local\Temp\ccICxoYV.s:345    .text.BSP_SD_WriteBlocks_DMA:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\ccICxoYV.s:351    .text.BSP_SD_WriteBlocks_DMA:00000000 BSP_SD_WriteBlocks_DMA
+C:\Users\jisu8\AppData\Local\Temp\ccICxoYV.s:403    .text.BSP_SD_WriteBlocks_DMA:00000030 $d
+C:\Users\jisu8\AppData\Local\Temp\ccICxoYV.s:408    .text.BSP_SD_Erase:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\ccICxoYV.s:414    .text.BSP_SD_Erase:00000000 BSP_SD_Erase
+C:\Users\jisu8\AppData\Local\Temp\ccICxoYV.s:464    .text.BSP_SD_Erase:0000002c $d
+C:\Users\jisu8\AppData\Local\Temp\ccICxoYV.s:469    .text.BSP_SD_GetCardState:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\ccICxoYV.s:475    .text.BSP_SD_GetCardState:00000000 BSP_SD_GetCardState
+C:\Users\jisu8\AppData\Local\Temp\ccICxoYV.s:505    .text.BSP_SD_GetCardState:0000001c $d
+C:\Users\jisu8\AppData\Local\Temp\ccICxoYV.s:510    .text.BSP_SD_GetCardInfo:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\ccICxoYV.s:516    .text.BSP_SD_GetCardInfo:00000000 BSP_SD_GetCardInfo
+C:\Users\jisu8\AppData\Local\Temp\ccICxoYV.s:551    .text.BSP_SD_GetCardInfo:00000018 $d
+C:\Users\jisu8\AppData\Local\Temp\ccICxoYV.s:556    .text.HAL_SD_AbortCallback:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\ccICxoYV.s:562    .text.HAL_SD_AbortCallback:00000000 HAL_SD_AbortCallback
+C:\Users\jisu8\AppData\Local\Temp\ccICxoYV.s:682    .text.BSP_SD_AbortCallback:00000000 BSP_SD_AbortCallback
+C:\Users\jisu8\AppData\Local\Temp\ccICxoYV.s:596    .text.HAL_SD_TxCpltCallback:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\ccICxoYV.s:602    .text.HAL_SD_TxCpltCallback:00000000 HAL_SD_TxCpltCallback
+C:\Users\jisu8\AppData\Local\Temp\ccICxoYV.s:717    .text.BSP_SD_WriteCpltCallback:00000000 BSP_SD_WriteCpltCallback
+C:\Users\jisu8\AppData\Local\Temp\ccICxoYV.s:636    .text.HAL_SD_RxCpltCallback:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\ccICxoYV.s:642    .text.HAL_SD_RxCpltCallback:00000000 HAL_SD_RxCpltCallback
+C:\Users\jisu8\AppData\Local\Temp\ccICxoYV.s:760    .text.BSP_SD_ReadCpltCallback:00000000 BSP_SD_ReadCpltCallback
+C:\Users\jisu8\AppData\Local\Temp\ccICxoYV.s:676    .text.BSP_SD_AbortCallback:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\ccICxoYV.s:711    .text.BSP_SD_WriteCpltCallback:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\ccICxoYV.s:749    .text.BSP_SD_WriteCpltCallback:00000014 $d
+C:\Users\jisu8\AppData\Local\Temp\ccICxoYV.s:754    .text.BSP_SD_ReadCpltCallback:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\ccICxoYV.s:792    .text.BSP_SD_ReadCpltCallback:00000014 $d
+C:\Users\jisu8\AppData\Local\Temp\ccICxoYV.s:797    .text.BSP_SD_IsDetected:00000000 $t
 
 UNDEFINED SYMBOLS
 HAL_SD_Init
@@ -1217,6 +1249,9 @@ HAL_SD_ReadBlocks
 HAL_SD_WriteBlocks
 HAL_SD_ReadBlocks_DMA
 HAL_SD_WriteBlocks_DMA
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccICxoYV.s 			page 22
+
+
 HAL_SD_Erase
 HAL_SD_GetCardState
 HAL_SD_GetCardInfo

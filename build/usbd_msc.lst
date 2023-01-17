@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccyyhau7.s 			page 1
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cc6rO8ME.s 			page 1
 
 
    1              		.cpu cortex-m7
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccyyhau7.s 			page 1
   53              		.global	MSCInEpAdd
   54              		.section	.data.MSCInEpAdd,"aw"
   57              	MSCInEpAdd:
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccyyhau7.s 			page 2
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cc6rO8ME.s 			page 2
 
 
   58 0000 81       		.byte	-127
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccyyhau7.s 			page 1
   41:Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Src/usbd_msc.c **** /* Includes ------------------------------------------------------------------*/
   42:Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Src/usbd_msc.c **** #include "usbd_msc.h"
   43:Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Src/usbd_msc.c **** 
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccyyhau7.s 			page 3
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cc6rO8ME.s 			page 3
 
 
   44:Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Src/usbd_msc.c **** 
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccyyhau7.s 			page 1
   98:Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Src/usbd_msc.c **** 
   99:Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Src/usbd_msc.c **** 
  100:Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Src/usbd_msc.c **** /** @defgroup MSC_CORE_Private_Variables
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccyyhau7.s 			page 4
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cc6rO8ME.s 			page 4
 
 
  101:Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Src/usbd_msc.c ****   * @{
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccyyhau7.s 			page 1
  155:Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Src/usbd_msc.c ****   0x00,                                            /* bAlternateSetting: Alternate setting */
  156:Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Src/usbd_msc.c ****   0x02,                                            /* bNumEndpoints */
  157:Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Src/usbd_msc.c ****   0x08,                                            /* bInterfaceClass: MSC Class */
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccyyhau7.s 			page 5
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cc6rO8ME.s 			page 5
 
 
  158:Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Src/usbd_msc.c ****   0x06,                                            /* bInterfaceSubClass : SCSI transparent*/
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccyyhau7.s 			page 1
  212:Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Src/usbd_msc.c ****   * @retval status
  213:Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Src/usbd_msc.c ****   */
  214:Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Src/usbd_msc.c **** uint8_t USBD_MSC_Init(USBD_HandleTypeDef *pdev, uint8_t cfgidx)
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccyyhau7.s 			page 6
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cc6rO8ME.s 			page 6
 
 
  215:Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Src/usbd_msc.c **** {
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccyyhau7.s 			page 1
  116 0034 D3F8D422 		ldr	r2, [r3, #724]
  117              		.loc 1 227 40
  118 0038 7B68     		ldr	r3, [r7, #4]
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccyyhau7.s 			page 7
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cc6rO8ME.s 			page 7
 
 
  119 003a B032     		adds	r2, r2, #176
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccyyhau7.s 			page 1
  241:Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Src/usbd_msc.c **** 
  242:Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Src/usbd_msc.c ****     /* Open EP IN */
  243:Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Src/usbd_msc.c ****     (void)USBD_LL_OpenEP(pdev, MSCInEpAdd, USBD_EP_TYPE_BULK, MSC_MAX_HS_PACKET);
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccyyhau7.s 			page 8
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cc6rO8ME.s 			page 8
 
 
  160              		.loc 1 243 5
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccyyhau7.s 			page 1
  252:Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Src/usbd_msc.c ****     /* Open EP IN */
  253:Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Src/usbd_msc.c ****     (void)USBD_LL_OpenEP(pdev, MSCInEpAdd, USBD_EP_TYPE_BULK, MSC_MAX_FS_PACKET);
  206              		.loc 1 253 5
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccyyhau7.s 			page 9
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cc6rO8ME.s 			page 9
 
 
  207 00e0 0E4B     		ldr	r3, .L6+4
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccyyhau7.s 			page 1
  254              		.align	1
  255              		.global	USBD_MSC_DeInit
  256              		.syntax unified
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccyyhau7.s 			page 10
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cc6rO8ME.s 			page 10
 
 
  257              		.thumb
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccyyhau7.s 			page 1
  291              		.loc 1 282 44
  292 0020 7968     		ldr	r1, [r7, #4]
  293 0022 1346     		mov	r3, r2
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccyyhau7.s 			page 11
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cc6rO8ME.s 			page 11
 
 
  294 0024 9B00     		lsls	r3, r3, #2
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccyyhau7.s 			page 1
  336 0072 7B68     		ldr	r3, [r7, #4]
  337 0074 D3F8D422 		ldr	r2, [r3, #724]
  338              		.loc 1 294 5
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccyyhau7.s 			page 12
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cc6rO8ME.s 			page 12
 
 
  339 0078 7B68     		ldr	r3, [r7, #4]
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccyyhau7.s 			page 1
  304:Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Src/usbd_msc.c ****   * @param  pdev: device instance
  305:Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Src/usbd_msc.c ****   * @param  req: USB request
  306:Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Src/usbd_msc.c ****   * @retval status
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccyyhau7.s 			page 13
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cc6rO8ME.s 			page 13
 
 
  307:Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Src/usbd_msc.c ****   */
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccyyhau7.s 			page 1
  424              	.L14:
  323:Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Src/usbd_msc.c ****   }
  324:Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Src/usbd_msc.c **** 
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccyyhau7.s 			page 14
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cc6rO8ME.s 			page 14
 
 
  325:Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Src/usbd_msc.c ****   switch (req->bmRequest & USB_REQ_TYPE_MASK)
@@ -838,7 +838,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccyyhau7.s 			page 1
  467              		.loc 1 335 78
  468 006c 7A68     		ldr	r2, [r7, #4]
  469 006e B033     		adds	r3, r3, #176
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccyyhau7.s 			page 15
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cc6rO8ME.s 			page 15
 
 
  470 0070 9B00     		lsls	r3, r3, #2
@@ -898,7 +898,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccyyhau7.s 			page 1
  511 00a6 0CD1     		bne	.L24
  512              		.loc 1 346 43 discriminator 1
  513 00a8 3B68     		ldr	r3, [r7]
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccyyhau7.s 			page 16
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cc6rO8ME.s 			page 16
 
 
  514 00aa DB88     		ldrh	r3, [r3, #6]
@@ -958,7 +958,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccyyhau7.s 			page 1
  550 00dc 00BF     		nop
  551              	.L23:
  362:Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Src/usbd_msc.c ****       }
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccyyhau7.s 			page 17
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cc6rO8ME.s 			page 17
 
 
  363:Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Src/usbd_msc.c ****       break;
@@ -1018,7 +1018,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccyyhau7.s 			page 1
  378:Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Src/usbd_msc.c ****           break;
  591              		.loc 1 378 11
  592 013a 50E0     		b	.L35
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccyyhau7.s 			page 18
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cc6rO8ME.s 			page 18
 
 
  593              	.L33:
@@ -1078,7 +1078,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccyyhau7.s 			page 1
  631              	.L28:
  391:Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Src/usbd_msc.c **** 
  392:Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Src/usbd_msc.c ****         case USB_REQ_SET_INTERFACE:
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccyyhau7.s 			page 19
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cc6rO8ME.s 			page 19
 
 
  393:Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Src/usbd_msc.c ****           if (pdev->dev_state == USBD_STATE_CONFIGURED)
@@ -1138,7 +1138,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccyyhau7.s 			page 1
  669 01a8 3B68     		ldr	r3, [r7]
  670 01aa 5B88     		ldrh	r3, [r3, #2]
  671              		.loc 1 407 16
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccyyhau7.s 			page 20
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cc6rO8ME.s 			page 20
 
 
  672 01ac 002B     		cmp	r3, #0
@@ -1198,7 +1198,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccyyhau7.s 			page 1
  424:Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Src/usbd_msc.c **** 
  425:Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Src/usbd_msc.c ****     default:
  426:Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Src/usbd_msc.c ****       USBD_CtlError(pdev, req);
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccyyhau7.s 			page 21
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cc6rO8ME.s 			page 21
 
 
  709              		.loc 1 426 7
@@ -1258,7 +1258,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccyyhau7.s 			page 1
  749              	.LCFI15:
  750              		.cfi_def_cfa_offset 8
  751              		.cfi_offset 7, -8
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccyyhau7.s 			page 22
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cc6rO8ME.s 			page 22
 
 
  752              		.cfi_offset 14, -4
@@ -1318,7 +1318,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccyyhau7.s 			page 1
  794              		@ frame_needed = 1, uses_anonymous_args = 0
  795 0000 80B5     		push	{r7, lr}
  796              	.LCFI20:
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccyyhau7.s 			page 23
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cc6rO8ME.s 			page 23
 
 
  797              		.cfi_def_cfa_offset 8
@@ -1378,7 +1378,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccyyhau7.s 			page 1
  840              		@ args = 0, pretend = 0, frame = 16
  841              		@ frame_needed = 1, uses_anonymous_args = 0
  842 0000 80B5     		push	{r7, lr}
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccyyhau7.s 			page 24
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cc6rO8ME.s 			page 24
 
 
  843              	.LCFI25:
@@ -1438,7 +1438,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccyyhau7.s 			page 1
  886 0042 5A71     		strb	r2, [r3, #5]
  887              	.L50:
  481:Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Src/usbd_msc.c ****   }
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccyyhau7.s 			page 25
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cc6rO8ME.s 			page 25
 
 
  482:Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Src/usbd_msc.c **** 
@@ -1498,7 +1498,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccyyhau7.s 			page 1
  931              		.cfi_def_cfa_offset 24
  932 0004 00AF     		add	r7, sp, #0
  933              	.LCFI32:
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccyyhau7.s 			page 26
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cc6rO8ME.s 			page 26
 
 
  934              		.cfi_def_cfa_register 7
@@ -1558,7 +1558,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccyyhau7.s 			page 1
  509:Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Src/usbd_msc.c ****   return USBD_MSC_CfgDesc;
  974              		.loc 1 509 10
  975 004a 024B     		ldr	r3, .L58
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccyyhau7.s 			page 27
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cc6rO8ME.s 			page 27
 
 
  510:Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Src/usbd_msc.c **** }
@@ -1618,7 +1618,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccyyhau7.s 			page 1
  1021 000c FFF7FEFF 		bl	USBD_GetEpDesc
  1022 0010 F860     		str	r0, [r7, #12]
  521:Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Src/usbd_msc.c ****   USBD_EpDescTypeDef *pEpOutDesc = USBD_GetEpDesc(USBD_MSC_CfgDesc, MSC_EPOUT_ADDR);
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccyyhau7.s 			page 28
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cc6rO8ME.s 			page 28
 
 
  1023              		.loc 1 521 36
@@ -1678,7 +1678,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccyyhau7.s 			page 1
  1063 0050 BD46     		mov	sp, r7
  1064              	.LCFI39:
  1065              		.cfi_def_cfa_register 13
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccyyhau7.s 			page 29
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cc6rO8ME.s 			page 29
 
 
  1066              		@ sp needed
@@ -1738,7 +1738,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccyyhau7.s 			page 1
  1110              		.cfi_def_cfa_offset 4
  1111 0014 BD46     		mov	sp, r7
  1112              	.LCFI44:
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccyyhau7.s 			page 30
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cc6rO8ME.s 			page 30
 
 
  1113              		.cfi_def_cfa_register 13
@@ -1798,7 +1798,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccyyhau7.s 			page 1
  1158 0010 0323     		movs	r3, #3
  1159 0012 09E0     		b	.L72
  1160              	.L71:
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccyyhau7.s 			page 31
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cc6rO8ME.s 			page 31
 
 
  559:Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Src/usbd_msc.c ****   }
@@ -1844,47 +1844,47 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccyyhau7.s 			page 1
  1196              		.file 5 "Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Inc/usbd_msc_bot.h"
  1197              		.file 6 "Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Inc/usbd_msc_scsi.h"
  1198              		.file 7 "Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Inc/usbd_msc.h"
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccyyhau7.s 			page 32
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cc6rO8ME.s 			page 32
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 usbd_msc.c
-C:\Users\jisu8\AppData\Local\Temp\ccyyhau7.s:24     .data.USBD_MSC:00000000 USBD_MSC
-C:\Users\jisu8\AppData\Local\Temp\ccyyhau7.s:21     .data.USBD_MSC:00000000 $d
-C:\Users\jisu8\AppData\Local\Temp\ccyyhau7.s:72     .text.USBD_MSC_Init:00000000 USBD_MSC_Init
-C:\Users\jisu8\AppData\Local\Temp\ccyyhau7.s:260    .text.USBD_MSC_DeInit:00000000 USBD_MSC_DeInit
-C:\Users\jisu8\AppData\Local\Temp\ccyyhau7.s:384    .text.USBD_MSC_Setup:00000000 USBD_MSC_Setup
-C:\Users\jisu8\AppData\Local\Temp\ccyyhau7.s:742    .text.USBD_MSC_DataIn:00000000 USBD_MSC_DataIn
-C:\Users\jisu8\AppData\Local\Temp\ccyyhau7.s:789    .text.USBD_MSC_DataOut:00000000 USBD_MSC_DataOut
-C:\Users\jisu8\AppData\Local\Temp\ccyyhau7.s:836    .text.USBD_MSC_GetHSCfgDesc:00000000 USBD_MSC_GetHSCfgDesc
-C:\Users\jisu8\AppData\Local\Temp\ccyyhau7.s:918    .text.USBD_MSC_GetFSCfgDesc:00000000 USBD_MSC_GetFSCfgDesc
-C:\Users\jisu8\AppData\Local\Temp\ccyyhau7.s:1000   .text.USBD_MSC_GetOtherSpeedCfgDesc:00000000 USBD_MSC_GetOtherSpeedCfgDesc
-C:\Users\jisu8\AppData\Local\Temp\ccyyhau7.s:1082   .text.USBD_MSC_GetDeviceQualifierDescriptor:00000000 USBD_MSC_GetDeviceQualifierDescriptor
-C:\Users\jisu8\AppData\Local\Temp\ccyyhau7.s:40     .data.USBD_MSC_CfgDesc:00000000 $d
-C:\Users\jisu8\AppData\Local\Temp\ccyyhau7.s:43     .data.USBD_MSC_CfgDesc:00000000 USBD_MSC_CfgDesc
-C:\Users\jisu8\AppData\Local\Temp\ccyyhau7.s:48     .data.USBD_MSC_DeviceQualifierDesc:00000000 $d
-C:\Users\jisu8\AppData\Local\Temp\ccyyhau7.s:51     .data.USBD_MSC_DeviceQualifierDesc:00000000 USBD_MSC_DeviceQualifierDesc
-C:\Users\jisu8\AppData\Local\Temp\ccyyhau7.s:57     .data.MSCInEpAdd:00000000 MSCInEpAdd
-C:\Users\jisu8\AppData\Local\Temp\ccyyhau7.s:63     .data.MSCOutEpAdd:00000000 MSCOutEpAdd
-C:\Users\jisu8\AppData\Local\Temp\ccyyhau7.s:66     .text.USBD_MSC_Init:00000000 $t
-C:\Users\jisu8\AppData\Local\Temp\ccyyhau7.s:248    .text.USBD_MSC_Init:00000118 $d
-C:\Users\jisu8\AppData\Local\Temp\ccyyhau7.s:254    .text.USBD_MSC_DeInit:00000000 $t
-C:\Users\jisu8\AppData\Local\Temp\ccyyhau7.s:372    .text.USBD_MSC_DeInit:000000a8 $d
-C:\Users\jisu8\AppData\Local\Temp\ccyyhau7.s:378    .text.USBD_MSC_Setup:00000000 $t
-C:\Users\jisu8\AppData\Local\Temp\ccyyhau7.s:564    .text.USBD_MSC_Setup:000000f0 $d
-C:\Users\jisu8\AppData\Local\Temp\ccyyhau7.s:576    .text.USBD_MSC_Setup:00000120 $t
-C:\Users\jisu8\AppData\Local\Temp\ccyyhau7.s:736    .text.USBD_MSC_DataIn:00000000 $t
-C:\Users\jisu8\AppData\Local\Temp\ccyyhau7.s:783    .text.USBD_MSC_DataOut:00000000 $t
-C:\Users\jisu8\AppData\Local\Temp\ccyyhau7.s:830    .text.USBD_MSC_GetHSCfgDesc:00000000 $t
-C:\Users\jisu8\AppData\Local\Temp\ccyyhau7.s:907    .text.USBD_MSC_GetHSCfgDesc:00000054 $d
-C:\Users\jisu8\AppData\Local\Temp\ccyyhau7.s:912    .text.USBD_MSC_GetFSCfgDesc:00000000 $t
-C:\Users\jisu8\AppData\Local\Temp\ccyyhau7.s:989    .text.USBD_MSC_GetFSCfgDesc:00000054 $d
-C:\Users\jisu8\AppData\Local\Temp\ccyyhau7.s:994    .text.USBD_MSC_GetOtherSpeedCfgDesc:00000000 $t
-C:\Users\jisu8\AppData\Local\Temp\ccyyhau7.s:1071   .text.USBD_MSC_GetOtherSpeedCfgDesc:00000054 $d
-C:\Users\jisu8\AppData\Local\Temp\ccyyhau7.s:1076   .text.USBD_MSC_GetDeviceQualifierDescriptor:00000000 $t
-C:\Users\jisu8\AppData\Local\Temp\ccyyhau7.s:1123   .text.USBD_MSC_GetDeviceQualifierDescriptor:0000001c $d
-C:\Users\jisu8\AppData\Local\Temp\ccyyhau7.s:1128   .text.USBD_MSC_RegisterStorage:00000000 $t
-C:\Users\jisu8\AppData\Local\Temp\ccyyhau7.s:1134   .text.USBD_MSC_RegisterStorage:00000000 USBD_MSC_RegisterStorage
+C:\Users\jisu8\AppData\Local\Temp\cc6rO8ME.s:24     .data.USBD_MSC:00000000 USBD_MSC
+C:\Users\jisu8\AppData\Local\Temp\cc6rO8ME.s:21     .data.USBD_MSC:00000000 $d
+C:\Users\jisu8\AppData\Local\Temp\cc6rO8ME.s:72     .text.USBD_MSC_Init:00000000 USBD_MSC_Init
+C:\Users\jisu8\AppData\Local\Temp\cc6rO8ME.s:260    .text.USBD_MSC_DeInit:00000000 USBD_MSC_DeInit
+C:\Users\jisu8\AppData\Local\Temp\cc6rO8ME.s:384    .text.USBD_MSC_Setup:00000000 USBD_MSC_Setup
+C:\Users\jisu8\AppData\Local\Temp\cc6rO8ME.s:742    .text.USBD_MSC_DataIn:00000000 USBD_MSC_DataIn
+C:\Users\jisu8\AppData\Local\Temp\cc6rO8ME.s:789    .text.USBD_MSC_DataOut:00000000 USBD_MSC_DataOut
+C:\Users\jisu8\AppData\Local\Temp\cc6rO8ME.s:836    .text.USBD_MSC_GetHSCfgDesc:00000000 USBD_MSC_GetHSCfgDesc
+C:\Users\jisu8\AppData\Local\Temp\cc6rO8ME.s:918    .text.USBD_MSC_GetFSCfgDesc:00000000 USBD_MSC_GetFSCfgDesc
+C:\Users\jisu8\AppData\Local\Temp\cc6rO8ME.s:1000   .text.USBD_MSC_GetOtherSpeedCfgDesc:00000000 USBD_MSC_GetOtherSpeedCfgDesc
+C:\Users\jisu8\AppData\Local\Temp\cc6rO8ME.s:1082   .text.USBD_MSC_GetDeviceQualifierDescriptor:00000000 USBD_MSC_GetDeviceQualifierDescriptor
+C:\Users\jisu8\AppData\Local\Temp\cc6rO8ME.s:40     .data.USBD_MSC_CfgDesc:00000000 $d
+C:\Users\jisu8\AppData\Local\Temp\cc6rO8ME.s:43     .data.USBD_MSC_CfgDesc:00000000 USBD_MSC_CfgDesc
+C:\Users\jisu8\AppData\Local\Temp\cc6rO8ME.s:48     .data.USBD_MSC_DeviceQualifierDesc:00000000 $d
+C:\Users\jisu8\AppData\Local\Temp\cc6rO8ME.s:51     .data.USBD_MSC_DeviceQualifierDesc:00000000 USBD_MSC_DeviceQualifierDesc
+C:\Users\jisu8\AppData\Local\Temp\cc6rO8ME.s:57     .data.MSCInEpAdd:00000000 MSCInEpAdd
+C:\Users\jisu8\AppData\Local\Temp\cc6rO8ME.s:63     .data.MSCOutEpAdd:00000000 MSCOutEpAdd
+C:\Users\jisu8\AppData\Local\Temp\cc6rO8ME.s:66     .text.USBD_MSC_Init:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\cc6rO8ME.s:248    .text.USBD_MSC_Init:00000118 $d
+C:\Users\jisu8\AppData\Local\Temp\cc6rO8ME.s:254    .text.USBD_MSC_DeInit:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\cc6rO8ME.s:372    .text.USBD_MSC_DeInit:000000a8 $d
+C:\Users\jisu8\AppData\Local\Temp\cc6rO8ME.s:378    .text.USBD_MSC_Setup:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\cc6rO8ME.s:564    .text.USBD_MSC_Setup:000000f0 $d
+C:\Users\jisu8\AppData\Local\Temp\cc6rO8ME.s:576    .text.USBD_MSC_Setup:00000120 $t
+C:\Users\jisu8\AppData\Local\Temp\cc6rO8ME.s:736    .text.USBD_MSC_DataIn:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\cc6rO8ME.s:783    .text.USBD_MSC_DataOut:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\cc6rO8ME.s:830    .text.USBD_MSC_GetHSCfgDesc:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\cc6rO8ME.s:907    .text.USBD_MSC_GetHSCfgDesc:00000054 $d
+C:\Users\jisu8\AppData\Local\Temp\cc6rO8ME.s:912    .text.USBD_MSC_GetFSCfgDesc:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\cc6rO8ME.s:989    .text.USBD_MSC_GetFSCfgDesc:00000054 $d
+C:\Users\jisu8\AppData\Local\Temp\cc6rO8ME.s:994    .text.USBD_MSC_GetOtherSpeedCfgDesc:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\cc6rO8ME.s:1071   .text.USBD_MSC_GetOtherSpeedCfgDesc:00000054 $d
+C:\Users\jisu8\AppData\Local\Temp\cc6rO8ME.s:1076   .text.USBD_MSC_GetDeviceQualifierDescriptor:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\cc6rO8ME.s:1123   .text.USBD_MSC_GetDeviceQualifierDescriptor:0000001c $d
+C:\Users\jisu8\AppData\Local\Temp\cc6rO8ME.s:1128   .text.USBD_MSC_RegisterStorage:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\cc6rO8ME.s:1134   .text.USBD_MSC_RegisterStorage:00000000 USBD_MSC_RegisterStorage
 
 UNDEFINED SYMBOLS
 malloc

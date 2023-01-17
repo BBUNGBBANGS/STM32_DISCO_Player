@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s 			page 1
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cctpWFR2.s 			page 1
 
 
    1              		.cpu cortex-m7
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s 			page 1
   10:Components/ft5336/ft5336.c ****   * <h2><center>&copy; COPYRIGHT(c) 2015 STMicroelectronics</center></h2>
   11:Components/ft5336/ft5336.c ****   *
   12:Components/ft5336/ft5336.c ****   * Redistribution and use in source and binary forms, with or without modification,
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s 			page 2
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cctpWFR2.s 			page 2
 
 
   13:Components/ft5336/ft5336.c ****   * are permitted provided that the following conditions are met:
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s 			page 1
   67:Components/ft5336/ft5336.c ****   * @{
   68:Components/ft5336/ft5336.c ****   */
   69:Components/ft5336/ft5336.c **** 
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s 			page 3
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cctpWFR2.s 			page 3
 
 
   70:Components/ft5336/ft5336.c **** /* Private variables ---------------------------------------------------------*/
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s 			page 1
  124:Components/ft5336/ft5336.c ****   * @retval Status FT5336_STATUS_OK or FT5336_STATUS_NOT_OK.
  125:Components/ft5336/ft5336.c ****   */
  126:Components/ft5336/ft5336.c **** static uint32_t ft5336_TS_Configure(uint16_t DeviceAddr);
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s 			page 4
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cctpWFR2.s 			page 4
 
 
  127:Components/ft5336/ft5336.c **** 
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s 			page 1
   78 0018 BD46     		mov	sp, r7
   79              	.LCFI4:
   80              		.cfi_def_cfa_register 13
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s 			page 5
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cctpWFR2.s 			page 5
 
 
   81              		@ sp needed
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s 			page 1
  125 0014 7047     		bx	lr
  126              		.cfi_endproc
  127              	.LFE1:
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s 			page 6
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cctpWFR2.s 			page 6
 
 
  129              		.section	.text.ft5336_ReadID,"ax",%progbits
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s 			page 1
  166              		.loc 1 183 22
  167 001a 0023     		movs	r3, #0
  168 001c FB73     		strb	r3, [r7, #15]
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s 			page 7
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cctpWFR2.s 			page 7
 
 
  169              		.loc 1 183 3
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s 			page 1
  206 004e 7B7B     		ldrb	r3, [r7, #13]
  207 0050 DBB2     		uxtb	r3, r3
  208 0052 9BB2     		uxth	r3, r3
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s 			page 8
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cctpWFR2.s 			page 8
 
 
  198:Components/ft5336/ft5336.c **** }
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s 			page 1
  211:Components/ft5336/ft5336.c ****   /* Note TS_INT is active low                                                                     
  212:Components/ft5336/ft5336.c ****   ft5336_TS_DisableIT(DeviceAddr);
  252              		.loc 1 212 3
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s 			page 9
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cctpWFR2.s 			page 9
 
 
  253 0012 FB88     		ldrh	r3, [r7, #6]
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s 			page 1
  297 000c FB73     		strb	r3, [r7, #15]
  225:Components/ft5336/ft5336.c **** 
  226:Components/ft5336/ft5336.c ****   /* Read register FT5336_TD_STAT_REG to check number of touches detection */
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s 			page 10
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cctpWFR2.s 			page 10
 
 
  227:Components/ft5336/ft5336.c ****   nbTouch = TS_IO_Read(DeviceAddr, FT5336_TD_STAT_REG);
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s 			page 1
  335              		.loc 1 243 1
  336 0048 1846     		mov	r0, r3
  337 004a 1037     		adds	r7, r7, #16
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s 			page 11
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cctpWFR2.s 			page 11
 
 
  338              	.LCFI24:
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s 			page 1
  381 000e 0023     		movs	r3, #0
  382 0010 FB74     		strb	r3, [r7, #19]
  257:Components/ft5336/ft5336.c ****   static uint16_t coord;
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s 			page 12
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cctpWFR2.s 			page 12
 
 
  258:Components/ft5336/ft5336.c ****   uint8_t regAddressXLow = 0;
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s 			page 1
  426              		.loc 1 268 23
  427 0068 0423     		movs	r3, #4
  428 006a FB75     		strb	r3, [r7, #23]
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s 			page 13
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cctpWFR2.s 			page 13
 
 
  269:Components/ft5336/ft5336.c ****       regAddressXHigh = FT5336_P1_XH_REG;
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s 			page 1
  466 0098 1123     		movs	r3, #17
  467 009a 3B75     		strb	r3, [r7, #20]
  286:Components/ft5336/ft5336.c ****       break;
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s 			page 14
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cctpWFR2.s 			page 14
 
 
  468              		.loc 1 286 7
@@ -838,7 +838,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s 			page 1
  504              		.loc 1 304 23
  505 00c6 2123     		movs	r3, #33
  506 00c8 BB75     		strb	r3, [r7, #22]
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s 			page 15
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cctpWFR2.s 			page 15
 
 
  305:Components/ft5336/ft5336.c ****       regAddressYLow  = FT5336_P6_YL_REG;
@@ -898,7 +898,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s 			page 1
  544 00f6 12E0     		b	.L29
  545              	.L20:
  322:Components/ft5336/ft5336.c **** 
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s 			page 16
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cctpWFR2.s 			page 16
 
 
  323:Components/ft5336/ft5336.c ****     case 8 :
@@ -958,7 +958,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s 			page 1
  579              		.loc 1 343 18
  580 011e FB89     		ldrh	r3, [r7, #14]	@ movhi
  581 0120 DBB2     		uxtb	r3, r3
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s 			page 17
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cctpWFR2.s 			page 17
 
 
  582 0122 FA7D     		ldrb	r2, [r7, #23]	@ zero_extendqisi2
@@ -1018,7 +1018,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s 			page 1
  625              		.loc 1 354 18
  626 0170 FB89     		ldrh	r3, [r7, #14]	@ movhi
  627 0172 DBB2     		uxtb	r3, r3
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s 			page 18
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cctpWFR2.s 			page 18
 
 
  628 0174 7A7D     		ldrb	r2, [r7, #21]	@ zero_extendqisi2
@@ -1078,7 +1078,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s 			page 1
  672 01c2 054B     		ldr	r3, .L32
  673 01c4 9B78     		ldrb	r3, [r3, #2]	@ zero_extendqisi2
  674              		.loc 1 364 37
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s 			page 19
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cctpWFR2.s 			page 19
 
 
  675 01c6 0133     		adds	r3, r3, #1
@@ -1138,7 +1138,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s 			page 1
  719 0004 00AF     		add	r7, sp, #0
  720              	.LCFI33:
  721              		.cfi_def_cfa_register 7
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s 			page 20
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cctpWFR2.s 			page 20
 
 
  722 0006 0346     		mov	r3, r0
@@ -1198,7 +1198,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s 			page 1
  763 0000 80B5     		push	{r7, lr}
  764              	.LCFI36:
  765              		.cfi_def_cfa_offset 8
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s 			page 21
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cctpWFR2.s 			page 21
 
 
  766              		.cfi_offset 7, -8
@@ -1258,7 +1258,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s 			page 1
  403:Components/ft5336/ft5336.c ****   *         @note : This feature is not applicable to FT5336.
  404:Components/ft5336/ft5336.c ****   * @param  DeviceAddr: Device address on communication Bus (I2C slave address of FT5336).
  405:Components/ft5336/ft5336.c ****   * @retval TS interrupts status : always return 0 here
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s 			page 22
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cctpWFR2.s 			page 22
 
 
  406:Components/ft5336/ft5336.c ****   */
@@ -1318,7 +1318,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s 			page 1
  417:Components/ft5336/ft5336.c ****   * @param  DeviceAddr: Device address on communication Bus (I2C slave address of FT5336).
  418:Components/ft5336/ft5336.c ****   * @retval None
  419:Components/ft5336/ft5336.c ****   */
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s 			page 23
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cctpWFR2.s 			page 23
 
 
  420:Components/ft5336/ft5336.c **** void ft5336_TS_ClearIT(uint16_t DeviceAddr)
@@ -1378,7 +1378,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s 			page 1
  433:Components/ft5336/ft5336.c ****   * @retval None.
  434:Components/ft5336/ft5336.c ****   */
  435:Components/ft5336/ft5336.c **** void ft5336_TS_GetGestureID(uint16_t DeviceAddr, uint32_t * pGestureId)
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s 			page 24
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cctpWFR2.s 			page 24
 
 
  436:Components/ft5336/ft5336.c **** {
@@ -1438,7 +1438,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s 			page 1
  946              	.LFE10:
  948              		.section	.text.ft5336_TS_GetTouchInfo,"ax",%progbits
  949              		.align	1
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s 			page 25
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cctpWFR2.s 			page 25
 
 
  950              		.global	ft5336_TS_GetTouchInfo
@@ -1498,7 +1498,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s 			page 1
  981 0014 0023     		movs	r3, #0
  982 0016 FB75     		strb	r3, [r7, #23]
  467:Components/ft5336/ft5336.c ****   uint8_t regAddressPWeight = 0;
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s 			page 26
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cctpWFR2.s 			page 26
 
 
  983              		.loc 1 467 11
@@ -1558,7 +1558,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s 			page 1
  1026              		.loc 1 478 7
  1027 0070 3FE0     		b	.L54
  1028              	.L52:
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s 			page 27
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cctpWFR2.s 			page 27
 
 
  479:Components/ft5336/ft5336.c **** 
@@ -1618,7 +1618,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s 			page 1
  497:Components/ft5336/ft5336.c **** 
  498:Components/ft5336/ft5336.c ****     case 4 :
  499:Components/ft5336/ft5336.c ****       regAddressXHigh   = FT5336_P5_XH_REG;
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s 			page 28
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cctpWFR2.s 			page 28
 
 
  1065              		.loc 1 499 25
@@ -1678,7 +1678,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s 			page 1
  1101              		.loc 1 517 25
  1102 00c6 2D23     		movs	r3, #45
  1103 00c8 FB75     		strb	r3, [r7, #23]
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s 			page 29
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cctpWFR2.s 			page 29
 
 
  518:Components/ft5336/ft5336.c ****       regAddressPWeight = FT5336_P8_WEIGHT_REG;
@@ -1738,7 +1738,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s 			page 1
  536:Components/ft5336/ft5336.c **** 
  537:Components/ft5336/ft5336.c ****     } /* end switch(touchIdx) */
  538:Components/ft5336/ft5336.c **** 
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s 			page 30
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cctpWFR2.s 			page 30
 
 
  539:Components/ft5336/ft5336.c ****     /* Read Event Id of touch index */
@@ -1798,7 +1798,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s 			page 1
  1184 013e 3B75     		strb	r3, [r7, #20]
  549:Components/ft5336/ft5336.c ****     * pArea = (ucReadData & FT5336_TOUCH_AREA_MASK) >> FT5336_TOUCH_AREA_SHIFT;
  1185              		.loc 1 549 53
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s 			page 31
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cctpWFR2.s 			page 31
 
 
  1186 0140 3B7D     		ldrb	r3, [r7, #20]
@@ -1858,7 +1858,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s 			page 1
  1222              		@ frame_needed = 1, uses_anonymous_args = 0
  1223              		@ link register save eliminated.
  1224 0000 80B4     		push	{r7}
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s 			page 32
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cctpWFR2.s 			page 32
 
 
  1225              	.LCFI63:
@@ -1918,7 +1918,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s 			page 1
  1271              		.cfi_def_cfa_register 7
  580:Components/ft5336/ft5336.c ****   if(ft5336_Get_I2C_InitializedStatus() == FT5336_I2C_NOT_INITIALIZED)
  1272              		.loc 1 580 6
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s 			page 33
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cctpWFR2.s 			page 33
 
 
  1273 0004 FFF7FEFF 		bl	ft5336_Get_I2C_InitializedStatus
@@ -1978,7 +1978,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s 			page 1
  1313              	.LCFI70:
  1314              		.cfi_def_cfa_offset 24
  1315 0004 00AF     		add	r7, sp, #0
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s 			page 34
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cctpWFR2.s 			page 34
 
 
  1316              	.LCFI71:
@@ -2022,56 +2022,56 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s 			page 1
  1351              		.file 3 "d:\\3.tools\\arm_gcc_toolchain\\arm-none-eabi\\include\\sys\\_stdint.h"
  1352              		.file 4 "Components/ft5336/../Common/ts.h"
  1353              		.file 5 "Components/ft5336/ft5336.h"
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s 			page 35
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cctpWFR2.s 			page 35
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 ft5336.c
-C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s:24     .data.ft5336_ts_drv:00000000 ft5336_ts_drv
-C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s:21     .data.ft5336_ts_drv:00000000 $d
-C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s:48     .text.ft5336_Init:00000000 ft5336_Init
-C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s:136    .text.ft5336_ReadID:00000000 ft5336_ReadID
-C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s:93     .text.ft5336_Reset:00000000 ft5336_Reset
-C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s:229    .text.ft5336_TS_Start:00000000 ft5336_TS_Start
-C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s:276    .text.ft5336_TS_DetectTouch:00000000 ft5336_TS_DetectTouch
-C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s:359    .text.ft5336_TS_GetXY:00000000 ft5336_TS_GetXY
-C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s:705    .text.ft5336_TS_EnableIT:00000000 ft5336_TS_EnableIT
-C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s:854    .text.ft5336_TS_ClearIT:00000000 ft5336_TS_ClearIT
-C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s:809    .text.ft5336_TS_ITStatus:00000000 ft5336_TS_ITStatus
-C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s:757    .text.ft5336_TS_DisableIT:00000000 ft5336_TS_DisableIT
-C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s:36     .bss.ft5336_handle:00000000 $d
-C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s:39     .bss.ft5336_handle:00000000 ft5336_handle
-C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s:42     .text.ft5336_Init:00000000 $t
-C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s:1258   .text.ft5336_I2C_InitializeIfRequired:00000000 ft5336_I2C_InitializeIfRequired
-C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s:87     .text.ft5336_Reset:00000000 $t
-C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s:130    .text.ft5336_ReadID:00000000 $t
-C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s:223    .text.ft5336_TS_Start:00000000 $t
-C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s:1301   .text.ft5336_TS_Configure:00000000 ft5336_TS_Configure
-C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s:270    .text.ft5336_TS_DetectTouch:00000000 $t
-C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s:348    .text.ft5336_TS_DetectTouch:00000050 $d
-C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s:353    .text.ft5336_TS_GetXY:00000000 $t
-C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s:414    .text.ft5336_TS_GetXY:00000040 $d
-C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s:424    .text.ft5336_TS_GetXY:00000068 $t
-C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s:693    .text.ft5336_TS_GetXY:000001d8 $d
-C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s:1346   .bss.coord.0:00000000 coord.0
-C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s:699    .text.ft5336_TS_EnableIT:00000000 $t
-C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s:751    .text.ft5336_TS_DisableIT:00000000 $t
-C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s:803    .text.ft5336_TS_ITStatus:00000000 $t
-C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s:848    .text.ft5336_TS_ClearIT:00000000 $t
-C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s:891    .text.ft5336_TS_GetGestureID:00000000 $t
-C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s:897    .text.ft5336_TS_GetGestureID:00000000 ft5336_TS_GetGestureID
-C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s:949    .text.ft5336_TS_GetTouchInfo:00000000 $t
-C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s:955    .text.ft5336_TS_GetTouchInfo:00000000 ft5336_TS_GetTouchInfo
-C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s:1005   .text.ft5336_TS_GetTouchInfo:0000003c $d
-C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s:1015   .text.ft5336_TS_GetTouchInfo:00000064 $t
-C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s:1207   .text.ft5336_TS_GetTouchInfo:00000158 $d
-C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s:1212   .text.ft5336_Get_I2C_InitializedStatus:00000000 $t
-C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s:1217   .text.ft5336_Get_I2C_InitializedStatus:00000000 ft5336_Get_I2C_InitializedStatus
-C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s:1248   .text.ft5336_Get_I2C_InitializedStatus:00000014 $d
-C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s:1253   .text.ft5336_I2C_InitializeIfRequired:00000000 $t
-C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s:1291   .text.ft5336_I2C_InitializeIfRequired:0000001c $d
-C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s:1296   .text.ft5336_TS_Configure:00000000 $t
-C:\Users\jisu8\AppData\Local\Temp\cccA6p22.s:1343   .bss.coord.0:00000000 $d
+C:\Users\jisu8\AppData\Local\Temp\cctpWFR2.s:24     .data.ft5336_ts_drv:00000000 ft5336_ts_drv
+C:\Users\jisu8\AppData\Local\Temp\cctpWFR2.s:21     .data.ft5336_ts_drv:00000000 $d
+C:\Users\jisu8\AppData\Local\Temp\cctpWFR2.s:48     .text.ft5336_Init:00000000 ft5336_Init
+C:\Users\jisu8\AppData\Local\Temp\cctpWFR2.s:136    .text.ft5336_ReadID:00000000 ft5336_ReadID
+C:\Users\jisu8\AppData\Local\Temp\cctpWFR2.s:93     .text.ft5336_Reset:00000000 ft5336_Reset
+C:\Users\jisu8\AppData\Local\Temp\cctpWFR2.s:229    .text.ft5336_TS_Start:00000000 ft5336_TS_Start
+C:\Users\jisu8\AppData\Local\Temp\cctpWFR2.s:276    .text.ft5336_TS_DetectTouch:00000000 ft5336_TS_DetectTouch
+C:\Users\jisu8\AppData\Local\Temp\cctpWFR2.s:359    .text.ft5336_TS_GetXY:00000000 ft5336_TS_GetXY
+C:\Users\jisu8\AppData\Local\Temp\cctpWFR2.s:705    .text.ft5336_TS_EnableIT:00000000 ft5336_TS_EnableIT
+C:\Users\jisu8\AppData\Local\Temp\cctpWFR2.s:854    .text.ft5336_TS_ClearIT:00000000 ft5336_TS_ClearIT
+C:\Users\jisu8\AppData\Local\Temp\cctpWFR2.s:809    .text.ft5336_TS_ITStatus:00000000 ft5336_TS_ITStatus
+C:\Users\jisu8\AppData\Local\Temp\cctpWFR2.s:757    .text.ft5336_TS_DisableIT:00000000 ft5336_TS_DisableIT
+C:\Users\jisu8\AppData\Local\Temp\cctpWFR2.s:36     .bss.ft5336_handle:00000000 $d
+C:\Users\jisu8\AppData\Local\Temp\cctpWFR2.s:39     .bss.ft5336_handle:00000000 ft5336_handle
+C:\Users\jisu8\AppData\Local\Temp\cctpWFR2.s:42     .text.ft5336_Init:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\cctpWFR2.s:1258   .text.ft5336_I2C_InitializeIfRequired:00000000 ft5336_I2C_InitializeIfRequired
+C:\Users\jisu8\AppData\Local\Temp\cctpWFR2.s:87     .text.ft5336_Reset:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\cctpWFR2.s:130    .text.ft5336_ReadID:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\cctpWFR2.s:223    .text.ft5336_TS_Start:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\cctpWFR2.s:1301   .text.ft5336_TS_Configure:00000000 ft5336_TS_Configure
+C:\Users\jisu8\AppData\Local\Temp\cctpWFR2.s:270    .text.ft5336_TS_DetectTouch:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\cctpWFR2.s:348    .text.ft5336_TS_DetectTouch:00000050 $d
+C:\Users\jisu8\AppData\Local\Temp\cctpWFR2.s:353    .text.ft5336_TS_GetXY:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\cctpWFR2.s:414    .text.ft5336_TS_GetXY:00000040 $d
+C:\Users\jisu8\AppData\Local\Temp\cctpWFR2.s:424    .text.ft5336_TS_GetXY:00000068 $t
+C:\Users\jisu8\AppData\Local\Temp\cctpWFR2.s:693    .text.ft5336_TS_GetXY:000001d8 $d
+C:\Users\jisu8\AppData\Local\Temp\cctpWFR2.s:1346   .bss.coord.0:00000000 coord.0
+C:\Users\jisu8\AppData\Local\Temp\cctpWFR2.s:699    .text.ft5336_TS_EnableIT:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\cctpWFR2.s:751    .text.ft5336_TS_DisableIT:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\cctpWFR2.s:803    .text.ft5336_TS_ITStatus:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\cctpWFR2.s:848    .text.ft5336_TS_ClearIT:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\cctpWFR2.s:891    .text.ft5336_TS_GetGestureID:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\cctpWFR2.s:897    .text.ft5336_TS_GetGestureID:00000000 ft5336_TS_GetGestureID
+C:\Users\jisu8\AppData\Local\Temp\cctpWFR2.s:949    .text.ft5336_TS_GetTouchInfo:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\cctpWFR2.s:955    .text.ft5336_TS_GetTouchInfo:00000000 ft5336_TS_GetTouchInfo
+C:\Users\jisu8\AppData\Local\Temp\cctpWFR2.s:1005   .text.ft5336_TS_GetTouchInfo:0000003c $d
+C:\Users\jisu8\AppData\Local\Temp\cctpWFR2.s:1015   .text.ft5336_TS_GetTouchInfo:00000064 $t
+C:\Users\jisu8\AppData\Local\Temp\cctpWFR2.s:1207   .text.ft5336_TS_GetTouchInfo:00000158 $d
+C:\Users\jisu8\AppData\Local\Temp\cctpWFR2.s:1212   .text.ft5336_Get_I2C_InitializedStatus:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\cctpWFR2.s:1217   .text.ft5336_Get_I2C_InitializedStatus:00000000 ft5336_Get_I2C_InitializedStatus
+C:\Users\jisu8\AppData\Local\Temp\cctpWFR2.s:1248   .text.ft5336_Get_I2C_InitializedStatus:00000014 $d
+C:\Users\jisu8\AppData\Local\Temp\cctpWFR2.s:1253   .text.ft5336_I2C_InitializeIfRequired:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\cctpWFR2.s:1291   .text.ft5336_I2C_InitializeIfRequired:0000001c $d
+C:\Users\jisu8\AppData\Local\Temp\cctpWFR2.s:1296   .text.ft5336_TS_Configure:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\cctpWFR2.s:1343   .bss.coord.0:00000000 $d
 
 UNDEFINED SYMBOLS
 TS_IO_Delay

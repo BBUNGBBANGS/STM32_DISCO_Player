@@ -1,0 +1,4 @@
+../Core/Src/music.c:14:6:Music_SdCard_Init	160	static
+../Core/Src/music.c:25:6:Music_File_Read	64	static
+../Core/Src/music.c:56:6:Music_Play	4	static
+../Core/Src/music.c:61:16:Music_File_Decision	24	static

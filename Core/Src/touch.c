@@ -112,7 +112,7 @@ uint8_t Toutch_Status = 1;
   * @}
   */ 
 
-static void Touch_Select_Zone(uint8_t x, uint8_t y, uint8_t * status);
+static void Touch_Select_Zone(uint16_t x, uint16_t y, uint8_t * status);
 static void Touch_Display_Zone(uint8_t *status,uint32_t color);
 
 /** @defgroup STM32746G_DISCOVERY_TS_Private_Function_Prototypes STM32746G_DISCOVERY_TS Private Function Prototypes
@@ -151,7 +151,7 @@ void Touch_Operation(void)
     }
 }
 
-static void Touch_Select_Zone(uint8_t x, uint8_t y, uint8_t * status)
+static void Touch_Select_Zone(uint16_t x, uint16_t y, uint8_t * status)
 {       
     if ((y > 30) && (y < 60))
     {

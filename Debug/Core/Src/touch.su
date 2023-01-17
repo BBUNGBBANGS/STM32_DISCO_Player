@@ -1,0 +1,11 @@
+../Core/Src/touch.c:128:6:Touch_Operation	48	static
+../Core/Src/touch.c:154:13:Touch_Select_Zone	16	static
+../Core/Src/touch.c:194:13:Touch_Display_Zone	16	static
+../Core/Src/touch.c:253:9:BSP_TS_Init	24	static
+../Core/Src/touch.c:283:9:BSP_TS_DeInit	4	static
+../Core/Src/touch.c:293:9:BSP_TS_ITConfig	32	static
+../Core/Src/touch.c:318:9:BSP_TS_ITGetStatus	8	static
+../Core/Src/touch.c:329:9:BSP_TS_GetState	104	static
+../Core/Src/touch.c:449:9:BSP_TS_Get_GestureId	24	static
+../Core/Src/touch.c:493:6:BSP_TS_ITClear	8	static
+../Core/Src/touch.c:511:9:BSP_TS_ResetTouchData	24	static
